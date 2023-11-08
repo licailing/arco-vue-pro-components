@@ -1,0 +1,77 @@
+@import '../../style/index.less';
+@pro-table-prefix-cls: ~'@{prefix}-pro-table';
+@pro-table-light-prefix-cls: ~'@{prefix}-pro-table-light';
+.@{pro-table-prefix-cls} {
+  &-toolbarContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 16px;
+  }
+
+  &-title {
+    color: #121212;
+    font-size: 18px;
+  }
+
+  &-column-indexBorder {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 12px;
+    background: #979797;
+    border-radius: 9px;
+
+    &--top-three {
+      background: #314659;
+    }
+  }
+  &-collapse-button {
+    display: flex;
+    align-items: center;
+    color: rgb(var(--primary-6));
+  }
+}
+.@{pro-table-light-prefix-cls} {
+  &-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 16px;
+  }
+
+  &-right {
+    display: flex;
+  }
+
+  &-power-btn {
+    color: #464646;
+    border-color: #c5c6ce;
+  }
+
+  &-power-popover {
+    color: rgba(0, 0, 0, 0.65);
+  }
+
+  &-power-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-power-content {
+    display: flex;
+    flex-direction: column;
+  }
+  &-link-btn {
+    padding: 0;
+    background: transparent;
+    margin-right: 20px;
+    &:hover {
+      background: transparent !important;
+    }
+  }
+}

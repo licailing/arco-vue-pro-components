@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Demo Test: render [BasicDemo] correctly 1`] = `
+"<div class=\\"arco-space arco-space-vertical\\">
+  <!---->
+  <div class=\\"arco-space-item\\" style=\\"margin-bottom: 24px;\\">
+    <div role=\\"separator\\" class=\\"arco-divider arco-divider-horizontal arco-divider-with-text\\"><span class=\\"arco-divider-text arco-divider-text-left\\">默认值</span></div>
+  </div>
+  <!---->
+  <div class=\\"arco-space-item\\" style=\\"margin-bottom: 24px;\\">
+    <div style=\\"width: 480px;\\"><span class=\\"arco-select-view-single arco-select arco-select-view arco-select-view-size-medium arco-select-view-search\\" labelkey=\\"name\\" valueoption=\\"false\\" style=\\"width: 480px;\\" title=\\"\\"><!----><input class=\\"arco-select-view-input\\" placeholder=\\"Please select ...\\"><span class=\\"arco-select-view-value arco-select-view-value-hidden\\"><!----></span><span class=\\"arco-select-view-suffix\\"><!----><span class=\\"arco-select-view-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down arco-select-view-arrow-icon\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path></svg></span>
+      <!----></span></span>
+      <!---->
+    </div>
+  </div>
+  <!---->
+  <div class=\\"arco-space-item\\" style=\\"margin-bottom: 24px;\\">
+    <div role=\\"separator\\" class=\\"arco-divider arco-divider-horizontal arco-divider-with-text\\"><span class=\\"arco-divider-text arco-divider-text-left\\">自定义Option</span></div>
+  </div>
+  <!---->
+  <div class=\\"arco-space-item\\" style=\\"margin-bottom: 24px;\\">
+    <div style=\\"width: 480px;\\"><span class=\\"arco-select-view-single arco-select arco-select-view arco-select-view-size-medium arco-select-view-search\\" labelkey=\\"label\\" valueoption=\\"false\\" style=\\"width: 480px;\\" title=\\"\\"><!----><input class=\\"arco-select-view-input\\" placeholder=\\"Please select ...\\"><span class=\\"arco-select-view-value arco-select-view-value-hidden\\"><!----></span><span class=\\"arco-select-view-suffix\\"><!----><span class=\\"arco-select-view-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down arco-select-view-arrow-icon\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path></svg></span>
+      <!----></span></span>
+      <!---->
+    </div>
+  </div>
+  <!---->
+  <div class=\\"arco-space-item\\" style=\\"margin-bottom: 24px;\\">
+    <div role=\\"separator\\" class=\\"arco-divider arco-divider-horizontal arco-divider-with-text\\"><span class=\\"arco-divider-text arco-divider-text-left\\">valueOption:true触发change事件返回(value,option)</span></div>
+  </div>
+  <!---->
+  <div class=\\"arco-space-item\\" style=\\"margin-bottom: 24px;\\">
+    <div style=\\"width: 480px;\\"><span class=\\"arco-select-view-single arco-select arco-select-view arco-select-view-size-medium arco-select-view-search\\" labelkey=\\"name\\" valueoption=\\"true\\" style=\\"width: 480px;\\" title=\\"\\"><!----><input class=\\"arco-select-view-input\\" placeholder=\\"Please select ...\\"><span class=\\"arco-select-view-value arco-select-view-value-hidden\\"><!----></span><span class=\\"arco-select-view-suffix\\"><!----><span class=\\"arco-select-view-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down arco-select-view-arrow-icon\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path></svg></span>
+      <!----></span></span>
+      <!---->
+    </div>
+  </div>
+  <!---->
+  <div class=\\"arco-space-item\\" style=\\"margin-bottom: 24px;\\">
+    <div role=\\"separator\\" class=\\"arco-divider arco-divider-horizontal arco-divider-with-text\\"><span class=\\"arco-divider-text arco-divider-text-left\\">外部赋值</span></div>
+  </div>
+  <!---->
+  <div class=\\"arco-space-item\\" style=\\"margin-bottom: 24px;\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+      <!--v-if-->赋值
+    </button></div>
+  <!---->
+  <div class=\\"arco-space-item\\" style=\\"margin-bottom: 24px;\\">
+    <div role=\\"separator\\" class=\\"arco-divider arco-divider-horizontal arco-divider-with-text\\"><span class=\\"arco-divider-text arco-divider-text-left\\">request返回远程请求数据</span></div>
+  </div>
+  <!---->
+  <div class=\\"arco-space-item\\" style=\\"margin-bottom: 24px;\\">
+    <div style=\\"width: 480px;\\"><span class=\\"arco-select-view-single arco-select arco-select-view arco-select-view-size-medium arco-select-view-search\\" request=\\"function (keyword) {
+      /* istanbul ignore next */
+      cov_1nq3zt4z14().f[17]++;
+      cov_1nq3zt4z14().s[85]++;
+      return __awaiter(_this, void 0, void 0, function () {
+        /* istanbul ignore next */
+        cov_1nq3zt4z14().f[18]++;
+        cov_1nq3zt4z14().s[86]++;
+        return __generator(this, function (_a) {
+          /* istanbul ignore next */
+          cov_1nq3zt4z14().f[19]++;
+          cov_1nq3zt4z14().s[87]++;
+          return [2 /*return*/, options];
+        });
+      });
+    }\\" labelkey=\\"name\\" valueoption=\\"false\\" style=\\"width: 480px;\\" title=\\"\\"><!----><input class=\\"arco-select-view-input\\" placeholder=\\"Please select ...\\"><span class=\\"arco-select-view-value arco-select-view-value-hidden\\"><!----></span><span class=\\"arco-select-view-suffix\\"><!----><span class=\\"arco-select-view-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down arco-select-view-arrow-icon\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path></svg></span>
+      <!----></span></span>
+      <!---->
+    </div>
+  </div>
+  <!---->
+  <div class=\\"arco-space-item\\" style=\\"margin-bottom: 24px;\\">
+    <div role=\\"separator\\" class=\\"arco-divider arco-divider-horizontal arco-divider-with-text\\"><span class=\\"arco-divider-text arco-divider-text-left\\">多选，valueOption:true触发change事件返回(value,option)</span></div>
+  </div>
+  <!---->
+  <div class=\\"arco-space-item\\">
+    <div style=\\"width: 480px;\\"><span class=\\"arco-select-view arco-select-view-size-medium arco-select-view-has-suffix arco-select-view-has-placeholder arco-select-view-multiple arco-select\\" request=\\"function (keyword) {
+      /* istanbul ignore next */
+      cov_1nq3zt4z14().f[17]++;
+      cov_1nq3zt4z14().s[85]++;
+      return __awaiter(_this, void 0, void 0, function () {
+        /* istanbul ignore next */
+        cov_1nq3zt4z14().f[18]++;
+        cov_1nq3zt4z14().s[86]++;
+        return __generator(this, function (_a) {
+          /* istanbul ignore next */
+          cov_1nq3zt4z14().f[19]++;
+          cov_1nq3zt4z14().s[87]++;
+          return [2 /*return*/, options];
+        });
+      });
+    }\\" labelkey=\\"name\\" valueoption=\\"true\\" style=\\"width: 480px;\\"><span class=\\"arco-select-view-mirror\\">Please select ...</span>
+      <!---->
+      <transition-group-stub tag=\\"span\\" name=\\"input-tag-zoom\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\" class=\\"arco-select-view-inner\\"><input class=\\"arco-select-view-input\\" style=\\"width: 12px;\\" placeholder=\\"Please select ...\\"></transition-group-stub>
+      <!----><span class=\\"arco-select-view-suffix\\"><!----><span class=\\"arco-select-view-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down arco-select-view-arrow-icon\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path></svg></span>
+      <!---->
+      <!----></span></span>
+      <!---->
+    </div>
+  </div>
+</div>"
+`;

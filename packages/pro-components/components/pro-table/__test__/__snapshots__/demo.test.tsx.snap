@@ -1,0 +1,2662 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Demo Test: render [BatchOption] correctly 1`] = `
+"<div class=\\"arco-card arco-card-size-medium\\">
+  <!---->
+  <!---->
+  <div class=\\"arco-card-body\\">
+    <!---->
+    <!---->
+    <!---->
+    <div>
+      <div class=\\"am-vue-pro-table-toolbarContainer\\">
+        <div class=\\"am-vue-pro-table-title\\">表格批量操作</div>
+        <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+          <!---->
+          <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+              <!--v-if-->查看日志
+            </button></div>
+        </div>
+      </div>
+      <div class=\\"arco-table arco-table-size-large arco-table-border arco-table-hover arco-table-type-selection arco-table-layout-fixed\\">
+        <!---->
+        <div class=\\"arco-spin\\">
+          <!---->
+          <div class=\\"arco-table-container arco-table-has-fixed-col-left arco-table-has-fixed-col-right arco-table-scroll-position-both\\">
+            <div class=\\"arco-scrollbar arco-scrollbar-type-embed\\" style=\\"height: 100%;\\">
+              <div class=\\"arco-scrollbar-container arco-table-content arco-table-content-scroll-x\\">
+                <table class=\\"arco-table-element\\" cellpadding=\\"0\\" cellspacing=\\"0\\" style=\\"width: 1300px;\\">
+                  <colgroup>
+                    <col class=\\"arco-table-selection-checkbox-col\\">
+                    <col style=\\"width: 140px; min-width: 140px; max-width: 140px;\\">
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                    <col>
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                    <col style=\\"width: 140px; min-width: 140px; max-width: 140px;\\">
+                    <col>
+                    <col style=\\"width: 80px; min-width: 80px; max-width: 80px;\\">
+                  </colgroup>
+                  <thead>
+                    <tr class=\\"arco-table-tr\\">
+                      <th class=\\"arco-table-th arco-table-operation arco-table-checkbox arco-table-col-fixed-left\\" style=\\"left: 0px;\\"><span class=\\"arco-table-cell\\"><label class=\\"arco-checkbox arco-checkbox-indeterminate\\"><input type=\\"checkbox\\" class=\\"arco-checkbox-target\\" value=\\"false\\"><span class=\\"arco-icon-hover arco-checkbox-icon-hover\\"><div class=\\"arco-checkbox-icon\\"><!----></div></span>
+                        <!----></label></span>
+                      </th>
+                      <th class=\\"arco-table-th arco-table-col-fixed-left arco-table-col-fixed-left-last\\" style=\\"left: 40px;\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">应用名称</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-right arco-table-cell-with-sorter arco-table-cell-next-ascend\\"><span class=\\"arco-table-th-title\\">容器量</span><span class=\\"arco-table-sorter\\"><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-up\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M23.063 13.171a1.2 1.2 0 0 1 1.875 0l13.503 16.88c.628.785.069 1.949-.937 1.949H10.497c-1.006 0-1.565-1.164-.937-1.95l13.503-16.879Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-down\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24.938 34.829a1.2 1.2 0 0 1-1.875 0L9.56 17.949c-.628-.785-.069-1.949.937-1.949h27.007c1.006 0 1.565 1.164.937 1.95L24.937 34.829Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div></span>
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-right\\"><span class=\\"arco-table-th-title\\">调用次数</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">执行进度</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">创建者</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left arco-table-cell-with-sorter arco-table-cell-next-ascend\\"><span class=\\"arco-table-th-title\\">创建时间</span><span class=\\"arco-table-sorter\\"><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-up\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M23.063 13.171a1.2 1.2 0 0 1 1.875 0l13.503 16.88c.628.785.069 1.949-.937 1.949H10.497c-1.006 0-1.565-1.164-.937-1.95l13.503-16.879Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-down\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24.938 34.829a1.2 1.2 0 0 1-1.875 0L9.56 17.949c-.628-.785-.069-1.949.937-1.949h27.007c1.006 0 1.565 1.164.937 1.95L24.937 34.829Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div></span>
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title arco-table-text-ellipsis\\">备注</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th arco-table-col-fixed-right arco-table-col-fixed-right-first\\" style=\\"right: 0px;\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">操作</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class=\\"arco-table-tr\\">
+                      <td class=\\"arco-table-td arco-table-operation arco-table-checkbox arco-table-col-fixed-left\\" style=\\"left: 0px;\\"><span class=\\"arco-table-cell\\"><label class=\\"arco-checkbox\\"><input type=\\"checkbox\\" class=\\"arco-checkbox-target\\" value=\\"false\\"><span class=\\"arco-icon-hover arco-checkbox-icon-hover\\"><div class=\\"arco-checkbox-icon\\"><!----></div></span>
+                        <!----></label></span>
+                      </td>
+                      <td class=\\"arco-table-td arco-table-col-fixed-left arco-table-col-fixed-left-last\\" style=\\"left: 40px;\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><a class=\\"arco-link arco-link-status-normal\\"><!--v-if-->AppName-0</a></span></span></td>
+                      <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-right\\"><!----><!----><span class=\\"arco-table-td-content\\">5</span></span></td>
+                      <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-right\\"><!----><!----><span class=\\"arco-table-td-content\\">585</span></span></td>
+                      <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-progress arco-progress-type-line arco-progress-size-small arco-progress-status-success\\"><div role=\\"progressbar\\" aria-valuemin=\\"0\\" aria-valuemax=\\"100\\" aria-valuenow=\\"0.96\\" class=\\"arco-progress-line-wrapper\\"><div class=\\"arco-progress-line\\" style=\\"width: 100%; height: 3px;\\"><div class=\\"arco-progress-line-bar-buffer\\"></div><div class=\\"arco-progress-line-bar\\" style=\\"width: 96%;\\"></div></div><div class=\\"arco-progress-line-text\\">96% <!--v-if--></div></div></div></span></span></td>
+                      <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\">林东东</span></span></td>
+                      <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\">2023-11-08</span></span></td>
+                      <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content arco-table-text-ellipsis\\"><span><div class=\\"arco-typography\\" style=\\"margin: 0px; padding: 0px;\\">简短备注文案<!----><!--v-if--><span class=\\"arco-typography-operation-copy\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-copy\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M20 6h18a2 2 0 0 1 2 2v22M8 16v24c0 1.105.891 2 1.996 2h20.007A1.99 1.99 0 0 0 32 40.008V15.997A1.997 1.997 0 0 0 30 14H10a2 2 0 0 0-2 2Z\\"></path></svg></span>
+                        <!---->
+                        <!--v-if-->
+              </div></span>
+              <!----></span></span></td>
+              <td class=\\"arco-table-td arco-table-col-fixed-right arco-table-col-fixed-right-first\\" style=\\"right: 0px;\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-space arco-space-horizontal arco-space-align-center pro-table-options\\"><!----><div class=\\"arco-space-item\\"><a class=\\"arco-link arco-link-status-normal\\"><!--v-if-->链路</a></div></div></span></span></td>
+              </tr>
+              <!---->
+              <tr class=\\"arco-table-tr arco-table-tr-checked\\">
+                <td class=\\"arco-table-td arco-table-operation arco-table-checkbox arco-table-col-fixed-left\\" style=\\"left: 0px;\\"><span class=\\"arco-table-cell\\"><label aria-disabled=\\"false\\" class=\\"arco-checkbox arco-checkbox-checked\\"><input type=\\"checkbox\\" class=\\"arco-checkbox-target\\" value=\\"false\\"><span class=\\"arco-icon-hover arco-icon-hover-disabled arco-checkbox-icon-hover\\"><div class=\\"arco-checkbox-icon\\"><svg aria-hidden=\\"true\\" focusable=\\"false\\" viewBox=\\"0 0 1024 1024\\" width=\\"200\\" height=\\"200\\" fill=\\"currentColor\\" class=\\"arco-checkbox-icon-check\\"><path d=\\"M877.44815445 206.10060629a64.72691371 64.72691371 0 0 0-95.14856334 4.01306852L380.73381888 685.46812814 235.22771741 533.48933518a64.72691371 64.72691371 0 0 0-92.43003222-1.03563036l-45.82665557 45.82665443a64.72691371 64.72691371 0 0 0-0.90617629 90.61767965l239.61903446 250.10479331a64.72691371 64.72691371 0 0 0 71.19960405 15.14609778 64.33855261 64.33855261 0 0 0 35.08198741-21.23042702l36.24707186-42.71976334 40.5190474-40.77795556-3.36579926-3.49525333 411.40426297-486.74638962a64.72691371 64.72691371 0 0 0-3.88361443-87.64024149l-45.3088404-45.43829334z\\" p-id=\\"840\\"></path></svg></div></span>
+                  <!----></label></span>
+                </td>
+                <td class=\\"arco-table-td arco-table-col-fixed-left arco-table-col-fixed-left-last\\" style=\\"left: 40px;\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><a class=\\"arco-link arco-link-status-normal\\"><!--v-if-->AppName-1</a></span></span></td>
+                <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-right\\"><!----><!----><span class=\\"arco-table-td-content\\">4</span></span></td>
+                <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-right\\"><!----><!----><span class=\\"arco-table-td-content\\">170</span></span></td>
+                <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-progress arco-progress-type-line arco-progress-size-small arco-progress-status-normal\\"><div role=\\"progressbar\\" aria-valuemin=\\"0\\" aria-valuemax=\\"100\\" aria-valuenow=\\"0.78\\" class=\\"arco-progress-line-wrapper\\"><div class=\\"arco-progress-line\\" style=\\"width: 100%; height: 3px;\\"><div class=\\"arco-progress-line-bar-buffer\\"></div><div class=\\"arco-progress-line-bar\\" style=\\"width: 78%;\\"></div></div><div class=\\"arco-progress-line-text\\">78% <!--v-if--></div></div></div></span></span></td>
+                <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\">兼某某</span></span></td>
+                <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\">2023-11-08</span></span></td>
+                <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content arco-table-text-ellipsis\\"><span><div class=\\"arco-typography\\" style=\\"margin: 0px; padding: 0px;\\">很长很长很长很长很长很长很长的文字要展示但是要留下尾巴<!----><!--v-if--><span class=\\"arco-typography-operation-copy\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-copy\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M20 6h18a2 2 0 0 1 2 2v22M8 16v24c0 1.105.891 2 1.996 2h20.007A1.99 1.99 0 0 0 32 40.008V15.997A1.997 1.997 0 0 0 30 14H10a2 2 0 0 0-2 2Z\\"></path></svg></span>
+                  <!---->
+                  <!--v-if-->
+            </div></span>
+            <!----></span></span></td>
+            <td class=\\"arco-table-td arco-table-col-fixed-right arco-table-col-fixed-right-first\\" style=\\"right: 0px;\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-space arco-space-horizontal arco-space-align-center pro-table-options\\"><!----><div class=\\"arco-space-item\\"><a class=\\"arco-link arco-link-status-normal\\"><!--v-if-->链路</a></div></div></span></span></td>
+            </tr>
+            <!---->
+            <tr class=\\"arco-table-tr\\">
+              <td class=\\"arco-table-td arco-table-operation arco-table-checkbox arco-table-col-fixed-left\\" style=\\"left: 0px;\\"><span class=\\"arco-table-cell\\"><label class=\\"arco-checkbox\\"><input type=\\"checkbox\\" class=\\"arco-checkbox-target\\" value=\\"false\\"><span class=\\"arco-icon-hover arco-checkbox-icon-hover\\"><div class=\\"arco-checkbox-icon\\"><!----></div></span>
+                <!----></label></span>
+              </td>
+              <td class=\\"arco-table-td arco-table-col-fixed-left arco-table-col-fixed-left-last\\" style=\\"left: 40px;\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><a class=\\"arco-link arco-link-status-normal\\"><!--v-if-->AppName-2</a></span></span></td>
+              <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-right\\"><!----><!----><span class=\\"arco-table-td-content\\">14</span></span></td>
+              <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-right\\"><!----><!----><span class=\\"arco-table-td-content\\">312</span></span></td>
+              <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-progress arco-progress-type-line arco-progress-size-small arco-progress-status-warning\\"><div role=\\"progressbar\\" aria-valuemin=\\"0\\" aria-valuemax=\\"100\\" aria-valuenow=\\"0.87\\" class=\\"arco-progress-line-wrapper\\"><div class=\\"arco-progress-line\\" style=\\"width: 100%; height: 3px;\\"><div class=\\"arco-progress-line-bar-buffer\\"></div><div class=\\"arco-progress-line-bar\\" style=\\"width: 87%;\\"></div></div><div class=\\"arco-progress-line-text\\">87% <!--v-if--></div></div></div></span></span></td>
+              <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\">付小小</span></span></td>
+              <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\">2023-11-08</span></span></td>
+              <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content arco-table-text-ellipsis\\"><span><div class=\\"arco-typography\\" style=\\"margin: 0px; padding: 0px;\\">简短备注文案<!----><!--v-if--><span class=\\"arco-typography-operation-copy\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-copy\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M20 6h18a2 2 0 0 1 2 2v22M8 16v24c0 1.105.891 2 1.996 2h20.007A1.99 1.99 0 0 0 32 40.008V15.997A1.997 1.997 0 0 0 30 14H10a2 2 0 0 0-2 2Z\\"></path></svg></span>
+                <!---->
+                <!--v-if-->
+          </div></span>
+          <!----></span></span></td>
+          <td class=\\"arco-table-td arco-table-col-fixed-right arco-table-col-fixed-right-first\\" style=\\"right: 0px;\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-space arco-space-horizontal arco-space-align-center pro-table-options\\"><!----><div class=\\"arco-space-item\\"><a class=\\"arco-link arco-link-status-normal\\"><!--v-if-->链路</a></div></div></span></span></td>
+          </tr>
+          <!---->
+          <tr class=\\"arco-table-tr\\">
+            <td class=\\"arco-table-td arco-table-operation arco-table-checkbox arco-table-col-fixed-left\\" style=\\"left: 0px;\\"><span class=\\"arco-table-cell\\"><label class=\\"arco-checkbox\\"><input type=\\"checkbox\\" class=\\"arco-checkbox-target\\" value=\\"false\\"><span class=\\"arco-icon-hover arco-checkbox-icon-hover\\"><div class=\\"arco-checkbox-icon\\"><!----></div></span>
+              <!----></label></span>
+            </td>
+            <td class=\\"arco-table-td arco-table-col-fixed-left arco-table-col-fixed-left-last\\" style=\\"left: 40px;\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><a class=\\"arco-link arco-link-status-normal\\"><!--v-if-->AppName-3</a></span></span></td>
+            <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-right\\"><!----><!----><span class=\\"arco-table-td-content\\">8</span></span></td>
+            <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-right\\"><!----><!----><span class=\\"arco-table-td-content\\">1186</span></span></td>
+            <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-progress arco-progress-type-line arco-progress-size-small arco-progress-status-warning\\"><div role=\\"progressbar\\" aria-valuemin=\\"0\\" aria-valuemax=\\"100\\" aria-valuenow=\\"0.36\\" class=\\"arco-progress-line-wrapper\\"><div class=\\"arco-progress-line\\" style=\\"width: 100%; height: 3px;\\"><div class=\\"arco-progress-line-bar-buffer\\"></div><div class=\\"arco-progress-line-bar\\" style=\\"width: 36%;\\"></div></div><div class=\\"arco-progress-line-text\\">36% <!--v-if--></div></div></div></span></span></td>
+            <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\">林东东</span></span></td>
+            <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\">2023-11-08</span></span></td>
+            <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content arco-table-text-ellipsis\\"><span><div class=\\"arco-typography\\" style=\\"margin: 0px; padding: 0px;\\">很长很长很长很长很长很长很长的文字要展示但是要留下尾巴<!----><!--v-if--><span class=\\"arco-typography-operation-copy\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-copy\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M20 6h18a2 2 0 0 1 2 2v22M8 16v24c0 1.105.891 2 1.996 2h20.007A1.99 1.99 0 0 0 32 40.008V15.997A1.997 1.997 0 0 0 30 14H10a2 2 0 0 0-2 2Z\\"></path></svg></span>
+              <!---->
+              <!--v-if-->
+        </div></span>
+        <!----></span></span></td>
+        <td class=\\"arco-table-td arco-table-col-fixed-right arco-table-col-fixed-right-first\\" style=\\"right: 0px;\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-space arco-space-horizontal arco-space-align-center pro-table-options\\"><!----><div class=\\"arco-space-item\\"><a class=\\"arco-link arco-link-status-normal\\"><!--v-if-->链路</a></div></div></span></span></td>
+        </tr>
+        <!---->
+        <tr class=\\"arco-table-tr\\">
+          <td class=\\"arco-table-td arco-table-operation arco-table-checkbox arco-table-col-fixed-left\\" style=\\"left: 0px;\\"><span class=\\"arco-table-cell\\"><label class=\\"arco-checkbox\\"><input type=\\"checkbox\\" class=\\"arco-checkbox-target\\" value=\\"false\\"><span class=\\"arco-icon-hover arco-checkbox-icon-hover\\"><div class=\\"arco-checkbox-icon\\"><!----></div></span>
+            <!----></label></span>
+          </td>
+          <td class=\\"arco-table-td arco-table-col-fixed-left arco-table-col-fixed-left-last\\" style=\\"left: 40px;\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><a class=\\"arco-link arco-link-status-normal\\"><!--v-if-->AppName-4</a></span></span></td>
+          <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-right\\"><!----><!----><span class=\\"arco-table-td-content\\">17</span></span></td>
+          <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-right\\"><!----><!----><span class=\\"arco-table-td-content\\">178</span></span></td>
+          <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-progress arco-progress-type-line arco-progress-size-small arco-progress-status-danger\\"><div role=\\"progressbar\\" aria-valuemin=\\"0\\" aria-valuemax=\\"100\\" aria-valuenow=\\"0.49\\" class=\\"arco-progress-line-wrapper\\"><div class=\\"arco-progress-line\\" style=\\"width: 100%; height: 3px;\\"><div class=\\"arco-progress-line-bar-buffer\\"></div><div class=\\"arco-progress-line-bar\\" style=\\"width: 49%;\\"></div></div><div class=\\"arco-progress-line-text\\">49% <svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-exclamation-circle-fill\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path fill-rule=\\"evenodd\\" clip-rule=\\"evenodd\\" d=\\"M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4 4 12.954 4 24s8.954 20 20 20Zm-2-11a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v2Zm4-18a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V15Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div></div></div></span></span></td>
+          <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\">林东东</span></span></td>
+          <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\">2023-11-08</span></span></td>
+          <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content arco-table-text-ellipsis\\"><span><div class=\\"arco-typography\\" style=\\"margin: 0px; padding: 0px;\\">简短备注文案<!----><!--v-if--><span class=\\"arco-typography-operation-copy\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-copy\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M20 6h18a2 2 0 0 1 2 2v22M8 16v24c0 1.105.891 2 1.996 2h20.007A1.99 1.99 0 0 0 32 40.008V15.997A1.997 1.997 0 0 0 30 14H10a2 2 0 0 0-2 2Z\\"></path></svg></span>
+            <!---->
+            <!--v-if-->
+      </div></span>
+      <!----></span></span></td>
+      <td class=\\"arco-table-td arco-table-col-fixed-right arco-table-col-fixed-right-first\\" style=\\"right: 0px;\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-space arco-space-horizontal arco-space-align-center pro-table-options\\"><!----><div class=\\"arco-space-item\\"><a class=\\"arco-link arco-link-status-normal\\"><!--v-if-->链路</a></div></div></span></span></td>
+      </tr>
+      <!---->
+      </tbody>
+      <!---->
+      </table>
+    </div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+</div>
+<!---->
+<div class=\\"arco-table-pagination arco-table-pagination-right\\">
+  <!---->
+  <div class=\\"arco-pagination arco-pagination-size-medium\\"><span class=\\"arco-pagination-total\\">共 50 条</span>
+    <ul class=\\"arco-pagination-list\\"><span class=\\"arco-pagination-item arco-pagination-item-previous arco-pagination-item-disabled\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-left\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M32 8.4 16.444 23.956 32 39.513\\"></path></svg></span>
+      <li class=\\"arco-pagination-item arco-pagination-item-active\\" pages=\\"10\\">1</li>
+      <li class=\\"arco-pagination-item\\" pages=\\"10\\">2</li>
+      <li class=\\"arco-pagination-item\\" pages=\\"10\\">3</li>
+      <li class=\\"arco-pagination-item\\" pages=\\"10\\">4</li>
+      <li class=\\"arco-pagination-item\\" pages=\\"10\\">5</li>
+      <li class=\\"arco-pagination-item arco-pagination-item-ellipsis\\" disabled=\\"false\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-more\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\">
+          <path d=\\"M38 25v-2h2v2h-2ZM23 25v-2h2v2h-2ZM8 25v-2h2v2H8Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path>
+          <path d=\\"M38 25v-2h2v2h-2ZM23 25v-2h2v2h-2ZM8 25v-2h2v2H8Z\\"></path>
+        </svg></li>
+      <li class=\\"arco-pagination-item\\" pages=\\"10\\">10</li>
+      <!----><span class=\\"arco-pagination-item arco-pagination-item-next\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-right\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"m16 39.513 15.556-15.557L16 8.4\\"></path></svg></span>
+    </ul><span class=\\"arco-pagination-options\\"><span class=\\"arco-select-view-single arco-select arco-select-view arco-select-view-size-medium\\" title=\\"5 条/页\\"><!----><input class=\\"arco-select-view-input arco-select-view-input-hidden\\" readonly=\\"\\"><span class=\\"arco-select-view-value\\">5 条/页</span><span class=\\"arco-select-view-suffix\\"><!----><span class=\\"arco-select-view-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down arco-select-view-arrow-icon\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path></svg></span>
+    <!----></span></span>
+    <!----></span><span class=\\"arco-pagination-jumper\\"><span class=\\"arco-pagination-jumper-prepend arco-pagination-jumper-text-goto\\">前往</span><span class=\\"arco-input-wrapper arco-input-number arco-input-number-mode-embed arco-input-number-size-medium arco-pagination-jumper-input\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" role=\\"spinbutton\\" aria-valuemax=\\"10\\" aria-valuemin=\\"1\\" aria-valuenow=\\"\\"><!----><!----></span>
+    <!--v-if-->
+    <!--v-if--></span>
+  </div>
+  <!---->
+</div>
+<!---->
+</div>
+</div>
+</div>
+<!---->
+</div>
+</div>"
+`;
+
+exports[`Demo Test: render [DragSortTable] correctly 1`] = `
+"<div class=\\"arco-card arco-card-size-medium\\">
+  <!---->
+  <!---->
+  <div class=\\"arco-card-body\\">
+    <!---->
+    <!---->
+    <form class=\\"arco-form arco-form-layout-horizontal arco-form-size-medium\\">
+      <div class=\\"arco-grid\\" style=\\"gap: 0px 0px; grid-template-columns: repeat(3, minmax(0px, 1fr));\\">
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->姓名
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"name\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"请输入\\"><!----><!----></span></div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->年龄
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"age\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"请输入\\"><!----><!----></span></div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->地址
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"address\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"请输入\\"><!----><!----></span></div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\" style=\\"text-align: right; margin-bottom: 20px;\\">
+          <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+            <!---->
+            <div class=\\"arco-space-item\\">
+              <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+                <!---->
+                <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                    <!--v-if-->重置
+                  </button></div>
+                <!---->
+                <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"submit\\">
+                    <!--v-if-->查询
+                  </button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div>
+      <div class=\\"am-vue-pro-table-toolbarContainer\\">
+        <div class=\\"am-vue-pro-table-title\\">拖拽排序</div>
+        <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\"></div>
+      </div>
+      <div class=\\"arco-table arco-table-size-large arco-table-border arco-table-hover\\">
+        <!---->
+        <div class=\\"arco-spin\\">
+          <!---->
+          <div class=\\"arco-table-container\\">
+            <div class=\\"arco-scrollbar arco-scrollbar-type-embed\\" style=\\"height: 100%;\\">
+              <div class=\\"arco-scrollbar-container arco-table-content arco-table-content-scroll-x\\">
+                <table class=\\"arco-table-element\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <colgroup>
+                    <col class=\\"arco-table-drag-handle-col\\" style=\\"width: 40px; min-width: 40px; max-width: 40px;\\">
+                    <col>
+                    <col>
+                    <col>
+                  </colgroup>
+                  <thead>
+                    <tr class=\\"arco-table-tr\\">
+                      <th class=\\"arco-table-th arco-table-operation\\"><span class=\\"arco-table-cell\\"><!----></span></th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">姓名</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">年龄</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">地址</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class=\\"arco-table-tr\\">
+                      <td class=\\"arco-table-td arco-table-operation arco-table-drag-handle\\" draggable=\\"true\\"><span class=\\"arco-table-cell\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-drag-dot-vertical\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M17 8h2v2h-2V8ZM17 23h2v2h-2v-2ZM17 38h2v2h-2v-2ZM29 8h2v2h-2V8ZM29 23h2v2h-2v-2ZM29 38h2v2h-2v-2Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path><path d=\\"M17 8h2v2h-2V8ZM17 23h2v2h-2v-2ZM17 38h2v2h-2v-2ZM29 8h2v2h-2V8ZM29 23h2v2h-2v-2ZM29 38h2v2h-2v-2Z\\"></path></svg></span></td>
+                      <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><a class=\\"arco-link arco-link-status-normal\\"><!--v-if-->John Brown</a></span></span></td>
+                      <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\">32</span></span></td>
+                      <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\">New York No. 1 Lake Park</span></span></td>
+                    </tr>
+                    <!---->
+                    <tr class=\\"arco-table-tr\\">
+                      <td class=\\"arco-table-td arco-table-operation arco-table-drag-handle\\" draggable=\\"true\\"><span class=\\"arco-table-cell\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-drag-dot-vertical\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M17 8h2v2h-2V8ZM17 23h2v2h-2v-2ZM17 38h2v2h-2v-2ZM29 8h2v2h-2V8ZM29 23h2v2h-2v-2ZM29 38h2v2h-2v-2Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path><path d=\\"M17 8h2v2h-2V8ZM17 23h2v2h-2v-2ZM17 38h2v2h-2v-2ZM29 8h2v2h-2V8ZM29 23h2v2h-2v-2ZM29 38h2v2h-2v-2Z\\"></path></svg></span></td>
+                      <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><a class=\\"arco-link arco-link-status-normal\\"><!--v-if-->Jim Green</a></span></span></td>
+                      <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\">42</span></span></td>
+                      <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\">London No. 1 Lake Park</span></span></td>
+                    </tr>
+                    <!---->
+                    <tr class=\\"arco-table-tr\\">
+                      <td class=\\"arco-table-td arco-table-operation arco-table-drag-handle\\" draggable=\\"true\\"><span class=\\"arco-table-cell\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-drag-dot-vertical\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M17 8h2v2h-2V8ZM17 23h2v2h-2v-2ZM17 38h2v2h-2v-2ZM29 8h2v2h-2V8ZM29 23h2v2h-2v-2ZM29 38h2v2h-2v-2Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path><path d=\\"M17 8h2v2h-2V8ZM17 23h2v2h-2v-2ZM17 38h2v2h-2v-2ZM29 8h2v2h-2V8ZM29 23h2v2h-2v-2ZM29 38h2v2h-2v-2Z\\"></path></svg></span></td>
+                      <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><a class=\\"arco-link arco-link-status-normal\\"><!--v-if-->Joe Black</a></span></span></td>
+                      <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\">32</span></span></td>
+                      <td class=\\"arco-table-td\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\">Sidney No. 1 Lake Park</span></span></td>
+                    </tr>
+                    <!---->
+                  </tbody>
+                  <!---->
+                </table>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+          <!---->
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`Demo Test: render [Form] correctly 1`] = `
+"<div class=\\"arco-card arco-card-size-medium\\">
+  <!---->
+  <!---->
+  <div class=\\"arco-card-body\\">
+    <!---->
+    <!---->
+    <form class=\\"arco-form arco-form-layout-horizontal arco-form-size-medium\\">
+      <div class=\\"arco-grid\\" style=\\"gap: 0px 0px; grid-template-columns: repeat(3, minmax(0px, 1fr));\\">
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->标题
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"name\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"请输入\\"><!----><!----></span></div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->创建时间
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"createdAt\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div class=\\"arco-picker arco-picker-size-medium\\" style=\\"width: 100%;\\" visible=\\"false\\">
+                    <!--v-if-->
+                    <div class=\\"arco-picker-input\\"><input placeholder=\\"请选择日期\\" class=\\"arco-picker-start-time\\"></div>
+                    <div class=\\"arco-picker-suffix\\">
+                      <!--v-if--><span class=\\"arco-picker-suffix-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-calendar\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M7 22h34M14 5v8m20-8v8M8 41h32a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v30a1 1 0 0 0 1 1Z\\"></path></svg></span>
+                      <!--v-if-->
+                    </div>
+                  </div>
+                  <!---->
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->更新时间
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"updateAt\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div class=\\"arco-picker arco-picker-size-medium\\" style=\\"width: 100%;\\" visible=\\"false\\">
+                    <!--v-if-->
+                    <div class=\\"arco-picker-input\\"><input placeholder=\\"请选择日期\\" class=\\"arco-picker-start-time\\"></div>
+                    <div class=\\"arco-picker-suffix\\">
+                      <!--v-if--><span class=\\"arco-picker-suffix-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-calendar\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M7 22h34M14 5v8m20-8v8M8 41h32a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v30a1 1 0 0 0 1 1Z\\"></path></svg></span>
+                      <!--v-if-->
+                    </div>
+                  </div>
+                  <!---->
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\" style=\\"text-align: right; margin-bottom: 20px;\\">
+          <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+            <!---->
+            <div class=\\"arco-space-item\\" style=\\"margin-right: 16px;\\">
+              <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+                <!---->
+                <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                    <!--v-if-->重置
+                  </button></div>
+                <!---->
+                <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"submit\\">
+                    <!--v-if-->查询
+                  </button></div>
+              </div>
+            </div>
+            <!---->
+            <div class=\\"arco-space-item\\"><a class=\\"am-vue-pro-table-collapse-button\\">收起<svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down\\" style=\\"vertical-align: baseline; font-size: 16px; margin-left: 8px; transition: 0.3s all; transform: rotate(0.5turn);\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\">
+                  <path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path>
+                </svg></a></div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div>
+      <div class=\\"am-vue-pro-table-toolbarContainer\\">
+        <div class=\\"am-vue-pro-table-title\\">表单赋值</div>
+        <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+          <!---->
+          <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+              <!--v-if-->赋值
+            </button></div>
+          <!---->
+          <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+              <!--v-if-->提交
+            </button></div>
+          <!---->
+          <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+              <!--v-if-->刷新
+            </button></div>
+        </div>
+      </div>
+      <div class=\\"arco-table arco-table-size-large arco-table-border arco-table-hover arco-table-empty\\">
+        <!---->
+        <div class=\\"arco-spin\\">
+          <!---->
+          <div class=\\"arco-table-container\\">
+            <div class=\\"arco-scrollbar arco-scrollbar-type-embed\\" style=\\"height: 100%;\\">
+              <div class=\\"arco-scrollbar-container arco-table-content arco-table-content-scroll-x\\">
+                <table class=\\"arco-table-element\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                  </colgroup>
+                  <thead>
+                    <tr class=\\"arco-table-tr\\">
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">标题</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">创建时间</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">更新时间</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class=\\"arco-table-tr arco-table-tr-empty\\">
+                      <td class=\\"arco-table-td\\" colspan=\\"3\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-empty\\"><div class=\\"arco-empty-image\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-empty\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24 5v6m7 1 4-4m-18 4-4-4m28.5 22H28s-1 3-4 3-4-3-4-3H6.5M40 41H8a2 2 0 0 1-2-2v-8.46a2 2 0 0 1 .272-1.007l6.15-10.54A2 2 0 0 1 14.148 18H33.85a2 2 0 0 1 1.728.992l6.149 10.541A2 2 0 0 1 42 30.541V39a2 2 0 0 1-2 2Z\\"></path></svg></div><div class=\\"arco-empty-description\\">暂无数据</div></div></span></span></td>
+                    </tr>
+                  </tbody>
+                  <!---->
+                </table>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+          <!---->
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`Demo Test: render [FormV] correctly 1`] = `
+"<div class=\\"arco-card arco-card-size-medium\\">
+  <!---->
+  <!---->
+  <div class=\\"arco-card-body\\">
+    <!---->
+    <!---->
+    <form class=\\"arco-form arco-form-layout-horizontal arco-form-size-medium\\">
+      <div class=\\"arco-grid\\" style=\\"gap: 0px 0px; grid-template-columns: repeat(3, minmax(0px, 1fr));\\">
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->标题
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"name\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"请输入\\"><!----><!----></span></div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->创建时间
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"createdAt\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div class=\\"arco-picker arco-picker-size-medium\\" style=\\"width: 100%;\\" visible=\\"false\\">
+                    <!--v-if-->
+                    <div class=\\"arco-picker-input\\"><input placeholder=\\"请选择日期\\" class=\\"arco-picker-start-time\\"></div>
+                    <div class=\\"arco-picker-suffix\\">
+                      <!--v-if--><span class=\\"arco-picker-suffix-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-calendar\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M7 22h34M14 5v8m20-8v8M8 41h32a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v30a1 1 0 0 0 1 1Z\\"></path></svg></span>
+                      <!--v-if-->
+                    </div>
+                  </div>
+                  <!---->
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->更新时间
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"updateAt\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div class=\\"arco-picker arco-picker-size-medium\\" style=\\"width: 100%;\\" visible=\\"false\\">
+                    <!--v-if-->
+                    <div class=\\"arco-picker-input\\"><input placeholder=\\"请选择日期\\" class=\\"arco-picker-start-time\\"></div>
+                    <div class=\\"arco-picker-suffix\\">
+                      <!--v-if--><span class=\\"arco-picker-suffix-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-calendar\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M7 22h34M14 5v8m20-8v8M8 41h32a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v30a1 1 0 0 0 1 1Z\\"></path></svg></span>
+                      <!--v-if-->
+                    </div>
+                  </div>
+                  <!---->
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\" style=\\"text-align: right; margin-bottom: 20px;\\">
+          <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+            <!---->
+            <div class=\\"arco-space-item\\" style=\\"margin-right: 16px;\\">
+              <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+                <!---->
+                <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                    <!--v-if-->重置
+                  </button></div>
+                <!---->
+                <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"submit\\">
+                    <!--v-if-->查询
+                  </button></div>
+              </div>
+            </div>
+            <!---->
+            <div class=\\"arco-space-item\\"><a class=\\"am-vue-pro-table-collapse-button\\">收起<svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down\\" style=\\"vertical-align: baseline; font-size: 16px; margin-left: 8px; transition: 0.3s all; transform: rotate(0.5turn);\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\">
+                  <path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path>
+                </svg></a></div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div>
+      <div class=\\"am-vue-pro-table-toolbarContainer\\">
+        <div class=\\"am-vue-pro-table-title\\">表单赋值</div>
+        <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+          <!---->
+          <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+              <!--v-if-->赋值
+            </button></div>
+          <!---->
+          <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+              <!--v-if-->提交
+            </button></div>
+          <!---->
+          <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+              <!--v-if-->刷新
+            </button></div>
+        </div>
+      </div>
+      <div class=\\"arco-table arco-table-size-large arco-table-border arco-table-hover arco-table-empty\\">
+        <!---->
+        <div class=\\"arco-spin\\">
+          <!---->
+          <div class=\\"arco-table-container\\">
+            <div class=\\"arco-scrollbar arco-scrollbar-type-embed\\" style=\\"height: 100%;\\">
+              <div class=\\"arco-scrollbar-container arco-table-content arco-table-content-scroll-x\\">
+                <table class=\\"arco-table-element\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                  </colgroup>
+                  <thead>
+                    <tr class=\\"arco-table-tr\\">
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">标题</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">创建时间</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">更新时间</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class=\\"arco-table-tr arco-table-tr-empty\\">
+                      <td class=\\"arco-table-td\\" colspan=\\"3\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-empty\\"><div class=\\"arco-empty-image\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-empty\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24 5v6m7 1 4-4m-18 4-4-4m28.5 22H28s-1 3-4 3-4-3-4-3H6.5M40 41H8a2 2 0 0 1-2-2v-8.46a2 2 0 0 1 .272-1.007l6.15-10.54A2 2 0 0 1 14.148 18H33.85a2 2 0 0 1 1.728.992l6.149 10.541A2 2 0 0 1 42 30.541V39a2 2 0 0 1-2 2Z\\"></path></svg></div><div class=\\"arco-empty-description\\">暂无数据</div></div></span></span></td>
+                    </tr>
+                  </tbody>
+                  <!---->
+                </table>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+          <!---->
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`Demo Test: render [Lightfilter] correctly 1`] = `
+"<div>
+  <div class=\\"arco-card arco-card-size-medium\\">
+    <!---->
+    <!---->
+    <div class=\\"arco-card-body\\">
+      <!---->
+      <form class=\\"arco-form arco-form-layout-vertical arco-form-size-medium\\">
+        <div class=\\"am-vue-pro-table-light-container\\"><span class=\\"arco-input-outer arco-input-outer-size-medium arco-input-search\\" style=\\"width: 420px; margin-right: 8px;\\"><!----><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"搜索应用名称/创建者\\"><!----><!----></span><span class=\\"arco-input-append\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal arco-input-search-btn\\" type=\\"button\\"><!--v-if-->查询</button></span></span>
+          <div class=\\"am-vue-pro-table-light-right\\">
+            <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+              <!---->
+              <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\">
+                <div><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"应用名称\\"><!----><!----></span></div>
+              </div>
+              <!---->
+              <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\">
+                <div><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"容器数量\\"><!----><!----></span></div>
+              </div>
+              <!---->
+              <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal am-vue-pro-table-light-power-btn\\" type=\\"button\\">
+                  <!--v-if--><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-find-replace\\" style=\\"font-size: 18px; margin-right: 12px;\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\">
+                    <path d=\\"M42.353 40.854 36.01 34.51m0 0a9 9 0 0 1-15.364-6.364c0-5 4-9 9-9s9 4 9 9a8.972 8.972 0 0 1-2.636 6.364Zm5.636-26.365h-36m10 16h-10m10 16h-10\\"></path>
+                  </svg>高级筛选
+                  <!---->
+                </button>
+                <!---->
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <!---->
+      <div>
+        <div class=\\"am-vue-pro-table-toolbarContainer\\">
+          <div class=\\"am-vue-pro-table-title\\">高级筛选表格</div>
+          <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+            <!---->
+            <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                <!--v-if-->查看日志
+              </button></div>
+            <!---->
+            <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                <!--v-if-->导出数据<svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\">
+                  <path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path>
+                </svg>
+              </button></div>
+            <!---->
+            <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                <!--v-if-->创建应用
+              </button></div>
+          </div>
+        </div>
+        <div class=\\"arco-table arco-table-size-large arco-table-border arco-table-hover arco-table-empty arco-table-layout-fixed\\">
+          <!---->
+          <div class=\\"arco-spin\\">
+            <!---->
+            <div class=\\"arco-table-container\\">
+              <div class=\\"arco-scrollbar arco-scrollbar-type-embed\\" style=\\"height: 100%;\\">
+                <div class=\\"arco-scrollbar-container arco-table-content arco-table-content-scroll-x\\">
+                  <table class=\\"arco-table-element\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                    <colgroup>
+                      <col style=\\"width: 140px; min-width: 140px; max-width: 140px;\\">
+                      <col>
+                      <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                      <col style=\\"width: 80px; min-width: 80px; max-width: 80px;\\">
+                      <col style=\\"width: 140px; min-width: 140px; max-width: 140px;\\">
+                      <col>
+                      <col style=\\"width: 260px; min-width: 260px; max-width: 260px;\\">
+                    </colgroup>
+                    <thead>
+                      <tr class=\\"arco-table-tr\\">
+                        <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">应用名称</span>
+                          <!---->
+                          <!----></span>
+                          <!---->
+                          <!---->
+                        </th>
+                        <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-right arco-table-cell-with-sorter arco-table-cell-next-ascend\\"><span class=\\"arco-table-th-title\\">容器数量</span><span class=\\"arco-table-sorter\\"><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-up\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M23.063 13.171a1.2 1.2 0 0 1 1.875 0l13.503 16.88c.628.785.069 1.949-.937 1.949H10.497c-1.006 0-1.565-1.164-.937-1.95l13.503-16.879Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-down\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24.938 34.829a1.2 1.2 0 0 1-1.875 0L9.56 17.949c-.628-.785-.069-1.949.937-1.949h27.007c1.006 0 1.565 1.164.937 1.95L24.937 34.829Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div></span>
+                          <!----></span>
+                          <!---->
+                          <!---->
+                        </th>
+                        <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">状态</span>
+                          <!---->
+                          <!----></span>
+                          <!---->
+                          <!---->
+                        </th>
+                        <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">创建者</span>
+                          <!---->
+                          <!----></span>
+                          <!---->
+                          <!---->
+                        </th>
+                        <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left arco-table-cell-with-sorter arco-table-cell-next-ascend\\"><span class=\\"arco-table-th-title\\"><div style=\\"white-space: nowrap;\\">创建时间<svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-question-circle\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M42 24c0 9.941-8.059 18-18 18S6 33.941 6 24 14.059 6 24 6s18 8.059 18 18Z\\"></path><path d=\\"M24.006 31v4.008m0-6.008L24 28c0-3 3-4 4.78-6.402C30.558 19.195 28.288 15 23.987 15c-4.014 0-5.382 2.548-5.388 4.514v.465\\"></path></svg><!----></div></span><span class=\\"arco-table-sorter\\"><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-up\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M23.063 13.171a1.2 1.2 0 0 1 1.875 0l13.503 16.88c.628.785.069 1.949-.937 1.949H10.497c-1.006 0-1.565-1.164-.937-1.95l13.503-16.879Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-down\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24.938 34.829a1.2 1.2 0 0 1-1.875 0L9.56 17.949c-.628-.785-.069-1.949.937-1.949h27.007c1.006 0 1.565 1.164.937 1.95L24.937 34.829Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div></span>
+                          <!----></span>
+                          <!---->
+                          <!---->
+                        </th>
+                        <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title arco-table-text-ellipsis\\">备注</span>
+                          <!---->
+                          <!----></span>
+                          <!---->
+                          <!---->
+                        </th>
+                        <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">操作</span>
+                          <!---->
+                          <!----></span>
+                          <!---->
+                          <!---->
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class=\\"arco-table-tr arco-table-tr-empty\\">
+                        <td class=\\"arco-table-td\\" colspan=\\"7\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-empty\\"><div class=\\"arco-empty-image\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-empty\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24 5v6m7 1 4-4m-18 4-4-4m28.5 22H28s-1 3-4 3-4-3-4-3H6.5M40 41H8a2 2 0 0 1-2-2v-8.46a2 2 0 0 1 .272-1.007l6.15-10.54A2 2 0 0 1 14.148 18H33.85a2 2 0 0 1 1.728.992l6.149 10.541A2 2 0 0 1 42 30.541V39a2 2 0 0 1-2 2Z\\"></path></svg></div><div class=\\"arco-empty-description\\">暂无数据</div></div></span></span></td>
+                      </tr>
+                    </tbody>
+                    <!---->
+                  </table>
+                </div>
+                <!--v-if-->
+                <!--v-if-->
+              </div>
+            </div>
+            <!---->
+            <!---->
+            <!---->
+          </div>
+        </div>
+      </div>
+      <!---->
+    </div>
+  </div>
+  <div class=\\"arco-card arco-card-size-medium\\">
+    <!---->
+    <!---->
+    <div class=\\"arco-card-body\\">
+      <!---->
+      <!---->
+      <form class=\\"arco-form arco-form-layout-horizontal arco-form-size-medium\\">
+        <div class=\\"arco-grid\\" style=\\"gap: 0px 0px; grid-template-columns: repeat(3, minmax(0px, 1fr));\\">
+          <div class=\\"arco-grid-item\\">
+            <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+              <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                  <!--v-if-->应用名称
+                  <!--v-if-->
+                  <!--v-if-->
+                </label></div>
+              <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"name\\">
+                <div class=\\"arco-form-item-content-wrapper\\">
+                  <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"请输入\\"><span class=\\"arco-icon-hover arco-input-icon-hover arco-input-clear-btn\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-close\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M9.857 9.858 24 24m0 0 14.142 14.142M24 24 38.142 9.858M24 24 9.857 38.142\\"></path></svg></span>
+                    <!----></span>
+                  </div>
+                </div>
+                <!--v-if-->
+                <!--v-if-->
+              </div>
+            </div>
+          </div>
+          <div class=\\"arco-grid-item\\">
+            <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+              <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                  <!--v-if-->容器数量
+                  <!--v-if-->
+                  <!--v-if-->
+                </label></div>
+              <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"containers\\">
+                <div class=\\"arco-form-item-content-wrapper\\">
+                  <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"请输入\\"><!----><!----></span></div>
+                </div>
+                <!--v-if-->
+                <!--v-if-->
+              </div>
+            </div>
+          </div>
+          <div class=\\"arco-grid-item\\">
+            <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+              <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                  <!--v-if-->状态
+                  <!--v-if-->
+                  <!--v-if-->
+                </label></div>
+              <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"status\\">
+                <div class=\\"arco-form-item-content-wrapper\\">
+                  <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                    <div style=\\"width: 100%;\\"><span class=\\"arco-select-view-single arco-select arco-select-view arco-select-view-size-medium arco-select-view-search\\" labelkey=\\"label\\" valueoption=\\"false\\" style=\\"width: 100%;\\" title=\\"\\"><!----><input class=\\"arco-select-view-input\\" placeholder=\\"请选择\\"><span class=\\"arco-select-view-value arco-select-view-value-hidden\\"><!----></span><span class=\\"arco-select-view-suffix\\"><!----><span class=\\"arco-select-view-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down arco-select-view-arrow-icon\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path></svg></span>
+                      <!----></span></span>
+                      <!---->
+                    </div>
+                  </div>
+                </div>
+                <!--v-if-->
+                <!--v-if-->
+              </div>
+            </div>
+          </div>
+          <div class=\\"arco-grid-item\\">
+            <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+              <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                  <!--v-if-->
+                  <div style=\\"white-space: nowrap;\\">创建时间<svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-question-circle\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\">
+                      <path d=\\"M42 24c0 9.941-8.059 18-18 18S6 33.941 6 24 14.059 6 24 6s18 8.059 18 18Z\\"></path>
+                      <path d=\\"M24.006 31v4.008m0-6.008L24 28c0-3 3-4 4.78-6.402C30.558 19.195 28.288 15 23.987 15c-4.014 0-5.382 2.548-5.388 4.514v.465\\"></path>
+                    </svg>
+                    <!---->
+                  </div>
+                  <!--v-if-->
+                  <!--v-if-->
+                </label></div>
+              <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"createdAt\\">
+                <div class=\\"arco-form-item-content-wrapper\\">
+                  <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                    <div class=\\"arco-picker arco-picker-size-medium\\" style=\\"width: 100%;\\" visible=\\"false\\">
+                      <!--v-if-->
+                      <div class=\\"arco-picker-input\\"><input placeholder=\\"请选择日期\\" class=\\"arco-picker-start-time\\"></div>
+                      <div class=\\"arco-picker-suffix\\">
+                        <!--v-if--><span class=\\"arco-picker-suffix-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-calendar\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M7 22h34M14 5v8m20-8v8M8 41h32a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v30a1 1 0 0 0 1 1Z\\"></path></svg></span>
+                        <!--v-if-->
+                      </div>
+                    </div>
+                    <!---->
+                  </div>
+                </div>
+                <!--v-if-->
+                <!--v-if-->
+              </div>
+            </div>
+          </div>
+          <div class=\\"arco-grid-item\\">
+            <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+              <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                  <!--v-if-->备注1
+                  <!--v-if-->
+                  <!--v-if-->
+                </label></div>
+              <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"memo\\">
+                <div class=\\"arco-form-item-content-wrapper\\">
+                  <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"请输入\\"><!----><!----></span></div>
+                </div>
+                <!--v-if-->
+                <!--v-if-->
+              </div>
+            </div>
+          </div>
+          <div class=\\"arco-grid-item\\" style=\\"text-align: right; margin-bottom: 20px;\\">
+            <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+              <!---->
+              <div class=\\"arco-space-item\\">
+                <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+                  <!---->
+                  <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                      <!--v-if-->重置
+                    </button></div>
+                  <!---->
+                  <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"submit\\">
+                      <!--v-if-->查询
+                    </button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div>
+        <div class=\\"am-vue-pro-table-toolbarContainer\\">
+          <div class=\\"am-vue-pro-table-title\\">查询表格</div>
+          <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+            <!---->
+            <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                <!--v-if-->查看日志
+              </button></div>
+            <!---->
+            <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                <!--v-if-->导出数据<svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\">
+                  <path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path>
+                </svg>
+              </button></div>
+            <!---->
+            <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                <!--v-if-->创建应用
+              </button></div>
+          </div>
+        </div>
+        <div class=\\"arco-table arco-table-size-large arco-table-border arco-table-hover arco-table-empty arco-table-layout-fixed\\">
+          <!---->
+          <div class=\\"arco-spin\\">
+            <!---->
+            <div class=\\"arco-table-container\\">
+              <div class=\\"arco-scrollbar arco-scrollbar-type-embed\\" style=\\"height: 100%;\\">
+                <div class=\\"arco-scrollbar-container arco-table-content arco-table-content-scroll-x\\">
+                  <table class=\\"arco-table-element\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                    <colgroup>
+                      <col style=\\"width: 140px; min-width: 140px; max-width: 140px;\\">
+                      <col>
+                      <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                      <col style=\\"width: 80px; min-width: 80px; max-width: 80px;\\">
+                      <col style=\\"width: 140px; min-width: 140px; max-width: 140px;\\">
+                      <col>
+                      <col style=\\"width: 260px; min-width: 260px; max-width: 260px;\\">
+                    </colgroup>
+                    <thead>
+                      <tr class=\\"arco-table-tr\\">
+                        <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">应用名称</span>
+                          <!---->
+                          <!----></span>
+                          <!---->
+                          <!---->
+                        </th>
+                        <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-right arco-table-cell-with-sorter arco-table-cell-next-ascend\\"><span class=\\"arco-table-th-title\\">容器数量</span><span class=\\"arco-table-sorter\\"><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-up\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M23.063 13.171a1.2 1.2 0 0 1 1.875 0l13.503 16.88c.628.785.069 1.949-.937 1.949H10.497c-1.006 0-1.565-1.164-.937-1.95l13.503-16.879Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-down\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24.938 34.829a1.2 1.2 0 0 1-1.875 0L9.56 17.949c-.628-.785-.069-1.949.937-1.949h27.007c1.006 0 1.565 1.164.937 1.95L24.937 34.829Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div></span>
+                          <!----></span>
+                          <!---->
+                          <!---->
+                        </th>
+                        <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">状态</span>
+                          <!---->
+                          <!----></span>
+                          <!---->
+                          <!---->
+                        </th>
+                        <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">创建者</span>
+                          <!---->
+                          <!----></span>
+                          <!---->
+                          <!---->
+                        </th>
+                        <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left arco-table-cell-with-sorter arco-table-cell-next-ascend\\"><span class=\\"arco-table-th-title\\"><div style=\\"white-space: nowrap;\\">创建时间<svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-question-circle\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M42 24c0 9.941-8.059 18-18 18S6 33.941 6 24 14.059 6 24 6s18 8.059 18 18Z\\"></path><path d=\\"M24.006 31v4.008m0-6.008L24 28c0-3 3-4 4.78-6.402C30.558 19.195 28.288 15 23.987 15c-4.014 0-5.382 2.548-5.388 4.514v.465\\"></path></svg><!----></div></span><span class=\\"arco-table-sorter\\"><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-up\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M23.063 13.171a1.2 1.2 0 0 1 1.875 0l13.503 16.88c.628.785.069 1.949-.937 1.949H10.497c-1.006 0-1.565-1.164-.937-1.95l13.503-16.879Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-down\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24.938 34.829a1.2 1.2 0 0 1-1.875 0L9.56 17.949c-.628-.785-.069-1.949.937-1.949h27.007c1.006 0 1.565 1.164.937 1.95L24.937 34.829Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div></span>
+                          <!----></span>
+                          <!---->
+                          <!---->
+                        </th>
+                        <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title arco-table-text-ellipsis\\">备注</span>
+                          <!---->
+                          <!----></span>
+                          <!---->
+                          <!---->
+                        </th>
+                        <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">操作</span>
+                          <!---->
+                          <!----></span>
+                          <!---->
+                          <!---->
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class=\\"arco-table-tr arco-table-tr-empty\\">
+                        <td class=\\"arco-table-td\\" colspan=\\"7\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-empty\\"><div class=\\"arco-empty-image\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-empty\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24 5v6m7 1 4-4m-18 4-4-4m28.5 22H28s-1 3-4 3-4-3-4-3H6.5M40 41H8a2 2 0 0 1-2-2v-8.46a2 2 0 0 1 .272-1.007l6.15-10.54A2 2 0 0 1 14.148 18H33.85a2 2 0 0 1 1.728.992l6.149 10.541A2 2 0 0 1 42 30.541V39a2 2 0 0 1-2 2Z\\"></path></svg></div><div class=\\"arco-empty-description\\">暂无数据</div></div></span></span></td>
+                      </tr>
+                    </tbody>
+                    <!---->
+                  </table>
+                </div>
+                <!--v-if-->
+                <!--v-if-->
+              </div>
+            </div>
+            <!---->
+            <!---->
+            <!---->
+          </div>
+        </div>
+      </div>
+      <!---->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Demo Test: render [LinkageForm] correctly 1`] = `
+"<div class=\\"arco-card arco-card-size-medium\\">
+  <!---->
+  <!---->
+  <div class=\\"arco-card-body\\">
+    <!---->
+    <!---->
+    <form class=\\"arco-form arco-form-layout-horizontal arco-form-size-medium\\">
+      <div class=\\"arco-grid\\" style=\\"gap: 0px 0px; grid-template-columns: repeat(3, minmax(0px, 1fr));\\">
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->标题
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"name\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"请输入\\"><!----><!----></span></div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->状态
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"state\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div style=\\"width: 100%;\\"><span class=\\"arco-select-view-single arco-select arco-select-view arco-select-view-size-medium arco-select-view-search\\" request=\\"async () => {
+          /* istanbul ignore next */
+          cov_2jqq6p6h8o().f[3]++;
+          cov_2jqq6p6h8o().s[4]++;
+          return stateDict;
+        }\\" labelkey=\\"label\\" valueoption=\\"false\\" style=\\"width: 100%;\\" title=\\"\\"><!----><input class=\\"arco-select-view-input\\" placeholder=\\"请选择\\"><span class=\\"arco-select-view-value arco-select-view-value-hidden\\"><!----></span><span class=\\"arco-select-view-suffix\\"><!----><span class=\\"arco-select-view-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down arco-select-view-arrow-icon\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path></svg></span>
+                    <!----></span></span>
+                    <!---->
+                  </div>
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->动态表单
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"direction\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div style=\\"width: 100%;\\"><span class=\\"arco-select-view-single arco-select arco-select-view arco-select-view-size-medium arco-select-view-search\\" labelkey=\\"word\\" valueoption=\\"false\\" title=\\"\\"><!----><input class=\\"arco-select-view-input\\" placeholder=\\"请选择\\"><span class=\\"arco-select-view-value arco-select-view-value-hidden\\"><!----></span><span class=\\"arco-select-view-suffix\\"><!----><span class=\\"arco-select-view-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down arco-select-view-arrow-icon\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path></svg></span>
+                    <!----></span></span>
+                    <!---->
+                  </div>
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\" style=\\"text-align: right; margin-bottom: 20px;\\">
+          <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+            <!---->
+            <div class=\\"arco-space-item\\" style=\\"margin-right: 16px;\\">
+              <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+                <!---->
+                <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"submit\\">
+                    <!--v-if-->查询
+                  </button></div>
+                <!---->
+                <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                    <!--v-if-->重置
+                  </button></div>
+                <!---->
+                <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                    <!--v-if-->导出
+                  </button></div>
+              </div>
+            </div>
+            <!---->
+            <div class=\\"arco-space-item\\"><a class=\\"am-vue-pro-table-collapse-button\\">收起<svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down\\" style=\\"vertical-align: baseline; font-size: 16px; margin-left: 8px; transition: 0.3s all; transform: rotate(0.5turn);\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\">
+                  <path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path>
+                </svg></a></div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div>
+      <div class=\\"am-vue-pro-table-toolbarContainer\\">
+        <div class=\\"am-vue-pro-table-title\\">动态自定义搜索栏</div>
+        <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+          <!---->
+          <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+              <!--v-if-->新建
+            </button></div>
+        </div>
+      </div>
+      <div class=\\"arco-table arco-table-size-large arco-table-border arco-table-hover arco-table-empty\\">
+        <!---->
+        <div class=\\"arco-spin\\">
+          <!---->
+          <div class=\\"arco-table-container\\">
+            <div class=\\"arco-scrollbar arco-scrollbar-type-embed\\" style=\\"height: 100%;\\">
+              <div class=\\"arco-scrollbar-container arco-table-content arco-table-content-scroll-x\\">
+                <table class=\\"arco-table-element\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                  </colgroup>
+                  <thead>
+                    <tr class=\\"arco-table-tr\\">
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">序号</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">标题</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">状态</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class=\\"arco-table-tr arco-table-tr-empty\\">
+                      <td class=\\"arco-table-td\\" colspan=\\"3\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-empty\\"><div class=\\"arco-empty-image\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-empty\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24 5v6m7 1 4-4m-18 4-4-4m28.5 22H28s-1 3-4 3-4-3-4-3H6.5M40 41H8a2 2 0 0 1-2-2v-8.46a2 2 0 0 1 .272-1.007l6.15-10.54A2 2 0 0 1 14.148 18H33.85a2 2 0 0 1 1.728.992l6.149 10.541A2 2 0 0 1 42 30.541V39a2 2 0 0 1-2 2Z\\"></path></svg></div><div class=\\"arco-empty-description\\">暂无数据</div></div></span></span></td>
+                    </tr>
+                  </tbody>
+                  <!---->
+                </table>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+          <!---->
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`Demo Test: render [LinkageFormV] correctly 1`] = `
+"<div class=\\"arco-card arco-card-size-medium\\">
+  <!---->
+  <!---->
+  <div class=\\"arco-card-body\\">
+    <!---->
+    <!---->
+    <form class=\\"arco-form arco-form-layout-horizontal arco-form-size-medium\\">
+      <div class=\\"arco-grid\\" style=\\"gap: 0px 0px; grid-template-columns: repeat(3, minmax(0px, 1fr));\\">
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->标题
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"name\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"请输入\\"><!----><!----></span></div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->状态
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"state\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div style=\\"width: 100%;\\"><span class=\\"arco-select-view-single arco-select arco-select-view arco-select-view-size-medium arco-select-view-search\\" request=\\"function () {
+          /* istanbul ignore next */
+          cov_33soxizus().f[18]++;
+          cov_33soxizus().s[86]++;
+          return __awaiter(_this, void 0, void 0, function () {
+            /* istanbul ignore next */
+            cov_33soxizus().f[19]++;
+            cov_33soxizus().s[87]++;
+            return __generator(this, function (_a) {
+              /* istanbul ignore next */
+              cov_33soxizus().f[20]++;
+              cov_33soxizus().s[88]++;
+              return [2 /*return*/, stateDict];
+            });
+          });
+        }\\" labelkey=\\"label\\" valueoption=\\"false\\" style=\\"width: 100%;\\" title=\\"\\"><!----><input class=\\"arco-select-view-input\\" placeholder=\\"请选择\\"><span class=\\"arco-select-view-value arco-select-view-value-hidden\\"><!----></span><span class=\\"arco-select-view-suffix\\"><!----><span class=\\"arco-select-view-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down arco-select-view-arrow-icon\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path></svg></span>
+                    <!----></span></span>
+                    <!---->
+                  </div>
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->动态表单
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"direction\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div style=\\"width: 100%;\\" label-column=\\"word\\" value-column=\\"id\\"><span class=\\"arco-select-view-single arco-select arco-select-view arco-select-view-size-medium arco-select-view-search\\" labelkey=\\"label\\" valueoption=\\"false\\" label-column=\\"word\\" value-column=\\"id\\" title=\\"\\"><!----><input class=\\"arco-select-view-input\\" placeholder=\\"请选择\\"><span class=\\"arco-select-view-value arco-select-view-value-hidden\\"><!----></span><span class=\\"arco-select-view-suffix\\"><!----><span class=\\"arco-select-view-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down arco-select-view-arrow-icon\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path></svg></span>
+                    <!----></span></span>
+                    <!---->
+                  </div>
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\" style=\\"text-align: right; margin-bottom: 20px;\\">
+          <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+            <!---->
+            <div class=\\"arco-space-item\\" style=\\"margin-right: 16px;\\">
+              <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+                <!---->
+                <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"submit\\">
+                    <!--v-if-->查询
+                  </button></div>
+                <!---->
+                <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                    <!--v-if-->重置
+                  </button></div>
+                <!---->
+                <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                    <!--v-if-->导出
+                  </button></div>
+                <!---->
+                <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"submit\\">
+                    <!--v-if-->查询
+                  </button></div>
+                <!---->
+                <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                    <!--v-if-->重置
+                  </button></div>
+              </div>
+            </div>
+            <!---->
+            <div class=\\"arco-space-item\\"><a class=\\"am-vue-pro-table-collapse-button\\">收起<svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down\\" style=\\"vertical-align: baseline; font-size: 16px; margin-left: 8px; transition: 0.3s all; transform: rotate(0.5turn);\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\">
+                  <path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path>
+                </svg></a></div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div>
+      <div class=\\"am-vue-pro-table-toolbarContainer\\">
+        <div class=\\"am-vue-pro-table-title\\">动态自定义搜索栏</div>
+        <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+          <!---->
+          <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+              <!--v-if--> 新建
+            </button></div>
+        </div>
+      </div>
+      <div class=\\"arco-table arco-table-size-large arco-table-border arco-table-hover arco-table-empty\\">
+        <!---->
+        <div class=\\"arco-spin\\">
+          <!---->
+          <div class=\\"arco-table-container\\">
+            <div class=\\"arco-scrollbar arco-scrollbar-type-embed\\" style=\\"height: 100%;\\">
+              <div class=\\"arco-scrollbar-container arco-table-content arco-table-content-scroll-x\\">
+                <table class=\\"arco-table-element\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                  </colgroup>
+                  <thead>
+                    <tr class=\\"arco-table-tr\\">
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">序号</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">标题</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">状态</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class=\\"arco-table-tr arco-table-tr-empty\\">
+                      <td class=\\"arco-table-td\\" colspan=\\"3\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-empty\\"><div class=\\"arco-empty-image\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-empty\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24 5v6m7 1 4-4m-18 4-4-4m28.5 22H28s-1 3-4 3-4-3-4-3H6.5M40 41H8a2 2 0 0 1-2-2v-8.46a2 2 0 0 1 .272-1.007l6.15-10.54A2 2 0 0 1 14.148 18H33.85a2 2 0 0 1 1.728.992l6.149 10.541A2 2 0 0 1 42 30.541V39a2 2 0 0 1-2 2Z\\"></path></svg></div><div class=\\"arco-empty-description\\">暂无数据</div></div></span></span></td>
+                    </tr>
+                  </tbody>
+                  <!---->
+                </table>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+          <!---->
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`Demo Test: render [Normal] correctly 1`] = `
+"<div class=\\"arco-card arco-card-size-medium\\">
+  <!---->
+  <!---->
+  <div class=\\"arco-card-body\\">
+    <!---->
+    <!---->
+    <!---->
+    <div>
+      <div class=\\"am-vue-pro-table-toolbarContainer\\">
+        <div class=\\"am-vue-pro-table-title\\">无查询表单</div>
+        <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+          <!---->
+          <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+              <!--v-if-->查看日志
+            </button></div>
+          <!---->
+          <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+              <!--v-if-->导出数据<svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\">
+                <path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path>
+              </svg>
+            </button></div>
+          <!---->
+          <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+              <!--v-if-->创建应用
+            </button></div>
+        </div>
+      </div>
+      <div class=\\"arco-table arco-table-size-large arco-table-border arco-table-hover arco-table-empty arco-table-layout-fixed\\">
+        <!---->
+        <div class=\\"arco-spin\\">
+          <!---->
+          <div class=\\"arco-table-container\\">
+            <div class=\\"arco-scrollbar arco-scrollbar-type-embed\\" style=\\"height: 100%;\\">
+              <div class=\\"arco-scrollbar-container arco-table-content arco-table-content-scroll-x\\">
+                <table class=\\"arco-table-element\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <colgroup>
+                    <col style=\\"width: 140px; min-width: 140px; max-width: 140px;\\">
+                    <col>
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                    <col style=\\"width: 80px; min-width: 80px; max-width: 80px;\\">
+                    <col style=\\"width: 140px; min-width: 140px; max-width: 140px;\\">
+                    <col>
+                    <col style=\\"width: 280px; min-width: 280px; max-width: 280px;\\">
+                  </colgroup>
+                  <thead>
+                    <tr class=\\"arco-table-tr\\">
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">应用名称</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-right arco-table-cell-with-sorter arco-table-cell-next-ascend\\"><span class=\\"arco-table-th-title\\">容器数量</span><span class=\\"arco-table-sorter\\"><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-up\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M23.063 13.171a1.2 1.2 0 0 1 1.875 0l13.503 16.88c.628.785.069 1.949-.937 1.949H10.497c-1.006 0-1.565-1.164-.937-1.95l13.503-16.879Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-down\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24.938 34.829a1.2 1.2 0 0 1-1.875 0L9.56 17.949c-.628-.785-.069-1.949.937-1.949h27.007c1.006 0 1.565 1.164.937 1.95L24.937 34.829Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div></span>
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">状态</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">创建者</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left arco-table-cell-with-sorter arco-table-cell-next-ascend\\"><span class=\\"arco-table-th-title\\"><div style=\\"white-space: nowrap;\\">创建时间<svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-question-circle\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M42 24c0 9.941-8.059 18-18 18S6 33.941 6 24 14.059 6 24 6s18 8.059 18 18Z\\"></path><path d=\\"M24.006 31v4.008m0-6.008L24 28c0-3 3-4 4.78-6.402C30.558 19.195 28.288 15 23.987 15c-4.014 0-5.382 2.548-5.388 4.514v.465\\"></path></svg><!----></div></span><span class=\\"arco-table-sorter\\"><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-up\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M23.063 13.171a1.2 1.2 0 0 1 1.875 0l13.503 16.88c.628.785.069 1.949-.937 1.949H10.497c-1.006 0-1.565-1.164-.937-1.95l13.503-16.879Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-down\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24.938 34.829a1.2 1.2 0 0 1-1.875 0L9.56 17.949c-.628-.785-.069-1.949.937-1.949h27.007c1.006 0 1.565 1.164.937 1.95L24.937 34.829Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div></span>
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title arco-table-text-ellipsis\\">备注</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">操作</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class=\\"arco-table-tr arco-table-tr-empty\\">
+                      <td class=\\"arco-table-td\\" colspan=\\"7\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-empty\\"><div class=\\"arco-empty-image\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-empty\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24 5v6m7 1 4-4m-18 4-4-4m28.5 22H28s-1 3-4 3-4-3-4-3H6.5M40 41H8a2 2 0 0 1-2-2v-8.46a2 2 0 0 1 .272-1.007l6.15-10.54A2 2 0 0 1 14.148 18H33.85a2 2 0 0 1 1.728.992l6.149 10.541A2 2 0 0 1 42 30.541V39a2 2 0 0 1-2 2Z\\"></path></svg></div><div class=\\"arco-empty-description\\">暂无数据</div></div></span></span></td>
+                    </tr>
+                  </tbody>
+                  <!---->
+                </table>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+          <!---->
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`Demo Test: render [Signle] correctly 1`] = `
+"<div class=\\"arco-card arco-card-size-medium\\">
+  <!---->
+  <!---->
+  <div class=\\"arco-card-body\\">
+    <!---->
+    <!---->
+    <form class=\\"arco-form arco-form-layout-horizontal arco-form-size-medium\\">
+      <div class=\\"arco-grid\\" style=\\"gap: 0px 0px; grid-template-columns: repeat(3, minmax(0px, 1fr));\\">
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->标题<svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-question-circle arco-form-item-label-tooltip\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\">
+                  <path d=\\"M42 24c0 9.941-8.059 18-18 18S6 33.941 6 24 14.059 6 24 6s18 8.059 18 18Z\\"></path>
+                  <path d=\\"M24.006 31v4.008m0-6.008L24 28c0-3 3-4 4.78-6.402C30.558 19.195 28.288 15 23.987 15c-4.014 0-5.382 2.548-5.388 4.514v.465\\"></path>
+                </svg>
+                <!---->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"title\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"请输入\\"><!----><!----></span></div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->状态
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"state\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div style=\\"width: 100%;\\"><span class=\\"arco-select-view-single arco-select arco-select-view arco-select-view-size-medium arco-select-view-search\\" labelkey=\\"label\\" valueoption=\\"false\\" style=\\"width: 100%;\\" title=\\"\\"><!----><input class=\\"arco-select-view-input\\" placeholder=\\"请选择\\"><span class=\\"arco-select-view-value arco-select-view-value-hidden\\"><!----></span><span class=\\"arco-select-view-suffix\\"><!----><span class=\\"arco-select-view-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down arco-select-view-arrow-icon\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path></svg></span>
+                    <!----></span></span>
+                    <!---->
+                  </div>
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->创建时间
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"createdAt\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div class=\\"arco-picker arco-picker-range arco-picker-size-medium\\" style=\\"width: 100%;\\" visible=\\"false\\">
+                    <!--v-if-->
+                    <div class=\\"arco-picker-input arco-picker-input-active\\"><input placeholder=\\"开始日期\\"></div><span class=\\"arco-picker-separator\\">-</span>
+                    <div class=\\"arco-picker-input\\"><input placeholder=\\"结束日期\\"></div>
+                    <div class=\\"arco-picker-suffix\\">
+                      <!--v-if--><span class=\\"arco-picker-suffix-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-calendar\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M7 22h34M14 5v8m20-8v8M8 41h32a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v30a1 1 0 0 0 1 1Z\\"></path></svg></span>
+                      <!--v-if-->
+                    </div>
+                  </div>
+                  <!---->
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\" style=\\"text-align: right; margin-bottom: 20px;\\">
+          <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+            <!---->
+            <div class=\\"arco-space-item\\">
+              <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+                <!---->
+                <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                    <!--v-if-->重置
+                  </button></div>
+                <!---->
+                <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"submit\\">
+                    <!--v-if-->查询
+                  </button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div>
+      <div class=\\"am-vue-pro-table-toolbarContainer\\">
+        <div class=\\"am-vue-pro-table-title\\">查询表格</div>
+        <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+          <!---->
+          <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\"><span class=\\"arco-btn-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-plus\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M5 24h38M24 5v38\\"></path></svg></span>新建</button></div>
+          <!---->
+          <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+              <!--v-if--><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-more\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\">
+                <path d=\\"M38 25v-2h2v2h-2ZM23 25v-2h2v2h-2ZM8 25v-2h2v2H8Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path>
+                <path d=\\"M38 25v-2h2v2h-2ZM23 25v-2h2v2h-2ZM8 25v-2h2v2H8Z\\"></path>
+              </svg>
+            </button>
+            <!---->
+          </div>
+        </div>
+      </div>
+      <div class=\\"arco-table arco-table-size-large arco-table-border arco-table-hover arco-table-empty arco-table-layout-fixed\\">
+        <!---->
+        <div class=\\"arco-spin\\">
+          <!---->
+          <div class=\\"arco-table-container\\">
+            <div class=\\"arco-scrollbar arco-scrollbar-type-embed\\" style=\\"height: 100%;\\">
+              <div class=\\"arco-scrollbar-container arco-table-content arco-table-content-scroll-x\\">
+                <table class=\\"arco-table-element\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <colgroup>
+                    <col style=\\"width: 45px; min-width: 45px; max-width: 45px;\\">
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                  </colgroup>
+                  <thead>
+                    <tr class=\\"arco-table-tr\\">
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\"><!----></span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title arco-table-text-ellipsis\\">标题</span>
+                        <!---->
+                        <!----></span><span class=\\"arco-icon-hover arco-icon-hover-disabled arco-table-filters\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-search\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M33.072 33.071c6.248-6.248 6.248-16.379 0-22.627-6.249-6.249-16.38-6.249-22.628 0-6.248 6.248-6.248 16.379 0 22.627 6.248 6.248 16.38 6.248 22.628 0Zm0 0 8.485 8.485\\"></path></svg></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title arco-table-text-ellipsis\\">状态</span>
+                        <!---->
+                        <!----></span><span class=\\"arco-icon-hover arco-icon-hover-disabled arco-table-filters arco-table-filters-active\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-filter\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M30 42V22.549a1 1 0 0 1 .463-.844l10.074-6.41A1 1 0 0 0 41 14.45V8a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v6.451a1 1 0 0 0 .463.844l10.074 6.41a1 1 0 0 1 .463.844V37\\"></path></svg></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">标签</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left arco-table-cell-with-sorter arco-table-cell-next-ascend\\"><span class=\\"arco-table-th-title\\">创建时间</span><span class=\\"arco-table-sorter\\"><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-up\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M23.063 13.171a1.2 1.2 0 0 1 1.875 0l13.503 16.88c.628.785.069 1.949-.937 1.949H10.497c-1.006 0-1.565-1.164-.937-1.95l13.503-16.879Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-down\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24.938 34.829a1.2 1.2 0 0 1-1.875 0L9.56 17.949c-.628-.785-.069-1.949.937-1.949h27.007c1.006 0 1.565 1.164.937 1.95L24.937 34.829Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div></span>
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">操作</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class=\\"arco-table-tr arco-table-tr-empty\\">
+                      <td class=\\"arco-table-td\\" colspan=\\"6\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-empty\\"><div class=\\"arco-empty-image\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-empty\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24 5v6m7 1 4-4m-18 4-4-4m28.5 22H28s-1 3-4 3-4-3-4-3H6.5M40 41H8a2 2 0 0 1-2-2v-8.46a2 2 0 0 1 .272-1.007l6.15-10.54A2 2 0 0 1 14.148 18H33.85a2 2 0 0 1 1.728.992l6.149 10.541A2 2 0 0 1 42 30.541V39a2 2 0 0 1-2 2Z\\"></path></svg></div><div class=\\"arco-empty-description\\">暂无数据</div></div></span></span></td>
+                    </tr>
+                  </tbody>
+                  <!---->
+                </table>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+          <!---->
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`Demo Test: render [TableNested] correctly 1`] = `
+"<div class=\\"arco-card arco-card-size-medium\\">
+  <!---->
+  <!---->
+  <div class=\\"arco-card-body\\">
+    <!---->
+    <!---->
+    <!---->
+    <div>
+      <div class=\\"am-vue-pro-table-toolbarContainer\\">
+        <div class=\\"am-vue-pro-table-title\\">嵌套表格</div>
+        <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+          <!---->
+          <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+              <!--v-if-->查看日志
+            </button></div>
+          <!---->
+          <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-secondary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+              <!--v-if-->导出数据<svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\">
+                <path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path>
+              </svg>
+            </button></div>
+          <!---->
+          <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+              <!--v-if-->创建应用
+            </button></div>
+        </div>
+      </div>
+      <div class=\\"arco-table arco-table-size-large arco-table-border arco-table-hover arco-table-empty\\">
+        <!---->
+        <div class=\\"arco-spin\\">
+          <!---->
+          <div class=\\"arco-table-container\\">
+            <div class=\\"arco-scrollbar arco-scrollbar-type-embed\\" style=\\"height: 100%;\\">
+              <div class=\\"arco-scrollbar-container arco-table-content arco-table-content-scroll-x\\">
+                <table class=\\"arco-table-element\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <colgroup>
+                    <col class=\\"arco-table-expand-col\\">
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                    <col style=\\"width: 140px; min-width: 140px; max-width: 140px;\\">
+                    <col style=\\"width: 164px; min-width: 164px; max-width: 164px;\\">
+                  </colgroup>
+                  <thead>
+                    <tr class=\\"arco-table-tr\\">
+                      <th class=\\"arco-table-th arco-table-operation\\"><span class=\\"arco-table-cell\\"><!----></span></th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">应用名称</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">状态</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-right arco-table-cell-with-sorter arco-table-cell-next-ascend\\"><span class=\\"arco-table-th-title\\">容器数量</span><span class=\\"arco-table-sorter\\"><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-up\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M23.063 13.171a1.2 1.2 0 0 1 1.875 0l13.503 16.88c.628.785.069 1.949-.937 1.949H10.497c-1.006 0-1.565-1.164-.937-1.95l13.503-16.879Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-down\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24.938 34.829a1.2 1.2 0 0 1-1.875 0L9.56 17.949c-.628-.785-.069-1.949.937-1.949h27.007c1.006 0 1.565 1.164.937 1.95L24.937 34.829Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div></span>
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">创建者</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left arco-table-cell-with-sorter arco-table-cell-next-ascend\\"><span class=\\"arco-table-th-title\\">创建时间<svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-question-circle\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M42 24c0 9.941-8.059 18-18 18S6 33.941 6 24 14.059 6 24 6s18 8.059 18 18Z\\"></path><path d=\\"M24.006 31v4.008m0-6.008L24 28c0-3 3-4 4.78-6.402C30.558 19.195 28.288 15 23.987 15c-4.014 0-5.382 2.548-5.388 4.514v.465\\"></path></svg><!----></span><span class=\\"arco-table-sorter\\"><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-up\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M23.063 13.171a1.2 1.2 0 0 1 1.875 0l13.503 16.88c.628.785.069 1.949-.937 1.949H10.497c-1.006 0-1.565-1.164-.937-1.95l13.503-16.879Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div><div class=\\"arco-table-sorter-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-caret-down\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24.938 34.829a1.2 1.2 0 0 1-1.875 0L9.56 17.949c-.628-.785-.069-1.949.937-1.949h27.007c1.006 0 1.565 1.164.937 1.95L24.937 34.829Z\\" fill=\\"currentColor\\" stroke=\\"none\\"></path></svg></div></span>
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">操作</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class=\\"arco-table-tr arco-table-tr-empty\\">
+                      <td class=\\"arco-table-td\\" colspan=\\"7\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-empty\\"><div class=\\"arco-empty-image\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-empty\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24 5v6m7 1 4-4m-18 4-4-4m28.5 22H28s-1 3-4 3-4-3-4-3H6.5M40 41H8a2 2 0 0 1-2-2v-8.46a2 2 0 0 1 .272-1.007l6.15-10.54A2 2 0 0 1 14.148 18H33.85a2 2 0 0 1 1.728.992l6.149 10.541A2 2 0 0 1 42 30.541V39a2 2 0 0 1-2 2Z\\"></path></svg></div><div class=\\"arco-empty-description\\">暂无数据</div></div></span></span></td>
+                    </tr>
+                  </tbody>
+                  <!---->
+                </table>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+          <!---->
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`Demo Test: render [ValueType] correctly 1`] = `
+"<div class=\\"arco-card arco-card-size-medium\\">
+  <!---->
+  <!---->
+  <div class=\\"arco-card-body\\">
+    <!---->
+    <!---->
+    <form class=\\"arco-form arco-form-layout-horizontal arco-form-size-medium\\">
+      <div class=\\"arco-grid\\" style=\\"gap: 0px 0px; grid-template-columns: repeat(3, minmax(0px, 1fr));\\">
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->代码
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"code\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"请输入\\"><!----><!----></span></div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->头像
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"avatar\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"请输入\\"><!----><!----></span></div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->图片
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"image\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"请输入\\"><!----><!----></span></div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\" style=\\"text-align: right; margin-bottom: 20px;\\">
+          <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+            <!---->
+            <div class=\\"arco-space-item\\">
+              <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+                <!---->
+                <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                    <!--v-if-->重置
+                  </button></div>
+                <!---->
+                <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"submit\\">
+                    <!--v-if-->查询
+                  </button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div>
+      <div class=\\"am-vue-pro-table-toolbarContainer\\">
+        <div class=\\"am-vue-pro-table-title\\">样式类</div>
+        <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\"></div>
+      </div>
+      <div class=\\"arco-table arco-table-size-large arco-table-border arco-table-hover arco-table-empty\\">
+        <!---->
+        <div class=\\"arco-spin\\">
+          <!---->
+          <div class=\\"arco-table-container\\">
+            <div class=\\"arco-scrollbar arco-scrollbar-type-embed\\" style=\\"height: 100%;\\">
+              <div class=\\"arco-scrollbar-container arco-table-content arco-table-content-scroll-x\\">
+                <table class=\\"arco-table-element\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <colgroup>
+                    <col style=\\"width: 80px; min-width: 80px; max-width: 80px;\\">
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                    <col style=\\"width: 180px; min-width: 180px; max-width: 180px;\\">
+                    <col>
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                  </colgroup>
+                  <thead>
+                    <tr class=\\"arco-table-tr\\">
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">序号</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">border 序号</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">自定义序号</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">代码</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">头像</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">图片</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">操作</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class=\\"arco-table-tr arco-table-tr-empty\\">
+                      <td class=\\"arco-table-td\\" colspan=\\"7\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-empty\\"><div class=\\"arco-empty-image\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-empty\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24 5v6m7 1 4-4m-18 4-4-4m28.5 22H28s-1 3-4 3-4-3-4-3H6.5M40 41H8a2 2 0 0 1-2-2v-8.46a2 2 0 0 1 .272-1.007l6.15-10.54A2 2 0 0 1 14.148 18H33.85a2 2 0 0 1 1.728.992l6.149 10.541A2 2 0 0 1 42 30.541V39a2 2 0 0 1-2 2Z\\"></path></svg></div><div class=\\"arco-empty-description\\">暂无数据</div></div></span></span></td>
+                    </tr>
+                  </tbody>
+                  <!---->
+                </table>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+          <!---->
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`Demo Test: render [ValueTypeDate] correctly 1`] = `
+"<div class=\\"arco-card arco-card-size-medium\\">
+  <!---->
+  <!---->
+  <div class=\\"arco-card-body\\">
+    <!---->
+    <!---->
+    <form class=\\"arco-form arco-form-layout-horizontal arco-form-size-medium\\">
+      <div class=\\"arco-grid\\" style=\\"gap: 0px 0px; grid-template-columns: repeat(3, minmax(0px, 1fr));\\">
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->创建时间
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"createdAt\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div class=\\"arco-picker arco-picker-size-medium\\" style=\\"width: 100%;\\" visible=\\"false\\">
+                    <!--v-if-->
+                    <div class=\\"arco-picker-input\\"><input placeholder=\\"请选择日期\\" class=\\"arco-picker-start-time\\"></div>
+                    <div class=\\"arco-picker-suffix\\">
+                      <!--v-if--><span class=\\"arco-picker-suffix-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-calendar\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M7 22h34M14 5v8m20-8v8M8 41h32a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v30a1 1 0 0 0 1 1Z\\"></path></svg></span>
+                      <!--v-if-->
+                    </div>
+                  </div>
+                  <!---->
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->日期区间
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"createdAtRange\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div class=\\"arco-picker arco-picker-range arco-picker-size-medium\\" style=\\"width: 100%;\\" visible=\\"false\\">
+                    <!--v-if-->
+                    <div class=\\"arco-picker-input arco-picker-input-active\\"><input placeholder=\\"开始日期\\"></div><span class=\\"arco-picker-separator\\">-</span>
+                    <div class=\\"arco-picker-input\\"><input placeholder=\\"结束日期\\"></div>
+                    <div class=\\"arco-picker-suffix\\">
+                      <!--v-if--><span class=\\"arco-picker-suffix-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-calendar\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M7 22h34M14 5v8m20-8v8M8 41h32a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v30a1 1 0 0 0 1 1Z\\"></path></svg></span>
+                      <!--v-if-->
+                    </div>
+                  </div>
+                  <!---->
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->时间区间
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"createdAtRange1\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div class=\\"arco-picker arco-picker-range arco-picker-size-medium\\" style=\\"width: 100%;\\" visible=\\"false\\">
+                    <!--v-if-->
+                    <div class=\\"arco-picker-input arco-picker-input-active\\"><input placeholder=\\"开始日期\\"></div><span class=\\"arco-picker-separator\\">-</span>
+                    <div class=\\"arco-picker-input\\"><input placeholder=\\"结束日期\\"></div>
+                    <div class=\\"arco-picker-suffix\\">
+                      <!--v-if--><span class=\\"arco-picker-suffix-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-calendar\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M7 22h34M14 5v8m20-8v8M8 41h32a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v30a1 1 0 0 0 1 1Z\\"></path></svg></span>
+                      <!--v-if-->
+                    </div>
+                  </div>
+                  <!---->
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->更新时间
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"createdAt\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div class=\\"arco-picker arco-picker-size-medium\\" style=\\"width: 100%;\\" visible=\\"false\\">
+                    <!--v-if-->
+                    <div class=\\"arco-picker-input\\"><input placeholder=\\"请选择日期\\" class=\\"arco-picker-start-time\\"></div>
+                    <div class=\\"arco-picker-suffix\\">
+                      <!--v-if--><span class=\\"arco-picker-suffix-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-calendar\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M7 22h34M14 5v8m20-8v8M8 41h32a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v30a1 1 0 0 0 1 1Z\\"></path></svg></span>
+                      <!--v-if-->
+                    </div>
+                  </div>
+                  <!---->
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->关闭时间
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"updatedAt\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div class=\\"arco-picker arco-picker-size-medium\\" style=\\"width: 100%;\\" visible=\\"false\\" editable=\\"true\\">
+                    <!--v-if-->
+                    <div class=\\"arco-picker-input\\"><input placeholder=\\"请选择时间\\" class=\\"arco-picker-start-time\\"></div>
+                    <div class=\\"arco-picker-suffix\\">
+                      <!--v-if--><span class=\\"arco-picker-suffix-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-clock-circle\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24 14v10h9.5m8.5 0c0 9.941-8.059 18-18 18S6 33.941 6 24 14.059 6 24 6s18 8.059 18 18Z\\"></path></svg></span>
+                      <!--v-if-->
+                    </div>
+                  </div>
+                  <!---->
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\" style=\\"text-align: right; margin-bottom: 20px;\\">
+          <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+            <!---->
+            <div class=\\"arco-space-item\\">
+              <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+                <!---->
+                <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                    <!--v-if-->重置
+                  </button></div>
+                <!---->
+                <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"submit\\">
+                    <!--v-if-->查询
+                  </button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div>
+      <div class=\\"am-vue-pro-table-toolbarContainer\\">
+        <div class=\\"am-vue-pro-table-title\\">日期类</div>
+        <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\"></div>
+      </div>
+      <div class=\\"arco-table arco-table-size-large arco-table-border arco-table-hover arco-table-empty\\">
+        <!---->
+        <div class=\\"arco-spin\\">
+          <!---->
+          <div class=\\"arco-table-container\\">
+            <div class=\\"arco-scrollbar arco-scrollbar-type-embed\\" style=\\"height: 100%;\\">
+              <div class=\\"arco-scrollbar-container arco-table-content arco-table-content-scroll-x\\">
+                <table class=\\"arco-table-element\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <colgroup>
+                    <col style=\\"width: 180px; min-width: 180px; max-width: 180px;\\">
+                    <col>
+                    <col>
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                  </colgroup>
+                  <thead>
+                    <tr class=\\"arco-table-tr\\">
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">创建时间</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">日期区间</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">时间区间</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">更新时间</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">关闭时间</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">操作</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class=\\"arco-table-tr arco-table-tr-empty\\">
+                      <td class=\\"arco-table-td\\" colspan=\\"6\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-empty\\"><div class=\\"arco-empty-image\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-empty\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24 5v6m7 1 4-4m-18 4-4-4m28.5 22H28s-1 3-4 3-4-3-4-3H6.5M40 41H8a2 2 0 0 1-2-2v-8.46a2 2 0 0 1 .272-1.007l6.15-10.54A2 2 0 0 1 14.148 18H33.85a2 2 0 0 1 1.728.992l6.149 10.541A2 2 0 0 1 42 30.541V39a2 2 0 0 1-2 2Z\\"></path></svg></div><div class=\\"arco-empty-description\\">暂无数据</div></div></span></span></td>
+                    </tr>
+                  </tbody>
+                  <!---->
+                </table>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+          <!---->
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`Demo Test: render [ValueTypeNumber] correctly 1`] = `
+"<div class=\\"arco-card arco-card-size-medium\\">
+  <!---->
+  <!---->
+  <div class=\\"arco-card-body\\">
+    <!---->
+    <!---->
+    <form class=\\"arco-form arco-form-layout-horizontal arco-form-size-medium\\">
+      <div class=\\"arco-grid\\" style=\\"gap: 0px 0px; grid-template-columns: repeat(3, minmax(0px, 1fr));\\">
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->进度
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"progress\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-input-wrapper\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"text\\" placeholder=\\"请输入\\"><!----><!----></span></div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->金额
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"money\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div class=\\"am-vue-input-decimal-container\\" style=\\"width: 100%;\\"><span class=\\"arco-input-wrapper arco-input-number arco-input-number-mode-embed arco-input-number-size-medium am-vue-input-decimal-input\\" capitalunit=\\"元\\" showcapital=\\"false\\" style=\\"width: 100%;\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"money\\" role=\\"spinbutton\\" aria-valuemax=\\"Infinity\\" aria-valuemin=\\"-Infinity\\" aria-valuenow=\\"\\"><!----><span class=\\"arco-input-suffix\\"><!---->元<!----></span></span>
+                    <!---->
+                  </div>
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->数字
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"money\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div class=\\"am-vue-input-decimal-container\\" style=\\"width: 100%;\\"><span class=\\"arco-input-wrapper arco-input-number arco-input-number-mode-embed arco-input-number-size-medium am-vue-input-decimal-input\\" capitalunit=\\"元\\" showcapital=\\"false\\" style=\\"width: 100%;\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"digit\\" role=\\"spinbutton\\" aria-valuemax=\\"Infinity\\" aria-valuemin=\\"-Infinity\\" aria-valuenow=\\"\\"><!----><!----></span>
+                    <!---->
+                  </div>
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->小数
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"money\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div class=\\"am-vue-input-decimal-container\\" style=\\"width: 100%;\\"><span class=\\"arco-input-wrapper arco-input-number arco-input-number-mode-embed arco-input-number-size-medium am-vue-input-decimal-input\\" capitalunit=\\"元\\" showcapital=\\"false\\" style=\\"width: 100%;\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"decimal\\" role=\\"spinbutton\\" aria-valuemax=\\"Infinity\\" aria-valuemin=\\"-Infinity\\" aria-valuenow=\\"\\"><!----><!----></span>
+                    <!---->
+                  </div>
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->百分比
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"percent\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div class=\\"am-vue-input-decimal-container\\" style=\\"width: 100%;\\"><span class=\\"arco-input-wrapper arco-input-number arco-input-number-mode-embed arco-input-number-size-medium am-vue-input-decimal-input\\" capitalunit=\\"元\\" showcapital=\\"false\\" style=\\"width: 100%;\\"><!----><input class=\\"arco-input arco-input-size-medium\\" type=\\"percent\\" role=\\"spinbutton\\" aria-valuemax=\\"Infinity\\" aria-valuemin=\\"-Infinity\\" aria-valuenow=\\"\\"><!----><span class=\\"arco-input-suffix\\"><!---->%<!----></span></span>
+                    <!---->
+                  </div>
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\" style=\\"text-align: right; margin-bottom: 20px;\\">
+          <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+            <!---->
+            <div class=\\"arco-space-item\\">
+              <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+                <!---->
+                <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                    <!--v-if-->重置
+                  </button></div>
+                <!---->
+                <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"submit\\">
+                    <!--v-if-->查询
+                  </button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div>
+      <div class=\\"am-vue-pro-table-toolbarContainer\\">
+        <div class=\\"am-vue-pro-table-title\\">数字类</div>
+        <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\"></div>
+      </div>
+      <div class=\\"arco-table arco-table-size-large arco-table-border arco-table-hover arco-table-empty\\">
+        <!---->
+        <div class=\\"arco-spin\\">
+          <!---->
+          <div class=\\"arco-table-container\\">
+            <div class=\\"arco-scrollbar arco-scrollbar-type-embed\\" style=\\"height: 100%;\\">
+              <div class=\\"arco-scrollbar-container arco-table-content arco-table-content-scroll-x\\">
+                <table class=\\"arco-table-element\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <colgroup>
+                    <col style=\\"width: 200px; min-width: 200px; max-width: 200px;\\">
+                    <col style=\\"width: 150px; min-width: 150px; max-width: 150px;\\">
+                    <col style=\\"width: 150px; min-width: 150px; max-width: 150px;\\">
+                    <col style=\\"width: 150px; min-width: 150px; max-width: 150px;\\">
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                  </colgroup>
+                  <thead>
+                    <tr class=\\"arco-table-tr\\">
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">进度</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">金额</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">数字</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">小数</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">百分比</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">操作</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class=\\"arco-table-tr arco-table-tr-empty\\">
+                      <td class=\\"arco-table-td\\" colspan=\\"6\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-empty\\"><div class=\\"arco-empty-image\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-empty\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24 5v6m7 1 4-4m-18 4-4-4m28.5 22H28s-1 3-4 3-4-3-4-3H6.5M40 41H8a2 2 0 0 1-2-2v-8.46a2 2 0 0 1 .272-1.007l6.15-10.54A2 2 0 0 1 14.148 18H33.85a2 2 0 0 1 1.728.992l6.149 10.541A2 2 0 0 1 42 30.541V39a2 2 0 0 1-2 2Z\\"></path></svg></div><div class=\\"arco-empty-description\\">暂无数据</div></div></span></span></td>
+                    </tr>
+                  </tbody>
+                  <!---->
+                </table>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+          <!---->
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`Demo Test: render [ValueTypeSelect] correctly 1`] = `
+"<div class=\\"arco-card arco-card-size-medium\\">
+  <!---->
+  <!---->
+  <div class=\\"arco-card-body\\">
+    <!---->
+    <!---->
+    <form class=\\"arco-form arco-form-layout-horizontal arco-form-size-medium\\">
+      <div class=\\"arco-grid\\" style=\\"gap: 0px 0px; grid-template-columns: repeat(2, minmax(0px, 1fr));\\">
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->状态
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"status\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\">
+                  <div style=\\"width: 100%;\\"><span class=\\"arco-select-view-single arco-select arco-select-view arco-select-view-size-medium arco-select-view-search\\" labelkey=\\"label\\" valueoption=\\"false\\" style=\\"width: 100%;\\" title=\\"\\"><!----><input class=\\"arco-select-view-input\\" placeholder=\\"请选择\\"><span class=\\"arco-select-view-value arco-select-view-value-hidden\\"><!----></span><span class=\\"arco-select-view-suffix\\"><!----><span class=\\"arco-select-view-icon\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down arco-select-view-arrow-icon\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path></svg></span>
+                    <!----></span></span>
+                    <!---->
+                  </div>
+                </div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->单选状态
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"status1\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-radio-group arco-radio-group-size-medium arco-radio-group-direction-horizontal\\"><label class=\\"arco-radio arco-radio-checked\\"><input type=\\"radio\\" class=\\"arco-radio-target\\" value=\\"all\\"><span class=\\"arco-icon-hover arco-icon-hover-disabled arco-radio-icon-hover\\"><span class=\\"arco-radio-icon\\"></span></span><span class=\\"arco-radio-label\\">全部</span></label><label class=\\"arco-radio\\"><input type=\\"radio\\" class=\\"arco-radio-target\\" value=\\"running\\"><span class=\\"arco-icon-hover arco-radio-icon-hover\\"><span class=\\"arco-radio-icon\\"></span></span><span class=\\"arco-radio-label\\">运行中</span></label><label class=\\"arco-radio\\"><input type=\\"radio\\" class=\\"arco-radio-target\\" value=\\"online\\"><span class=\\"arco-icon-hover arco-radio-icon-hover\\"><span class=\\"arco-radio-icon\\"></span></span><span class=\\"arco-radio-label\\">已上线</span></label><label class=\\"arco-radio\\"><input type=\\"radio\\" class=\\"arco-radio-target\\" value=\\"error\\"><span class=\\"arco-icon-hover arco-radio-icon-hover\\"><span class=\\"arco-radio-icon\\"></span></span><span class=\\"arco-radio-label\\">异常</span></label></span></div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->单选按钮状态
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"status2\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-radio-group-button arco-radio-group-size-medium arco-radio-group-direction-horizontal\\"><label class=\\"arco-radio-button arco-radio-checked\\"><input type=\\"radio\\" class=\\"arco-radio-target\\" value=\\"all\\"><span class=\\"arco-radio-button-content\\">全部</span></label><label class=\\"arco-radio-button\\"><input type=\\"radio\\" class=\\"arco-radio-target\\" value=\\"running\\"><span class=\\"arco-radio-button-content\\">运行中</span></label><label class=\\"arco-radio-button\\"><input type=\\"radio\\" class=\\"arco-radio-target\\" value=\\"online\\"><span class=\\"arco-radio-button-content\\">已上线</span></label><label class=\\"arco-radio-button\\"><input type=\\"radio\\" class=\\"arco-radio-target\\" value=\\"error\\"><span class=\\"arco-radio-button-content\\">异常</span></label></span></div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\">
+          <div class=\\"arco-row arco-row-align-start arco-row-justify-start arco-form-item arco-form-item-layout-horizontal\\">
+            <div class=\\"arco-col arco-col-5 arco-form-item-label-col\\"><label class=\\"arco-form-item-label\\">
+                <!--v-if-->多选状态
+                <!--v-if-->
+                <!--v-if-->
+              </label></div>
+            <div class=\\"arco-col arco-col-19 arco-form-item-wrapper-col\\" id=\\"status3\\">
+              <div class=\\"arco-form-item-content-wrapper\\">
+                <div class=\\"arco-form-item-content arco-form-item-content-flex\\"><span class=\\"arco-checkbox-group arco-checkbox-group-direction-horizontal\\"><label aria-disabled=\\"false\\" class=\\"arco-checkbox arco-checkbox-checked\\"><input type=\\"checkbox\\" class=\\"arco-checkbox-target\\" value=\\"all\\"><span class=\\"arco-icon-hover arco-icon-hover-disabled arco-checkbox-icon-hover\\"><div class=\\"arco-checkbox-icon\\"><svg aria-hidden=\\"true\\" focusable=\\"false\\" viewBox=\\"0 0 1024 1024\\" width=\\"200\\" height=\\"200\\" fill=\\"currentColor\\" class=\\"arco-checkbox-icon-check\\"><path d=\\"M877.44815445 206.10060629a64.72691371 64.72691371 0 0 0-95.14856334 4.01306852L380.73381888 685.46812814 235.22771741 533.48933518a64.72691371 64.72691371 0 0 0-92.43003222-1.03563036l-45.82665557 45.82665443a64.72691371 64.72691371 0 0 0-0.90617629 90.61767965l239.61903446 250.10479331a64.72691371 64.72691371 0 0 0 71.19960405 15.14609778 64.33855261 64.33855261 0 0 0 35.08198741-21.23042702l36.24707186-42.71976334 40.5190474-40.77795556-3.36579926-3.49525333 411.40426297-486.74638962a64.72691371 64.72691371 0 0 0-3.88361443-87.64024149l-45.3088404-45.43829334z\\" p-id=\\"840\\"></path></svg></div></span><span class=\\"arco-checkbox-label\\">全部</span></label><label aria-disabled=\\"false\\" class=\\"arco-checkbox\\"><input type=\\"checkbox\\" class=\\"arco-checkbox-target\\" value=\\"running\\"><span class=\\"arco-icon-hover arco-checkbox-icon-hover\\"><div class=\\"arco-checkbox-icon\\"><!----></div></span><span class=\\"arco-checkbox-label\\">运行中</span></label><label aria-disabled=\\"false\\" class=\\"arco-checkbox\\"><input type=\\"checkbox\\" class=\\"arco-checkbox-target\\" value=\\"online\\"><span class=\\"arco-icon-hover arco-checkbox-icon-hover\\"><div class=\\"arco-checkbox-icon\\"><!----></div></span><span class=\\"arco-checkbox-label\\">已上线</span></label><label aria-disabled=\\"false\\" class=\\"arco-checkbox\\"><input type=\\"checkbox\\" class=\\"arco-checkbox-target\\" value=\\"error\\"><span class=\\"arco-icon-hover arco-checkbox-icon-hover\\"><div class=\\"arco-checkbox-icon\\"><!----></div></span><span class=\\"arco-checkbox-label\\">异常</span></label></span></div>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+        </div>
+        <div class=\\"arco-grid-item\\" style=\\"text-align: right; margin-bottom: 20px;\\">
+          <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+            <!---->
+            <div class=\\"arco-space-item\\" style=\\"margin-right: 16px;\\">
+              <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\">
+                <!---->
+                <div class=\\"arco-space-item\\" style=\\"margin-right: 8px;\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"button\\">
+                    <!--v-if-->重置
+                  </button></div>
+                <!---->
+                <div class=\\"arco-space-item\\"><button class=\\"arco-btn arco-btn-primary arco-btn-shape-square arco-btn-size-medium arco-btn-status-normal\\" type=\\"submit\\">
+                    <!--v-if-->查询
+                  </button></div>
+              </div>
+            </div>
+            <!---->
+            <div class=\\"arco-space-item\\"><a class=\\"am-vue-pro-table-collapse-button\\">收起<svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-down\\" style=\\"vertical-align: baseline; font-size: 16px; margin-left: 8px; transition: 0.3s all; transform: rotate(0.5turn);\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\">
+                  <path d=\\"M39.6 17.443 24.043 33 8.487 17.443\\"></path>
+                </svg></a></div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div>
+      <div class=\\"am-vue-pro-table-toolbarContainer\\">
+        <div class=\\"am-vue-pro-table-title\\">选项类</div>
+        <div class=\\"arco-space arco-space-horizontal arco-space-align-center\\"></div>
+      </div>
+      <div class=\\"arco-table arco-table-size-large arco-table-border arco-table-hover arco-table-empty\\">
+        <!---->
+        <div class=\\"arco-spin\\">
+          <!---->
+          <div class=\\"arco-table-container\\">
+            <div class=\\"arco-scrollbar arco-scrollbar-type-embed\\" style=\\"height: 100%;\\">
+              <div class=\\"arco-scrollbar-container arco-table-content arco-table-content-scroll-x\\">
+                <table class=\\"arco-table-element\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <colgroup>
+                    <col style=\\"width: 100px; min-width: 100px; max-width: 100px;\\">
+                    <col style=\\"width: 100px; min-width: 100px; max-width: 100px;\\">
+                    <col style=\\"width: 100px; min-width: 100px; max-width: 100px;\\">
+                    <col style=\\"width: 100px; min-width: 100px; max-width: 100px;\\">
+                    <col style=\\"width: 120px; min-width: 120px; max-width: 120px;\\">
+                  </colgroup>
+                  <thead>
+                    <tr class=\\"arco-table-tr\\">
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">状态</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">单选状态</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">单选按钮状态</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">多选状态</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                      <th class=\\"arco-table-th\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><span class=\\"arco-table-th-title\\">操作</span>
+                        <!---->
+                        <!----></span>
+                        <!---->
+                        <!---->
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class=\\"arco-table-tr arco-table-tr-empty\\">
+                      <td class=\\"arco-table-td\\" colspan=\\"5\\"><span class=\\"arco-table-cell arco-table-cell-align-left\\"><!----><!----><span class=\\"arco-table-td-content\\"><div class=\\"arco-empty\\"><div class=\\"arco-empty-image\\"><svg viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" stroke=\\"currentColor\\" class=\\"arco-icon arco-icon-empty\\" stroke-width=\\"4\\" stroke-linecap=\\"butt\\" stroke-linejoin=\\"miter\\"><path d=\\"M24 5v6m7 1 4-4m-18 4-4-4m28.5 22H28s-1 3-4 3-4-3-4-3H6.5M40 41H8a2 2 0 0 1-2-2v-8.46a2 2 0 0 1 .272-1.007l6.15-10.54A2 2 0 0 1 14.148 18H33.85a2 2 0 0 1 1.728.992l6.149 10.541A2 2 0 0 1 42 30.541V39a2 2 0 0 1-2 2Z\\"></path></svg></div><div class=\\"arco-empty-description\\">暂无数据</div></div></span></span></td>
+                    </tr>
+                  </tbody>
+                  <!---->
+                </table>
+              </div>
+              <!--v-if-->
+              <!--v-if-->
+            </div>
+          </div>
+          <!---->
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+</div>"
+`;
