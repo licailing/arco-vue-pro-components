@@ -1,6 +1,14 @@
 ## pro-table
+
+[简体中文](/packages/pro-components/components/pro-table/README.md) | [English](/packages/pro-components/components/pro-table/README.en-US.md)
+
 ## pro-input-number
+
+[简体中文](/packages/pro-components/components/pro-input-number/README.md) | [English](/packages/pro-components/components/pro-input-number/README.en-US.md)
+
 ## pro-select
+
+[简体中文](/packages/pro-components/components/pro-select/README.md) | [English](/packages/pro-components/components/pro-select/README.en-US.md)
 
 ## 开发
 

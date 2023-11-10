@@ -2,11 +2,19 @@
   "name": "@arco-vue-pro-components/pro-components",
   "version": "1.0.0",
   "description": "基于@arco-design/web-vue组件的高级组件，包括pro-table",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/licailing/arco-vue-pro-components.git"
+  },
   "keywords": [
     "vue",
     "arco-design",
     "pro-table"
   ],
+  "bugs": {
+    "url": "https://github.com/licailing/arco-vue-pro-components/issues"
+  },
+  "homepage": "https://github.com/licailing/arco-vue-pro-components/tree/main/packages/pro-components#readme",
   "author": "licailing",
   "license": "MIT",
   "main": "dist/index.cjs.js",
@@ -56,6 +64,10 @@
     "type": "vue-library",
     "title": "est",
     "category": []
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "files": [
     "es",
