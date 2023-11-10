@@ -162,7 +162,9 @@ export default defineComponent({
                 return false;
               }
               if (
-                !['index', 'indexBorder'].includes(item.valueType) &&
+                !(
+                  item.valueType === 'index' || item.valueType === 'indexBorder'
+                ) &&
                 (item.key || item.dataIndex)
               ) {
                 return true;
@@ -323,7 +325,8 @@ export default defineComponent({
                 <Popover
                   popupVisible={visible.value}
                   trigger="click"
-                  position='lb'
+                  position="br"
+                  showArrow={false}
                   unmountOnClose={false}
                   v-slots={{
                     default: () => {

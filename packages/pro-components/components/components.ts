@@ -1,9 +1,12 @@
 import type { App, Plugin } from 'vue';
-// import your Component
-
+import ProSelect from './pro-select';
+import ProInputNumber from './pro-input-number';
+import ProTable from './pro-table';
 
 const components: Record<string, Plugin> = {
-  // Add your Component
+  ProSelect,
+  ProInputNumber,
+  ProTable,
 };
 
 const install = (app: App) => {

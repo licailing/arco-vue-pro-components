@@ -36,42 +36,50 @@ export const getDefaultFilters = (columns: ProColumns[]) => {
   const filters: Filters = {};
   // 默认值
   for (const item of columns) {
-    if (
-      item.dataIndex &&
-      (item.filterable?.defaultFilteredValue || item.defaultFilteredValue)
-    ) {
-      filters[item.dataIndex] =
-        item.filterable?.defaultFilteredValue || item.defaultFilteredValue;
+    if (!item.dataIndex) {
+      continue;
+    }
+    if (item.defaultFilteredValue) {
+      filters[item.dataIndex] = item.defaultFilteredValue;
+    }
+    if (item.filterable?.defaultFilteredValue) {
+      filters[item.dataIndex] = item.filterable.defaultFilteredValue;
     }
   }
   return filters;
 };
 export const getDefaultSorter = (columns: ProColumns[]): Sorter | undefined => {
   for (const item of columns) {
-    // get first enabled sorter
-    if (
-      item.dataIndex &&
-      (item.sortable?.defaultSortOrder || item?.defaultSortOrder)
-    ) {
+    if (!item.dataIndex) {
+      continue;
+    }
+    if (item.sortable?.defaultSortOrder) {
       return {
         field: item.dataIndex,
-        direction: item.sortable?.defaultSortOrder || item?.defaultSortOrder,
+        direction: item.sortable?.defaultSortOrder,
+      };
+    }
+    // get first enabled sorter
+    if (item.dataIndex && item?.defaultSortOrder) {
+      return {
+        field: item.dataIndex,
+        direction: item?.defaultSortOrder,
       };
     }
   }
   return undefined;
 };
 export const getDefaultSorters = (columns: ProColumns[]): Sorters => {
-  const sorters: Sorters = {};
   for (const item of columns) {
-    // get first enabled sorter
-    if (
-      item.dataIndex &&
-      (item.sortable?.defaultSortOrder || item?.defaultSortOrder)
-    ) {
-      sorters[item.dataIndex] =
-        item.sortable?.defaultSortOrder || item.defaultSortOrder;
+    if (!item.dataIndex) {
+      continue;
+    }
+    if (item.sortable?.defaultSortOrder) {
+      return { [item.dataIndex]: item.sortable?.defaultSortOrder };
+    }
+    if (item?.defaultSortOrder) {
+      return { [item.dataIndex]: item.defaultSortOrder };
     }
   }
-  return sorters;
+  return {};
 };

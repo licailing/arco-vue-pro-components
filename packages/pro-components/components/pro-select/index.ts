@@ -6,6 +6,7 @@ const ProSelect = Object.assign(_ProSelect, {
     app.component(_ProSelect.name, _ProSelect);
   },
 });
+export type ProSelectInstance = InstanceType<typeof _ProSelect>;
 export type { ProSelectProps } from './interface';
 
 export default ProSelect;

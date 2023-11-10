@@ -13,7 +13,7 @@ export type Status = {
   text: string;
 };
 
-const statusMap = {
+const statusMap: any = {
   0: {
     color: 'blue',
     text: '进行中',
@@ -129,7 +129,7 @@ export default defineComponent({
       },
     ];
     const expandedRowRender = () => {
-      const data = [];
+      const data: any[] = [];
       for (let i = 0; i < 3; i += 1) {
         data.push({
           key: i,
@@ -162,7 +162,6 @@ export default defineComponent({
           ]}
           headerTitle={false}
           search={false}
-          options={false}
           data={data}
           pagination={false}
         />
@@ -182,7 +181,7 @@ export default defineComponent({
           }}
           rowKey="key"
           pagination={{
-            showQuickJumper: true,
+            showJumper: true,
           }}
           expandable={{ expandedRowRender }}
           search={false}

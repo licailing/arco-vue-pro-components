@@ -42,7 +42,7 @@ import type {
   TableOperationColumn,
   TablePagePosition,
   TableComponents,
-  VirtualListProps
+  VirtualListProps,
 } from './interface';
 import FormSearch from './form/form-search';
 import useFetchData from './form/use-fetch-data';
@@ -826,7 +826,9 @@ export default defineComponent({
     });
 
     const fetchData = computed(() => {
-      if (!props.request) return undefined;
+      if (!props.request) {
+        return undefined;
+      }
       return async (pageParams?: Record<string, any>) => {
         const actionParams = {
           ...(pageParams || {}),
@@ -834,7 +836,7 @@ export default defineComponent({
           ...props.params,
         };
         delete (actionParams as any)._timestamp;
-        const response = await props.request(
+        const response = await props.request?.(
           actionParams,
           _sorters.value,
           _filters.value
@@ -955,12 +957,13 @@ export default defineComponent({
       currentData: TableData[]
     ) => {
       _sorter.value = extra.sorter;
-      // 多列排序
+      // 暂时不支持多列排序
       if (extra.sorter?.field) {
         _sorters.value = {
-          ..._sorters.value,
           [extra.sorter?.field]: extra.sorter?.direction,
         };
+      } else {
+        _sorters.value = {};
       }
       _filters.value = extra.filters || {};
       emit('change', data, extra, currentData);

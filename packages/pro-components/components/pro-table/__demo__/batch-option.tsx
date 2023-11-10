@@ -3,14 +3,14 @@ import { Button, Link } from '@arco-design/web-vue';
 import type { ProColumns, RenderData } from '../index';
 import ProTable from '../index';
 
-const valueEnum = {
+const valueEnum: any = {
   0: 'close',
   1: 'running',
   2: 'online',
   3: 'error',
 };
 
-const ProcessMap = {
+const ProcessMap: any = {
   close: 'normal',
   running: 'warning',
   online: 'success',

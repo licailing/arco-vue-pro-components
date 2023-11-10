@@ -22,7 +22,7 @@
     "build": "npm run build:component && npm run build:style && npm run dtsgen",
     "build:component": "arco-vue-scripts build:material-library",
     "build:style": "arco-vue-scripts build:style -M",
-    "dtsgen": "arco-vue-scripts dtsgen 'components/**/*.{ts,tsx,vue}'",
+    "dtsgen": "arco-vue-scripts dtsgen components/**/*.{ts,tsx,vue}",
     "docgen": "arco-vue-scripts docgen",
     "test": "arco-vue-scripts test --coverage",
     "add:component": "node ./scripts/add-component.js",

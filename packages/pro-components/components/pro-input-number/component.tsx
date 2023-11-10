@@ -5,7 +5,6 @@ import InputNumber from './input-number';
 import { CapitalUnitType, ProInputNumberType } from './interface';
 import { getPrefixCls } from '../_utils';
 import { Size } from '@arco-design/web-vue';
-import inputNumber from './input-number';
 
 /**
  * 金额

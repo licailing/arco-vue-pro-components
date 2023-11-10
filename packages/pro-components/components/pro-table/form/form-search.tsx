@@ -1,17 +1,14 @@
 import {
   PropType,
-  VNodeChild,
   computed,
   defineComponent,
   Ref,
   ref,
   cloneVNode,
   onMounted,
-  VNodeTypes,
   watch,
   toRef,
   watchEffect,
-  VNode,
 } from 'vue';
 import {
   Form,
@@ -49,6 +46,7 @@ import {
   runFunction,
 } from '../utils';
 import { getPrefixCls } from '../../_utils';
+import { ProInputNumberType } from '../../pro-input-number';
 
 const inputDecimalTypes = ['digit', 'decimal', 'money', 'percent'];
 export const renderFormInput = (
@@ -202,7 +200,12 @@ export const renderFormInput = (
     return <Upload action="/" {...item.fieldProps} multiple={false} />;
   }
   if (typeof valueType === 'string' && inputDecimalTypes.includes(valueType)) {
-    return <ProInputNumber type={valueType} {...item.fieldProps} />;
+    return (
+      <ProInputNumber
+        type={valueType as ProInputNumberType}
+        {...item.fieldProps}
+      />
+    );
   }
   return (
     <Input
@@ -343,6 +346,7 @@ export default defineComponent({
     const collapsed = ref(searchConfig.value.collapsed ?? true);
 
     const columnsList = ref<any[]>([]);
+    const gridKey = ref(Date.now());
     watch(
       columns,
       (columns) => {
@@ -356,7 +360,9 @@ export default defineComponent({
                 return false;
               }
               if (
-                !['index', 'indexBorder'].includes(item.valueType) &&
+                !(
+                  item.valueType === 'index' || item.valueType === 'indexBorder'
+                ) &&
                 (item.key || item.dataIndex)
               ) {
                 return true;
@@ -375,6 +381,7 @@ export default defineComponent({
               }
               return 0;
             }) || [];
+        gridKey.value = Date.now();
       },
       { deep: true, immediate: true }
     );
@@ -402,7 +409,7 @@ export default defineComponent({
           {...(props.search && props.search !== true
             ? props.search.gridProps
             : undefined)}
-          key={columnsList.value}
+          key={gridKey.value}
           collapsedRows={1}
         >
           {columnsList.value.map((item) => {
@@ -487,9 +494,7 @@ export default defineComponent({
         submit: onSubmit,
         reset: onReset,
         dom: [
-          <Button onClick={onReset} type="primary">
-            {searchConfig.value.resetText}
-          </Button>,
+          <Button onClick={onReset}>{searchConfig.value.resetText}</Button>,
           <Button
             type="primary"
             htmlType="submit"

@@ -93,7 +93,7 @@ const DetailList = defineComponent({
           data={tableListDataSource.value}
           pagination={{
             pageSize: 3,
-            showSizeChanger: false,
+            pageSizeOptions: [3, 5, 10],
           }}
           rowKey="key"
           toolBarRender={false}
@@ -178,7 +178,7 @@ const IPList = defineComponent({
           search={false}
           onRowClick={(record) => {
             if (record.ip) {
-              props.onChange(record.ip);
+              props.onChange?.(record.ip);
             }
           }}
         />
@@ -211,7 +211,7 @@ export default defineComponent({
         >
           {{
             first: () => (
-              <IPList onChange={(cIp) => (ip.value = cIp)} ip={ip.value} />
+              <IPList onChange={(cIp: any) => (ip.value = cIp)} ip={ip.value} />
             ),
             second: () => (
               <Card title={ip.value}>

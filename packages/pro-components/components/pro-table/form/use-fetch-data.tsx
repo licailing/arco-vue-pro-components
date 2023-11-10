@@ -38,7 +38,10 @@ const mergeOptionAndPageInfo = (pageInfo: PaginationProps) => {
 const useFetchData = <T extends RequestData<any>>(
   getData:
     | undefined
-    | ((params: { pageSize: number; current: number }) => Promise<T>),
+    | ((params: {
+        pageSize: number;
+        current: number;
+      }) => Promise<T | undefined>),
   props: any,
   emit: any,
   options: {
@@ -60,7 +63,7 @@ const useFetchData = <T extends RequestData<any>>(
     setLoading(true);
     try {
       const {
-        data,
+        data = [],
         success,
         total: dataTotal = 0,
         ...rest

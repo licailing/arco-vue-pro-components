@@ -7,6 +7,7 @@ const ProInputNumber = Object.assign(_ProInputNumber, {
   },
 });
 
+export type ProInputNumberInstance = InstanceType<typeof _ProInputNumber>;
 export type {
   ProInputNumberType,
   ProInputNumberProps,

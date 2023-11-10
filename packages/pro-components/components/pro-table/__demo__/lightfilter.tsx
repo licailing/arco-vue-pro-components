@@ -115,7 +115,7 @@ export default defineComponent({
         dataIndex: 'option',
         valueType: 'option',
         hideInSearch: true,
-        render: ({ text, record, action }: RenderData) => [
+        render: ({ dom, record, action }: RenderData) => [
           <a key="link">链路</a>,
           <a key="link2">报警</a>,
           <a key="link3">监控</a>,
@@ -144,7 +144,7 @@ export default defineComponent({
     const render = () => {
       return (
         <div>
-          <ProTable<TableListItem>
+          <ProTable
             columns={columns}
             request={(params, sorter, filter) => {
               // 表单搜索项会从 params 传入，传递给后端接口。
@@ -156,7 +156,7 @@ export default defineComponent({
             }}
             rowKey="key"
             pagination={{
-              showQuickJumper: true,
+              showJumper: true,
             }}
             searchType="light"
             lightSearchConfig={{
@@ -190,7 +190,7 @@ export default defineComponent({
             }}
             rowKey="key"
             pagination={{
-              showQuickJumper: true,
+              showJumper: true,
             }}
             defaultFormData={{ status: 'all', name: 'aaa' }}
             headerTitle="查询表格"

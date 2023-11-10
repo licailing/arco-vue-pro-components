@@ -1,12 +1,15 @@
 import { ref, reactive, inject, computed } from 'vue';
 import { configProviderInjectionKey } from '../components/_utils/context';
 import { isString } from '../components/_utils/is';
-import type { ArcoI18nMessages, ArcoLang } from './interface';
+import type {
+  ArcoVueProComponentI18nMessages,
+  ArcoVueProComponentLang,
+} from './interface';
 import zhCN from './lang/zh_CN';
 import enUS from './lang/en_US';
 
 const LOCALE = ref('zh-CN');
-const I18N_MESSAGES = reactive<ArcoI18nMessages>({
+const I18N_MESSAGES = reactive<ArcoVueProComponentI18nMessages>({
   'zh-CN': zhCN,
   'en-US': enUS,
 });
@@ -17,7 +20,7 @@ const I18N_MESSAGES = reactive<ArcoI18nMessages>({
  * @param options
  */
 export const addI18nMessages = (
-  messages: ArcoI18nMessages,
+  messages: ArcoVueProComponentI18nMessages,
   options?: {
     overwrite?: boolean;
   }
@@ -52,7 +55,7 @@ export const getLocale = () => {
 // 仅内部使用
 export const useI18n = () => {
   const configProvider = inject(configProviderInjectionKey, undefined);
-  const i18nMessage = computed<ArcoLang>(
+  const i18nMessage = computed<ArcoVueProComponentLang>(
     () => configProvider?.locale ?? I18N_MESSAGES[LOCALE.value]
   );
   const locale = computed(() => i18nMessage.value.locale);

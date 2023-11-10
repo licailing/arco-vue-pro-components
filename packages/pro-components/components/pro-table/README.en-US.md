@@ -468,7 +468,7 @@ export default defineComponent({
         dataIndex: 'option',
         valueType: 'option',
         hideInSearch: true,
-        render: ({ text, record, action }: RenderData) => [
+        render: ({ dom, record, action }: RenderData) => [
           <a key="link">链路</a>,
           <a key="link2">报警</a>,
           <a key="link3">监控</a>,
@@ -497,7 +497,7 @@ export default defineComponent({
     const render = () => {
       return (
         <div>
-          <ProTable<TableListItem>
+          <ProTable
             columns={columns}
             request={(params, sorter, filter) => {
               // 表单搜索项会从 params 传入，传递给后端接口。
@@ -509,7 +509,7 @@ export default defineComponent({
             }}
             rowKey="key"
             pagination={{
-              showQuickJumper: true,
+              showJumper: true,
             }}
             searchType="light"
             lightSearchConfig={{
@@ -543,7 +543,7 @@ export default defineComponent({
             }}
             rowKey="key"
             pagination={{
-              showQuickJumper: true,
+              showJumper: true,
             }}
             defaultFormData={{ status: 'all', name: 'aaa' }}
             headerTitle="查询表格"
@@ -579,14 +579,14 @@ import { Button, Link } from '@arco-design/web-vue';
 import type { ProColumns, RenderData } from '../index';
 import ProTable from '../index';
 
-const valueEnum = {
+const valueEnum: any = {
   0: 'close',
   1: 'running',
   2: 'online',
   3: 'error',
 };
 
-const ProcessMap = {
+const ProcessMap: any = {
   close: 'normal',
   running: 'warning',
   online: 'success',
@@ -936,7 +936,7 @@ export type Status = {
   text: string;
 };
 
-const statusMap = {
+const statusMap: any = {
   0: {
     color: 'blue',
     text: '进行中',
@@ -1052,7 +1052,7 @@ export default defineComponent({
       },
     ];
     const expandedRowRender = () => {
-      const data = [];
+      const data: any[] = [];
       for (let i = 0; i < 3; i += 1) {
         data.push({
           key: i,
@@ -1085,7 +1085,6 @@ export default defineComponent({
           ]}
           headerTitle={false}
           search={false}
-          options={false}
           data={data}
           pagination={false}
         />
@@ -1105,7 +1104,7 @@ export default defineComponent({
           }}
           rowKey="key"
           pagination={{
-            showQuickJumper: true,
+            showJumper: true,
           }}
           expandable={{ expandedRowRender }}
           search={false}
@@ -1231,7 +1230,7 @@ const DetailList = defineComponent({
           data={tableListDataSource.value}
           pagination={{
             pageSize: 3,
-            showSizeChanger: false,
+            pageSizeOptions: [3, 5, 10],
           }}
           rowKey="key"
           toolBarRender={false}
@@ -1316,7 +1315,7 @@ const IPList = defineComponent({
           search={false}
           onRowClick={(record) => {
             if (record.ip) {
-              props.onChange(record.ip);
+              props.onChange?.(record.ip);
             }
           }}
         />
@@ -1349,7 +1348,7 @@ export default defineComponent({
         >
           {{
             first: () => (
-              <IPList onChange={(cIp) => (ip.value = cIp)} ip={ip.value} />
+              <IPList onChange={(cIp: any) => (ip.value = cIp)} ip={ip.value} />
             ),
             second: () => (
               <Card title={ip.value}>
