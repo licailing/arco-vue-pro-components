@@ -31,7 +31,7 @@ arco sync
 npm:
 
 ```bash
-$ npm install --save-dev @acro-vue-pro-components/pro-components
+$ npm install --save @acro-vue-pro-components/pro-components
 ```
 
 yarn:
