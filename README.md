@@ -1,55 +1,48 @@
-# Arco 物料 Monorepo
+## Demos
+![Demos](/packages/pro-components/assets/images/096cefd4-7317-4456-872b-f2005d9c710a.mp4)
+
+## pro-table
+
+[简体中文](/packages/pro-components/components/pro-table/README.md) | [English](/packages/pro-components/components/pro-table/README.en-US.md)
+
+## pro-input-number
+
+[简体中文](/packages/pro-components/components/pro-input-number/README.md) | [English](/packages/pro-components/components/pro-input-number/README.en-US.md)
+
+## pro-select
+
+[简体中文](/packages/pro-components/components/pro-select/README.md) | [English](/packages/pro-components/components/pro-select/README.en-US.md)
+
+## 开发
+
+```
+# 开发
+npm run dev
+
+# 构建
+npm run build
+
+# 发布前预览
+npm run prepublishOnly && arco preview
+
+# 发布至物料平台（需先发布 NPM 包）
+arco sync
+```
+
+## 安装
+
+npm:
+
+```bash
+$ npm install --save @acro-vue-pro-components/pro-components
+```
+
+yarn:
+
+```bash
+$ yarn add @acro-vue-pro-components/pro-components
+```
+
+# Arco 物料项目
 
 [物料平台文档中心](https://arco.design/docs/material/guide)
-
-**此项目依赖 `yarn` 和 `lerna`，请确保你已全局安装这两个包。**
-
-## 准备工作
-
-如果这是你刚刚从 Git 仓库克隆下来的项目，请首先安装所有的项目依赖，并执行一次构建。
-
-```
-// 安装公共依赖项
-yarn install
-
-// 为 packages 中的包安装各自的依赖
-lerna bootstrap
-
-// 执行项目构建
-yarn build
-```
-
-## 指定默认团队ID
-
-`arco generate` 生成的物料信息默认的 Group 为 0，如果你想要指定默认生成你的团队ID，可在 `arco.config.js` 里进行如下配置：
-
-```js
-module.exports = {
-  // ...
-  // initial meta for 'arco generate'
-  initialMeta: {
-    // 修改此处为你的团队ID
-    group: 1,
-  },
-};
-
-```
-
-## 为 Monorepo 添加 Arco 物料
-
-```
-yarn add:package -- yourPackageDirectoryName
-```
-
-## 快速开始
-
-```
-// 开发模式
-yarn dev
-
-// 构建所有包
-yarn build
-
-// 构建单个包
-lerna run build --stream --scope packageName
-```
