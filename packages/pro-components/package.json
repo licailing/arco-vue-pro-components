@@ -53,6 +53,8 @@
     ]
   },
   "peerDependencies": {
+    "@arco-design/web-vue": "^2.45.3",
+    "dayjs": "^1.11.5",
     "vue": "^3.2.0"
   },
   "devDependencies": {

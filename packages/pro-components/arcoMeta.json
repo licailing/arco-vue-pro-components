@@ -1,0 +1,25 @@
+{
+  "name": "@arco-vue-pro-components/pro-components",
+  "title": "pro-table",
+  "description": "基于@arco-design/web-vue组件的高级组件，包括pro-table",
+  "type": "vue-library",
+  "category": [
+    "表格"
+  ],
+  "group": 0,
+  "homepage": "",
+  "repository": "https://github.com/licailing/arco-vue-pro-components.git",
+  "author": "licailing",
+  "screenshot": "",
+  "package": {
+    "name": "@arco-vue-pro-components/pro-components",
+    "version": "latest",
+    "type": "npm",
+    "registry": "https://registry.npmjs.org",
+    "peerDependencies": [
+      "@arco-design/web-react",
+      "dayjs",
+      "vue"
+    ]
+  }
+}
