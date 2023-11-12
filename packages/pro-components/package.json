@@ -17,9 +17,9 @@
   "homepage": "https://github.com/licailing/arco-vue-pro-components/tree/main/packages/pro-components#readme",
   "author": "licailing",
   "license": "MIT",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "types": "es/index.d.ts",
   "umd": {
     "file": "dist/index.min.js",
     "style": "dist/index.min.css",

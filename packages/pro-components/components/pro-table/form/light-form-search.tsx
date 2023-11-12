@@ -114,7 +114,9 @@ export default defineComponent({
       nextTick(() => {
         setFields(defaultFormData.value, lightFormRef.value);
       });
-      emit('submit', defaultFormData.value, true);
+      if (props.type === 'table') {
+        emit('submit', defaultFormData.value, true);
+      }
     });
 
     watchEffect(() => {

@@ -9,6 +9,7 @@ import {
   watch,
   toRef,
   watchEffect,
+  toRefs,
 } from 'vue';
 import {
   Form,
@@ -329,7 +330,9 @@ export default defineComponent({
 
     onMounted(() => {
       // 首次加载带上查询
-      emit('submit', defaultFormData.value, true);
+      if (props.type === 'table') {
+        emit('submit', defaultFormData.value, true);
+      }
     });
 
     watchEffect(() => {
