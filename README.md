@@ -1,5 +1,5 @@
 ## Demos
-![Demos](/packages/pro-components/assets/images/096cefd4-7317-4456-872b-f2005d9c710a.mp4)
+![Demos](https://upload-images.jianshu.io/upload_images/23474406-263f5c19ad066262.gif)
 
 ## pro-table
 
