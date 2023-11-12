@@ -7,19 +7,18 @@
     "表格"
   ],
   "group": 0,
-  "homepage": "https://upload-images.jianshu.io/upload_images/23474406-263f5c19ad066262.gif",
+  "homepage": "",
   "repository": "https://github.com/licailing/arco-vue-pro-components.git",
   "author": "licailing",
-  "screenshot": "",
+  "screenshot": "https://upload-images.jianshu.io/upload_images/23474406-263f5c19ad066262.gif",
   "package": {
     "name": "@arco-vue-pro-components/pro-components",
     "version": "latest",
     "type": "npm",
     "registry": "https://registry.npmjs.org",
     "peerDependencies": [
-      "@arco-design/web-react",
-      "dayjs",
       "vue"
     ]
-  }
+  },
+  "metaUpdateTime": 1699788908620
 }
