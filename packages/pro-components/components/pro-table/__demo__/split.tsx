@@ -159,6 +159,7 @@ const IPList = defineComponent({
             console.log(params, sorter, filter);
             return Promise.resolve({
               data: ipListDataSource,
+              total: 10,
               success: true,
             });
           }}

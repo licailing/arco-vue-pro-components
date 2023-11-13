@@ -75,6 +75,7 @@ const request = (params: any, sort: any, filters: any) => {
         updateAt: 1602572996055,
       },
     ],
+    total: 1,
     success: true,
   });
 };

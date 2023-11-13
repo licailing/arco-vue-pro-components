@@ -176,6 +176,7 @@ export default defineComponent({
             console.log(params, sorter, filter);
             return Promise.resolve({
               data: tableListDataSource,
+              total: 5,
               success: true,
             });
           }}

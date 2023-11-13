@@ -65,6 +65,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |default-expand-all-rows|是否默认展开所有的行|`boolean`|`false`|
 |sticky-header|是否开启表头吸顶|`boolean\|number`|`false`|
 |scrollbar|是否开启虚拟滚动条|`boolean \| ScrollbarProps`|`true`|
+|size|输入框大小|`'mini' \| 'small' \| 'medium' \| 'large'`|`'medium'`|
 ### `<pro-table>` Events
 
 |事件名|描述|参数|
@@ -359,7 +360,7 @@ import {
 import type { ProColumns, RenderData } from '../index';
 import ProTable from '../index';
 
-const valueEnum = {
+const valueEnum: any = {
   0: 'close',
   1: 'running',
   2: 'online',
@@ -453,7 +454,7 @@ export default defineComponent({
       },
       {
         title: (column, type) => {
-          return type === 'table' ? '备注' : '备注1';
+          return type === 'table' ? '备注' : '备注说明';
         },
         dataIndex: 'memo',
         ellipsis: true,
@@ -502,12 +503,15 @@ export default defineComponent({
               console.log('lightSearch', params, sorter, filter);
               return Promise.resolve({
                 data: tableListDataSource,
+                total: 5,
                 success: true,
               });
             }}
             rowKey="key"
             pagination={{
               showJumper: true,
+              defaultPageSize: 5,
+              hideOnSinglePage: false,
             }}
             searchType="light"
             lightSearchConfig={{
@@ -536,12 +540,15 @@ export default defineComponent({
               console.log(params, sorter, filter);
               return Promise.resolve({
                 data: tableListDataSource,
+                total: 5,
                 success: true,
               });
             }}
             rowKey="key"
             pagination={{
               showJumper: true,
+              defaultPageSize: 5,
+              hideOnSinglePage: false,
             }}
             defaultFormData={{ status: 'all', name: 'aaa' }}
             headerTitle="查询表格"
@@ -883,13 +890,15 @@ export default defineComponent({
             console.log(params, sorter, filter);
             return Promise.resolve({
               data: tableListDataSource,
+              total: 1,
               success: true,
             });
           }}
           rowKey="key"
           pagination={{
-            showQuickJumper: true,
+            showJumper: true,
           }}
+          size="small"
           search={false}
           defaultFormData={{ status: 'all' }}
           headerTitle="无查询表单"
@@ -1097,6 +1106,7 @@ export default defineComponent({
             console.log(params, sorter, filter);
             return Promise.resolve({
               data: tableListDataSource,
+              total: 5,
               success: true,
             });
           }}
@@ -1294,6 +1304,7 @@ const IPList = defineComponent({
             console.log(params, sorter, filter);
             return Promise.resolve({
               data: ipListDataSource,
+              total: 10,
               success: true,
             });
           }}
@@ -1370,7 +1381,7 @@ export default defineComponent({
 ```tsx
 import { Ref, defineComponent, ref } from 'vue';
 import { Button } from '@arco-design/web-vue';
-import type { ProColumns } from '../index';
+import type { ActionType, ProColumns } from '../index';
 import ProTable from '../index';
 
 export type TableListItem = {
@@ -1387,7 +1398,7 @@ export default defineComponent({
     const setFormRef = (ref: Ref) => {
       formRef.value = ref;
     };
-    const setActionRef = (ref: Ref) => {
+    const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
     };
     const onReload = () => {
@@ -1434,15 +1445,13 @@ export default defineComponent({
                   updateAt: 1602572996055,
                 },
               ],
+              total: 1,
               success: true,
             });
           }}
           rowKey="key"
-          pagination={{
-            showSizeChanger: true,
-          }}
           search={{
-            collapsed,
+            collapsed: collapsed.value,
             onCollapse: (value: boolean) => {
               collapsed.value = value;
             },
@@ -1570,6 +1579,7 @@ const request = (params: any, sort: any, filters: any) => {
         updateAt: 1602572996055,
       },
     ],
+    total: 1,
     success: true,
   });
 };
@@ -2072,12 +2082,11 @@ export default defineComponent({
                   state: 'closed',
                 },
               ],
+              total: 1,
               success: true,
             };
           }}
           rowKey="key"
-          tableLayout="fixed"
-          dateFormatter="string"
           headerTitle="动态自定义搜索栏"
           search={{
             collapsed: false,
@@ -2188,6 +2197,7 @@ const request = async (params) => {
         state: 'closed',
       },
     ],
+    total: 1,
     success: true,
   };
 };
@@ -2241,7 +2251,7 @@ import { Link } from '@arco-design/web-vue';
 import type { ProColumns, RenderData } from '../index';
 import ProTable from '../index';
 
-const valueEnumMap = {
+const valueEnumMap: any = {
   0: 'running',
   1: 'online',
   2: 'error',
@@ -2328,6 +2338,7 @@ export default defineComponent({
             console.log('params', params);
             return Promise.resolve({
               data: tableListDataSource,
+              total: 2,
               success: true,
             });
           }}

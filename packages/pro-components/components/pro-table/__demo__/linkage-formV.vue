@@ -79,6 +79,7 @@ const request = async (params) => {
         state: 'closed',
       },
     ],
+    total: 1,
     success: true,
   };
 };

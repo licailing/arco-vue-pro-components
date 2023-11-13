@@ -432,7 +432,7 @@ export function mergePagination<T>(
     showTotal: true,
     showJumper: true,
     showPageSize: true,
-    hideOnSinglePage: true,
+    hideOnSinglePage: false,
     pageSizeOptions: [5, 10, 20, 30, 40, 50],
     ...(defaultPagination as PaginationProps),
     ...pageInfo.value,

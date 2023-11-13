@@ -3,7 +3,7 @@ import { Link } from '@arco-design/web-vue';
 import type { ProColumns, RenderData } from '../index';
 import ProTable from '../index';
 
-const valueEnumMap = {
+const valueEnumMap: any = {
   0: 'running',
   1: 'online',
   2: 'error',
@@ -90,6 +90,7 @@ export default defineComponent({
             console.log('params', params);
             return Promise.resolve({
               data: tableListDataSource,
+              total: 2,
               success: true,
             });
           }}

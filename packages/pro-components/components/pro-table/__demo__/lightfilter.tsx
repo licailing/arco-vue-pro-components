@@ -8,7 +8,7 @@ import {
 import type { ProColumns, RenderData } from '../index';
 import ProTable from '../index';
 
-const valueEnum = {
+const valueEnum: any = {
   0: 'close',
   1: 'running',
   2: 'online',
@@ -102,7 +102,7 @@ export default defineComponent({
       },
       {
         title: (column, type) => {
-          return type === 'table' ? '备注' : '备注1';
+          return type === 'table' ? '备注' : '备注说明';
         },
         dataIndex: 'memo',
         ellipsis: true,
@@ -151,12 +151,15 @@ export default defineComponent({
               console.log('lightSearch', params, sorter, filter);
               return Promise.resolve({
                 data: tableListDataSource,
+                total: 5,
                 success: true,
               });
             }}
             rowKey="key"
             pagination={{
               showJumper: true,
+              defaultPageSize: 5,
+              hideOnSinglePage: false,
             }}
             searchType="light"
             lightSearchConfig={{
@@ -185,12 +188,15 @@ export default defineComponent({
               console.log(params, sorter, filter);
               return Promise.resolve({
                 data: tableListDataSource,
+                total: 5,
                 success: true,
               });
             }}
             rowKey="key"
             pagination={{
               showJumper: true,
+              defaultPageSize: 5,
+              hideOnSinglePage: false,
             }}
             defaultFormData={{ status: 'all', name: 'aaa' }}
             headerTitle="查询表格"

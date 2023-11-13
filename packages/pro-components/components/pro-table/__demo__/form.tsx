@@ -1,6 +1,6 @@
 import { Ref, defineComponent, ref } from 'vue';
 import { Button } from '@arco-design/web-vue';
-import type { ProColumns } from '../index';
+import type { ActionType, ProColumns } from '../index';
 import ProTable from '../index';
 
 export type TableListItem = {
@@ -17,7 +17,7 @@ export default defineComponent({
     const setFormRef = (ref: Ref) => {
       formRef.value = ref;
     };
-    const setActionRef = (ref: Ref) => {
+    const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
     };
     const onReload = () => {
@@ -64,15 +64,13 @@ export default defineComponent({
                   updateAt: 1602572996055,
                 },
               ],
+              total: 1,
               success: true,
             });
           }}
           rowKey="key"
-          pagination={{
-            showSizeChanger: true,
-          }}
           search={{
-            collapsed,
+            collapsed: collapsed.value,
             onCollapse: (value: boolean) => {
               collapsed.value = value;
             },

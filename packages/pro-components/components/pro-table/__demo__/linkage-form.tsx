@@ -101,12 +101,11 @@ export default defineComponent({
                   state: 'closed',
                 },
               ],
+              total: 1,
               success: true,
             };
           }}
           rowKey="key"
-          tableLayout="fixed"
-          dateFormatter="string"
           headerTitle="动态自定义搜索栏"
           search={{
             collapsed: false,
