@@ -1,6 +1,5 @@
 ## Demos
-![pro-table高级筛选](/packages/pro-components/assets/images/pro-table-%E9%AB%98%E7%BA%A7%E7%AD%9B%E9%80%89.png)
-![pro-table筛选](/packages/pro-components/assets/images/pro-table-%E7%AD%9B%E9%80%89.png)
+![pro-table筛选](/packages/pro-components/assets/images/pro-table.png)
 
 
 ## pro-table
