@@ -10,7 +10,7 @@
   "homepage": "https://github.com/licailing/arco-vue-pro-components/tree/main/packages/pro-components#readme",
   "repository": "https://github.com/licailing/arco-vue-pro-components.git",
   "author": "licailing",
-  "screenshot": "https://upload-images.jianshu.io/upload_images/23474406-263f5c19ad066262.gif",
+  "screenshot": "https://raw.githubusercontent.com/licailing/arco-vue-pro-components/main/packages/pro-components/assets/images/pro-table.png",
   "package": {
     "name": "@arco-vue-pro-components/pro-components",
     "version": "latest",
