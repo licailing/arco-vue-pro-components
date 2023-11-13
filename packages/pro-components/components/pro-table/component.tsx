@@ -10,7 +10,6 @@ import {
   toRefs,
   watch,
   watchEffect,
-  inject,
 } from 'vue';
 import {
   PaginationProps,
@@ -498,6 +497,15 @@ export default defineComponent({
     scrollbar: {
       type: [Object, Boolean] as PropType<boolean | ScrollbarProps>,
       default: true,
+    },
+    /**
+     * @zh 输入框大小
+     * @en Input size
+     * @values 'mini','small','medium','large'
+     * @defaultValue 'medium'
+     */
+    size: {
+      type: String as PropType<Size>,
     },
   },
   emits: {

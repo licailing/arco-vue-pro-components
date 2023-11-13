@@ -156,8 +156,9 @@ export default defineComponent({
           }}
           rowKey="key"
           pagination={{
-            showQuickJumper: true,
+            showJumper: true,
           }}
+          size="small"
           search={false}
           defaultFormData={{ status: 'all' }}
           headerTitle="无查询表单"
