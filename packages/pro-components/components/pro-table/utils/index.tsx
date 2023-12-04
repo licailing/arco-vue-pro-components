@@ -7,7 +7,7 @@ import {
   TypographyParagraph,
 } from '@arco-design/web-vue';
 import { getValueByPath } from '../../_utils/get-value-by-path';
-import { isObject } from '../../_utils/is';
+import { isArray, isObject } from '../../_utils/is';
 import type {
   ActionType,
   ColumnEmptyText,
@@ -541,4 +541,22 @@ export function runFunction(valueEnum: any, ...rest: any) {
     return valueEnum(...rest);
   }
   return valueEnum;
+}
+
+export function flattenChildren(arr: any[] = [], rowKey: string): any {
+  if (!isArray(arr) || !arr.length) {
+    return {};
+  }
+  let data: any = {};
+  for (let item of arr) {
+    if (!item || item[rowKey] == undefined) {
+      continue;
+    }
+    data[item[rowKey]] = item;
+    if (!isArray(item.children) || !item.children.length) {
+      continue;
+    }
+    data = { ...data, ...flattenChildren(item.children, rowKey) };
+  }
+  return data;
 }

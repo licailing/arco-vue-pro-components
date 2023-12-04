@@ -34,11 +34,11 @@ export interface ProInputNumberProps {
    */
   capitalUnit?: CapitalUnitType;
   /**
-     * @zh 是否显示大写金额提示
-     * @en Whether to display an amount prompt in uppercase
-     * @defaultValue false
-     */
-  showCapital?: boolean,
+   * @zh 是否显示大写金额提示
+   * @en Whether to display an amount prompt in uppercase
+   * @defaultValue false
+   */
+  showCapital?: boolean;
   /**
    * @zh 最大长度
    * @en max length
@@ -122,4 +122,37 @@ export interface ProInputNumberProps {
    * @defaultValue false
    */
   readOnly?: boolean;
+  /**
+   * @zh 值发生改变时触发
+   * @en Triggered when the value changes
+   * @param { number | undefined } value
+   * @param {Event} ev
+   */
+  onChange: (value: number | undefined, ev: Event) => void;
+  /**
+   * @zh 输入框获取焦点时触发
+   * @en Triggered when the input gets focus
+   * @param {FocusEvent} ev
+   */
+  onFocus: (ev: FocusEvent) => void;
+  /**
+   * @zh 输入框失去焦点时触发
+   * @en Triggered when the input box loses focus
+   * @param {FocusEvent} ev
+   */
+  onBlur: (ev: FocusEvent) => void;
+  /**
+   * @zh 用户点击清除按钮时触发
+   * @en Triggered when the user clicks the clear button
+   * @param {Event} ev
+   */
+  onClear: (ev: Event) => void;
+  /**
+   * @zh 输入时触发
+   * @en Triggered on input
+   * @param { number | undefined } value
+   * @param {string} inputValue
+   * @param {Event} ev
+   */
+  onInput: (value: number | undefined, inputValue: string, ev: Event) => void;
 }

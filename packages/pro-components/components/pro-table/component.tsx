@@ -15,7 +15,6 @@ import {
   PaginationProps,
   Table,
   TableChangeExtra,
-  TableData,
   Space,
   Card,
   TableBorder,
@@ -42,13 +41,20 @@ import type {
   TablePagePosition,
   TableComponents,
   VirtualListProps,
+  TableData,
 } from './interface';
 import FormSearch from './form/form-search';
 import useFetchData from './form/use-fetch-data';
-import { genProColumnToColumn, mergePagination, useActionType } from './utils';
+import {
+  flattenChildren,
+  genProColumnToColumn,
+  mergePagination,
+  useActionType,
+} from './utils';
 import { useRowSelection } from './hooks/useRowSelection';
 import LightFormSearch from './form/light-form-search';
 import { getPrefixCls } from '../_utils';
+import { isArray } from '../_utils/is';
 
 Table.inheritAttrs = false;
 export default defineComponent({
@@ -79,8 +85,8 @@ export default defineComponent({
      */
     params: Object,
     /**
-     * @zh 获取 `dataSource` 的方法 | `(params?: {pageSize,current},sort,filter) => {data,success,total}`
-     * @en How to get `dataSource` | `(params?: {pageSize,current},sort,filter) => {data,success,total}`
+     * @zh 获取 `data` 的方法 | `(params?: {pageSize,current},sort,filter) => {data,success,total}`
+     * @en How to get `data` | `(params?: {pageSize,current},sort,filter) => {data,success,total}`
      */
     request: {
       type: Function as PropType<
@@ -502,13 +508,11 @@ export default defineComponent({
      * @zh 输入框大小
      * @en Input size
      * @values 'mini','small','medium','large'
-     * @defaultValue 'medium'
+     * @defaultValue 'large'
      */
     size: {
       type: String as PropType<Size>,
     },
-  },
-  emits: {
     /**
      * @zh 表格数据发生变化时触发
      * @en Triggered when table data changes
@@ -516,22 +520,30 @@ export default defineComponent({
      * @param {TableChangeExtra} extra
      * @param {TableData[]} currentData
      */
-    'change': (
-      data: TableData[],
-      extra: TableChangeExtra,
-      currentData: TableData[]
-    ) => true,
+    onChange: {
+      type: Function as PropType<
+        (
+          data: TableData[],
+          extra: TableChangeExtra,
+          currentData: TableData[]
+        ) => void
+      >,
+    },
     /**
      * @zh 搜索表单提交时触发
      * @en Triggered when search form submit
      * @param {any} formData
      */
-    'submit': (formData: any) => true,
+    onSubmit: {
+      type: Function as PropType<(formData: any) => void>,
+    },
     /**
      * @zh 搜索表单重置时触发
      * @en Triggered when search form reset
      */
-    'reset': () => true,
+    onReset: {
+      type: Function as PropType<() => void>,
+    },
     /**
      * @zh 表格数据加载完后触发
      * @en Triggered when table data load
@@ -539,34 +551,46 @@ export default defineComponent({
      * @param {number} total
      * @param {any} extra
      */
-    'load': (data: any[], total: number, extra: any) => true,
+    onLoad: {
+      type: Function as PropType<
+        (data: any[], total: number, extra: any) => void
+      >,
+    },
     /**
      * @zh 表格分页发生改变时触发
      * @en Triggered when the table pagination changes
      * @param {number} page
      */
-    'pageChange': (page: number) => true,
+    onPageChange: {
+      type: Function as PropType<(page: number) => void>,
+    },
     /**
      * @zh 表格每页数据数量发生改变时触发
      * @en Triggered when the number of data per page of the table changes
      * @param {number} pageSize
      */
-    'pageSizeChange': (pageSize: number) => true,
-    'update:selectedKeys': (rowKeys: (string | number)[]) => true,
-    'update:expandedKeys': (rowKeys: (string | number)[]) => true,
+    onPageSizeChange: {
+      type: Function as PropType<(pageSize: number) => void>,
+    },
     /**
      * @zh 点击展开行时触发
      * @en Triggered when a row is clicked to expand
      * @param {string | number} rowKey
      * @param {TableData} record
      */
-    'expand': (rowKey: string | number, record: TableData) => true,
+    onExpand: {
+      type: Function as PropType<
+        (rowKey: string | number, record: TableData) => void
+      >,
+    },
     /**
      * @zh 已展开的数据行发生改变时触发
      * @en Triggered when the expanded data row changes
      * @param {(string | number)[]} rowKeys
      */
-    'expandedChange': (rowKeys: (string | number)[]) => true,
+    onExpandedChange: {
+      type: Function as PropType<(rowKeys: (string | number)[]) => void>,
+    },
     /**
      * @zh 点击行选择器时触发
      * @en Triggered when the row selector is clicked
@@ -574,37 +598,53 @@ export default defineComponent({
      * @param {string | number} rowKey
      * @param {TableData} record
      */
-    'select': (
-      rowKeys: (string | number)[],
-      rowKey: string | number,
-      record: TableData
-    ) => true,
+    onSelect: {
+      type: Function as PropType<
+        (
+          rowKeys: (string | number)[],
+          rowKey: string | number,
+          record: TableData
+        ) => void
+      >,
+    },
     /**
      * @zh 点击全选选择器时触发
      * @en Triggered when the select all selector is clicked
      * @param {boolean} checked
      */
-    'selectAll': (checked: boolean) => true,
+    onSelectAll: {
+      type: Function as PropType<(checked: boolean) => void>,
+    },
     /**
      * @zh 已选择的数据行发生改变时触发
      * @en Triggered when the selected data row changes
      * @param {(string | number)[]} rowKeys
      */
-    'selectionChange': (rowKeys: (string | number)[]) => true,
+    onSelectionChange: {
+      type: Function as PropType<(rowKeys: (string | number)[]) => void>,
+    },
     /**
      * @zh 排序规则发生改变时触发
      * @en Triggered when the collation changes
      * @param {string} dataIndex
      * @param {string} direction
      */
-    'sorterChange': (dataIndex: string, direction: string) => true,
+    onSorterChange: {
+      type: Function as PropType<
+        (dataIndex: string, direction: string) => void
+      >,
+    },
     /**
      * @zh 过滤选项发生改变时触发
      * @en Triggered when the filter options are changed
      * @param {string} dataIndex
      * @param {string[]} filteredValues
      */
-    'filterChange': (dataIndex: string, filteredValues: string[]) => true,
+    onFilterChange: {
+      type: Function as PropType<
+        (dataIndex: string, filteredValues: string[]) => void
+      >,
+    },
     /**
      * @zh 点击单元格时触发
      * @en Triggered when a cell is clicked
@@ -612,29 +652,38 @@ export default defineComponent({
      * @param {TableColumnData} column
      * @param {Event} ev
      */
-    'cellClick': (record: TableData, column: TableColumnData, ev: Event) =>
-      true,
+    onCellClick: {
+      type: Function as PropType<
+        (record: TableData, column: TableColumnData, ev: Event) => void
+      >,
+    },
     /**
      * @zh 点击行数据时触发
      * @en Triggered when row data is clicked
      * @param {TableData} record
      * @param {Event} ev
      */
-    'rowClick': (record: TableData, ev: Event) => true,
+    onRowClick: {
+      type: Function as PropType<(record: TableData, ev: Event) => void>,
+    },
     /**
      * @zh 点击表头数据时触发
      * @en Triggered when the header data is clicked
      * @param {TableColumnData} column
      * @param {Event} ev
      */
-    'headerClick': (column: TableColumnData, ev: Event) => true,
+    onHeaderClick: {
+      type: Function as PropType<(column: TableColumnData, ev: Event) => void>,
+    },
     /**
      * @zh 调整列宽时触发
      * @en Triggered when column width is adjusted
      * @param {string} dataIndex
      * @param {number} width
      */
-    'columnResize': (dataIndex: string, width: number) => true,
+    onColumnResize: {
+      type: Function as PropType<(dataIndex: string, width: number) => void>,
+    },
   },
   /**
    * @zh 表格列定义。启用时会屏蔽 columns 属性
@@ -862,40 +911,41 @@ export default defineComponent({
       effects: [props.params, formSearch, _sorter, _filters],
     });
     const action = useFetchData(fetchData.value, props, emit, options);
-    const data = computed(() =>
-      props.request ? action.data.value : props.data || []
-    );
+    const dataSource = computed(() => {
+      return props.request ? action.data.value : props.data || [];
+    });
     const noRowSelection = computed(() => !rowSelection.value);
+    const dataSourceMap = computed(() => {
+      return noRowSelection.value
+        ? {}
+        : flattenChildren(dataSource.value, props.rowKey);
+    });
+    // 已选中
+    const selectedRowsMap = computed(() => {
+      return noRowSelection.value
+        ? {}
+        : flattenChildren(selectedRows.value, props.rowKey);
+    });
+
     watch(
-      [selectedRowKeys, data, noRowSelection, action.loading],
-      ([selectedRowKeys, data, noRowSelection, loading]) => {
+      [selectedRowKeys, dataSourceMap, noRowSelection, action.loading],
+      ([selectedRowKeys, dataSourceMap, noRowSelection, loading]) => {
         if (loading || noRowSelection) {
           return;
         }
-        const duplicateRemoveMap = new Map();
-        if (
-          Array.isArray(data) &&
-          data.length &&
-          Array.isArray(selectedRowKeys) &&
-          selectedRowKeys.length
-        ) {
-          const rows: any[] = [...data, ...selectedRows.value].filter(
-            (item, index) => {
-              if (!props.rowKey) {
-                return selectedRowKeys.includes(index);
-              }
-              const rowKey = item[props.rowKey];
-              if (duplicateRemoveMap.has(rowKey)) {
-                return false;
-              }
-              duplicateRemoveMap.set(rowKey, true);
-              return selectedRowKeys.includes(rowKey);
-            }
-          );
+        if (isArray(selectedRowKeys) && selectedRowKeys.length) {
+          // 记住翻页选中及跟selectedRowKeys一样的顺序
+          const rows: any[] = selectedRowKeys.map((item) => {
+            return dataSourceMap[item] || selectedRowsMap.value[item];
+          });
           selectedRows.value = rows;
           return;
+        } else {
+          selectedRows.value = [];
         }
-        selectedRows.value = [];
+      },
+      {
+        immediate: true,
       }
     );
 
@@ -999,14 +1049,6 @@ export default defineComponent({
       emit('reset');
     };
 
-    const handleSelect = (
-      rowKeys: (string | number)[],
-      rowKey: string | number,
-      record: TableData
-    ) => {
-      emit('select', rowKeys, rowKey, record);
-    };
-
     const ToolBar = () => {
       // 操作列表
       const data = {
@@ -1088,7 +1130,7 @@ export default defineComponent({
                 {...attrs}
                 columns={tableColumns.value}
                 loading={props.loading || action.loading.value}
-                data={data.value}
+                data={dataSource.value}
                 onChange={handleChange}
                 v-slots={{
                   ...slots,
@@ -1096,7 +1138,6 @@ export default defineComponent({
                 }}
                 pagination={pagination.value}
                 v-model:selectedKeys={selectedRowKeys.value}
-                onSelect={handleSelect}
               ></Table>
             </div>
           )}

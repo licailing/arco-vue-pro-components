@@ -33,15 +33,11 @@ description: Only input boxes in numeric format are allowed, money percent int d
 |size|Input size|`'mini' \| 'small' \| 'medium' \| 'large'`|`'medium'`|
 |allow-clear|Whether to allow the input to be cleared|`boolean`|`true`|
 |read-only|Readonly|`boolean`|`false`|
-### `<pro-input-number>` Events
-
-|Event Name|Description|Parameters|
-|---|---|---|
-|change|Triggered when the value changes|value: ` number \| undefined `<br>ev: `Event`|
-|focus|Triggered when the input gets focus|ev: `FocusEvent`|
-|blur|Triggered when the input box loses focus|ev: `FocusEvent`|
-|clear|Triggered when the user clicks the clear button|ev: `Event`|
-|input|Triggered on input|value: ` number \| undefined `<br>inputValue: `string`<br>ev: `Event`|
+|on-change|Triggered when the value changes|`(value: number \| undefined, ev: Event) => void`|`-`|
+|on-focus|Triggered when the input gets focus|`(ev: FocusEvent) => void`|`-`|
+|on-blur|Triggered when the input box loses focus|`(ev: FocusEvent) => void`|`-`|
+|on-clear|Triggered when the user clicks the clear button|`(ev: Event) => void`|`-`|
+|on-input|Triggered on input|`(value: number \| undefined, inputValue: string, ev: Event) => void`|`-`|
 ### `<pro-input-number>` Slots
 
 |Slot Name|Description|Parameters|
@@ -79,6 +75,11 @@ description: Only input boxes in numeric format are allowed, money percent int d
 |size|Input size|`Size`|`'medium'`|
 |allowClear|Whether to allow the input to be cleared|`boolean`|`true`|
 |readOnly|Readonly|`boolean`|`false`|
+|onChange|Triggered when the value changes|`(value: number \| undefined, ev: Event) => void`|`-`|
+|onFocus|Triggered when the input gets focus|`(ev: FocusEvent) => void`|`-`|
+|onBlur|Triggered when the input box loses focus|`(ev: FocusEvent) => void`|`-`|
+|onClear|Triggered when the user clicks the clear button|`(ev: Event) => void`|`-`|
+|onInput|Triggered on input|`(value: number \| undefined, inputValue: string, ev: Event) => void`|`-`|
 
 
 

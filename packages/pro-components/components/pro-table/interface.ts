@@ -11,6 +11,7 @@ import type {
   GridItemProps,
   InputSearchInstance,
   GridProps,
+  Size,
 } from '@arco-design/web-vue';
 import { TriggerEvent, TriggerPosition } from '../_utils/constant';
 import { ClassName, Data } from '../_utils/types';
@@ -387,6 +388,13 @@ export interface ProTableProps extends Omit<TableProps, 'columns'> {
    */
   params?: { [key: string]: any };
   /**
+   * @zh 表格的大小
+   * @en The size of the select
+   * @values 'mini';'small';'medium';'large'
+   * @defaultValue 'large'
+   */
+  size?: Size;
+  /**
    * @zh 获取 `dataSource` 的方法 | `(params?: {pageSize,current},sort,filter) => {data,success,total}`
    * @en How to get `dataSource` | `(params?: {pageSize,current},sort,filter) => {data,success,total}`
    */
@@ -458,6 +466,129 @@ export interface ProTableProps extends Omit<TableProps, 'columns'> {
    * @en Whether the table is loading
    */
   loading?: boolean;
+  /**
+   * @zh 表格数据发生变化时触发
+   * @en Triggered when table data changes
+   * @param {TableData[]} data
+   * @param {TableChangeExtra} extra
+   * @param {TableData[]} currentData
+   */
+  onChange: (
+    data: TableData[],
+    extra: TableChangeExtra,
+    currentData: TableData[]
+  ) => void;
+  /**
+   * @zh 搜索表单提交时触发
+   * @en Triggered when search form submit
+   * @param {any} formData
+   */
+  onSubmit: (formData: any) => void;
+  /**
+   * @zh 搜索表单重置时触发
+   * @en Triggered when search form reset
+   */
+  onReset: () => void;
+  /**
+   * @zh 表格数据加载完后触发
+   * @en Triggered when table data load
+   * @param {any[]} data
+   * @param {number} total
+   * @param {any} extra
+   */
+  onLoad: (data: any[], total: number, extra: any) => void;
+  /**
+   * @zh 表格分页发生改变时触发
+   * @en Triggered when the table pagination changes
+   * @param {number} page
+   */
+  onPageChange: (page: number) => void;
+  /**
+   * @zh 表格每页数据数量发生改变时触发
+   * @en Triggered when the number of data per page of the table changes
+   * @param {number} pageSize
+   */
+  onPageSizeChange: (pageSize: number) => void;
+  /**
+   * @zh 点击展开行时触发
+   * @en Triggered when a row is clicked to expand
+   * @param {string | number} rowKey
+   * @param {TableData} record
+   */
+  onExpand: (rowKey: string | number, record: TableData) => void;
+  /**
+   * @zh 已展开的数据行发生改变时触发
+   * @en Triggered when the expanded data row changes
+   * @param {(string | number)[]} rowKeys
+   */
+  onExpandedChange: (rowKeys: (string | number)[]) => void;
+  /**
+   * @zh 点击行选择器时触发
+   * @en Triggered when the row selector is clicked
+   * @param {string | number[]} rowKeys
+   * @param {string | number} rowKey
+   * @param {TableData} record
+   */
+  onSelect: (
+    rowKeys: (string | number)[],
+    rowKey: string | number,
+    record: TableData
+  ) => void;
+  /**
+   * @zh 点击全选选择器时触发
+   * @en Triggered when the select all selector is clicked
+   * @param {boolean} checked
+   */
+  onSelectAll: (checked: boolean) => void;
+  /**
+   * @zh 已选择的数据行发生改变时触发
+   * @en Triggered when the selected data row changes
+   * @param {(string | number)[]} rowKeys
+   */
+  onSelectionChange: (rowKeys: (string | number)[]) => void;
+  /**
+   * @zh 排序规则发生改变时触发
+   * @en Triggered when the collation changes
+   * @param {string} dataIndex
+   * @param {string} direction
+   */
+  onSorterChange: (dataIndex: string, direction: string) => void;
+  /**
+   * @zh 过滤选项发生改变时触发
+   * @en Triggered when the filter options are changed
+   * @param {string} dataIndex
+   * @param {string[]} filteredValues
+   */
+  onFilterChange: (dataIndex: string, filteredValues: string[]) => void;
+  /**
+   * @zh 点击单元格时触发
+   * @en Triggered when a cell is clicked
+   * @param {TableData} record
+   * @param {TableColumnData} column
+   * @param {Event} ev
+   */
+  onCellClick: (record: TableData, column: TableColumnData, ev: Event) => void;
+  /**
+   * @zh 点击行数据时触发
+   * @en Triggered when row data is clicked
+   * @param {TableData} record
+   * @param {Event} ev
+   */
+  onRowClick: (record: TableData, ev: Event) => void;
+  /**
+   * @zh 点击表头数据时触发
+   * @en Triggered when the header data is clicked
+   * @param {TableColumnData} column
+   * @param {Event} ev
+   */
+  onHeaderClick: (column: TableColumnData, ev: Event) => void;
+  /**
+   * @zh 调整列宽时触发
+   * @en Triggered when column width is adjusted
+   * @param {string} dataIndex
+   * @param {number} width
+   */
+  onColumnResize: (dataIndex: string, width: number) => void;
 }
 
 export type UseFetchProps = {
@@ -482,7 +613,7 @@ export interface ProTableContext {
 }
 
 /** 操作类型 */
-export type ProCoreActionType<T = Record<string, unknown>> = {
+export type ActionType = {
   /**
    * @zh 刷新
    * @en reload
@@ -513,10 +644,11 @@ export type ProCoreActionType<T = Record<string, unknown>> = {
    * @en Get Table selected data
    */
   getSelected?: () => { selectedKeys: any[]; selectedRows: any[] };
-} & T;
-
-export type ActionType = ProCoreActionType & {
   fullScreen?: () => void;
+  /**
+   * @zh 设置page信息
+   * @en Set page info
+   */
   setPageInfo?: (page: Partial<PageInfo>) => void;
 };
 

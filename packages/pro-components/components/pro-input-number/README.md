@@ -31,15 +31,11 @@ description: 仅允许输入数字格式的输入框。
 |size|输入框大小|`'mini' \| 'small' \| 'medium' \| 'large'`|`'medium'`|
 |allow-clear|是否允许清空输入框|`boolean`|`true`|
 |read-only|只读|`boolean`|`false`|
-### `<pro-input-number>` Events
-
-|事件名|描述|参数|
-|---|---|---|
-|change|值发生改变时触发|value: ` number \| undefined `<br>ev: `Event`|
-|focus|输入框获取焦点时触发|ev: `FocusEvent`|
-|blur|输入框失去焦点时触发|ev: `FocusEvent`|
-|clear|用户点击清除按钮时触发|ev: `Event`|
-|input|输入时触发|value: ` number \| undefined `<br>inputValue: `string`<br>ev: `Event`|
+|on-change|值发生改变时触发|`(value: number \| undefined, ev: Event) => void`|`-`|
+|on-focus|输入框获取焦点时触发|`(ev: FocusEvent) => void`|`-`|
+|on-blur|输入框失去焦点时触发|`(ev: FocusEvent) => void`|`-`|
+|on-clear|用户点击清除按钮时触发|`(ev: Event) => void`|`-`|
+|on-input|输入时触发|`(value: number \| undefined, inputValue: string, ev: Event) => void`|`-`|
 ### `<pro-input-number>` Slots
 
 |插槽名|描述|参数|
@@ -77,6 +73,11 @@ description: 仅允许输入数字格式的输入框。
 |size|输入框大小|`Size`|`'medium'`|
 |allowClear|是否允许清空输入框|`boolean`|`true`|
 |readOnly|只读|`boolean`|`false`|
+|onChange|值发生改变时触发|`(value: number \| undefined, ev: Event) => void`|`-`|
+|onFocus|输入框获取焦点时触发|`(ev: FocusEvent) => void`|`-`|
+|onBlur|输入框失去焦点时触发|`(ev: FocusEvent) => void`|`-`|
+|onClear|用户点击清除按钮时触发|`(ev: Event) => void`|`-`|
+|onInput|输入时触发|`(value: number \| undefined, inputValue: string, ev: Event) => void`|`-`|
 
 
 

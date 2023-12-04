@@ -18,7 +18,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |columns|表格的列描述信息|`ProColumns[]`|`[]`|
 |row-key|表格行 `key` 的取值字段|`string`|`'id'`|
 |params|request 的参数，修改之后会触发更新|`object`|`-`|
-|request|获取 `dataSource` 的方法 \| `(params?: {pageSize,current},sort,filter) => {data,success,total}`|`(  params: {    pageSize?: number;    current?: number;    [key: string]: any;  },  sort: {    [key: string]: 'ascend' \| 'descend';  },  filter: { [key: string]: any }) => Promise<RequestData<any>>`|`-`|
+|request|获取 `data` 的方法 \| `(params?: {pageSize,current},sort,filter) => {data,success,total}`|`(  params: {    pageSize?: number;    current?: number;    [key: string]: any;  },  sort: {    [key: string]: 'ascend' \| 'descend';  },  filter: { [key: string]: any }) => Promise<RequestData<any>>`|`-`|
 |default-data|默认的数据|`array`|`-`|
 |before-search-submit|格式化搜索表单提交数据|`(searchParams: any) => any`|`(searchParams: any) => searchParams`|
 |search|是否显示搜索表单，传入对象时为搜索表单的配置|`SearchConfig \| boolean`|`true`|
@@ -65,28 +65,24 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |default-expand-all-rows|是否默认展开所有的行|`boolean`|`false`|
 |sticky-header|是否开启表头吸顶|`boolean\|number`|`false`|
 |scrollbar|是否开启虚拟滚动条|`boolean \| ScrollbarProps`|`true`|
-|size|输入框大小|`'mini' \| 'small' \| 'medium' \| 'large'`|`'medium'`|
-### `<pro-table>` Events
-
-|事件名|描述|参数|
-|---|---|---|
-|change|表格数据发生变化时触发|data: `TableData[]`<br>extra: `TableChangeExtra`<br>currentData: `TableData[]`|
-|submit|搜索表单提交时触发|formData: `any`|
-|reset|搜索表单重置时触发|-|
-|load|表格数据加载完后触发|data: `any[]`<br>total: `number`<br>extra: `any`|
-|page-change|表格分页发生改变时触发|page: `number`|
-|page-size-change|表格每页数据数量发生改变时触发|pageSize: `number`|
-|expand|点击展开行时触发|rowKey: `string \| number`<br>record: `TableData`|
-|expanded-change|已展开的数据行发生改变时触发|rowKeys: `(string \| number)[]`|
-|select|点击行选择器时触发|rowKeys: `string \| number[]`<br>rowKey: `string \| number`<br>record: `TableData`|
-|select-all|点击全选选择器时触发|checked: `boolean`|
-|selection-change|已选择的数据行发生改变时触发|rowKeys: `(string \| number)[]`|
-|sorter-change|排序规则发生改变时触发|dataIndex: `string`<br>direction: `string`|
-|filter-change|过滤选项发生改变时触发|dataIndex: `string`<br>filteredValues: `string[]`|
-|cell-click|点击单元格时触发|record: `TableData`<br>column: `TableColumnData`<br>ev: `Event`|
-|row-click|点击行数据时触发|record: `TableData`<br>ev: `Event`|
-|header-click|点击表头数据时触发|column: `TableColumnData`<br>ev: `Event`|
-|column-resize|调整列宽时触发|dataIndex: `string`<br>width: `number`|
+|size|输入框大小|`'mini' \| 'small' \| 'medium' \| 'large'`|`'large'`|
+|on-change|表格数据发生变化时触发|`(  data: TableData[],  extra: TableChangeExtra,  currentData: TableData[]) => void`|`-`|
+|on-submit|搜索表单提交时触发|`(formData: any) => void`|`-`|
+|on-reset|搜索表单重置时触发|`() => void`|`-`|
+|on-load|表格数据加载完后触发|`(data: any[], total: number, extra: any) => void`|`-`|
+|on-page-change|表格分页发生改变时触发|`(page: number) => void`|`-`|
+|on-page-size-change|表格每页数据数量发生改变时触发|`(pageSize: number) => void`|`-`|
+|on-expand|点击展开行时触发|`(rowKey: string \| number, record: TableData) => void`|`-`|
+|on-expanded-change|已展开的数据行发生改变时触发|`(rowKeys: (string \| number)[]) => void`|`-`|
+|on-select|点击行选择器时触发|`(  rowKeys: (string \| number)[],  rowKey: string \| number,  record: TableData) => void`|`-`|
+|on-select-all|点击全选选择器时触发|`(checked: boolean) => void`|`-`|
+|on-selection-change|已选择的数据行发生改变时触发|`(rowKeys: (string \| number)[]) => void`|`-`|
+|on-sorter-change|排序规则发生改变时触发|`(dataIndex: string, direction: string) => void`|`-`|
+|on-filter-change|过滤选项发生改变时触发|`(dataIndex: string, filteredValues: string[]) => void`|`-`|
+|on-cell-click|点击单元格时触发|`(record: TableData, column: TableColumnData, ev: Event) => void`|`-`|
+|on-row-click|点击行数据时触发|`(record: TableData, ev: Event) => void`|`-`|
+|on-header-click|点击表头数据时触发|`(column: TableColumnData, ev: Event) => void`|`-`|
+|on-column-resize|调整列宽时触发|`(dataIndex: string, width: number) => void`|`-`|
 ### `<pro-table>` Slots
 
 |插槽名|描述|参数|
@@ -181,6 +177,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |columns|columns|`ProColumns[]`|`-`|
 |type|pro-table类型|`ProTableTypes`|`-`|
 |params|request的参数，修改之后会触发更新|`{ [key: string]: any }`|`-`|
+|size|表格的大小|`Size`|`'large'`|
 |request|获取 `dataSource` 的方法 \| `(params?: {pageSize,current},sort,filter) => {data,success,total}`|`(    params: {      pageSize?: number;      current?: number;      [key: string]: any;    },    sort: {      [key: string]: 'ascend' \| 'descend';    },    filter: { [key: string]: string }  ) => Promise<RequestData<any>>`|`-`|
 |toolBarRender|自定义渲染表格函数|`ToolBarProps<any>['toolBarRender'] \| false`|`-`|
 |headerTitle|表格标题|`VNodeTypes`|`-`|
@@ -193,6 +190,23 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |formRef|可以获取到查询表单的form实例，用于一些灵活的配置|`(formRef: Ref) => void`|`-`|
 |actionRef|Table的action的引用，便于自定义触发|`(actionRef: Ref) => void`|`-`|
 |loading|表格是否加载中|`boolean`|`false`|
+|onChange|表格数据发生变化时触发|`(    data: TableData[],    extra: TableChangeExtra,    currentData: TableData[]  ) => void`|`-`|
+|onSubmit|搜索表单提交时触发|`(formData: any) => void`|`-`|
+|onReset|搜索表单重置时触发|`() => void`|`-`|
+|onLoad|表格数据加载完后触发|`(data: any[], total: number, extra: any) => void`|`-`|
+|onPageChange|表格分页发生改变时触发|`(page: number) => void`|`-`|
+|onPageSizeChange|表格每页数据数量发生改变时触发|`(pageSize: number) => void`|`-`|
+|onExpand|点击展开行时触发|`(rowKey: string \| number, record: TableData) => void`|`-`|
+|onExpandedChange|已展开的数据行发生改变时触发|`(rowKeys: (string \| number)[]) => void`|`-`|
+|onSelect|点击行选择器时触发|`(    rowKeys: (string \| number)[],    rowKey: string \| number,    record: TableData  ) => void`|`-`|
+|onSelectAll|点击全选选择器时触发|`(checked: boolean) => void`|`-`|
+|onSelectionChange|已选择的数据行发生改变时触发|`(rowKeys: (string \| number)[]) => void`|`-`|
+|onSorterChange|排序规则发生改变时触发|`(dataIndex: string, direction: string) => void`|`-`|
+|onFilterChange|过滤选项发生改变时触发|`(dataIndex: string, filteredValues: string[]) => void`|`-`|
+|onCellClick|点击单元格时触发|`(record: TableData, column: TableColumnData, ev: Event) => void`|`-`|
+|onRowClick|点击行数据时触发|`(record: TableData, ev: Event) => void`|`-`|
+|onHeaderClick|点击表头数据时触发|`(column: TableColumnData, ev: Event) => void`|`-`|
+|onColumnResize|调整列宽时触发|`(dataIndex: string, width: number) => void`|`-`|
 
 
 
@@ -579,9 +593,9 @@ export default defineComponent({
 
 ### 表格批量操作 
 ```tsx
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { Button, Link } from '@arco-design/web-vue';
-import type { ProColumns, RenderData } from '../index';
+import type { ActionType, ProColumns, RenderData, TableData } from '../index';
 import ProTable from '../index';
 
 const valueEnum: any = {
@@ -598,8 +612,8 @@ const ProcessMap: any = {
   error: 'danger',
 };
 
-export type TableListItem = {
-  key: number;
+export interface TableListItem extends TableData {
+  key: string;
   name: string;
   progress: number;
   containers: number;
@@ -608,15 +622,16 @@ export type TableListItem = {
   status: string;
   createdAt: number;
   memo: string;
-};
+  children?: any[];
+}
 const tableListDataSource: TableListItem[] = [];
 
 const creators = ['付小小', '曲丽丽', '林东东', '陈帅帅', '兼某某'];
 
-for (let i = 0; i < 50; i += 1) {
+function generateDataItem(i: number) {
   const progress = Math.random() * 1;
-  tableListDataSource.push({
-    key: i,
+  return {
+    key: `${i}`,
     name: `AppName-${i}`,
     containers: Math.floor(Math.random() * 20),
     callNumber: Math.floor(Math.random() * 2000),
@@ -628,13 +643,19 @@ for (let i = 0; i < 50; i += 1) {
       i % 2 === 1
         ? '很长很长很长很长很长很长很长的文字要展示但是要留下尾巴'
         : '简短备注文案',
-  });
+  };
 }
+for (let i = 0; i < 10; i += 1) {
+  tableListDataSource.push(generateDataItem(i));
+  tableListDataSource[i].children = [generateDataItem(i + 11)];
+}
+// @ts-ignore
+tableListDataSource[0].children[0].children = [generateDataItem(21)];
 
 const columns: ProColumns[] = [
   {
     title: '应用名称',
-    width: 140,
+    width: 200,
     dataIndex: 'name',
     fixed: 'left',
     render: (data: RenderData) => <Link>{data.dom}</Link>,
@@ -703,24 +724,64 @@ const columns: ProColumns[] = [
 export default defineComponent({
   name: 'BatchOption',
   setup(props) {
+    const actionRef = ref();
+    const setActionRef = (ref: ActionType) => {
+      actionRef.value = ref;
+    };
+    const selectedKeys = ref(['1']);
+    const expandedKeys = ref([]);
     const render = () => {
+      console.log(
+        'selectedKeys:%o, expandedKeys:%o',
+        selectedKeys.value,
+        expandedKeys.value
+      );
       return (
         <ProTable
           columns={columns}
           rowSelection={{
             type: 'checkbox',
             showCheckedAll: true,
-            defaultSelectedRowKeys: [1],
+            checkStrictly: true,
+            // defaultSelectedRowKeys: ['1'],
           }}
+          actionRef={setActionRef}
           data={tableListDataSource}
           scroll={{ x: 1300 }}
           search={false}
           pagination={{
             pageSize: 5,
           }}
+          onSelectAll={(checked: boolean) => {
+            console.log('onSelectAll', checked);
+          }}
+          onSelect={(rowKeys, rowKey, record) => {
+            console.log(
+              'onSelect:rowKeys:%o,rowKey:%o,record:%o',
+              rowKeys,
+              rowKey,
+              record
+            );
+          }}
+          v-model:selectedKeys={selectedKeys.value}
+          v-model:expandedKeys={expandedKeys.value}
           rowKey="key"
           headerTitle="表格批量操作"
-          toolBarRender={() => [<Button key="show">查看日志</Button>]}
+          toolBarRender={() => [
+            <Button
+              key="selected"
+              onClick={() => {
+                // 获取选中的数据
+                console.log(
+                  'selectedKeys',
+                  actionRef.value.getSelected() // selectedKeys和selectedRows
+                );
+              }}
+            >
+              获取选中
+            </Button>,
+            <Button key="show">查看日志</Button>,
+          ]}
         />
       );
     };

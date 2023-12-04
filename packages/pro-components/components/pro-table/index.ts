@@ -24,7 +24,6 @@ export type {
   ActionType,
   ToolBarData,
   ToolBarProps,
-  ProCoreActionType,
   UseFetchProps,
   SearchConfig,
   LightSearchConfig,

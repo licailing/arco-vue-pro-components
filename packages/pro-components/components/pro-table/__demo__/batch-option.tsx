@@ -1,6 +1,6 @@
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { Button, Link } from '@arco-design/web-vue';
-import type { ProColumns, RenderData } from '../index';
+import type { ActionType, ProColumns, RenderData, TableData } from '../index';
 import ProTable from '../index';
 
 const valueEnum: any = {
@@ -17,8 +17,8 @@ const ProcessMap: any = {
   error: 'danger',
 };
 
-export type TableListItem = {
-  key: number;
+export interface TableListItem extends TableData {
+  key: string;
   name: string;
   progress: number;
   containers: number;
@@ -27,15 +27,16 @@ export type TableListItem = {
   status: string;
   createdAt: number;
   memo: string;
-};
+  children?: any[];
+}
 const tableListDataSource: TableListItem[] = [];
 
 const creators = ['付小小', '曲丽丽', '林东东', '陈帅帅', '兼某某'];
 
-for (let i = 0; i < 50; i += 1) {
+function generateDataItem(i: number) {
   const progress = Math.random() * 1;
-  tableListDataSource.push({
-    key: i,
+  return {
+    key: `${i}`,
     name: `AppName-${i}`,
     containers: Math.floor(Math.random() * 20),
     callNumber: Math.floor(Math.random() * 2000),
@@ -47,13 +48,19 @@ for (let i = 0; i < 50; i += 1) {
       i % 2 === 1
         ? '很长很长很长很长很长很长很长的文字要展示但是要留下尾巴'
         : '简短备注文案',
-  });
+  };
 }
+for (let i = 0; i < 10; i += 1) {
+  tableListDataSource.push(generateDataItem(i));
+  tableListDataSource[i].children = [generateDataItem(i + 11)];
+}
+// @ts-ignore
+tableListDataSource[0].children[0].children = [generateDataItem(21)];
 
 const columns: ProColumns[] = [
   {
     title: '应用名称',
-    width: 140,
+    width: 200,
     dataIndex: 'name',
     fixed: 'left',
     render: (data: RenderData) => <Link>{data.dom}</Link>,
@@ -122,24 +129,64 @@ const columns: ProColumns[] = [
 export default defineComponent({
   name: 'BatchOption',
   setup(props) {
+    const actionRef = ref();
+    const setActionRef = (ref: ActionType) => {
+      actionRef.value = ref;
+    };
+    const selectedKeys = ref(['1']);
+    const expandedKeys = ref([]);
     const render = () => {
+      console.log(
+        'selectedKeys:%o, expandedKeys:%o',
+        selectedKeys.value,
+        expandedKeys.value
+      );
       return (
         <ProTable
           columns={columns}
           rowSelection={{
             type: 'checkbox',
             showCheckedAll: true,
-            defaultSelectedRowKeys: [1],
+            checkStrictly: true,
+            // defaultSelectedRowKeys: ['1'],
           }}
+          actionRef={setActionRef}
           data={tableListDataSource}
           scroll={{ x: 1300 }}
           search={false}
           pagination={{
             pageSize: 5,
           }}
+          onSelectAll={(checked: boolean) => {
+            console.log('onSelectAll', checked);
+          }}
+          onSelect={(rowKeys, rowKey, record) => {
+            console.log(
+              'onSelect:rowKeys:%o,rowKey:%o,record:%o',
+              rowKeys,
+              rowKey,
+              record
+            );
+          }}
+          v-model:selectedKeys={selectedKeys.value}
+          v-model:expandedKeys={expandedKeys.value}
           rowKey="key"
           headerTitle="表格批量操作"
-          toolBarRender={() => [<Button key="show">查看日志</Button>]}
+          toolBarRender={() => [
+            <Button
+              key="selected"
+              onClick={() => {
+                // 获取选中的数据
+                console.log(
+                  'selectedKeys',
+                  actionRef.value.getSelected() // selectedKeys和selectedRows
+                );
+              }}
+            >
+              获取选中
+            </Button>,
+            <Button key="show">查看日志</Button>,
+          ]}
         />
       );
     };

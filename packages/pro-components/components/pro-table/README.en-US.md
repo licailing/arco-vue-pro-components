@@ -20,7 +20,7 @@ description: pro-table component based on arco-design web-vue table package
 |columns|Column info of the table|`ProColumns[]`|`[]`|
 |row-key|Value field of table row `key`|`string`|`'id'`|
 |params|Additional parameters used for `request` query, once changed will trigger reloading|`object`|`-`|
-|request|How to get `dataSource` \| `(params?: {pageSize,current},sort,filter) => {data,success,total}`|`(  params: {    pageSize?: number;    current?: number;    [key: string]: any;  },  sort: {    [key: string]: 'ascend' \| 'descend';  },  filter: { [key: string]: any }) => Promise<RequestData<any>>`|`-`|
+|request|How to get `data` \| `(params?: {pageSize,current},sort,filter) => {data,success,total}`|`(  params: {    pageSize?: number;    current?: number;    [key: string]: any;  },  sort: {    [key: string]: 'ascend' \| 'descend';  },  filter: { [key: string]: any }) => Promise<RequestData<any>>`|`-`|
 |default-data|Default data|`array`|`-`|
 |before-search-submit|Make some changes before searching|`(searchParams: any) => any`|`(searchParams: any) => searchParams`|
 |search|Configuration column search related, false is hidden|`SearchConfig \| boolean`|`true`|
@@ -67,28 +67,24 @@ description: pro-table component based on arco-design web-vue table package
 |default-expand-all-rows|Whether to expand all rows by default|`boolean`|`false`|
 |sticky-header|Whether to open the sticky header|`boolean\|number`|`false`|
 |scrollbar|Whether to enable virtual scroll bar|`boolean \| ScrollbarProps`|`true`|
-|size|Input size|`'mini' \| 'small' \| 'medium' \| 'large'`|`'medium'`|
-### `<pro-table>` Events
-
-|Event Name|Description|Parameters|
-|---|---|---|
-|change|Triggered when table data changes|data: `TableData[]`<br>extra: `TableChangeExtra`<br>currentData: `TableData[]`|
-|submit|Triggered when search form submit|formData: `any`|
-|reset|Triggered when search form reset|-|
-|load|Triggered when table data load|data: `any[]`<br>total: `number`<br>extra: `any`|
-|page-change|Triggered when the table pagination changes|page: `number`|
-|page-size-change|Triggered when the number of data per page of the table changes|pageSize: `number`|
-|expand|Triggered when a row is clicked to expand|rowKey: `string \| number`<br>record: `TableData`|
-|expanded-change|Triggered when the expanded data row changes|rowKeys: `(string \| number)[]`|
-|select|Triggered when the row selector is clicked|rowKeys: `string \| number[]`<br>rowKey: `string \| number`<br>record: `TableData`|
-|select-all|Triggered when the select all selector is clicked|checked: `boolean`|
-|selection-change|Triggered when the selected data row changes|rowKeys: `(string \| number)[]`|
-|sorter-change|Triggered when the collation changes|dataIndex: `string`<br>direction: `string`|
-|filter-change|Triggered when the filter options are changed|dataIndex: `string`<br>filteredValues: `string[]`|
-|cell-click|Triggered when a cell is clicked|record: `TableData`<br>column: `TableColumnData`<br>ev: `Event`|
-|row-click|Triggered when row data is clicked|record: `TableData`<br>ev: `Event`|
-|header-click|Triggered when the header data is clicked|column: `TableColumnData`<br>ev: `Event`|
-|column-resize|Triggered when column width is adjusted|dataIndex: `string`<br>width: `number`|
+|size|Input size|`'mini' \| 'small' \| 'medium' \| 'large'`|`'large'`|
+|on-change|Triggered when table data changes|`(  data: TableData[],  extra: TableChangeExtra,  currentData: TableData[]) => void`|`-`|
+|on-submit|Triggered when search form submit|`(formData: any) => void`|`-`|
+|on-reset|Triggered when search form reset|`() => void`|`-`|
+|on-load|Triggered when table data load|`(data: any[], total: number, extra: any) => void`|`-`|
+|on-page-change|Triggered when the table pagination changes|`(page: number) => void`|`-`|
+|on-page-size-change|Triggered when the number of data per page of the table changes|`(pageSize: number) => void`|`-`|
+|on-expand|Triggered when a row is clicked to expand|`(rowKey: string \| number, record: TableData) => void`|`-`|
+|on-expanded-change|Triggered when the expanded data row changes|`(rowKeys: (string \| number)[]) => void`|`-`|
+|on-select|Triggered when the row selector is clicked|`(  rowKeys: (string \| number)[],  rowKey: string \| number,  record: TableData) => void`|`-`|
+|on-select-all|Triggered when the select all selector is clicked|`(checked: boolean) => void`|`-`|
+|on-selection-change|Triggered when the selected data row changes|`(rowKeys: (string \| number)[]) => void`|`-`|
+|on-sorter-change|Triggered when the collation changes|`(dataIndex: string, direction: string) => void`|`-`|
+|on-filter-change|Triggered when the filter options are changed|`(dataIndex: string, filteredValues: string[]) => void`|`-`|
+|on-cell-click|Triggered when a cell is clicked|`(record: TableData, column: TableColumnData, ev: Event) => void`|`-`|
+|on-row-click|Triggered when row data is clicked|`(record: TableData, ev: Event) => void`|`-`|
+|on-header-click|Triggered when the header data is clicked|`(column: TableColumnData, ev: Event) => void`|`-`|
+|on-column-resize|Triggered when column width is adjusted|`(dataIndex: string, width: number) => void`|`-`|
 ### `<pro-table>` Slots
 
 |Slot Name|Description|Parameters|
@@ -183,6 +179,7 @@ description: pro-table component based on arco-design web-vue table package
 |columns|table column|`ProColumns[]`|`-`|
 |type|pro-table type|`ProTableTypes`|`-`|
 |params|Additional parameters used for `request` query, once changed will trigger reloading|`{ [key: string]: any }`|`-`|
+|size|The size of the select|`Size`|`'large'`|
 |request|How to get `dataSource` \| `(params?: {pageSize,current},sort,filter) => {data,success,total}`|`(    params: {      pageSize?: number;      current?: number;      [key: string]: any;    },    sort: {      [key: string]: 'ascend' \| 'descend';    },    filter: { [key: string]: string }  ) => Promise<RequestData<any>>`|`-`|
 |toolBarRender|Render toolbar, support returning a dom array, will automatically increase margin-right|`ToolBarProps<any>['toolBarRender'] \| false`|`-`|
 |headerTitle|table tilte|`VNodeTypes`|`-`|
@@ -195,6 +192,23 @@ description: pro-table component based on arco-design web-vue table package
 |formRef|The form instance of the query form can be obtained for some flexible configuration|`(formRef: Ref) => void`|`-`|
 |actionRef|Reference to Table action for custom triggering|`(actionRef: Ref) => void`|`-`|
 |loading|Whether the table is loading|`boolean`|`false`|
+|onChange|Triggered when table data changes|`(    data: TableData[],    extra: TableChangeExtra,    currentData: TableData[]  ) => void`|`-`|
+|onSubmit|Triggered when search form submit|`(formData: any) => void`|`-`|
+|onReset|Triggered when search form reset|`() => void`|`-`|
+|onLoad|Triggered when table data load|`(data: any[], total: number, extra: any) => void`|`-`|
+|onPageChange|Triggered when the table pagination changes|`(page: number) => void`|`-`|
+|onPageSizeChange|Triggered when the number of data per page of the table changes|`(pageSize: number) => void`|`-`|
+|onExpand|Triggered when a row is clicked to expand|`(rowKey: string \| number, record: TableData) => void`|`-`|
+|onExpandedChange|Triggered when the expanded data row changes|`(rowKeys: (string \| number)[]) => void`|`-`|
+|onSelect|Triggered when the row selector is clicked|`(    rowKeys: (string \| number)[],    rowKey: string \| number,    record: TableData  ) => void`|`-`|
+|onSelectAll|Triggered when the select all selector is clicked|`(checked: boolean) => void`|`-`|
+|onSelectionChange|Triggered when the selected data row changes|`(rowKeys: (string \| number)[]) => void`|`-`|
+|onSorterChange|Triggered when the collation changes|`(dataIndex: string, direction: string) => void`|`-`|
+|onFilterChange|Triggered when the filter options are changed|`(dataIndex: string, filteredValues: string[]) => void`|`-`|
+|onCellClick|Triggered when a cell is clicked|`(record: TableData, column: TableColumnData, ev: Event) => void`|`-`|
+|onRowClick|Triggered when row data is clicked|`(record: TableData, ev: Event) => void`|`-`|
+|onHeaderClick|Triggered when the header data is clicked|`(column: TableColumnData, ev: Event) => void`|`-`|
+|onColumnResize|Triggered when column width is adjusted|`(dataIndex: string, width: number) => void`|`-`|
 
 
 
@@ -581,9 +595,9 @@ export default defineComponent({
 
 ### Batch manipulation of tables
 ```tsx
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { Button, Link } from '@arco-design/web-vue';
-import type { ProColumns, RenderData } from '../index';
+import type { ActionType, ProColumns, RenderData, TableData } from '../index';
 import ProTable from '../index';
 
 const valueEnum: any = {
@@ -600,8 +614,8 @@ const ProcessMap: any = {
   error: 'danger',
 };
 
-export type TableListItem = {
-  key: number;
+export interface TableListItem extends TableData {
+  key: string;
   name: string;
   progress: number;
   containers: number;
@@ -610,15 +624,16 @@ export type TableListItem = {
   status: string;
   createdAt: number;
   memo: string;
-};
+  children?: any[];
+}
 const tableListDataSource: TableListItem[] = [];
 
 const creators = ['付小小', '曲丽丽', '林东东', '陈帅帅', '兼某某'];
 
-for (let i = 0; i < 50; i += 1) {
+function generateDataItem(i: number) {
   const progress = Math.random() * 1;
-  tableListDataSource.push({
-    key: i,
+  return {
+    key: `${i}`,
     name: `AppName-${i}`,
     containers: Math.floor(Math.random() * 20),
     callNumber: Math.floor(Math.random() * 2000),
@@ -630,13 +645,19 @@ for (let i = 0; i < 50; i += 1) {
       i % 2 === 1
         ? '很长很长很长很长很长很长很长的文字要展示但是要留下尾巴'
         : '简短备注文案',
-  });
+  };
 }
+for (let i = 0; i < 10; i += 1) {
+  tableListDataSource.push(generateDataItem(i));
+  tableListDataSource[i].children = [generateDataItem(i + 11)];
+}
+// @ts-ignore
+tableListDataSource[0].children[0].children = [generateDataItem(21)];
 
 const columns: ProColumns[] = [
   {
     title: '应用名称',
-    width: 140,
+    width: 200,
     dataIndex: 'name',
     fixed: 'left',
     render: (data: RenderData) => <Link>{data.dom}</Link>,
@@ -705,24 +726,64 @@ const columns: ProColumns[] = [
 export default defineComponent({
   name: 'BatchOption',
   setup(props) {
+    const actionRef = ref();
+    const setActionRef = (ref: ActionType) => {
+      actionRef.value = ref;
+    };
+    const selectedKeys = ref(['1']);
+    const expandedKeys = ref([]);
     const render = () => {
+      console.log(
+        'selectedKeys:%o, expandedKeys:%o',
+        selectedKeys.value,
+        expandedKeys.value
+      );
       return (
         <ProTable
           columns={columns}
           rowSelection={{
             type: 'checkbox',
             showCheckedAll: true,
-            defaultSelectedRowKeys: [1],
+            checkStrictly: true,
+            // defaultSelectedRowKeys: ['1'],
           }}
+          actionRef={setActionRef}
           data={tableListDataSource}
           scroll={{ x: 1300 }}
           search={false}
           pagination={{
             pageSize: 5,
           }}
+          onSelectAll={(checked: boolean) => {
+            console.log('onSelectAll', checked);
+          }}
+          onSelect={(rowKeys, rowKey, record) => {
+            console.log(
+              'onSelect:rowKeys:%o,rowKey:%o,record:%o',
+              rowKeys,
+              rowKey,
+              record
+            );
+          }}
+          v-model:selectedKeys={selectedKeys.value}
+          v-model:expandedKeys={expandedKeys.value}
           rowKey="key"
           headerTitle="表格批量操作"
-          toolBarRender={() => [<Button key="show">查看日志</Button>]}
+          toolBarRender={() => [
+            <Button
+              key="selected"
+              onClick={() => {
+                // 获取选中的数据
+                console.log(
+                  'selectedKeys',
+                  actionRef.value.getSelected() // selectedKeys和selectedRows
+                );
+              }}
+            >
+              获取选中
+            </Button>,
+            <Button key="show">查看日志</Button>,
+          ]}
         />
       );
     };

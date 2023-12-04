@@ -164,34 +164,42 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
-  },
-  emits: {
-    'update:modelValue': (value: number | undefined) => true,
+
     /**
      * @zh 值发生改变时触发
      * @en Triggered when the value changes
      * @param { number | undefined } value
      * @param {Event} ev
      */
-    'change': (value: number | undefined, ev: Event) => true,
+    onChange: {
+      type: Function as PropType<
+        (value: number | undefined, ev: Event) => void
+      >,
+    },
     /**
      * @zh 输入框获取焦点时触发
      * @en Triggered when the input gets focus
      * @param {FocusEvent} ev
      */
-    'focus': (ev: FocusEvent) => true,
+    onFocus: {
+      type: Function as PropType<(ev: FocusEvent) => void>,
+    },
     /**
      * @zh 输入框失去焦点时触发
      * @en Triggered when the input box loses focus
      * @param {FocusEvent} ev
      */
-    'blur': (ev: FocusEvent) => true,
+    onBlur: {
+      type: Function as PropType<(ev: FocusEvent) => void>,
+    },
     /**
      * @zh 用户点击清除按钮时触发
      * @en Triggered when the user clicks the clear button
      * @param {Event} ev
      */
-    'clear': (ev: Event) => true,
+    onClear: {
+      type: Function as PropType<(ev: Event) => void>,
+    },
     /**
      * @zh 输入时触发
      * @en Triggered on input
@@ -199,7 +207,11 @@ export default defineComponent({
      * @param {string} inputValue
      * @param {Event} ev
      */
-    'input': (value: number | undefined, inputValue: string, ev: Event) => true,
+    onInput: {
+      type: Function as PropType<
+        (value: number | undefined, inputValue: string, ev: Event) => void
+      >,
+    },
   },
   /**
    * @zh 前缀
