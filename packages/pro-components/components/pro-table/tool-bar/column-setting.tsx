@@ -51,6 +51,9 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    icon: {
+      default: <IconSettings />,
+    },
   },
   setup(props, { slots }) {
     const tableCtx = inject<Partial<ProTableContext>>(proTableInjectionKey, {});
@@ -705,11 +708,7 @@ export default defineComponent({
                 <MyToolTip
                   content={getMessage('tableToolBar.columnSetting', '列设置')}
                 >
-                  {slots['setting-icon'] ? (
-                    slots['setting-icon']()
-                  ) : (
-                    <IconSettings />
-                  )}
+                  {slots['setting-icon'] ? slots['setting-icon']() : props.icon}
                 </MyToolTip>
               );
             },

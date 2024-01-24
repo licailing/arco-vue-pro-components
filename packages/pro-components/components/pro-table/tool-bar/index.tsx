@@ -124,12 +124,8 @@ function renderDefaultOption(
             {...options[key]}
             columns={columns}
             key={key}
-            v-slots={{
-              ...slots,
-              'setting-icon': slots['setting-icon']
-                ? slots['setting-icon']()
-                : options.settingIcon,
-            }}
+            icon={options.settingIcon}
+            v-slots={slots}
           />
         );
       }
