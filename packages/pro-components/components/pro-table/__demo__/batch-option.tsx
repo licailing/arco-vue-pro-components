@@ -1,6 +1,12 @@
 import { defineComponent, ref } from 'vue';
 import { Button, Link } from '@arco-design/web-vue';
-import type { ActionType, ProColumns, RenderData, TableData } from '../index';
+import type {
+  ActionType,
+  ProColumns,
+  RenderData,
+  TableData,
+  ToolBarData,
+} from '../index';
 import ProTable from '../index';
 
 const valueEnum: any = {
@@ -57,75 +63,6 @@ for (let i = 0; i < 10; i += 1) {
 // @ts-ignore
 tableListDataSource[0].children[0].children = [generateDataItem(21)];
 
-const columns: ProColumns[] = [
-  {
-    title: '应用名称',
-    width: 200,
-    dataIndex: 'name',
-    fixed: 'left',
-    render: (data: RenderData) => <Link>{data.dom}</Link>,
-  },
-  {
-    title: '容器量',
-    width: 120,
-    dataIndex: 'containers',
-    align: 'right',
-    sorter: true,
-  },
-  {
-    title: '调用次数',
-    width: 120,
-    align: 'right',
-    dataIndex: 'callNumber',
-  },
-  {
-    title: '执行进度',
-    dataIndex: 'progress',
-    valueType: (item) => ({
-      type: 'progress',
-      status: ProcessMap[item.status],
-    }),
-  },
-  {
-    title: '创建者',
-    width: 120,
-    dataIndex: 'creator',
-    valueType: 'select',
-    valueEnum: {
-      all: { text: '全部' },
-      付小小: { text: '付小小' },
-      曲丽丽: { text: '曲丽丽' },
-      林东东: { text: '林东东' },
-      陈帅帅: { text: '陈帅帅' },
-      兼某某: { text: '兼某某' },
-    },
-  },
-  {
-    title: '创建时间',
-    width: 140,
-    key: 'since',
-    dataIndex: 'createdAt',
-    valueType: 'date',
-    sorter: true,
-  },
-  {
-    title: '备注',
-    dataIndex: 'memo',
-    ellipsis: true,
-    copyable: true,
-  },
-  {
-    title: '操作',
-    width: 80,
-    key: 'option',
-    dataIndex: 'option',
-    valueType: 'option',
-    hideInSearch: true,
-    fixed: 'right',
-    render: () => [<Link key="link">链路</Link>],
-  },
-];
-
 export default defineComponent({
   name: 'BatchOption',
   setup(props) {
@@ -133,6 +70,76 @@ export default defineComponent({
     const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
     };
+    const columns: ProColumns[] = [
+      {
+        title: '应用名称',
+        width: 200,
+        dataIndex: 'name',
+        fixed: 'left',
+        render: (data: RenderData) => <Link>{data.dom}</Link>,
+      },
+      {
+        title: '容器量',
+        width: 120,
+        dataIndex: 'containers',
+        align: 'right',
+        sorter: true,
+      },
+      {
+        title: '调用次数',
+        width: 120,
+        align: 'right',
+        dataIndex: 'callNumber',
+      },
+      {
+        title: '执行进度',
+        dataIndex: 'progress',
+        valueType: (item) => ({
+          type: 'progress',
+          status: ProcessMap[item.status],
+        }),
+      },
+      {
+        title: '创建者',
+        width: 120,
+        dataIndex: 'creator',
+        valueType: 'select',
+        valueEnum: {
+          all: { text: '全部' },
+          付小小: { text: '付小小' },
+          曲丽丽: { text: '曲丽丽' },
+          林东东: { text: '林东东' },
+          陈帅帅: { text: '陈帅帅' },
+          兼某某: { text: '兼某某' },
+        },
+      },
+      {
+        title: '创建时间',
+        width: 140,
+        key: 'since',
+        dataIndex: 'createdAt',
+        valueType: 'date',
+        sorter: true,
+      },
+      {
+        title: '备注',
+        dataIndex: 'memo',
+        ellipsis: true,
+        copyable: true,
+      },
+      {
+        title: '操作',
+        width: 80,
+        key: 'option',
+        dataIndex: 'option',
+        valueType: 'option',
+        hideInSearch: true,
+        fixed: 'right',
+        render: () => {
+          return [<Link key="link">链路</Link>];
+        },
+      },
+    ];
     const selectedKeys = ref(['1']);
     const expandedKeys = ref([]);
     const render = () => {
@@ -172,21 +179,27 @@ export default defineComponent({
           v-model:expandedKeys={expandedKeys.value}
           rowKey="key"
           headerTitle="表格批量操作"
-          toolBarRender={() => [
-            <Button
-              key="selected"
-              onClick={() => {
-                // 获取选中的数据
-                console.log(
-                  'selectedKeys',
-                  actionRef.value.getSelected() // selectedKeys和selectedRows
-                );
-              }}
-            >
-              获取选中
-            </Button>,
-            <Button key="show">查看日志</Button>,
-          ]}
+          toolBarRender={({
+            selectedRowKeys,
+            selectedRows,
+            action,
+          }: ToolBarData<any>) => {
+            return [
+              <Button
+                key="selected"
+                onClick={() => {
+                  // 获取选中的数据
+                  console.log(
+                    'selectedKeys',
+                    actionRef.value.getSelected() // selectedKeys和selectedRows
+                  );
+                }}
+              >
+                获取选中
+              </Button>,
+              <Button key="show">查看日志</Button>,
+            ];
+          }}
         />
       );
     };

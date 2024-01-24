@@ -11,6 +11,7 @@ import {
   toRef,
   watchEffect,
   nextTick,
+  inject,
 } from 'vue';
 import {
   Button,
@@ -24,9 +25,15 @@ import { IconFindReplace } from '@arco-design/web-vue/es/icon';
 import { isEmptyObject } from '../../_utils/is';
 import { genColumnKey, setFields } from '../utils';
 import { renderFormInput } from './form-search';
-import { LightSearchConfig, ProColumns, ProTableTypes } from '../interface';
+import {
+  LightSearchConfig,
+  ProColumns,
+  ProTableContext,
+  ProTableTypes,
+} from '../interface';
 import { useI18n } from '../../../locale/index';
 import { getPrefixCls } from '../../_utils';
+import { proTableInjectionKey } from './context';
 
 const rangeType = ['dateRange', 'dateTimeRange'];
 function getFormFields(info: any) {
@@ -77,6 +84,7 @@ export default defineComponent({
   },
   setup(props, { slots, emit }) {
     const { t } = useI18n();
+    const tableCtx = inject<Partial<ProTableContext>>(proTableInjectionKey, {});
     const columns = toRef(props, 'columns');
     const lightFormRef = ref();
     const defaultFormData = toRef(props, 'defaultFormData');
@@ -138,8 +146,8 @@ export default defineComponent({
       }
     );
 
-    const getFormItemInfo = (item: ProColumns) => {
-      const key = genColumnKey(item.key, item.dataIndex, item.index);
+    const getFormItemInfo = (item: ProColumns, index: number) => {
+      const key = genColumnKey(item.key || item.dataIndex?.toString(), index);
       // 支持 function 的 title
       const getTitle = () => {
         if (item.title && typeof item.title === 'function') {
@@ -195,8 +203,8 @@ export default defineComponent({
           <div class={`${prefixCls}-power-content`}>
             {columnsList.value
               .slice(searchConfig.value.rowNumber)
-              .map((item: any) => {
-                const { key, title } = getFormItemInfo(item);
+              .map((item: any, index) => {
+                const { key, title } = getFormItemInfo(item, index);
                 return (
                   <FormItem
                     field={item.dataIndex}
@@ -281,6 +289,7 @@ export default defineComponent({
                 ? searchConfig.value.search || {}
                 : {})}
               searchButton
+              // @ts-ignore
               allowClear
             />
           ) : null}
@@ -328,8 +337,10 @@ export default defineComponent({
                   popupVisible={visible.value}
                   trigger="click"
                   position="br"
+                  // @ts-ignore
                   showArrow={false}
                   unmountOnClose={false}
+                  popupContainer={tableCtx?.popupContainer}
                   v-slots={{
                     default: () => {
                       return (

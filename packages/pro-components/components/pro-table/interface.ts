@@ -6,6 +6,7 @@ import {
   CSSProperties,
   RenderFunction,
   Slots,
+  Slot,
 } from 'vue';
 import type {
   GridItemProps,
@@ -87,6 +88,29 @@ export type ValueEnumMap = Map<
     }
   | VNodeChild
 >;
+
+export type ColumnsState = {
+  show?: boolean;
+  fixed?: 'right' | 'left' | undefined;
+  order?: number;
+  disable?:
+    | boolean
+    | {
+        checkbox: boolean;
+      };
+};
+
+export type ColumnStateType = {
+  /**
+   * 持久化的类型，支持 localStorage 和 sessionStorage
+   *
+   * @param localStorage 设置在关闭浏览器后也是存在的
+   * @param sessionStorage 关闭浏览器后会丢失
+   */
+  persistenceType?: 'localStorage' | 'sessionStorage';
+  /** 持久化的key，用于存储到 storage 中 */
+  persistenceKey?: string;
+};
 
 export interface TableColumnData {
   /**
@@ -355,6 +379,16 @@ export interface ProColumns
     | string
     | VNodeChild
     | ((item: ProColumns, type: ProTableTypes) => VNodeChild);
+  /**
+   * @zh 不在配置工具中显示
+   * @en hide in tool bar column setting
+   */
+  hideInSetting?: boolean;
+  /**
+   * @zh 列设置的 disabled
+   * @en tool bar column setting disabled
+   */
+  disable?: boolean;
 }
 
 export type ColumnEmptyText = string | false;
@@ -410,10 +444,20 @@ export interface ProTableProps extends Omit<TableProps, 'columns'> {
     filter: { [key: string]: string }
   ) => Promise<RequestData<any>>;
   /**
-   * @zh 自定义渲染表格函数
+   * @zh 渲染工具栏，支持返回一个 dom 数组，会自动增加 margin-right
    * @en Render toolbar, support returning a dom array, will automatically increase margin-right
    */
   toolBarRender?: ToolBarProps<any>['toolBarRender'] | false;
+  /**
+   * @zh 自定义操作栏
+   * @en Custom action bar
+   */
+  optionRender?: ToolBarProps<any>['optionsRender'] | false;
+  /**
+   * @zh table 工具栏，设为 false 时不显示，传入 function 会点击时触发
+   * @en table toolbar, not displayed when set to false
+   */
+  options?: OptionConfig | false;
   /**
    * @zh 表格标题
    * @en table tilte
@@ -589,6 +633,12 @@ export interface ProTableProps extends Omit<TableProps, 'columns'> {
    * @param {number} width
    */
   onColumnResize: (dataIndex: string, width: number) => void;
+
+  /**
+   * @zh 列状态的配置，可以用来操作列功能
+   * @en Column state configuration, which can be used to operate column functions
+   */
+  columnsState?: ColumnStateType;
 }
 
 export type UseFetchProps = {
@@ -606,10 +656,19 @@ export type UseFetchProps = {
 };
 export type DensitySize = 'small' | 'default' | 'middle' | undefined;
 export interface ProTableContext {
-  action: UseFetchDataAction<RequestData<any>>;
-  // setAction: (ref: Ref<UseFetchDataAction<RequestData<any>>>) => void;
-  columns: Ref<ProColumns[]>;
-  // setColumns: (columns: ProColumns[]) => void;
+  tableSize: Size;
+  setTableSize?: (size: Size) => void;
+  action?: ActionType;
+  columns: ProColumns[];
+  selectedRowKeys: (string | number)[];
+  selectedRows: any[];
+  popupContainer?: HTMLElement | null;
+  setPopupContainer: (ele: HTMLElement | undefined | null) => void;
+  columnsMap: {
+    [propName: string]: any;
+  };
+  setColumnsMap: (data: any) => void;
+  fullscreen?: boolean;
 }
 
 /** 操作类型 */
@@ -650,6 +709,7 @@ export type ActionType = {
    * @en Set page info
    */
   setPageInfo?: (page: Partial<PageInfo>) => void;
+  getPopupContainer?: () => any;
 };
 
 export interface ToolBarData<T> {
@@ -658,7 +718,7 @@ export interface ToolBarData<T> {
    * @en table action
    * @type UseFetchDataAction
    */
-  action: UseFetchDataAction<RequestData<T>>;
+  action?: ActionType;
   /**
    * @zh 列表选中键值数组
    * @en Table selected row keys array
@@ -671,14 +731,42 @@ export interface ToolBarData<T> {
   selectedRows: T[];
 }
 
+export type SettingOptionType = {
+  draggable?: boolean;
+  checkable?: boolean;
+  showListItemOption?: boolean;
+  checkedReset?: boolean;
+};
+export type OptionConfig = {
+  density?: boolean;
+  fullScreen?: OptionsType;
+  reload?: OptionsType;
+  setting?: boolean | SettingOptionType;
+  reloadIcon?: VNode;
+  densityIcon?: VNode;
+  settingIcon?: VNode;
+};
+export type ListToolBarSetting = {
+  icon: VNode;
+  tooltip?: string | VNode;
+  key?: string;
+  onClick?: (key?: string) => void;
+};
+export type OptionsFunctionType = (e: MouseEvent, action?: ActionType) => void;
+
+export type OptionsType = OptionsFunctionType | boolean;
+
 export interface ToolBarProps<T = unknown> {
-  headerTitle?: VNodeTypes;
-  formLabel?: VNodeTypes;
-  toolBarRender?: (data: ToolBarData<T>) => VNodeTypes[];
-  action: UseFetchDataAction<RequestData<T>>;
-  selectedRowKeys?: Ref<(string | number)[]>;
-  selectedRows?: Ref<any[]>;
-  onSearch?: (keyWords: string) => void;
+  headerTitle?: string | boolean;
+  toolBarRender?: false | ((data: ToolBarData<T>) => VNodeTypes[]);
+  options?: OptionConfig | boolean;
+  optionsRender?:
+    | false
+    | ((props: ToolBarProps<T>, defaultDom: Element[]) => VNodeTypes[]);
+  action?: ActionType;
+  selectedRowKeys: (string | number)[];
+  selectedRows: any[];
+  columns: ProColumns[];
 }
 export interface RequestData<T> {
   data: T[];
@@ -694,6 +782,7 @@ export interface UseFetchDataAction<T = any> {
   reload: () => Promise<void>;
   reset: () => void;
   setPageInfo: (pageInfo: Partial<PageInfo>) => void;
+  getPopupContainer: () => any;
 }
 
 export interface PageInfo {
@@ -746,7 +835,7 @@ export type ProColumnsValueObjectType = {
 export interface LightSearchConfig {
   rowNumber?: number;
   name?: string;
-  search?: InputSearchInstance | boolean;
+  search?: InputSearchInstance | boolean | { placeholder: string };
 }
 export interface FormOptionProps {
   searchConfig: SearchConfig;

@@ -1,21 +1,21 @@
 import {
   PropType,
-  VNodeTypes,
-  Fragment,
   Ref,
   computed,
   defineComponent,
   reactive,
   ref,
   toRefs,
+  toRef,
   watch,
   watchEffect,
+  provide,
+  inject,
 } from 'vue';
 import {
   PaginationProps,
   Table,
   TableChangeExtra,
-  Space,
   Card,
   TableBorder,
   Size,
@@ -42,12 +42,15 @@ import type {
   TableComponents,
   VirtualListProps,
   TableData,
+  ColumnStateType,
 } from './interface';
 import FormSearch from './form/form-search';
 import useFetchData from './form/use-fetch-data';
+import ToolBar from './tool-bar';
 import {
   flattenChildren,
   genProColumnToColumn,
+  loopFilter,
   mergePagination,
   useActionType,
 } from './utils';
@@ -55,6 +58,10 @@ import { useRowSelection } from './hooks/useRowSelection';
 import LightFormSearch from './form/light-form-search';
 import { getPrefixCls } from '../_utils';
 import { isArray } from '../_utils/is';
+import { proTableInjectionKey } from './form/context';
+import { usePureProp } from '../_hooks/use-pure-prop';
+import { configProviderInjectionKey } from '../_utils/context';
+import useState from '../_hooks/use-state';
 
 Table.inheritAttrs = false;
 export default defineComponent({
@@ -137,7 +144,7 @@ export default defineComponent({
       default: 'table',
     },
     /**
-     * @zh 自定义渲染表格函数
+     * @zh 渲染工具栏，支持返回一个 dom 数组，会自动增加 margin-right
      * @en Render toolbar, support returning a dom array, will automatically increase margin-right
      * @defaultValue undefined
      */
@@ -146,6 +153,27 @@ export default defineComponent({
         false | ToolBarProps<any>['toolBarRender']
       >,
       default: undefined,
+    },
+    /**
+     * @zh 自定义操作栏
+     * @en Custom action bar
+     */
+    optionsRender: {
+      type: [Boolean, Function] as PropType<
+        false | ToolBarProps<any>['optionsRender']
+      >,
+      default: false,
+    },
+    /**
+     * @zh table 工具栏，设为 false 时不显示，传入 function 会点击时触发
+     * @en table toolbar, not displayed when set to false
+     * @defaultValue false
+     */
+    options: {
+      type: [Object, Boolean] as PropType<
+        boolean | ToolBarProps<any>['options']
+      >,
+      default: false,
     },
     /**
      * @zh 表格标题
@@ -512,6 +540,8 @@ export default defineComponent({
      */
     size: {
       type: String as PropType<Size>,
+      default: () =>
+        inject(configProviderInjectionKey, undefined)?.size ?? 'large',
     },
     /**
      * @zh 表格数据发生变化时触发
@@ -684,6 +714,13 @@ export default defineComponent({
     onColumnResize: {
       type: Function as PropType<(dataIndex: string, width: number) => void>,
     },
+    /**
+     * @zh 列状态的配置，可以用来操作列功能
+     * @en Column state configuration, which can be used to operate column functions
+     */
+    columnsState: {
+      type: Object as PropType<ColumnStateType>,
+    },
   },
   /**
    * @zh 表格列定义。启用时会屏蔽 columns 属性
@@ -709,6 +746,13 @@ export default defineComponent({
    * @binding {UseFetchDataAction} action
    * @binding {any[]} selectedRowKeys
    * @binding {any[]} selectedRows
+   */
+  /**
+   * @zh 自定义工具栏 基础的配置
+   * @en Customize the search config
+   * @slot options-render
+   * @binding {ToolBarProps} data
+   * @binding {JSX.Element[]} settings
    */
   /**
    * @zh searchConfig 基础的配置
@@ -802,7 +846,16 @@ export default defineComponent({
       defaultSelected,
       pagination: propsPagination,
     } = toRefs(props);
-
+    const tableSize = usePureProp(props, 'size');
+    const columnsState = toRef(props, 'columnsState');
+    const columnsMap = ref<any>({});
+    const setColumnsMap = (data: any) => {
+      columnsMap.value = data;
+    };
+    initStorageColumnsMap();
+    const setTableSize = (size: Size) => {
+      tableSize.value = size;
+    };
     const prefixCls = getPrefixCls('pro-table');
     const tableRef = ref();
     const formRef = ref();
@@ -864,8 +917,12 @@ export default defineComponent({
       return text;
     };
     /** 获取 table 的 dom ref */
-    const rootRef = ref<HTMLDivElement>();
-
+    const [fullscreen, setFullscreen] = useState<boolean>(false);
+    const rootRef = ref<HTMLElement>();
+    const popupContainer = ref<HTMLElement | null | undefined>();
+    const setPopupContainer = (container: HTMLElement | undefined | null) => {
+      popupContainer.value = container;
+    };
     const tableColumns = computed(() => {
       return genProColumnToColumn({
         columns: props.columns,
@@ -880,6 +937,13 @@ export default defineComponent({
     });
     const { _filters, _sorter, _sorters } = useFilterSorter({
       columns: tableColumns,
+    });
+
+    const columns = computed(() => {
+      if (Object.keys(columnsMap.value).length === 0) {
+        return tableColumns.value;
+      }
+      return loopFilter(tableColumns.value, undefined, columnsMap);
     });
 
     const fetchData = computed(() => {
@@ -909,6 +973,7 @@ export default defineComponent({
     const options = reactive({
       pageInfo: fetchPagination.value,
       effects: [props.params, formSearch, _sorter, _filters],
+      getPopupContainer: () => popupContainer.value,
     });
     const action = useFetchData(fetchData.value, props, emit, options);
     const dataSource = computed(() => {
@@ -926,7 +991,48 @@ export default defineComponent({
         ? {}
         : flattenChildren(selectedRows.value, props.rowKey);
     });
+    function initStorageColumnsMap() {
+      const { persistenceType, persistenceKey } = columnsState.value || {};
 
+      if (persistenceKey && persistenceType && typeof window !== 'undefined') {
+        /** 从持久化中读取数据 */
+        const storage = window[persistenceType];
+        try {
+          const storageValue = storage?.getItem(persistenceKey);
+          if (storageValue) {
+            setColumnsMap(JSON.parse(storageValue));
+          } else {
+            setColumnsMap({});
+          }
+        } catch (error) {
+          console.warn(error);
+        }
+      }
+    }
+    watch([columnsState], () => {
+      initStorageColumnsMap();
+    });
+    watch(
+      [columnsState, columnsMap],
+      ([columnsState, columnsMap]) => {
+        if (!columnsState?.persistenceKey || !columnsState?.persistenceType) {
+          return;
+        }
+        if (typeof window === 'undefined') return;
+        /** 给持久化中设置数据 */
+        const { persistenceType, persistenceKey } = columnsState;
+        const storage = window[persistenceType];
+        try {
+          storage?.setItem(persistenceKey, JSON.stringify(columnsMap));
+        } catch (error) {
+          console.warn(error);
+          storage?.removeItem(persistenceKey);
+        }
+      },
+      {
+        deep: true,
+      }
+    );
     watch(
       [selectedRowKeys, dataSourceMap, noRowSelection, action.loading],
       ([selectedRowKeys, dataSourceMap, noRowSelection, loading]) => {
@@ -966,9 +1072,15 @@ export default defineComponent({
           return;
         }
         if (document.fullscreenElement) {
+          // 关闭全屏
           document.exitFullscreen();
+          setFullscreen(false);
+          setPopupContainer(null);
         } else {
+          // 全屏
           rootRef.value.requestFullscreen();
+          setFullscreen(true);
+          setPopupContainer(rootRef.value);
         }
       },
       getSelected,
@@ -993,6 +1105,23 @@ export default defineComponent({
         formSearch.value = {};
       },
     });
+
+    provide(
+      proTableInjectionKey,
+      reactive({
+        tableSize: tableSize,
+        setTableSize,
+        columns: tableColumns,
+        action: actionRef,
+        selectedRowKeys,
+        selectedRows,
+        fullscreen,
+        popupContainer,
+        setPopupContainer,
+        columnsMap,
+        setColumnsMap,
+      })
+    );
     watchEffect(() => {
       if (typeof props.actionRef === 'function' && actionRef.value) {
         props.actionRef(actionRef.value);
@@ -1049,31 +1178,6 @@ export default defineComponent({
       emit('reset');
     };
 
-    const ToolBar = () => {
-      // 操作列表
-      const data = {
-        action,
-        selectedRowKeys: selectedRowKeys.value,
-        selectedRows: selectedRows.value,
-      };
-      const actions: VNodeTypes[] = props.toolBarRender
-        ? props.toolBarRender(data)
-        : [];
-      return (
-        <div class={`${prefixCls}-toolbarContainer`}>
-          <div class={`${prefixCls}-title`}>{props.headerTitle}</div>
-          <Space>
-            {slots['tool-bar']?.(data)}
-            {actions
-              .filter((item) => !!item)
-              .map((node, index) => (
-                <Fragment key={index}>{node}</Fragment>
-              ))}
-          </Space>
-        </div>
-      );
-    };
-
     const formData = {
       onSubmit: (values: any) => {
         onSubmit({ ...formSearch.value, ...values });
@@ -1082,66 +1186,76 @@ export default defineComponent({
     };
     const render = () => {
       return (
-        <Card bordered={false}>
-          {slots['form-search']?.(formData)}
-          {!slots['form-search'] &&
-            props.search &&
-            props.searchType === 'light' && (
-              <LightFormSearch
-                columns={props.columns}
-                onSubmit={(values, firstLoad = false) => {
-                  onSubmit({ ...formSearch.value, ...values }, firstLoad);
-                }}
-                onReset={onReset}
-                onSearch={(value) => {
-                  formSearch.value = { ...formSearch.value, ...value };
-                }}
-                type={props.type}
-                formSearch={formSearch.value}
-                formRef={setFormRef}
-                search={props.lightSearchConfig}
-                defaultFormData={props.defaultFormData}
-                v-slots={slots}
-              />
+        <div ref={rootRef} class={`${prefixCls}`}>
+          <Card bordered={false}>
+            {slots['form-search']?.(formData)}
+            {!slots['form-search'] &&
+              props.search &&
+              props.searchType === 'light' && (
+                <LightFormSearch
+                  columns={props.columns}
+                  onSubmit={(values, firstLoad = false) => {
+                    onSubmit({ ...formSearch.value, ...values }, firstLoad);
+                  }}
+                  onReset={onReset}
+                  onSearch={(value) => {
+                    formSearch.value = { ...formSearch.value, ...value };
+                  }}
+                  type={props.type}
+                  formSearch={formSearch.value}
+                  formRef={setFormRef}
+                  search={props.lightSearchConfig}
+                  defaultFormData={props.defaultFormData}
+                  v-slots={slots}
+                />
+              )}
+            {!slots['form-search'] &&
+              ((props.search && props.searchType === 'query') ||
+                props.type === 'form') && (
+                <FormSearch
+                  columns={props.columns}
+                  onSubmit={onSubmit}
+                  onReset={onReset}
+                  type={props.type}
+                  search={props.search}
+                  formRef={setFormRef}
+                  submitButtonLoading={props.loading || action.loading.value}
+                  defaultFormData={props.defaultFormData}
+                  v-slots={slots}
+                />
+              )}
+            {props.type !== 'form' && (
+              <div>
+                {props.toolBarRender !== false &&
+                  (props.headerTitle || props.toolBarRender) && (
+                    <ToolBar
+                      headerTitle={props.headerTitle}
+                      v-slots={slots}
+                      toolBarRender={props.toolBarRender}
+                      optionsRender={props.optionsRender}
+                      options={props.options}
+                    />
+                  )}
+                <Table
+                  ref={tableRef}
+                  {...props}
+                  {...attrs}
+                  size={tableSize.value}
+                  columns={columns.value}
+                  loading={props.loading || action.loading.value}
+                  data={dataSource.value}
+                  onChange={handleChange}
+                  v-slots={{
+                    ...slots,
+                    index: renderIndex,
+                  }}
+                  pagination={pagination.value}
+                  v-model:selectedKeys={selectedRowKeys.value}
+                ></Table>
+              </div>
             )}
-          {!slots['form-search'] &&
-            ((props.search && props.searchType === 'query') ||
-              props.type === 'form') && (
-              <FormSearch
-                columns={props.columns}
-                onSubmit={onSubmit}
-                onReset={onReset}
-                type={props.type}
-                search={props.search}
-                formRef={setFormRef}
-                submitButtonLoading={props.loading || action.loading.value}
-                defaultFormData={props.defaultFormData}
-                v-slots={slots}
-              />
-            )}
-          {props.type !== 'form' && (
-            <div>
-              {props.toolBarRender !== false &&
-                (props.headerTitle || props.toolBarRender) &&
-                ToolBar()}
-              <Table
-                ref={tableRef}
-                {...props}
-                {...attrs}
-                columns={tableColumns.value}
-                loading={props.loading || action.loading.value}
-                data={dataSource.value}
-                onChange={handleChange}
-                v-slots={{
-                  ...slots,
-                  index: renderIndex,
-                }}
-                pagination={pagination.value}
-                v-model:selectedKeys={selectedRowKeys.value}
-              ></Table>
-            </div>
-          )}
-        </Card>
+          </Card>
+        </div>
       );
     };
     return {

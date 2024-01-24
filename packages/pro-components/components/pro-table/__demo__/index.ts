@@ -109,6 +109,14 @@ import ValueTypeNumber from './value-type-number.tsx';
  */
 import ValueType from './value-type.tsx';
 
+/**
+ * @fileName grouping-columns.tsx
+ * @fileType tsx
+ * @zh GroupingColumns 分组表头表格
+ * @en GroupingColumns - grouping table header
+ */
+import GroupingColumns from './grouping-columns.tsx';
+
 export const SignleDemo = () => Signle;
 export const BatchOptionDemo = () => BatchOption;
 export const NormalDemo = () => Normal;
@@ -124,3 +132,4 @@ export const ValueTypeSelectDemo = () => ValueTypeSelect;
 export const ValueTypeDateDemo = () => ValueTypeDate;
 export const ValueTypeNumberDemo = () => ValueTypeNumber;
 export const ValueTypeDemo = () => ValueType;
+export const GroupingColumnsDemo = () => GroupingColumns;

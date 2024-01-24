@@ -80,9 +80,34 @@ export const useI18n = () => {
     return temp;
   };
 
+  const getMessage = (
+    key: string,
+    defaultMsg?: string,
+    ...args: any[]
+  ): string => {
+    const keyArray = key.split('.');
+    let temp: any = i18nMessage.value;
+
+    for (const keyItem of keyArray) {
+      if (!temp[keyItem]) {
+        return defaultMsg || key;
+      }
+      temp = temp[keyItem];
+    }
+    if (isString(temp)) {
+      if (args.length > 0) {
+        return temp.replace(/{(\d+)}/g, (sub, index) => args[index] ?? sub);
+      }
+
+      return temp;
+    }
+    return temp;
+  };
+
   return {
     i18nMessage,
     locale,
     t: transform,
+    getMessage,
   };
 };

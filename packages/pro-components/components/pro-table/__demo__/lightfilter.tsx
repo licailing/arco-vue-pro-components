@@ -1,11 +1,11 @@
-import { defineComponent, h } from 'vue';
+import { defineComponent, h, ref } from 'vue';
 import { Button, Dropdown, Link, Tooltip } from '@arco-design/web-vue';
 import {
   IconDown,
   IconMore,
   IconQuestionCircle,
 } from '@arco-design/web-vue/es/icon';
-import type { ProColumns, RenderData } from '../index';
+import type { ActionType, ProColumns, RenderData } from '../index';
 import ProTable from '../index';
 
 const valueEnum: any = {
@@ -46,6 +46,10 @@ for (let i = 0; i < 5; i += 1) {
 export default defineComponent({
   name: 'Lightfilter1',
   setup() {
+    const actionRef = ref();
+    const setActionRef = (ref: ActionType) => {
+      actionRef.value = ref;
+    };
     const columns: ProColumns[] = [
       {
         title: '应用名称',
@@ -115,30 +119,133 @@ export default defineComponent({
         dataIndex: 'option',
         valueType: 'option',
         hideInSearch: true,
-        render: ({ dom, record, action }: RenderData) => [
-          <a key="link">链路</a>,
-          <a key="link2">报警</a>,
-          <a key="link3">监控</a>,
-          <Dropdown
-            trigger="hover"
-            onSelect={(value) => {
-              action?.reload();
-            }}
-            v-slots={{
-              default: () => {
-                return <IconMore style={{ color: '#1677FF' }} />;
-              },
-              content: () => {
-                return (
-                  <div>
-                    <Dropdown.Option value="copy">复制</Dropdown.Option>
-                    <Dropdown.Option value="delete">删除</Dropdown.Option>
-                  </div>
-                );
-              },
-            }}
-          ></Dropdown>,
-        ],
+        render: ({ dom, record, action }: RenderData) => {
+          return [
+            <a key="link">链路</a>,
+            <a key="link2">报警</a>,
+            <a key="link3">监控</a>,
+            <Dropdown
+              trigger="hover"
+              onSelect={(value) => {
+                action?.reload();
+              }}
+              popupContainer={actionRef.value.getPopupContainer()}
+              v-slots={{
+                default: () => {
+                  return <IconMore style={{ color: '#1677FF' }} />;
+                },
+                content: () => {
+                  return (
+                    <div>
+                      <Dropdown.Option value="copy">复制</Dropdown.Option>
+                      <Dropdown.Option value="delete">删除</Dropdown.Option>
+                    </div>
+                  );
+                },
+              }}
+            ></Dropdown>,
+          ];
+        },
+      },
+    ];
+    const columns1: ProColumns[] = [
+      {
+        title: '应用名称',
+        width: 140,
+        dataIndex: 'name',
+        hideInSetting: true,// 不显示在设置里面
+        render: ({ dom }) => <Link>{dom}</Link>,
+      },
+      {
+        title: '容器数量',
+        dataIndex: 'containers',
+        align: 'right',
+        sorter: true,
+      },
+      {
+        title: '状态',
+        width: 120,
+        dataIndex: 'status',
+        disable: true, // 设置里面不能取消勾选
+        valueEnum: {
+          all: { text: '全部', status: 'Default' },
+          close: { text: '关闭', status: 'Default' },
+          running: { text: '运行中', status: 'Processing' },
+          online: { text: '已上线', status: 'Success' },
+          error: { text: '异常', status: 'Error' },
+        },
+      },
+      {
+        title: '创建者',
+        width: 80,
+        dataIndex: 'creator',
+        hideInSearch: true,
+        valueEnum: {
+          all: { text: '全部' },
+          付小小: { text: '付小小' },
+          曲丽丽: { text: '曲丽丽' },
+          林东东: { text: '林东东' },
+          陈帅帅: { text: '陈帅帅' },
+          兼某某: { text: '兼某某' },
+        },
+      },
+      {
+        title: (
+          <div style={{ whiteSpace: 'nowrap' }}>
+            创建时间
+            <Tooltip position="top" content="这是一段描述">
+              <IconQuestionCircle style={{ marginLeft: 4 }} />
+            </Tooltip>
+          </div>
+        ),
+        width: 140,
+        key: 'since',
+        dataIndex: 'createdAt',
+        valueType: 'date',
+        sorter: true,
+      },
+      {
+        title: (column, type) => {
+          return type === 'table' ? '备注' : '备注说明';
+        },
+        dataIndex: 'memo',
+        ellipsis: true,
+        copyable: true,
+      },
+      {
+        title: '操作',
+        width: 260,
+        key: 'option',
+        dataIndex: 'option',
+        valueType: 'option',
+        hideInSearch: true,
+        render: ({ dom, record, action }: RenderData) => {
+          return [
+            <a key="link">链路</a>,
+            <a key="link2">报警</a>,
+            <a key="link3">监控</a>,
+            <Dropdown
+              trigger="hover"
+              onSelect={(value) => {
+                action?.reload();
+              }}
+              popupContainer={action?.getPopupContainer()}
+              v-slots={{
+                default: () => {
+                  return <IconMore style={{ color: '#1677FF' }} />;
+                },
+                content: () => {
+                  return (
+                    <div>
+                      <Dropdown.Option value="copy">复制</Dropdown.Option>
+                      <Dropdown.Option value="delete">删除</Dropdown.Option>
+                    </div>
+                  );
+                },
+              }}
+            ></Dropdown>,
+          ];
+        },
       },
     ];
     const render = () => {
@@ -167,6 +274,12 @@ export default defineComponent({
                 placeholder: '搜索应用名称/创建者',
               },
             }}
+            actionRef={setActionRef}
+            options={{ fullScreen: true }} // 显示全屏
+            columnsState={{
+              persistenceKey: 'pro-table-lightfilter-demos',
+              persistenceType: 'localStorage',
+            }}
             params={{ type: 1 }}
             defaultFormData={{ status: 'all', name: 'aaa' }}
             headerTitle="高级筛选表格"
@@ -182,7 +295,7 @@ export default defineComponent({
             ]}
           />
           <ProTable
-            columns={columns}
+            columns={columns1}
             request={(params, sorter, filter) => {
               // 表单搜索项会从 params 传入，传递给后端接口。
               console.log(params, sorter, filter);
@@ -197,6 +310,11 @@ export default defineComponent({
               showJumper: true,
               defaultPageSize: 5,
               hideOnSinglePage: false,
+            }}
+            options={{ fullScreen: true, density: false  }} // 显示全屏
+            columnsState={{
+              persistenceKey: 'pro-table-lightfilter-demos1',
+              persistenceType: 'localStorage',
             }}
             defaultFormData={{ status: 'all', name: 'aaa' }}
             headerTitle="查询表格"

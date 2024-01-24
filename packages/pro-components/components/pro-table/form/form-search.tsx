@@ -415,8 +415,11 @@ export default defineComponent({
           key={gridKey.value}
           collapsedRows={1}
         >
-          {columnsList.value.map((item) => {
-            const key = genColumnKey(item.key, item.dataIndex, item.index);
+          {columnsList.value.map((item, index) => {
+            const key = genColumnKey(
+              item.key || item.dataIndex?.toString(),
+              index
+            );
             // 支持 function 的 title
             const getTitle = () => {
               if (item.title && typeof item.title === 'function') {

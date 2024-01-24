@@ -1,4 +1,4 @@
-import type { Ref, VNodeChild } from 'vue';
+import { Ref, VNodeChild, cloneVNode, isVNode } from 'vue';
 import {
   PaginationProps,
   Tooltip,
@@ -22,6 +22,7 @@ import type {
 } from '../interface';
 import defaultRenderText from '../default-render';
 import TableStatus from '../status';
+import MyToolTip from '../my-tool-tip';
 
 /**
  * 获取用户的 action 信息
@@ -65,25 +66,26 @@ export function useActionType<T>(
       await action?.reload();
     },
     fullScreen: () => props.fullScreen(),
+    getPopupContainer: () => action?.getPopupContainer(),
     clearSelected: () => props.onCleanSelected(),
     setPageInfo: (rest) => action.setPageInfo(rest),
   };
   actionRef.value = userAction;
 }
 
+/**
+ * 根据 key 和 dataIndex 生成唯一 id
+ *
+ * @param key 用户设置的 key
+ * @param dataIndex 在对象中的数据
+ * @param index 序列号，理论上唯一
+ */
 export const genColumnKey = (
-  key?: VNodeChild | undefined,
-  dataIndex?: any,
-  index?: number
+  key?: string | number,
+  index?: number | string
 ): string => {
   if (key) {
-    return `${key}`;
-  }
-  if (!key && dataIndex) {
-    if (Array.isArray(dataIndex)) {
-      return dataIndex.join('-');
-    }
-    return dataIndex;
+    return Array.isArray(key) ? key.join('-') : key.toString();
   }
   return `${index}`;
 };
@@ -120,9 +122,9 @@ const genEllipsis = (dom: VNodeChild, item: ProColumns, text: string) => {
     return dom;
   }
   return (
-    <Tooltip content={text}>
+    <MyToolTip position="bottom" content={text}>
       <span>{dom}</span>
-    </Tooltip>
+    </MyToolTip>
   );
 };
 
@@ -135,6 +137,7 @@ const genCopyable = (dom: VNodeChild, item: ProColumns) => {
           margin: 0,
           padding: 0,
         }}
+        // @ts-ignore
         copyable={item.copyable}
         ellipsis={item.ellipsis}
       >
@@ -158,8 +161,10 @@ export function genProColumnToColumn<T>(props: {
   columnEmptyText: ColumnEmptyText;
   action: any;
   slots: any;
+  parentColumnKey?: any;
 }) {
-  const { columns, type, columnEmptyText, action, slots } = props;
+  const { columns, type, columnEmptyText, action, slots, parentColumnKey } =
+    props;
   return columns
     .map((item, columnsIndex) => {
       const {
@@ -172,14 +177,15 @@ export function genProColumnToColumn<T>(props: {
       } = item;
       const columnKey = genColumnKey(
         key || dataIndex?.toString(),
-        columnsIndex
+        [parentColumnKey, columnsIndex].filter(Boolean).join('-')
       );
       // 这些都没有，说明是普通的表格不需要 pro 管理
       const noNeedPro = !valueType && !valueEnum && !children;
       if (noNeedPro) {
         return {
-          index: columnsIndex,
           ...item,
+          key: columnKey,
+          index: columnsIndex,
         };
       }
       const config = {
@@ -187,10 +193,10 @@ export function genProColumnToColumn<T>(props: {
       };
 
       const tempColumns: any = {
-        index: columnsIndex,
-        key: columnKey,
         ellipsis: false,
         ...item,
+        index: columnsIndex,
+        key: columnKey,
         title:
           title && typeof title === 'function' ? title(item, 'table') : title,
         fixed: config.fixed,
@@ -224,6 +230,7 @@ export function genProColumnToColumn<T>(props: {
           ? genProColumnToColumn({
               ...props,
               columns: item?.children,
+              parentColumnKey: columnKey,
             })
           : undefined,
         render: (data: RenderData) =>
@@ -450,30 +457,57 @@ export function mergePagination<T>(
     },
   };
 }
-export const columnSort =
-  (columnsMap: Record<string, any>) => (a: any, b: any) => {
-    const { fixed: aFixed, index: aIndex } = a;
-    const { fixed: bFixed, index: bIndex } = b;
-    if (
-      (aFixed === 'left' && bFixed !== 'left') ||
-      (bFixed === 'right' && aFixed !== 'right')
-    ) {
-      return -2;
-    }
-    if (
-      (bFixed === 'left' && aFixed !== 'left') ||
-      (aFixed === 'right' && bFixed !== 'right')
-    ) {
-      return 2;
-    }
-    // 如果没有index，在 dataIndex 或者 key 不存在的时候他会报错
-    const aKey = a.key || `${aIndex}`;
-    const bKey = b.key || `${bIndex}`;
-    if (columnsMap[aKey]?.order || columnsMap[bKey]?.order) {
-      return (columnsMap[aKey]?.order || 0) - (columnsMap[bKey]?.order || 0);
-    }
-    return (a.index || 0) - (b.index || 0);
-  };
+export const columnFixedSort = (a: any, b: any) => {
+  const { fixed: aFixed } = a;
+  const { fixed: bFixed } = b;
+  if (
+    (aFixed === 'left' && bFixed !== 'left') ||
+    (bFixed === 'right' && aFixed !== 'right')
+  ) {
+    return -2;
+  }
+  if (
+    (bFixed === 'left' && aFixed !== 'left') ||
+    (aFixed === 'right' && bFixed !== 'right')
+  ) {
+    return 2;
+  }
+  return 0;
+};
+
+export const columnSortOrderSort = (a: any, b: any) => {
+  return a.sortOrder - b.sortOrder;
+};
+
+export function loopFilter(
+  column: any[],
+  parentFixed: any = undefined,
+  columnsMap: any = {},
+  isTable = true
+): any[] {
+  return column
+    .map((item) => {
+      // 删掉不应该显示的
+      const config = columnsMap.value[item.key] || { fixed: item.fixed };
+      if (isTable && config && config.show === false) {
+        return false;
+      }
+      const fixed = config.fixed || parentFixed;
+      const sortOrder = config.order === undefined ? item.index : config.order;
+      if (item.children) {
+        return {
+          ...item,
+          fixed,
+          sortOrder,
+          children: loopFilter(item.children, fixed, columnsMap, isTable),
+        };
+      }
+      return { ...item, sortOrder, fixed };
+    })
+    .filter(Boolean)
+    .sort(columnFixedSort)
+    .sort(columnSortOrderSort);
+}
 
 export function formatFormFields(data: { [propName: string]: any }) {
   if (!isObject(data) || !Object.keys(data).length) {
@@ -559,4 +593,72 @@ export function flattenChildren(arr: any[] = [], rowKey: string): any {
     data = { ...data, ...flattenChildren(item.children, rowKey) };
   }
   return data;
+}
+
+const isNode =
+  typeof process !== 'undefined' &&
+  process.versions != null &&
+  process.versions.node != null;
+
+/**
+ * 用于判断当前是否在浏览器环境中。
+ * 首先会判断当前是否处于测试环境中（通过 process.env.NODE_ENV === 'TEST' 判断），
+ * 如果是，则返回 true。否则，会进一步判断是否存在 window 对象、document 对象以及 matchMedia 方法
+ * 同时通过 !isNode 判断当前不是在服务器（Node.js）环境下执行，
+ * 如果都符合，则返回 true 表示当前处于浏览器环境中。
+ * @returns  boolean
+ */
+export const isBrowser = () => {
+  if (typeof process !== 'undefined' && process.env.NODE_ENV === 'TEST') {
+    return true;
+  }
+  return (
+    typeof window !== 'undefined' &&
+    typeof window.document !== 'undefined' &&
+    typeof window.matchMedia !== 'undefined' &&
+    !isNode
+  );
+};
+
+// 取两个数组差集
+export function getArrDiff(distArr: any[], ...rest: any[]) {
+  if (!distArr || !isArray(distArr) || !distArr.length) {
+    return [];
+  }
+  let restArr: any[] = [];
+  for (let i = 0; i < rest.length; i++) {
+    restArr.push(...rest[i]);
+  }
+  const data = [...new Set(restArr)];
+  return distArr.filter((item) => !data.includes(item));
+}
+
+export function deepClone(obj: any, map = new WeakMap()) {
+  if (typeof obj !== 'object' || obj === null) {
+    return obj;
+  }
+  // 日期
+  if (obj instanceof Date) {
+    return new Date(obj);
+  }
+  // 正则
+  if (obj instanceof RegExp) {
+    return new RegExp(obj);
+  }
+  // 判断是不是循环引用
+  if (map.has(obj)) {
+    return map.get(obj);
+  }
+  // vnode
+  if (isVNode(obj)) {
+    return cloneVNode(obj);
+  }
+  let cloneObj = new obj.constructor();
+  map.set(obj, cloneObj);
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      cloneObj[key] = deepClone(obj[key], map);
+    }
+  }
+  return cloneObj;
 }

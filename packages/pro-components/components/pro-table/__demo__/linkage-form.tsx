@@ -1,7 +1,18 @@
 /* eslint-disable no-console */
 import { defineComponent } from 'vue';
 import { Button, Input, Link } from '@arco-design/web-vue';
-import type { ProColumns, RenderData, RenderFormItemData, FormOptionProps } from '../index';
+import {
+  IconQuestionCircleFill,
+  IconSend,
+  IconStar,
+} from '@arco-design/web-vue/es/icon';
+import type {
+  ProColumns,
+  RenderData,
+  RenderFormItemData,
+  FormOptionProps,
+  ToolBarProps,
+} from '../index';
 import ProTable from '../index';
 import ProSelect from '../../pro-select';
 import { getDictLabel } from '../../_utils/index';
@@ -113,6 +124,44 @@ export default defineComponent({
               ...dom.reverse(),
               <Button key="out">导出</Button>,
             ],
+          }}
+          // 自定义图标
+          // options={{fullScreen: true, reloadIcon: <IconSend />, settingIcon: <IconStar />}}
+          options={{
+            fullScreen: true,
+          }}
+          // slot自定义options图标
+          // v-slots={{
+          //   'setting-icon': () => {
+          //     return <IconSend />;
+          //   },
+          //   'density-icon': () => {
+          //     return <IconStar />;
+          //   },
+          // }}
+          optionsRender={({ action }: ToolBarProps, defaultDom) => {
+            // 自定义
+            return [
+              defaultDom[2],
+              {
+                key: 'send',
+                tooltip: (
+                  <div>
+                    发送
+                    <IconQuestionCircleFill />
+                  </div>
+                ),
+                icon: <IconSend />,
+                onClick: () => {
+                  alert('发送成功');
+                },
+              },
+              <IconStar
+                onClick={() => {
+                  alert('star成功');
+                }}
+              />,
+            ];
           }}
           toolBarRender={() => [
             <Button key="3" type="primary">

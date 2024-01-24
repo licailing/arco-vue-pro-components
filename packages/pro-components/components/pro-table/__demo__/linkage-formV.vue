@@ -5,6 +5,7 @@
     row-key="key"
     header-title="动态自定义搜索栏"
     :search="search"
+    :options="{ fullScreen: true }"
   >
     <template #index="{ rowIndex, action }">
       <span
@@ -36,9 +37,7 @@
       {{ getDictLabel(stateDict, record.state) }}
     </template>
     <template #tool-bar>
-      <Button key="3" type="primary">
-        新建
-      </Button>
+      <Button key="3" type="primary"> 新建 </Button>
     </template>
     <template #direction-form-item="{ formModel }">
       <template v-if="formModel.value['state'] === 'online'"
@@ -58,12 +57,27 @@
           value-column="id"
       /></template>
     </template>
+    <!-- options自定义 -->
+    <template #options-render="{ action }, defaultDom">
+      <component :is="defaultDom[3]" />
+      <component :is="defaultDom[2]" />
+      <Tooltip content="发送" :popupContainer="action?.getPopupContainer?.()"
+        ><IconSend @click="action?.reload?.()"
+      /></Tooltip>
+      <IconStar @click="action?.fullScreen?.()" />
+    </template>
   </ProTable>
 </template>
 <script setup lang="ts">
 import { h } from 'vue';
-import { Button, Input, Link, Space } from '@arco-design/web-vue';
-import type { ProColumns, RenderData, RenderFormItemData, FormOptionProps } from '../index';
+import { Button, Input, Link, Space, Tooltip } from '@arco-design/web-vue';
+import { IconSend, IconStar } from '@arco-design/web-vue/es/icon';
+import type {
+  ProColumns,
+  RenderData,
+  RenderFormItemData,
+  FormOptionProps,
+} from '../index';
 import ProTable from '../index';
 import ProSelect from '../../pro-select';
 import { getDictLabel } from '../../_utils/index';

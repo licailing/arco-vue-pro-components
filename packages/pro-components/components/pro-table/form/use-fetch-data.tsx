@@ -2,21 +2,13 @@ import { watch, Ref, onBeforeUnmount } from 'vue';
 import useState from '../../_hooks/use-state';
 import { debounce } from 'lodash';
 import { PaginationProps } from '@arco-design/web-vue';
+import { UseFetchDataAction } from '../interface';
 
 export interface RequestData<T> {
   data: T[];
   success?: boolean;
   total?: number;
   [key: string]: any;
-}
-export interface UseFetchDataAction<T = any> {
-  data: Ref<T[]>;
-  setDataSource: (data: T[]) => void;
-  loading: Ref<boolean | undefined>;
-  pageInfo: Ref<PageInfo>;
-  reload: () => Promise<void>;
-  reset: () => void;
-  setPageInfo: (pageInfo: Partial<PageInfo>) => void;
 }
 
 export interface PageInfo {
@@ -47,6 +39,7 @@ const useFetchData = <T extends RequestData<any>>(
   options: {
     pageInfo: PaginationProps;
     effects: any;
+    getPopupContainer: () => any;
   }
 ): UseFetchDataAction<T> => {
   const [list, setList] = useState<T['data']>(props?.defaultData || []);
@@ -146,6 +139,7 @@ const useFetchData = <T extends RequestData<any>>(
         pageSize: options.pageInfo?.defaultPageSize || 20,
       });
     },
+    getPopupContainer: () => options.getPopupContainer(),
     setPageInfo: (info) =>
       setPageInfo({
         ...pageInfo.value,
