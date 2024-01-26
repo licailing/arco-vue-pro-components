@@ -179,6 +179,7 @@ export default defineComponent({
           v-model:expandedKeys={expandedKeys.value}
           rowKey="key"
           headerTitle="表格批量操作"
+          options={{ fullScreen: true }}
           toolBarRender={({
             selectedRowKeys,
             selectedRows,
@@ -200,6 +201,8 @@ export default defineComponent({
               <Button key="show">查看日志</Button>,
             ];
           }}
+          // 不显示
+          // alertRender={false}
         />
       );
     };

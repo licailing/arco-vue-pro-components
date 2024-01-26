@@ -481,6 +481,9 @@ export default defineComponent({
       showTitle?: boolean;
       type: PositionType;
     }) => {
+      if (!list || !list.length) {
+        return null;
+      }
       const listDom = (
         <Tree
           draggable={
@@ -615,7 +618,10 @@ export default defineComponent({
         <div
           class={[
             `${prefixCls}-list`,
-            { [`${prefixCls}-list-group`]: showRight || showLeft },
+            {
+              [`${prefixCls}-list-group`]: showRight || showLeft,
+              [`${prefixCls}-list-nocheckbox`]: !checkable,
+            },
           ]}
         >
           <CheckboxList

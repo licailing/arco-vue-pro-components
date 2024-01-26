@@ -43,10 +43,12 @@ import type {
   VirtualListProps,
   TableData,
   ColumnStateType,
+  AlertRenderType,
 } from './interface';
 import FormSearch from './form/form-search';
 import useFetchData from './form/use-fetch-data';
 import ToolBar from './tool-bar';
+import Alert from './alert';
 import {
   flattenChildren,
   genProColumnToColumn,
@@ -721,6 +723,14 @@ export default defineComponent({
     columnsState: {
       type: Object as PropType<ColumnStateType>,
     },
+    /**
+     * @zh 自定义 table 的 alert 的操作
+     * @en Custom table alert operation
+     */
+    alertRender: {
+      type: [Function, Boolean] as PropType<AlertRenderType>,
+      default: undefined,
+    },
   },
   /**
    * @zh 表格列定义。启用时会屏蔽 columns 属性
@@ -1236,6 +1246,13 @@ export default defineComponent({
                       options={props.options}
                     />
                   )}
+                {!noRowSelection.value ? (
+                  <Alert
+                    alertRender={props.alertRender}
+                    alwaysShowAlert={rowSelection.value?.alwaysShowAlert}
+                    v-slots={slots}
+                  />
+                ) : null}
                 <Table
                   ref={tableRef}
                   {...props}

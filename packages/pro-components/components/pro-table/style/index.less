@@ -1,6 +1,7 @@
 @import '../../style/index.less';
 @pro-table-prefix-cls: ~'@{prefix}-pro-table';
 @pro-table-light-prefix-cls: ~'@{prefix}-pro-table-light';
+@pro-table-alert-prefix-cls: ~'@{prefix}-pro-table-alert';
 .@{pro-table-prefix-cls} {
   &:fullscreen {
     min-height: 100vh;
@@ -131,6 +132,9 @@
         right: auto;
         color: rgba(42, 46, 54, 0.88);
       }
+      &-nocheckbox .arco-tree-node-title-block .arco-tree-node-drag-icon {
+        left: -26px;
+      }
       &-item-title {
         flex: 1;
         min-width: 80px;
@@ -181,5 +185,14 @@
     &:hover {
       background: transparent !important;
     }
+  }
+}
+.@{pro-table-alert-prefix-cls} {
+  &-container {
+    margin-bottom: 16px;
+  }
+  &-clear {
+    color: rgb(var(--link-6));
+    cursor: pointer;
   }
 }

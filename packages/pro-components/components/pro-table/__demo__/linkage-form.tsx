@@ -130,6 +130,15 @@ export default defineComponent({
           options={{
             fullScreen: true,
           }}
+          // 设置配置
+          // options={{
+          //   setting: {
+          //     // checkable: false,
+          //     draggable: false,
+          //     // showListItemOption: false,
+          //     // checkedReset: false,
+          //   },
+          // }}
           // slot自定义options图标
           // v-slots={{
           //   'setting-icon': () => {

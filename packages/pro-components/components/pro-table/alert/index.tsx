@@ -1,96 +1,87 @@
-import type { IntlType } from '@ant-design/pro-provider';
-import { useIntl } from '@ant-design/pro-provider';
-import { ConfigProvider, Space } from 'antd';
-import React, { Key, useContext } from 'react';
-import { useStyle } from './style';
+import { PropType, defineComponent, inject, isVNode, toRefs } from 'vue';
+import { Space, Alert } from '@arco-design/web-vue';
+import { useI18n } from '../../../locale';
+import { getPrefixCls } from '../../_utils';
+import { AlertRenderType, ProTableContext } from '../interface';
+import { proTableInjectionKey } from '../form/context';
 
-export type AlertRenderType<T> =
-  | ((props: {
-      intl: IntlType;
-      selectedRowKeys: (number | string | Key)[];
-      selectedRows: T[];
-      onCleanSelected: () => void;
-    }) => React.ReactNode)
-  | false;
+export default defineComponent({
+  name: 'TableAlert',
+  props: {
+    alwaysShowAlert: {
+      type: Boolean,
+      default: false,
+    },
+    alertRender: {
+      type: [Function, Boolean] as PropType<AlertRenderType>,
+    },
+  },
+  setup(props, { slots }) {
+    const { alwaysShowAlert } = toRefs(props);
+    const tableCtx = inject<Partial<ProTableContext>>(proTableInjectionKey, {});
+    const { getMessage } = useI18n();
+    const prefixCls = getPrefixCls('pro-table-alert');
 
-export type TableAlertProps<T> = {
-  selectedRowKeys: (number | string | Key)[];
-  selectedRows: T[];
-  alwaysShowAlert?: boolean;
-  alertInfoRender?: AlertRenderType<T>;
-  onCleanSelected: () => void;
-  alertOptionRender?: AlertRenderType<T>;
-};
+    const render = () => {
+      const data = {
+        selectedRowKeys: tableCtx?.selectedRowKeys || [],
+        selectedRows: tableCtx?.selectedRows || [],
+        onCleanSelected: () => {
+          tableCtx?.action?.clearSelected?.();
+        },
+      };
+      if (slots['alert-render']) {
+        return slots['alert-render'](data);
+      }
 
-const defaultAlertOptionRender = (props: {
-  intl: IntlType;
-  onCleanSelected: () => void;
-}) => {
-  const { intl, onCleanSelected } = props;
-  return [
-    <a onClick={onCleanSelected} key="0">
-      {intl.getMessage('alert.clear', '清空')}
-    </a>,
-  ];
-};
+      // 自定义render
+      const dom: any =
+        typeof props.alertRender === 'function'
+          ? props.alertRender(data)
+          : props.alertRender;
 
-function TableAlert<T>({
-  selectedRowKeys = [],
-  onCleanSelected,
-  alwaysShowAlert,
-  selectedRows,
-  alertInfoRender = ({ intl }) => (
-    <Space>
-      {intl.getMessage('alert.selected', '已选择')}
-      {selectedRowKeys.length}
-      {intl.getMessage('alert.item', '项')}&nbsp;&nbsp;
-    </Space>
-  ),
-  alertOptionRender = defaultAlertOptionRender,
-}: TableAlertProps<T>) {
-  const intl = useIntl();
-
-  const option =
-    alertOptionRender &&
-    alertOptionRender({
-      onCleanSelected,
-      selectedRowKeys,
-      selectedRows,
-      intl,
-    });
-
-  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
-  const className = getPrefixCls('pro-table-alert');
-  const { wrapSSR, hashId } = useStyle(className);
-  if (alertInfoRender === false) {
-    return null;
-  }
-  const dom = alertInfoRender({
-    intl,
-    selectedRowKeys,
-    selectedRows,
-    onCleanSelected,
-  });
-
-  if (dom === false || (selectedRowKeys.length < 1 && !alwaysShowAlert)) {
-    return null;
-  }
-  return wrapSSR(
-    <div className={`${className} ${hashId}`.trim()}>
-      <div className={`${className}-container ${hashId}`.trim()}>
-        <div className={`${className}-info ${hashId}`.trim()}>
-          <div className={`${className}-info-content ${hashId}`.trim()}>
-            {dom}
-          </div>
-          {option ? (
-            <div className={`${className}-info-option ${hashId}`.trim()}>
-              {option}
-            </div>
-          ) : null}
-        </div>
-      </div>
-    </div>,
-  );
-}
-
-export default TableAlert;
+      if (isVNode(dom)) {
+        return dom;
+      }
+      if (
+        dom === false ||
+        (tableCtx?.selectedRowKeys &&
+          tableCtx?.selectedRowKeys?.length < 1 &&
+          !alwaysShowAlert.value)
+      ) {
+        return null;
+      }
+      return (
+        <Alert
+          class={`${prefixCls}-container`}
+          closable={false}
+          v-slots={{
+            action: () => {
+              return (
+                <a
+                  class={`${prefixCls}-clear`}
+                  onClick={data.onCleanSelected}
+                  key="0"
+                >
+                  {getMessage('alert.clear', '清空')}
+                </a>
+              );
+            },
+          }}
+        >
+          <Space>
+            {getMessage('alert.selected', '已选择')}
+            {tableCtx?.selectedRowKeys && tableCtx?.selectedRowKeys.length}
+            {getMessage('alert.item', '项')}&nbsp;&nbsp;
+          </Space>
+        </Alert>
+      );
+    };
+    return {
+      render,
+    };
+  },
+  render() {
+    return this.render();
+  },
+});

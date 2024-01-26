@@ -692,7 +692,7 @@ export type ActionType = {
    * @zh 清空选择
    * @en clear selected
    */
-  clearSelected?: () => void;
+  clearSelected: () => void;
   /**
    * @zh 页面的信息都在里面
    * @en All the information on the page is in there
@@ -1331,3 +1331,16 @@ export interface TriggerProps {
   updateAtScroll?: boolean;
   autoFitPosition?: boolean;
 }
+
+export type AlertRenderType =
+  | ((props: {
+      selectedRowKeys: any[];
+      selectedRows: any[];
+      onCleanSelected: () => void;
+    }) => VNode)
+  | false;
+
+export type TableAlertProps = {
+  alwaysShowAlert?: boolean;
+  alertRender?: AlertRenderType;
+};
