@@ -23,7 +23,9 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |before-search-submit|格式化搜索表单提交数据|`(searchParams: any) => any`|`(searchParams: any) => searchParams`|
 |search|是否显示搜索表单，传入对象时为搜索表单的配置|`SearchConfig \| boolean`|`true`|
 |type|pro-table 类型|`ProTableTypes`|`'table'`|
-|tool-bar-render|自定义渲染表格函数|`false \| ToolBarProps<any>['toolBarRender']`|`undefined`|
+|tool-bar-render|渲染工具栏，支持返回一个 dom 数组，会自动增加 margin-right|`false \| ToolBarProps<any>['toolBarRender']`|`undefined`|
+|options-render|自定义操作栏|`false \| ToolBarProps<any>['optionsRender']`|`false`|
+|options|table 工具栏，设为 false 时不显示，传入 function 会点击时触发|`boolean \| ToolBarProps<any>['options']`|`false`|
 |header-title|表格标题|`string\|boolean`|`'列表数据'`|
 |default-form-data|表单初始化数据|`object`|`-`|
 |search-type|搜索表单类型|`ProTableProps['searchType']`|`'query'`|
@@ -83,6 +85,8 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |on-row-click|点击行数据时触发|`(record: TableData, ev: Event) => void`|`-`|
 |on-header-click|点击表头数据时触发|`(column: TableColumnData, ev: Event) => void`|`-`|
 |on-column-resize|调整列宽时触发|`(dataIndex: string, width: number) => void`|`-`|
+|columns-state|列状态的配置，可以用来操作列功能|`ColumnStateType`|`-`|
+|alert-render|自定义 table 的 alert 的操作|`AlertRenderType`|`-`|
 ### `<pro-table>` Slots
 
 |插槽名|描述|参数|
@@ -101,6 +105,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |expand-row|展开行内容|record: `TableData`|
 |expand-icon|展开行图标|expanded: `boolean`<br>record: `TableData`|
 |option-render|searchConfig 基础的配置|data: `FormOptionProps`|
+|options-render|自定义工具栏 基础的配置|data: `ToolBarProps`<br>settings: `JSX.Element[]`|
 |tool-bar|自定义操作栏|action: `UseFetchDataAction`<br>selectedRowKeys: `any[]`<br>selectedRows: `any[]`|
 |index|columns配置自定义索引列|pagination: `PaginationProps`|
 |form-search|自定义搜索表单|formData: `any`|
@@ -167,6 +172,8 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |defaultFilteredValue|筛选默认值|`string[]`|`-`|
 |defaultSortOrder|排序默认值|`'ascend' \| 'descend' \| ''`|`-`|
 |title|列标题|`string    \| VNodeChild    \| ((item: ProColumns, type: ProTableTypes) => VNodeChild)`|`-`|
+|hideInSetting|不在配置工具中显示|`boolean`|`false`|
+|disable|列设置的 disabled|`boolean`|`false`|
 
 
 
@@ -179,7 +186,9 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |params|request的参数，修改之后会触发更新|`{ [key: string]: any }`|`-`|
 |size|表格的大小|`Size`|`'large'`|
 |request|获取 `dataSource` 的方法 \| `(params?: {pageSize,current},sort,filter) => {data,success,total}`|`(    params: {      pageSize?: number;      current?: number;      [key: string]: any;    },    sort: {      [key: string]: 'ascend' \| 'descend';    },    filter: { [key: string]: string }  ) => Promise<RequestData<any>>`|`-`|
-|toolBarRender|自定义渲染表格函数|`ToolBarProps<any>['toolBarRender'] \| false`|`-`|
+|toolBarRender|渲染工具栏，支持返回一个 dom 数组，会自动增加 margin-right|`ToolBarProps<any>['toolBarRender'] \| false`|`-`|
+|optionRender|自定义操作栏|`ToolBarProps<any>['optionsRender'] \| false`|`-`|
+|options|table 工具栏，设为 false 时不显示，传入 function 会点击时触发|`OptionConfig \| false`|`-`|
 |headerTitle|表格标题|`VNodeTypes`|`-`|
 |search|是否显示搜索表单，传入对象时为搜索表单的配置|`boolean \| SearchConfig`|`-`|
 |beforeSearchSubmit|格式化搜索表单提交数据|`(params: Partial<any>) => Partial<any>`|`-`|
@@ -207,6 +216,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |onRowClick|点击行数据时触发|`(record: TableData, ev: Event) => void`|`-`|
 |onHeaderClick|点击表头数据时触发|`(column: TableColumnData, ev: Event) => void`|`-`|
 |onColumnResize|调整列宽时触发|`(dataIndex: string, width: number) => void`|`-`|
+|columnsState|列状态的配置，可以用来操作列功能|`ColumnStateType`|`-`|
 
 
 
@@ -214,7 +224,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 
 |参数名|描述|类型|默认值|
 |---|---|---|:---:|
-|action|表格action方法|`UseFetchDataAction<RequestData<T>>`|`-`|
+|action|表格action方法|`ActionType`|`-`|
 |selectedRowKeys|列表选中键值数组|`(string \| number)[]`|`-`|
 |selectedRows|列表选中行数据|`T[]`|`-`|
 
@@ -364,14 +374,14 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 
 ### 高级筛选表格 
 ```tsx
-import { defineComponent, h } from 'vue';
+import { defineComponent, h, ref } from 'vue';
 import { Button, Dropdown, Link, Tooltip } from '@arco-design/web-vue';
 import {
   IconDown,
   IconMore,
   IconQuestionCircle,
 } from '@arco-design/web-vue/es/icon';
-import type { ProColumns, RenderData } from '../index';
+import type { ActionType, ProColumns, RenderData } from '../index';
 import ProTable from '../index';
 
 const valueEnum: any = {
@@ -412,6 +422,10 @@ for (let i = 0; i < 5; i += 1) {
 export default defineComponent({
   name: 'Lightfilter1',
   setup() {
+    const actionRef = ref();
+    const setActionRef = (ref: ActionType) => {
+      actionRef.value = ref;
+    };
     const columns: ProColumns[] = [
       {
         title: '应用名称',
@@ -481,30 +495,133 @@ export default defineComponent({
         dataIndex: 'option',
         valueType: 'option',
         hideInSearch: true,
-        render: ({ dom, record, action }: RenderData) => [
-          <a key="link">链路</a>,
-          <a key="link2">报警</a>,
-          <a key="link3">监控</a>,
-          <Dropdown
-            trigger="hover"
-            onSelect={(value) => {
-              action?.reload();
-            }}
-            v-slots={{
-              default: () => {
-                return <IconMore style={{ color: '#1677FF' }} />;
-              },
-              content: () => {
-                return (
-                  <div>
-                    <Dropdown.Option value="copy">复制</Dropdown.Option>
-                    <Dropdown.Option value="delete">删除</Dropdown.Option>
-                  </div>
-                );
-              },
-            }}
-          ></Dropdown>,
-        ],
+        render: ({ dom, record, action }: RenderData) => {
+          return [
+            <a key="link">链路</a>,
+            <a key="link2">报警</a>,
+            <a key="link3">监控</a>,
+            <Dropdown
+              trigger="hover"
+              onSelect={(value) => {
+                action?.reload();
+              }}
+              popupContainer={actionRef.value.getPopupContainer()}
+              v-slots={{
+                default: () => {
+                  return <IconMore style={{ color: '#1677FF' }} />;
+                },
+                content: () => {
+                  return (
+                    <div>
+                      <Dropdown.Option value="copy">复制</Dropdown.Option>
+                      <Dropdown.Option value="delete">删除</Dropdown.Option>
+                    </div>
+                  );
+                },
+              }}
+            ></Dropdown>,
+          ];
+        },
+      },
+    ];
+    const columns1: ProColumns[] = [
+      {
+        title: '应用名称',
+        width: 140,
+        dataIndex: 'name',
+        hideInSetting: true,// 不显示在设置里面
+        render: ({ dom }) => <Link>{dom}</Link>,
+      },
+      {
+        title: '容器数量',
+        dataIndex: 'containers',
+        align: 'right',
+        sorter: true,
+      },
+      {
+        title: '状态',
+        width: 120,
+        dataIndex: 'status',
+        disable: true, // 设置里面不能取消勾选
+        valueEnum: {
+          all: { text: '全部', status: 'Default' },
+          close: { text: '关闭', status: 'Default' },
+          running: { text: '运行中', status: 'Processing' },
+          online: { text: '已上线', status: 'Success' },
+          error: { text: '异常', status: 'Error' },
+        },
+      },
+      {
+        title: '创建者',
+        width: 80,
+        dataIndex: 'creator',
+        hideInSearch: true,
+        valueEnum: {
+          all: { text: '全部' },
+          付小小: { text: '付小小' },
+          曲丽丽: { text: '曲丽丽' },
+          林东东: { text: '林东东' },
+          陈帅帅: { text: '陈帅帅' },
+          兼某某: { text: '兼某某' },
+        },
+      },
+      {
+        title: (
+          <div style={{ whiteSpace: 'nowrap' }}>
+            创建时间
+            <Tooltip position="top" content="这是一段描述">
+              <IconQuestionCircle style={{ marginLeft: 4 }} />
+            </Tooltip>
+          </div>
+        ),
+        width: 140,
+        key: 'since',
+        dataIndex: 'createdAt',
+        valueType: 'date',
+        sorter: true,
+      },
+      {
+        title: (column, type) => {
+          return type === 'table' ? '备注' : '备注说明';
+        },
+        dataIndex: 'memo',
+        ellipsis: true,
+        copyable: true,
+      },
+      {
+        title: '操作',
+        width: 260,
+        key: 'option',
+        dataIndex: 'option',
+        valueType: 'option',
+        hideInSearch: true,
+        render: ({ dom, record, action }: RenderData) => {
+          return [
+            <a key="link">链路</a>,
+            <a key="link2">报警</a>,
+            <a key="link3">监控</a>,
+            <Dropdown
+              trigger="hover"
+              onSelect={(value) => {
+                action?.reload();
+              }}
+              popupContainer={action?.getPopupContainer()}
+              v-slots={{
+                default: () => {
+                  return <IconMore style={{ color: '#1677FF' }} />;
+                },
+                content: () => {
+                  return (
+                    <div>
+                      <Dropdown.Option value="copy">复制</Dropdown.Option>
+                      <Dropdown.Option value="delete">删除</Dropdown.Option>
+                    </div>
+                  );
+                },
+              }}
+            ></Dropdown>,
+          ];
+        },
       },
     ];
     const render = () => {
@@ -533,6 +650,12 @@ export default defineComponent({
                 placeholder: '搜索应用名称/创建者',
               },
             }}
+            actionRef={setActionRef}
+            options={{ fullScreen: true }} // 显示全屏
+            columnsState={{
+              persistenceKey: 'pro-table-lightfilter-demos',
+              persistenceType: 'localStorage',
+            }}
             params={{ type: 1 }}
             defaultFormData={{ status: 'all', name: 'aaa' }}
             headerTitle="高级筛选表格"
@@ -548,7 +671,7 @@ export default defineComponent({
             ]}
           />
           <ProTable
-            columns={columns}
+            columns={columns1}
             request={(params, sorter, filter) => {
               // 表单搜索项会从 params 传入，传递给后端接口。
               console.log(params, sorter, filter);
@@ -563,6 +686,11 @@ export default defineComponent({
               showJumper: true,
               defaultPageSize: 5,
               hideOnSinglePage: false,
+            }}
+            options={{ fullScreen: true, density: false  }} // 显示全屏
+            columnsState={{
+              persistenceKey: 'pro-table-lightfilter-demos1',
+              persistenceType: 'localStorage',
             }}
             defaultFormData={{ status: 'all', name: 'aaa' }}
             headerTitle="查询表格"
@@ -595,7 +723,13 @@ export default defineComponent({
 ```tsx
 import { defineComponent, ref } from 'vue';
 import { Button, Link } from '@arco-design/web-vue';
-import type { ActionType, ProColumns, RenderData, TableData } from '../index';
+import type {
+  ActionType,
+  ProColumns,
+  RenderData,
+  TableData,
+  ToolBarData,
+} from '../index';
 import ProTable from '../index';
 
 const valueEnum: any = {
@@ -652,75 +786,6 @@ for (let i = 0; i < 10; i += 1) {
 // @ts-ignore
 tableListDataSource[0].children[0].children = [generateDataItem(21)];
 
-const columns: ProColumns[] = [
-  {
-    title: '应用名称',
-    width: 200,
-    dataIndex: 'name',
-    fixed: 'left',
-    render: (data: RenderData) => <Link>{data.dom}</Link>,
-  },
-  {
-    title: '容器量',
-    width: 120,
-    dataIndex: 'containers',
-    align: 'right',
-    sorter: true,
-  },
-  {
-    title: '调用次数',
-    width: 120,
-    align: 'right',
-    dataIndex: 'callNumber',
-  },
-  {
-    title: '执行进度',
-    dataIndex: 'progress',
-    valueType: (item) => ({
-      type: 'progress',
-      status: ProcessMap[item.status],
-    }),
-  },
-  {
-    title: '创建者',
-    width: 120,
-    dataIndex: 'creator',
-    valueType: 'select',
-    valueEnum: {
-      all: { text: '全部' },
-      付小小: { text: '付小小' },
-      曲丽丽: { text: '曲丽丽' },
-      林东东: { text: '林东东' },
-      陈帅帅: { text: '陈帅帅' },
-      兼某某: { text: '兼某某' },
-    },
-  },
-  {
-    title: '创建时间',
-    width: 140,
-    key: 'since',
-    dataIndex: 'createdAt',
-    valueType: 'date',
-    sorter: true,
-  },
-  {
-    title: '备注',
-    dataIndex: 'memo',
-    ellipsis: true,
-    copyable: true,
-  },
-  {
-    title: '操作',
-    width: 80,
-    key: 'option',
-    dataIndex: 'option',
-    valueType: 'option',
-    hideInSearch: true,
-    fixed: 'right',
-    render: () => [<Link key="link">链路</Link>],
-  },
-];
-
 export default defineComponent({
   name: 'BatchOption',
   setup(props) {
@@ -728,6 +793,76 @@ export default defineComponent({
     const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
     };
+    const columns: ProColumns[] = [
+      {
+        title: '应用名称',
+        width: 200,
+        dataIndex: 'name',
+        fixed: 'left',
+        render: (data: RenderData) => <Link>{data.dom}</Link>,
+      },
+      {
+        title: '容器量',
+        width: 120,
+        dataIndex: 'containers',
+        align: 'right',
+        sorter: true,
+      },
+      {
+        title: '调用次数',
+        width: 120,
+        align: 'right',
+        dataIndex: 'callNumber',
+      },
+      {
+        title: '执行进度',
+        dataIndex: 'progress',
+        valueType: (item) => ({
+          type: 'progress',
+          status: ProcessMap[item.status],
+        }),
+      },
+      {
+        title: '创建者',
+        width: 120,
+        dataIndex: 'creator',
+        valueType: 'select',
+        valueEnum: {
+          all: { text: '全部' },
+          付小小: { text: '付小小' },
+          曲丽丽: { text: '曲丽丽' },
+          林东东: { text: '林东东' },
+          陈帅帅: { text: '陈帅帅' },
+          兼某某: { text: '兼某某' },
+        },
+      },
+      {
+        title: '创建时间',
+        width: 140,
+        key: 'since',
+        dataIndex: 'createdAt',
+        valueType: 'date',
+        sorter: true,
+      },
+      {
+        title: '备注',
+        dataIndex: 'memo',
+        ellipsis: true,
+        copyable: true,
+      },
+      {
+        title: '操作',
+        width: 80,
+        key: 'option',
+        dataIndex: 'option',
+        valueType: 'option',
+        hideInSearch: true,
+        fixed: 'right',
+        render: () => {
+          return [<Link key="link">链路</Link>];
+        },
+      },
+    ];
     const selectedKeys = ref(['1']);
     const expandedKeys = ref([]);
     const render = () => {
@@ -767,21 +902,30 @@ export default defineComponent({
           v-model:expandedKeys={expandedKeys.value}
           rowKey="key"
           headerTitle="表格批量操作"
-          toolBarRender={() => [
-            <Button
-              key="selected"
-              onClick={() => {
-                // 获取选中的数据
-                console.log(
-                  'selectedKeys',
-                  actionRef.value.getSelected() // selectedKeys和selectedRows
-                );
-              }}
-            >
-              获取选中
-            </Button>,
-            <Button key="show">查看日志</Button>,
-          ]}
+          options={{ fullScreen: true }}
+          toolBarRender={({
+            selectedRowKeys,
+            selectedRows,
+            action,
+          }: ToolBarData<any>) => {
+            return [
+              <Button
+                key="selected"
+                onClick={() => {
+                  // 获取选中的数据
+                  console.log(
+                    'selectedKeys',
+                    actionRef.value.getSelected() // selectedKeys和selectedRows
+                  );
+                }}
+              >
+                获取选中
+              </Button>,
+              <Button key="show">查看日志</Button>,
+            ];
+          }}
+          // 不显示
+          // alertRender={false}
         />
       );
     };
@@ -2043,7 +2187,18 @@ export default defineComponent({
 /* eslint-disable no-console */
 import { defineComponent } from 'vue';
 import { Button, Input, Link } from '@arco-design/web-vue';
-import type { ProColumns, RenderData, RenderFormItemData, FormOptionProps } from '../index';
+import {
+  IconQuestionCircleFill,
+  IconSend,
+  IconStar,
+} from '@arco-design/web-vue/es/icon';
+import type {
+  ProColumns,
+  RenderData,
+  RenderFormItemData,
+  FormOptionProps,
+  ToolBarProps,
+} from '../index';
 import ProTable from '../index';
 import ProSelect from '../../pro-select';
 import { getDictLabel } from '../../_utils/index';
@@ -2156,6 +2311,53 @@ export default defineComponent({
               <Button key="out">导出</Button>,
             ],
           }}
+          // 自定义图标
+          // options={{fullScreen: true, reloadIcon: <IconSend />, settingIcon: <IconStar />}}
+          options={{
+            fullScreen: true,
+          }}
+          // 设置配置
+          // options={{
+          //   setting: {
+          //     // checkable: false,
+          //     draggable: false,
+          //     // showListItemOption: false,
+          //     // checkedReset: false,
+          //   },
+          // }}
+          // slot自定义options图标
+          // v-slots={{
+          //   'setting-icon': () => {
+          //     return <IconSend />;
+          //   },
+          //   'density-icon': () => {
+          //     return <IconStar />;
+          //   },
+          // }}
+          optionsRender={({ action }: ToolBarProps, defaultDom) => {
+            // 自定义
+            return [
+              defaultDom[2],
+              {
+                key: 'send',
+                tooltip: (
+                  <div>
+                    发送
+                    <IconQuestionCircleFill />
+                  </div>
+                ),
+                icon: <IconSend />,
+                onClick: () => {
+                  alert('发送成功');
+                },
+              },
+              <IconStar
+                onClick={() => {
+                  alert('star成功');
+                }}
+              />,
+            ];
+          }}
           toolBarRender={() => [
             <Button key="3" type="primary">
               新建
@@ -2184,6 +2386,7 @@ export default defineComponent({
     row-key="key"
     header-title="动态自定义搜索栏"
     :search="search"
+    :options="{ fullScreen: true }"
   >
     <template #index="{ rowIndex, action }">
       <span
@@ -2215,9 +2418,7 @@ export default defineComponent({
       {{ getDictLabel(stateDict, record.state) }}
     </template>
     <template #tool-bar>
-      <Button key="3" type="primary">
-        新建
-      </Button>
+      <Button key="3" type="primary"> 新建 </Button>
     </template>
     <template #direction-form-item="{ formModel }">
       <template v-if="formModel.value['state'] === 'online'"
@@ -2237,12 +2438,27 @@ export default defineComponent({
           value-column="id"
       /></template>
     </template>
+    <!-- options自定义 -->
+    <template #options-render="{ action }, defaultDom">
+      <component :is="defaultDom[3]" />
+      <component :is="defaultDom[2]" />
+      <Tooltip content="发送" :popupContainer="action?.getPopupContainer?.()"
+        ><IconSend @click="action?.reload?.()"
+      /></Tooltip>
+      <IconStar @click="action?.fullScreen?.()" />
+    </template>
   </ProTable>
 </template>
 <script setup lang="ts">
 import { h } from 'vue';
-import { Button, Input, Link, Space } from '@arco-design/web-vue';
-import type { ProColumns, RenderData, RenderFormItemData, FormOptionProps } from '../index';
+import { Button, Input, Link, Space, Tooltip } from '@arco-design/web-vue';
+import { IconSend, IconStar } from '@arco-design/web-vue/es/icon';
+import type {
+  ProColumns,
+  RenderData,
+  RenderFormItemData,
+  FormOptionProps,
+} from '../index';
 import ProTable from '../index';
 import ProSelect from '../../pro-select';
 import { getDictLabel } from '../../_utils/index';
@@ -2846,6 +3062,185 @@ export default defineComponent({
     return {
       render,
     };
+  },
+  render() {
+    return this.render();
+  },
+});
+
+```
+
+### GroupingColumns 分组表头表格
+```tsx
+import ProTable from '../index';
+import { defineComponent, reactive } from 'vue';
+import { IconQuestionCircle } from '@arco-design/web-vue/es/icon';
+import MyToolTip from '../my-tool-tip';
+
+export default defineComponent({
+  name: 'GroupingColumns',
+  setup() {
+    const columns = [
+      {
+        dataIndex: 'name',
+        key: 'name',
+        fixed: 'left',
+        width: 140,
+        disable: true,
+        title: (
+          <div style={{ whiteSpace: 'nowrap' }}>
+            Name
+            <MyToolTip position="top" content="这是一段描述">
+              <IconQuestionCircle style={{ marginLeft: 4 }} />
+            </MyToolTip>
+          </div>
+        ),
+      },
+      {
+        title: 'User Info',
+        key: 'userInfo',
+        children: [
+          {
+            title: 'Address',
+            key: 'address',
+            children: [
+              {
+                title: 'City',
+                dataIndex: 'city',
+                key: 'city',
+                width: 100,
+              },
+              {
+                title: (
+                  <div style={{ whiteSpace: 'nowrap' }}>
+                    Road
+                    <MyToolTip position="top" content="这是一段描述">
+                      <IconQuestionCircle style={{ marginLeft: 4 }} />
+                    </MyToolTip>
+                  </div>
+                ),
+                dataIndex: 'road',
+                key: 'road',
+                width: 140,
+              },
+              {
+                title: 'No.',
+                dataIndex: 'no',
+                key: 'no',
+                width: 140,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: 'Information',
+        key: 'information',
+        children: [
+          {
+            title: 'Email',
+            dataIndex: 'email',
+            key: 'email',
+            width: 120,
+            ellipsis: true,
+          },
+          {
+            title: 'Phone',
+            dataIndex: 'phone',
+            key: 'phone',
+            width: 140,
+          },
+        ],
+      },
+      {
+        title: 'Salary',
+        dataIndex: 'salary',
+        key: 'salary',
+        fixed: 'right',
+        width: 120,
+      },
+    ];
+    const data = reactive([
+      {
+        key: '1',
+        name: 'Jane Doe',
+        salary: 23000,
+        city: 'London',
+        road: 'Park',
+        no: '34',
+        phone: '12345678',
+        email: 'jane.doe@example.comjane.doe@example.com',
+      },
+      {
+        key: '2',
+        name: 'Alisa Ross',
+        salary: 25000,
+        city: 'London',
+        road: 'Park',
+        no: '37',
+        phone: '12345678',
+        email: 'alisa.ross@example.com',
+      },
+      {
+        key: '3',
+        name: 'Kevin Sandra',
+        salary: 22000,
+        city: 'Paris',
+        road: 'Arco',
+        no: '67',
+        phone: '12345678',
+        email: 'kevin.sandra@example.com',
+      },
+      {
+        key: '4',
+        name: 'Ed Hellen',
+        salary: 17000,
+        city: 'London',
+        road: 'Park',
+        no: '317',
+        phone: '12345678',
+        email: 'ed.hellen@example.com',
+      },
+      {
+        key: '5',
+        name: 'William Smith',
+        salary: 27000,
+        city: 'Paris',
+        road: 'Park',
+        no: '114',
+        phone: '12345678',
+        email: 'william.smith@example.com',
+      },
+    ]);
+    const render = () => {
+      return (
+        <ProTable
+          columns={columns}
+          request={() => {
+            console.log('request reload');
+            return Promise.resolve({
+              data,
+              total: 5,
+              success: true,
+            });
+          }}
+          bordered={{ cell: true }}
+          columnsState={{
+            persistenceKey: 'pro-table-group-demos',
+            persistenceType: 'localStorage',
+          }}
+          // options={true} // 显示工具栏 默认不显示全屏
+          options={{ fullScreen: true }} // 显示全屏
+          rowKey="key"
+          scroll={{ x: 'calc(700px + 50%)', y: 240 }}
+          pagination={{
+            pageSize: 5,
+          }}
+          headerTitle="分组表头表格及工具栏"
+        />
+      );
+    };
+    return { render };
   },
   render() {
     return this.render();

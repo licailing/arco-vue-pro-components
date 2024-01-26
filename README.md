@@ -4,6 +4,11 @@
 
 ![pro-table筛选](/packages/pro-components/assets/images/pro-table.png)
 
+在线预览：[http://139.159.191.219:6006/?path=/story/pro-table--grouping-columns-demo](http://139.159.191.219:6006/?path=/story/pro-table--grouping-columns-demo)
+
+![pro-table筛选](/packages/pro-components/assets/images/group-columns-setting.png)
+![pro-table筛选](/packages/pro-components/assets/images/table-alert.png)
+
 ## pro-table
 
 [简体中文](/packages/pro-components/components/pro-table/README.md) | [English](/packages/pro-components/components/pro-table/README.en-US.md)
