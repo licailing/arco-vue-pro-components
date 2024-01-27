@@ -8,9 +8,9 @@
   ],
   "group": 0,
   "homepage": "",
-  "repository": "https://github.com/licailing/arco-vue-pro-components.git",
+  "repository": "https://gitee.com/li-cailing/arco-vue-pro-components",
   "author": "licailing",
-  "screenshot": "https://raw.githubusercontent.com/licailing/arco-vue-pro-components/main/packages/pro-components/assets/images/pro-table.png",
+  "screenshot": "https://raw.githubusercontent.com/licailing/arco-vue-pro-components/main/packages/pro-components/assets/images/group-columns-setting.png",
   "package": {
     "name": "@arco-vue-pro-components/pro-components",
     "version": "latest",
