@@ -1,10 +1,10 @@
 ## Demos
 
-在线预览：[http://139.159.191.219:6006/?path=/story/pro-table--lightfilter-demo](http://139.159.191.219:6006/?path=/story/pro-table--lightfilter-demo)
+在线预览：[http://47.120.3.125:6006/?path=/story/pro-table--lightfilter-demo](http://47.120.3.125:6006/?path=/story/pro-table--lightfilter-demo)
 
 ![pro-table筛选](/packages/pro-components/assets/images/pro-table.png)
 
-在线预览：[http://139.159.191.219:6006/?path=/story/pro-table--grouping-columns-demo](http://139.159.191.219:6006/?path=/story/pro-table--grouping-columns-demo)
+在线预览：[http://47.120.3.125:6006/?path=/story/pro-table--grouping-columns-demo](http://47.120.3.125:6006/?path=/story/pro-table--grouping-columns-demo)
 
 ![pro-table筛选](/packages/pro-components/assets/images/group-columns-setting.png)
 ![pro-table筛选](/packages/pro-components/assets/images/table-alert.png)
