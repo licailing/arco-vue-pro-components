@@ -59,7 +59,7 @@ export default defineComponent({
         fieldProps: {
           // requestSearch: true, // 是否需要远程搜索 不需要设为false
           request: async (keyword) => {
-            // console.log('request', keyword)
+            console.log('request', keyword)
             // if(keyword) {
             //   return [
             //     { name: keyword, id: keyword },
