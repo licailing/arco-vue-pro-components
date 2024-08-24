@@ -41,7 +41,11 @@
     <ProSelect
       :style="{ width: '480px' }"
       :request="request"
+      request-search
       label-key="name"
+      @search="onSearch"
+      @clear="onClear"
+      @inputValueChange="inputValueChange"
       value-key="key"
       v-model="value"
       @change="onChange"
@@ -94,7 +98,20 @@ const change = () => {
 const onChange = (value, option) => {
   console.log('value', value, option);
 };
+const onSearch = (value) => {
+  console.log('onSearch', value)
+}
+const onClear = (value) => {
+  console.log('onClear', value)
+}
+const inputValueChange = (value) => {
+  console.log('inputValueChange', value)
+}
 const request = async (keyword) => {
+  console.log('request', keyword)
+  if(keyword) {
+    return []
+  }
   return options;
 };
 </script>

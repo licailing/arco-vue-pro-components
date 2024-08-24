@@ -62,6 +62,8 @@ export default defineComponent({
         valueType: 'select',
         fieldProps: {
           request: async () => stateDict,
+          labelKey: 'label',
+          valueKey: 'value',
         },
         render: ({ record }: RenderData) => {
           return getDictLabel(stateDict, record.state);

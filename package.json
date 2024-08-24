@@ -31,9 +31,9 @@
     "@arco-design/arco-vue-scripts": "latest",
     "@arco-design/web-vue": "~2",
     "@babel/core": "^7.14.6",
-    "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/plugin-proposal-class-properties": "^7.14.5",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-typescript": "^7.14.5",
     "@storybook/addon-actions": "^6.3.0",
@@ -70,5 +70,8 @@
     "vue-loader": "^16.2.0",
     "yarn": "^1.22.10"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "swr-vue": "^1.9.1"
+  }
 }

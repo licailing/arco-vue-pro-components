@@ -1069,6 +1069,7 @@ export default defineComponent({
     const onCleanSelected = () => {
       selectedRowKeys.value = [];
       selectedRows.value = [];
+      emit('update:selectedKeys', [])
     };
     const getSelected = () => {
       return {

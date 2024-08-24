@@ -241,6 +241,7 @@ export function genProColumnToColumn<T>(props: {
             columnEmptyText,
             action,
             slots,
+            columnKey,
           }),
       };
       return omitUndefinedAndEmptyArr(tempColumns);
@@ -271,6 +272,7 @@ interface ColumRenderInterface {
   action: any;
   columnEmptyText?: ColumnEmptyText;
   slots: any;
+  columnKey?: string;
 }
 
 export const ObjToMap = (
@@ -340,6 +342,7 @@ const columRender = ({
   columnEmptyText,
   action,
   slots,
+  columnKey,
 }: ColumRenderInterface): any => {
   if (!action.value) {
     return null;
@@ -356,7 +359,9 @@ const columRender = ({
     item.valueType || 'text',
     rowIndex,
     record,
-    columnEmptyText
+    columnEmptyText,
+    item,
+    columnKey,
   );
 
   const dom: VNodeChild = genEllipsis(

@@ -23,6 +23,20 @@ export default defineComponent({
         ),
       },
       {
+        title: (
+          <div style={{ whiteSpace: 'nowrap' }}>
+            Road
+            <MyToolTip position="top" content="这是一段描述">
+              <IconQuestionCircle style={{ marginLeft: 4 }} />
+            </MyToolTip>
+          </div>
+        ),
+        dataIndex: 'road',
+        key: 'road',
+        width: 140,
+        hideInTable: true, // 是否显示在表格里面
+      },
+      {
         title: 'User Info',
         key: 'userInfo',
         children: [
@@ -142,8 +156,8 @@ export default defineComponent({
       return (
         <ProTable
           columns={columns}
-          request={() => {
-            console.log('request reload');
+          request={(params) => {
+            console.log('request reload', params);
             return Promise.resolve({
               data,
               total: 5,

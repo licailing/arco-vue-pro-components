@@ -90,6 +90,7 @@ export const renderFormInput = (
           style={{
             width: '100%',
           }}
+          columnKey={item.key}
           options={options}
           placeholder={t('tableForm.selectPlaceholder')}
           {...item.fieldProps}
@@ -110,6 +111,7 @@ export const renderFormInput = (
         style={{
           width: '100%',
         }}
+        columnKey={item.key}
         placeholder={t('tableForm.selectPlaceholder')}
         options={options}
         {...item.fieldProps}

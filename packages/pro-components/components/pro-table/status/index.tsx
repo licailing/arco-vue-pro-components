@@ -10,6 +10,11 @@ const Status: StatusType = {
   Default: ({ text }) => <Badge status="normal" text={text} />,
   Processing: ({ text }) => <Badge status="processing" text={text} />,
   Warning: ({ text }) => <Badge status="warning" text={text} />,
+  success: ({ text }) => <Badge status="success" text={text} />,
+  error: ({ text }) => <Badge status="danger" text={text} />,
+  default: ({ text }) => <Badge status="normal" text={text} />,
+  processing: ({ text }) => <Badge status="processing" text={text} />,
+  warning: ({ text }) => <Badge status="warning" text={text} />,
 };
 
 export default Status;

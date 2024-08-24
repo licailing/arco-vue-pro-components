@@ -1,6 +1,7 @@
 import type { VNodeChild } from 'vue';
 import { Avatar, Image, Progress } from '@arco-design/web-vue';
 import dayjs from 'dayjs';
+import ProSelect from '../../pro-select';
 import type {
   ColumnEmptyText,
   ProColumnsValueType,
@@ -95,18 +96,40 @@ const defaultRenderText = <T, U>(
   valueType: ProColumnsValueType | ProColumnsValueTypeFunction<T>,
   rowIndex: number,
   item?: T,
-  columnEmptyText?: ColumnEmptyText
+  columnEmptyText?: ColumnEmptyText,
+  itemColumn?: any,
+  columnKey?: string
 ): VNodeChild => {
   // when valueType == function
   // item always not null
   if (typeof valueType === 'function' && item) {
     const value = valueType(item);
     if (typeof value === 'string') {
-      return defaultRenderText(text, value, rowIndex);
+      return defaultRenderText(
+        text,
+        value,
+        rowIndex,
+        item,
+        columnEmptyText,
+        itemColumn,
+        columnKey
+      );
     }
     if (typeof value === 'object') {
       return defaultRenderTextByObject(text as string, value);
     }
+  }
+
+  if (valueType === 'select' && itemColumn?.fieldProps?.request) {
+    return (
+      <ProSelect
+        cacheForSwr
+        mode="read"
+        columnKey={columnKey}
+        modelValue={text}
+        {...itemColumn?.fieldProps}
+      />
+    );
   }
 
   /**
@@ -157,7 +180,9 @@ const defaultRenderText = <T, U>(
     const [startText, endText] = text;
     return (
       <div>
-        <div>{startText ? dayjs(startText as any).format('YYYY-MM-DD') : '-'}</div>
+        <div>
+          {startText ? dayjs(startText as any).format('YYYY-MM-DD') : '-'}
+        </div>
         <div>{endText ? dayjs(endText as any).format('YYYY-MM-DD') : '-'}</div>
       </div>
     );
@@ -176,7 +201,9 @@ const defaultRenderText = <T, U>(
     return (
       <div>
         <div>
-          {startText ? dayjs(startText as any).format('YYYY-MM-DD HH:mm:ss') : '-'}
+          {startText
+            ? dayjs(startText as any).format('YYYY-MM-DD HH:mm:ss')
+            : '-'}
         </div>
         <div>
           {endText ? dayjs(endText as any).format('YYYY-MM-DD HH:mm:ss') : '-'}

@@ -15,6 +15,7 @@ export type TableListItem = {
   status1: string | number;
   status2: string | number;
   status3: string | number;
+  status4: string | number;
 };
 
 export default defineComponent({
@@ -22,13 +23,14 @@ export default defineComponent({
   setup() {
     const tableListDataSource: TableListItem[] = [];
 
-    for (let i = 0; i < 2; i += 1) {
+    for (let i = 0; i < 40; i += 1) {
       tableListDataSource.push({
         key: i,
         status: valueEnumMap[Math.floor(Math.random() * 10) % 3],
         status1: valueEnumMap[Math.floor(Math.random() * 10) % 3],
         status2: valueEnumMap[Math.floor(Math.random() * 10) % 3],
         status3: valueEnumMap[Math.floor(Math.random() * 10) % 3],
+        status4: valueEnumMap[Math.floor(Math.random() * 10) % 3],
       });
     }
 
@@ -47,6 +49,34 @@ export default defineComponent({
         dataIndex: 'status',
         width: 100,
         valueEnum,
+      },
+      {
+        title: '远程状态数据',
+        key: 'status4',
+        dataIndex: 'status4',
+        width: 100,
+        valueType: 'select',
+        fieldProps: {
+          // requestSearch: true, // 是否需要远程搜索 不需要设为false
+          request: async (keyword) => {
+            // console.log('request', keyword)
+            // if(keyword) {
+            //   return [
+            //     { name: keyword, id: keyword },
+            //   ]
+            // }
+            return [
+              { name: '全部1', id: 'all' },
+              { name: '运行中', id: 'running' },
+              { name: '已上线', id: 'online' },
+              { name: '异常', id: 'error' },
+              // { name:  `${Math.floor(Math.random() * 10)}`, id: `${Math.floor(Math.random() * 10)}`}
+            ]
+          },
+          // cacheForSwr: false, // 可以设置不缓存 翻页会重新请求select数据
+          labelKey: 'name',
+          valueKey: 'id',
+        },
       },
       {
         title: '单选状态',
@@ -90,7 +120,7 @@ export default defineComponent({
             console.log('params', params);
             return Promise.resolve({
               data: tableListDataSource,
-              total: 2,
+              total: 40,
               success: true,
             });
           }}

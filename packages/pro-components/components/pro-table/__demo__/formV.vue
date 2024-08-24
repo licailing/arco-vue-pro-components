@@ -8,6 +8,7 @@
     :search="search"
     :form-ref="setFormRef"
     header-title="表单赋值"
+    @submit="handleSubmit"
   >
     <template #tool-bar>
       <Button key="set" @click="onSet">赋值</Button>
@@ -17,7 +18,7 @@
   </ProTable>
 </template>
 <script setup lang="ts">
-import { defineComponent, ref, Ref } from 'vue';
+import { defineComponent, ref, Ref, toRaw } from 'vue';
 import { Button } from '@arco-design/web-vue';
 import type { ProColumns, RenderData } from '../index';
 import ProTable from '../index';
@@ -87,7 +88,7 @@ const onSet = () => {
   }
 };
 const onSubmit = () => {
-  console.log('formRef', formRef, actionRef);
+  console.log('formRef', formRef, actionRef, toRaw(formRef.value.model));
   if (formRef.value) {
     formRef.value.submit();
   }
@@ -97,4 +98,7 @@ const onReload = () => {
     actionRef.value.reload();
   }
 };
+const handleSubmit = (formData) => {
+  console.log('formData', formData);
+}
 </script>

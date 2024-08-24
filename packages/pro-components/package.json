@@ -62,6 +62,9 @@
     "fast-glob": "^3.2.7",
     "fs-extra": "^9.1.0"
   },
+  "dependencies": {
+    "swr-vue": "^1.9.1"
+  },
   "arcoMeta": {
     "type": "vue-library",
     "title": "est",

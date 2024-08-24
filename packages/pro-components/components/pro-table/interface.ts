@@ -893,6 +893,11 @@ export type StatusType = {
   Default: ({ text }: { text: any }) => VNodeChild;
   Processing: ({ text }: { text: any }) => VNodeChild;
   Warning: ({ text }: { text: any }) => VNodeChild;
+  success: ({ text }: { text: any }) => VNodeChild;
+  error: ({ text }: { text: any }) => VNodeChild;
+  default: ({ text }: { text: any }) => VNodeChild;
+  processing: ({ text }: { text: any }) => VNodeChild;
+  warning: ({ text }: { text: any }) => VNodeChild;
 };
 
 export type BaseType = string | number;

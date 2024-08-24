@@ -2,6 +2,20 @@ import { Size } from '@arco-design/web-vue';
 
 export interface ProSelectProps {
   /**
+   * @zh 是否使用 swr 来缓存 缓存可能导致数据更新不及时，请谨慎使用，尤其是页面中多个组件 name 相同
+   * @en Whether to open request by keyword search
+   * @defaultValue false
+   */
+  cacheForSwr?: boolean;
+  columnKey?: string;
+  /**
+   * @zh 是否开启 request 远程搜索
+   * @en Whether to open request by keyword search
+   * @defaultValue false
+   */
+  requestSearch?: boolean;
+  mode?: 'read';
+  /**
    * @zh 是否开启多选模式（多选模式默认开启搜索）
    * @en Whether to open multi-select mode (The search is turned on by default in the multi-select mode)
    * @defaultValue undefined

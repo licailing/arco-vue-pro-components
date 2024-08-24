@@ -4,23 +4,48 @@ import {
   watch,
   toRef,
   PropType,
-  onMounted,
   toRefs,
   defineComponent,
 } from 'vue';
+import { debounce } from 'lodash';
+import { Select, Option, Size, Space } from '@arco-design/web-vue';
+import { useSWR } from 'swr-vue';
 import { omit } from '../_utils/omit';
-import { Select, Option, Size } from '@arco-design/web-vue';
-import {
-  isUndefined,
-  isNull,
-  isNumber,
-} from '../_utils/is';
+import { isUndefined, isNull, isNumber } from '../_utils/is';
 import { usePureProp } from '../_hooks/use-pure-prop';
-import { getPrefixCls } from '../_utils';
+import { ProSelectProps } from './interface';
+
+let testId = 0;
 
 export default defineComponent({
   name: 'ProSelect',
   props: {
+    /**
+     * @zh 是否使用 swr 来缓存 缓存可能导致数据更新不及时，请谨慎使用，尤其是页面中多个组件 name 相同
+     * @en Whether to open request by keyword search
+     * @defaultValue false
+     */
+    cacheForSwr: {
+      type: Boolean,
+      default: false,
+    },
+    columnKey: {
+      type: String,
+      default: '',
+    },
+    /**
+     * @zh 是否开启 request 远程搜索
+     * @en Whether to open request by keyword search
+     * @defaultValue false
+     */
+    requestSearch: {
+      type: Boolean,
+      default: false,
+    },
+    mode: {
+      type: String as PropType<ProSelectProps['mode']>,
+      default: undefined,
+    },
     /**
      * @zh 是否开启多选模式（多选模式默认开启搜索）
      * @en Whether to open multi-select mode (The search is turned on by default in the multi-select mode)
@@ -207,11 +232,61 @@ export default defineComponent({
     'change': (value: any, option?: Record<string, any> | any[]) => true,
   },
   setup(props, { attrs, slots, emit }) {
-    const { valueKey, labelKey, multiple, valueOption } = toRefs(props);
-    const prefixCls = getPrefixCls('pro-select');
+    const { valueKey, labelKey, multiple, valueOption, cacheForSwr } =
+      toRefs(props);
     const selectRef = ref();
-    const modelValue = toRef(props, 'modelValue');
     const options = usePureProp(props, 'options');
+    const modelValue = toRef(props, 'modelValue');
+    const keyword = ref<string | undefined>('');
+    const loading = ref(false);
+    const cacheKey = computed(() => {
+      if (props.columnKey) {
+        return props.columnKey.toString();
+      }
+      if (props.request) {
+        testId += 1;
+        return testId.toString();
+      }
+      return '';
+    });
+    const fetchData = async () => {
+      if (!props.request) {
+        return [];
+      }
+      loading.value = true;
+      const res = await props.request(keyword.value);
+      loading.value = false;
+      return res || [];
+    };
+    const { data } = useSWR(
+      () => {
+        if (!props.request) {
+          return null;
+        }
+        return `${cacheKey.value}_${props.requestSearch ? keyword.value : ''}`;
+      },
+      fetchData,
+      {
+        revalidateIfStale: !cacheForSwr.value, // 控制 SWR 在挂载并且存在陈旧数据时是否应重新请求 为false则使用旧数据不会重新请求
+        revalidateOnReconnect: cacheForSwr.value, // 是否会在网络恢复时自动重新请求
+        revalidateOnFocus: false,
+      }
+    );
+
+    const optionsEnum = computed(() => {
+      if (!props.request || !(props.mode === 'read')) {
+        return {};
+      }
+      return options.value?.length
+        ? options.value?.reduce(
+            (pre, cur) => ({
+              ...pre,
+              [cur[valueKey.value]]: cur[labelKey.value],
+            }),
+            {}
+          )
+        : {};
+    });
     const getFormatValue = (value: any) => {
       return isNumber(value) ? `${value}` : value;
     };
@@ -243,6 +318,18 @@ export default defineComponent({
     const _value: any = ref(
       getModelValue(props.modelValue ?? props.defaultValue)
     );
+    watch(
+      data,
+      (data) => {
+        if (props.request) {
+          options.value = data || [];
+        }
+      },
+      {
+        deep: true,
+        immediate: true,
+      }
+    );
     watch(modelValue, (value) => {
       if (isUndefined(value) || isNull(value)) {
         _value.value = multiple.value ? [] : undefined;
@@ -266,23 +353,43 @@ export default defineComponent({
       },
     });
 
-    const loading = ref(false);
-    onMounted(() => {
-      // 默认查询
-      handleSearch(undefined);
-    });
-    const handleSearch = async (value: string | undefined) => {
-      if (!props.request) {
-        return;
-      }
-      loading.value = true;
-      const res = await props.request(value);
-      loading.value = false;
-      options.value = Array.isArray(res) ? res : [];
+    const handleSearch = (value: string | undefined) => {
+      keyword.value = value;
     };
 
+    const debounceSetKeyword = debounce((value) => {
+      keyword.value = value;
+    }, props.searchDelay || 500);
+
+    // 清空所选值 重新fetchData
+    const handleClear = () => {
+      debounceSetKeyword('');
+    };
+
+    // 没有选值 重新fetchData
+    const handleInputValueChange = (value: string | undefined) => {
+      if (!value) {
+        debounceSetKeyword('');
+      }
+    };
+
+    const parsingText = (text: any) => {
+      if (Array.isArray(text)) {
+        return (
+          <Space size={16}>
+            {text.map((item) => (
+              <span key={item}>{optionsEnum.value[item]}</span>
+            ))}
+          </Space>
+        );
+      }
+      return optionsEnum.value[text];
+    };
     const restProps = computed(() => omit(props, ['options']));
     return () => {
+      if (props.mode === 'read') {
+        return parsingText(value.value);
+      }
       return (
         <div style="width: 100%">
           <Select
@@ -292,6 +399,8 @@ export default defineComponent({
             loading={loading.value}
             ref={selectRef}
             onSearch={handleSearch}
+            onClear={handleClear}
+            onInputValueChange={handleInputValueChange}
             v-slots={{
               default: () => {
                 return options.value.map((item: any) => (
@@ -299,14 +408,10 @@ export default defineComponent({
                     key={item[valueKey.value]}
                     value={getFormatValue(item[valueKey.value])}
                     label={item[labelKey.value]}
+                    title={item[labelKey.value]}
                     disabled={item.disabled}
                   >
-                    <span
-                      class={`${prefixCls}-option`}
-                      title={item[labelKey.value]}
-                    >
-                      {item[labelKey.value]}
-                    </span>
+                    {item[labelKey.value]}
                   </Option>
                 ));
               },
