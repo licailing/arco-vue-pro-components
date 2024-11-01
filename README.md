@@ -44,6 +44,7 @@ arco sync
 pnpm:
 
 ```bash
+$ npm install -g pnpm
 $ pnpm install --save @acro-vue-pro-components/pro-components
 ```
 
