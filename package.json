@@ -1,7 +1,6 @@
 {
   "name": "arco-vue-pro-components",
   "description": "Arco Design Vue Pro Components",
-  "private": true,
   "workspaces": [
     "packages/*"
   ],
