@@ -1,6 +1,7 @@
 ## Demos
 ![pro-table筛选](/packages/pro-components/assets/images/pro-table.png)
 
+## 组件文档
 
 ## pro-table
 
@@ -32,16 +33,10 @@ arco sync
 
 ## 安装
 
-npm:
+pnpm:
 
 ```bash
-$ npm install --save @acro-vue-pro-components/pro-components
-```
-
-yarn:
-
-```bash
-$ yarn add @acro-vue-pro-components/pro-components
+$ pnpm install --save @acro-vue-pro-components/pro-components
 ```
 
 # Arco 物料项目

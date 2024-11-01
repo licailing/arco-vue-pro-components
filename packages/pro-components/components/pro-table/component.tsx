@@ -247,8 +247,8 @@ export default defineComponent({
       type: Array,
     },
     /**
-     * @zh 表格默认选中
-     * @en table defaule selected
+     * @zh 表格加载中
+     * @en table loading
      */
     loading: {
       type: Boolean,

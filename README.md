@@ -9,6 +9,8 @@
 ![pro-table筛选](/packages/pro-components/assets/images/group-columns-setting.png)
 ![pro-table筛选](/packages/pro-components/assets/images/table-alert.png)
 
+## 组件文档
+
 ## pro-table
 
 [简体中文](/packages/pro-components/components/pro-table/README.md) | [English](/packages/pro-components/components/pro-table/README.en-US.md)
@@ -39,16 +41,10 @@ arco sync
 
 ## 安装
 
-npm:
+pnpm:
 
 ```bash
-$ npm install --save @acro-vue-pro-components/pro-components
-```
-
-yarn:
-
-```bash
-$ yarn add @acro-vue-pro-components/pro-components
+$ pnpm install --save @acro-vue-pro-components/pro-components
 ```
 
 # Arco 物料项目

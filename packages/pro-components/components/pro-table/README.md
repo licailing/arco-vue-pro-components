@@ -35,7 +35,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |column-empty-text|空值时的显示，不设置时显示 `-`， false 可以关闭此功能|`ColumnEmptyText`|`'-'`|
 |selected|表格选中|`array`|`-`|
 |default-selected|表格默认选中|`array`|`-`|
-|loading|表格默认选中|`boolean`|`-`|
+|loading|表格加载中|`boolean`|`-`|
 |data|表格的数据|`TableData[]`|`[]`|
 |bordered|是否显示边框|`boolean \| TableBorder`|`true`|
 |hoverable|是否显示选中效果|`boolean`|`true`|

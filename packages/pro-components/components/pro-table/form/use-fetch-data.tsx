@@ -43,9 +43,7 @@ const useFetchData = <T extends RequestData<any>>(
   }
 ): UseFetchDataAction<T> => {
   const [list, setList] = useState<T['data']>(props?.defaultData || []);
-  const [loading, setLoading] = useState<boolean | undefined>(
-    props.loading || undefined
-  );
+  const [loading, setLoading] = useState<boolean | undefined>(undefined);
   const [pageInfo, setPageInfo] = useState<PageInfo>(
     mergeOptionAndPageInfo(options.pageInfo)
   );

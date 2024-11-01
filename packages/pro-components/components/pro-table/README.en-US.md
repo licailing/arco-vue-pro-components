@@ -37,7 +37,7 @@ description: pro-table component based on arco-design web-vue table package
 |column-empty-text|Display when it is empty, display `-` when it is not set, false can turn off this function|`ColumnEmptyText`|`'-'`|
 |selected|table selected|`array`|`-`|
 |default-selected|table defaule selected|`array`|`-`|
-|loading|table defaule selected|`boolean`|`-`|
+|loading|table loading|`boolean`|`-`|
 |data|Table data|`TableData[]`|`[]`|
 |bordered|Whether to show the border|`boolean \| TableBorder`|`true`|
 |hoverable|Whether to show the hover effect|`boolean`|`true`|
