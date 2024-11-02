@@ -3,10 +3,12 @@
     :columns="columns"
     :request="request"
     row-key="key"
-    header-title="动态自定义搜索栏"
     :search="search"
     :options="{ fullScreen: true }"
   >
+    <template #header-title="{ action, selectedRowKeys, selectedRows }">
+      <div>动态自定义搜索栏 <IconFullscreen @click="action?.fullScreen?.()"></IconFullscreen></div>
+    </template>
     <template #index="{ rowIndex, action }">
       <span
         :style="{
@@ -71,7 +73,7 @@
 <script setup lang="ts">
 import { h } from 'vue';
 import { Button, Input, Link, Space, Tooltip } from '@arco-design/web-vue';
-import { IconSend, IconStar } from '@arco-design/web-vue/es/icon';
+import { IconSend, IconStar, IconFullscreen } from '@arco-design/web-vue/es/icon';
 import type {
   ProColumns,
   RenderData,

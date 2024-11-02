@@ -178,7 +178,17 @@ export default defineComponent({
           v-model:selectedKeys={selectedKeys.value}
           v-model:expandedKeys={expandedKeys.value}
           rowKey="key"
-          headerTitle="表格批量操作"
+          headerTitle={({
+            selectedRowKeys,
+            selectedRows,
+            action,
+          }: ToolBarData<any>) => {
+            return (
+              <div>
+                表格批量操作
+              </div>
+            );
+          }}
           options={{ fullScreen: true }}
           toolBarRender={({
             selectedRowKeys,

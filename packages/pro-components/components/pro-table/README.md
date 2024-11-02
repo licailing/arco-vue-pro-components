@@ -26,7 +26,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |tool-bar-render|渲染工具栏，支持返回一个 dom 数组，会自动增加 margin-right|`false \| ToolBarProps<any>['toolBarRender']`|`undefined`|
 |options-render|自定义操作栏|`false \| ToolBarProps<any>['optionsRender']`|`false`|
 |options|table 工具栏，设为 false 时不显示，传入 function 会点击时触发|`boolean \| ToolBarProps<any>['options']`|`false`|
-|header-title|表格标题|`string\|boolean`|`'列表数据'`|
+|header-title|表格标题|`ToolBarProps<any>['headerTitle']`|`'列表数据'`|
 |default-form-data|表单初始化数据|`object`|`-`|
 |search-type|搜索表单类型|`ProTableProps['searchType']`|`'query'`|
 |light-search-config|高级搜索表单配置|`LightSearchConfig`|`-`|
@@ -107,6 +107,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |option-render|searchConfig 基础的配置|data: `FormOptionProps`|
 |options-render|自定义工具栏 基础的配置|data: `ToolBarProps`<br>settings: `JSX.Element[]`|
 |tool-bar|自定义操作栏|action: `UseFetchDataAction`<br>selectedRowKeys: `any[]`<br>selectedRows: `any[]`|
+|header-title|自定义表格标题|action: `UseFetchDataAction`<br>selectedRowKeys: `any[]`<br>selectedRows: `any[]`|
 |index|columns配置自定义索引列|pagination: `PaginationProps`|
 |form-search|自定义搜索表单|formData: `any`|
 |columns|表格列定义。启用时会屏蔽 columns 属性|-|
@@ -185,11 +186,11 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |type|pro-table类型|`ProTableTypes`|`-`|
 |params|request的参数，修改之后会触发更新|`{ [key: string]: any }`|`-`|
 |size|表格的大小|`Size`|`'large'`|
-|request|获取 `dataSource` 的方法 \| `(params?: {pageSize,current},sort,filter) => {data,success,total}`|`(    params: {      pageSize?: number;      current?: number;      [key: string]: any;    },    sort: {      [key: string]: 'ascend' \| 'descend';    },    filter: { [key: string]: string }  ) => Promise<RequestData<any>>`|`-`|
+|request|获取 `data` 的方法 \| `(params?: {pageSize,current},sort,filter) => {data,success,total}` 组件内部有维护loading，不需要传loading|`(    params: {      pageSize?: number;      current?: number;      [key: string]: any;    },    sort: {      [key: string]: 'ascend' \| 'descend';    },    filter: { [key: string]: string }  ) => Promise<RequestData<any>>`|`-`|
 |toolBarRender|渲染工具栏，支持返回一个 dom 数组，会自动增加 margin-right|`ToolBarProps<any>['toolBarRender'] \| false`|`-`|
 |optionRender|自定义操作栏|`ToolBarProps<any>['optionsRender'] \| false`|`-`|
 |options|table 工具栏，设为 false 时不显示，传入 function 会点击时触发|`OptionConfig \| false`|`-`|
-|headerTitle|表格标题|`VNodeTypes`|`-`|
+|headerTitle|表格标题|`ToolBarProps<any>['headerTitle']`|`-`|
 |search|是否显示搜索表单，传入对象时为搜索表单的配置|`boolean \| SearchConfig`|`-`|
 |beforeSearchSubmit|格式化搜索表单提交数据|`(params: Partial<any>) => Partial<any>`|`-`|
 |defaultFormData|表单初始化数据|`Record<string, unknown>`|`-`|
@@ -198,7 +199,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |columnEmptyText|空值时的显示，不设置时显示`-`，false可以关闭此功能|`ColumnEmptyText`|`-`|
 |formRef|可以获取到查询表单的form实例，用于一些灵活的配置|`(formRef: Ref) => void`|`-`|
 |actionRef|Table的action的引用，便于自定义触发|`(actionRef: Ref) => void`|`-`|
-|loading|表格是否加载中|`boolean`|`false`|
+|loading|表格是否加载中, 用request请求不需要传loading, 组件内部有维护loading|`boolean`|`false`|
 |onChange|表格数据发生变化时触发|`(    data: TableData[],    extra: TableChangeExtra,    currentData: TableData[]  ) => void`|`-`|
 |onSubmit|搜索表单提交时触发|`(formData: any) => void`|`-`|
 |onReset|搜索表单重置时触发|`() => void`|`-`|
@@ -901,7 +902,17 @@ export default defineComponent({
           v-model:selectedKeys={selectedKeys.value}
           v-model:expandedKeys={expandedKeys.value}
           rowKey="key"
-          headerTitle="表格批量操作"
+          headerTitle={({
+            selectedRowKeys,
+            selectedRows,
+            action,
+          }: ToolBarData<any>) => {
+            return (
+              <div>
+                表格批量操作
+              </div>
+            );
+          }}
           options={{ fullScreen: true }}
           toolBarRender={({
             selectedRowKeys,
@@ -1717,6 +1728,7 @@ export default defineComponent({
     :search="search"
     :form-ref="setFormRef"
     header-title="表单赋值"
+    @submit="handleSubmit"
   >
     <template #tool-bar>
       <Button key="set" @click="onSet">赋值</Button>
@@ -1726,7 +1738,7 @@ export default defineComponent({
   </ProTable>
 </template>
 <script setup lang="ts">
-import { defineComponent, ref, Ref } from 'vue';
+import { defineComponent, ref, Ref, toRaw } from 'vue';
 import { Button } from '@arco-design/web-vue';
 import type { ProColumns, RenderData } from '../index';
 import ProTable from '../index';
@@ -1796,7 +1808,7 @@ const onSet = () => {
   }
 };
 const onSubmit = () => {
-  console.log('formRef', formRef, actionRef);
+  console.log('formRef', formRef, actionRef, toRaw(formRef.value.model));
   if (formRef.value) {
     formRef.value.submit();
   }
@@ -1806,6 +1818,9 @@ const onReload = () => {
     actionRef.value.reload();
   }
 };
+const handleSubmit = (formData) => {
+  console.log('formData', formData);
+}
 </script>
 
 ```
@@ -2248,6 +2263,8 @@ export default defineComponent({
         valueType: 'select',
         fieldProps: {
           request: async () => stateDict,
+          labelKey: 'label',
+          valueKey: 'value',
         },
         render: ({ record }: RenderData) => {
           return getDictLabel(stateDict, record.state);
@@ -2303,7 +2320,7 @@ export default defineComponent({
             };
           }}
           rowKey="key"
-          headerTitle="动态自定义搜索栏"
+          headerTitle={<div>动态自定义搜索栏<IconStar /></div>}
           search={{
             collapsed: false,
             optionRender: ({ dom }: FormOptionProps) => [
@@ -2384,10 +2401,12 @@ export default defineComponent({
     :columns="columns"
     :request="request"
     row-key="key"
-    header-title="动态自定义搜索栏"
     :search="search"
     :options="{ fullScreen: true }"
   >
+    <template #header-title="{ action, selectedRowKeys, selectedRows }">
+      <div>动态自定义搜索栏 <IconFullscreen @click="action?.fullScreen?.()"></IconFullscreen></div>
+    </template>
     <template #index="{ rowIndex, action }">
       <span
         :style="{
@@ -2452,7 +2471,7 @@ export default defineComponent({
 <script setup lang="ts">
 import { h } from 'vue';
 import { Button, Input, Link, Space, Tooltip } from '@arco-design/web-vue';
-import { IconSend, IconStar } from '@arco-design/web-vue/es/icon';
+import { IconSend, IconStar, IconFullscreen } from '@arco-design/web-vue/es/icon';
 import type {
   ProColumns,
   RenderData,
@@ -2540,6 +2559,7 @@ export type TableListItem = {
   status1: string | number;
   status2: string | number;
   status3: string | number;
+  status4: string | number;
 };
 
 export default defineComponent({
@@ -2547,13 +2567,14 @@ export default defineComponent({
   setup() {
     const tableListDataSource: TableListItem[] = [];
 
-    for (let i = 0; i < 2; i += 1) {
+    for (let i = 0; i < 40; i += 1) {
       tableListDataSource.push({
         key: i,
         status: valueEnumMap[Math.floor(Math.random() * 10) % 3],
         status1: valueEnumMap[Math.floor(Math.random() * 10) % 3],
         status2: valueEnumMap[Math.floor(Math.random() * 10) % 3],
         status3: valueEnumMap[Math.floor(Math.random() * 10) % 3],
+        status4: valueEnumMap[Math.floor(Math.random() * 10) % 3],
       });
     }
 
@@ -2572,6 +2593,34 @@ export default defineComponent({
         dataIndex: 'status',
         width: 100,
         valueEnum,
+      },
+      {
+        title: '远程状态数据',
+        key: 'status4',
+        dataIndex: 'status4',
+        width: 100,
+        valueType: 'select',
+        fieldProps: {
+          // requestSearch: true, // 是否需要远程搜索 不需要设为false
+          request: async (keyword) => {
+            console.log('request', keyword)
+            // if(keyword) {
+            //   return [
+            //     { name: keyword, id: keyword },
+            //   ]
+            // }
+            return [
+              { name: '全部1', id: 'all' },
+              { name: '运行中', id: 'running' },
+              { name: '已上线', id: 'online' },
+              { name: '异常', id: 'error' },
+              // { name:  `${Math.floor(Math.random() * 10)}`, id: `${Math.floor(Math.random() * 10)}`}
+            ]
+          },
+          // cacheForSwr: false, // 可以设置不缓存 翻页会重新请求select数据
+          labelKey: 'name',
+          valueKey: 'id',
+        },
       },
       {
         title: '单选状态',
@@ -2615,7 +2664,7 @@ export default defineComponent({
             console.log('params', params);
             return Promise.resolve({
               data: tableListDataSource,
-              total: 2,
+              total: 40,
               success: true,
             });
           }}
@@ -3097,6 +3146,20 @@ export default defineComponent({
         ),
       },
       {
+        title: (
+          <div style={{ whiteSpace: 'nowrap' }}>
+            Road
+            <MyToolTip position="top" content="这是一段描述">
+              <IconQuestionCircle style={{ marginLeft: 4 }} />
+            </MyToolTip>
+          </div>
+        ),
+        dataIndex: 'road',
+        key: 'road',
+        width: 140,
+        hideInTable: true, // 是否显示在表格里面
+      },
+      {
         title: 'User Info',
         key: 'userInfo',
         children: [
@@ -3216,8 +3279,8 @@ export default defineComponent({
       return (
         <ProTable
           columns={columns}
-          request={() => {
-            console.log('request reload');
+          request={(params) => {
+            console.log('request reload', params);
             return Promise.resolve({
               data,
               total: 5,

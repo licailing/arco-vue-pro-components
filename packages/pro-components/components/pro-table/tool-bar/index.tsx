@@ -25,6 +25,7 @@ import FullScreenIcon from './fullscreen-icon';
 import { proTableInjectionKey } from '../form/context';
 import { isArray } from '../../_utils/is';
 import MyToolTip from '../my-tool-tip';
+import { runFunction } from '../utils';
 
 function getSettingItem(setting: ListToolBarSetting, slots: any) {
   if (isVNode(setting)) {
@@ -201,7 +202,9 @@ export default defineComponent({
      * @en table tilte
      */
     headerTitle: {
-      type: [String, Boolean],
+      type: [String, Boolean, Object, Function] as PropType<
+        ToolBarProps<any>['headerTitle']
+      >,
       default: '列表数据',
     },
   },
@@ -281,7 +284,10 @@ export default defineComponent({
       const actions = props.toolBarRender ? props.toolBarRender(data) : [];
       return (
         <div class={`${prefixCls}-toolbarContainer`}>
-          <div class={`${prefixCls}-title`}>{props.headerTitle}</div>
+          <div class={`${prefixCls}-title`}>
+            {slots['header-title']?.(data) ??
+              runFunction(props.headerTitle, data)}
+          </div>
           <Space>
             {slots['tool-bar']?.(data)}
             {actions

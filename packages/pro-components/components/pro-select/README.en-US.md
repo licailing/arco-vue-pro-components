@@ -17,6 +17,8 @@ description: When users need to select one or more from a group of similar data,
 
 |Attribute|Description|Type|Default|
 |---|---|---|:---:|
+|cache-for-swr|Whether to open request by keyword search|`boolean`|`false`|
+|request-search|Whether to open request by keyword search|`boolean`|`false`|
 |multiple|Whether to open multi-select mode (The search is turned on by default in the multi-select mode)|`boolean`|`undefined`|
 |model-value **(v-model)**|Value|`string\| number\| Record<string, any>\| (string \| number \| Record<string, any>)[]`|`-`|
 |fallback-option|Options that do not exist in custom values|`boolean`|`false`|
@@ -51,6 +53,8 @@ description: When users need to select one or more from a group of similar data,
 
 |Name|Description|Type|Default|
 |---|---|---|:---:|
+|cacheForSwr|Whether to open request by keyword search|`boolean`|`false`|
+|requestSearch|Whether to open request by keyword search|`boolean`|`false`|
 |multiple|Whether to open multi-select mode (The search is turned on by default in the multi-select mode)|`boolean`|`undefined`|
 |modelValue **(v-model)**|Value|`any`|`-`|
 |fallbackOption|Options that do not exist in custom values|`boolean`|`false`|
@@ -119,7 +123,11 @@ description: When users need to select one or more from a group of similar data,
     <ProSelect
       :style="{ width: '480px' }"
       :request="request"
+      request-search
       label-key="name"
+      @search="onSearch"
+      @clear="onClear"
+      @inputValueChange="inputValueChange"
       value-key="key"
       v-model="value"
       @change="onChange"
@@ -172,7 +180,20 @@ const change = () => {
 const onChange = (value, option) => {
   console.log('value', value, option);
 };
+const onSearch = (value) => {
+  console.log('onSearch', value)
+}
+const onClear = (value) => {
+  console.log('onClear', value)
+}
+const inputValueChange = (value) => {
+  console.log('inputValueChange', value)
+}
 const request = async (keyword) => {
+  console.log('request', keyword)
+  if(keyword) {
+    return []
+  }
   return options;
 };
 </script>

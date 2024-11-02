@@ -182,7 +182,9 @@ export default defineComponent({
      * @en table tilte
      */
     headerTitle: {
-      type: [String, Boolean],
+      type: [String, Boolean, Object, Function] as PropType<
+        ToolBarProps<any>['headerTitle']
+      >,
       default: '列表数据',
     },
     /**
@@ -748,6 +750,14 @@ export default defineComponent({
    * @en columns Indicates the user-defined index columns
    * @slot index
    * @binding {PaginationProps} pagination
+   */
+  /**
+   * @zh 自定义表格标题
+   * @en Customize the head title
+   * @slot header-title
+   * @binding {UseFetchDataAction} action
+   * @binding {any[]} selectedRowKeys
+   * @binding {any[]} selectedRows
    */
   /**
    * @zh 自定义操作栏

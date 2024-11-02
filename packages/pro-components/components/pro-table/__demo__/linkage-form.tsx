@@ -119,7 +119,7 @@ export default defineComponent({
             };
           }}
           rowKey="key"
-          headerTitle="动态自定义搜索栏"
+          headerTitle={<div>动态自定义搜索栏<IconStar /></div>}
           search={{
             collapsed: false,
             optionRender: ({ dom }: FormOptionProps) => [

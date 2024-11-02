@@ -429,8 +429,8 @@ export interface ProTableProps extends Omit<TableProps, 'columns'> {
    */
   size?: Size;
   /**
-   * @zh 获取 `dataSource` 的方法 | `(params?: {pageSize,current},sort,filter) => {data,success,total}`
-   * @en How to get `dataSource` | `(params?: {pageSize,current},sort,filter) => {data,success,total}`
+   * @zh 获取 `data` 的方法 | `(params?: {pageSize,current},sort,filter) => {data,success,total}` 组件内部有维护loading，不需要传loading
+   * @en How to get `data` | `(params?: {pageSize,current},sort,filter) => {data,success,total}`
    */
   request?: (
     params: {
@@ -462,7 +462,7 @@ export interface ProTableProps extends Omit<TableProps, 'columns'> {
    * @zh 表格标题
    * @en table tilte
    */
-  headerTitle?: VNodeTypes;
+  headerTitle?: ToolBarProps<any>['headerTitle'];
   /**
    * @zh 是否显示搜索表单，传入对象时为搜索表单的配置
    * @en Configuration column search related, false is hidden
@@ -506,7 +506,7 @@ export interface ProTableProps extends Omit<TableProps, 'columns'> {
    */
   actionRef?: (actionRef: Ref) => void;
   /**
-   * @zh 表格是否加载中
+   * @zh 表格是否加载中, 用request请求不需要传loading, 组件内部有维护loading
    * @en Whether the table is loading
    */
   loading?: boolean;
@@ -757,7 +757,7 @@ export type OptionsFunctionType = (e: MouseEvent, action?: ActionType) => void;
 export type OptionsType = OptionsFunctionType | boolean;
 
 export interface ToolBarProps<T = unknown> {
-  headerTitle?: string | boolean;
+  headerTitle?: string | boolean | VNode | ((data: ToolBarData<T>) => VNodeTypes);
   toolBarRender?: false | ((data: ToolBarData<T>) => VNodeTypes[]);
   options?: OptionConfig | boolean;
   optionsRender?:

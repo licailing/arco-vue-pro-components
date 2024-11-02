@@ -15,6 +15,8 @@ description: 当用户需要从一组同类数据中选择一个或多个时，�
 
 |参数名|描述|类型|默认值|
 |---|---|---|:---:|
+|cache-for-swr|是否使用 swr 来缓存 缓存可能导致数据更新不及时，请谨慎使用，尤其是页面中多个组件 name 相同|`boolean`|`false`|
+|request-search|是否开启 request 远程搜索|`boolean`|`false`|
 |multiple|是否开启多选模式（多选模式默认开启搜索）|`boolean`|`undefined`|
 |model-value **(v-model)**|绑定值|`string\| number\| Record<string, any>\| (string \| number \| Record<string, any>)[]`|`-`|
 |fallback-option|自定义值中不存在的选项|`boolean`|`false`|
@@ -49,6 +51,8 @@ description: 当用户需要从一组同类数据中选择一个或多个时，�
 
 |参数名|描述|类型|默认值|
 |---|---|---|:---:|
+|cacheForSwr|是否使用 swr 来缓存 缓存可能导致数据更新不及时，请谨慎使用，尤其是页面中多个组件 name 相同|`boolean`|`false`|
+|requestSearch|是否开启 request 远程搜索|`boolean`|`false`|
 |multiple|是否开启多选模式（多选模式默认开启搜索）|`boolean`|`undefined`|
 |modelValue **(v-model)**|绑定值|`any`|`-`|
 |fallbackOption|自定义值中不存在的选项|`boolean`|`false`|
@@ -117,7 +121,11 @@ description: 当用户需要从一组同类数据中选择一个或多个时，�
     <ProSelect
       :style="{ width: '480px' }"
       :request="request"
+      request-search
       label-key="name"
+      @search="onSearch"
+      @clear="onClear"
+      @inputValueChange="inputValueChange"
       value-key="key"
       v-model="value"
       @change="onChange"
@@ -170,7 +178,20 @@ const change = () => {
 const onChange = (value, option) => {
   console.log('value', value, option);
 };
+const onSearch = (value) => {
+  console.log('onSearch', value)
+}
+const onClear = (value) => {
+  console.log('onClear', value)
+}
+const inputValueChange = (value) => {
+  console.log('inputValueChange', value)
+}
 const request = async (keyword) => {
+  console.log('request', keyword)
+  if(keyword) {
+    return []
+  }
   return options;
 };
 </script>
