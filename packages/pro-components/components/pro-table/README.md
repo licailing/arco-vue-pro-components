@@ -1,5 +1,7 @@
 简体中文 | [English](./README.en-US.md)
 
+[API文件](./interface.ts)
+
 ```yaml
 meta:
   type: 组件
@@ -23,8 +25,8 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |before-search-submit|格式化搜索表单提交数据|`(searchParams: any) => any`|`(searchParams: any) => searchParams`|
 |search|是否显示搜索表单，传入对象时为搜索表单的配置|`SearchConfig \| boolean`|`true`|
 |type|pro-table 类型|`ProTableTypes`|`'table'`|
-|tool-bar-render|渲染工具栏，支持返回一个 dom 数组，会自动增加 margin-right|`false \| ToolBarProps<any>['toolBarRender']`|`undefined`|
-|options-render|自定义操作栏|`false \| ToolBarProps<any>['optionsRender']`|`false`|
+|tool-bar-render|渲染工具栏右侧操作按钮，支持返回一个 dom 数组，会自动增加 margin-right,为false则不显示工具栏|`false \| ToolBarProps<any>['toolBarRender']`|`undefined`|
+|options-render|自定义工具栏右侧表格操作按钮,为false则显示默认：reload(刷新)\|density(表格密度)\|setting(列设置)\|fullScreen(全屏 默认不显示)|`false \| ToolBarProps<any>['optionsRender']`|`false`|
 |options|table 工具栏，设为 false 时不显示，传入 function 会点击时触发|`boolean \| ToolBarProps<any>['options']`|`false`|
 |header-title|表格标题|`ToolBarProps<any>['headerTitle']`|`'列表数据'`|
 |default-form-data|表单初始化数据|`object`|`-`|
@@ -104,11 +106,11 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |footer|表格底部|-|
 |expand-row|展开行内容|record: `TableData`|
 |expand-icon|展开行图标|expanded: `boolean`<br>record: `TableData`|
-|option-render|searchConfig 基础的配置|data: `FormOptionProps`|
-|options-render|自定义工具栏 基础的配置|data: `ToolBarProps`<br>settings: `JSX.Element[]`|
-|tool-bar|自定义操作栏|action: `UseFetchDataAction`<br>selectedRowKeys: `any[]`<br>selectedRows: `any[]`|
+|option-render|自定义普通搜索表单(searchType=query)的按钮(如果search=false则不显示)，默认：重置\|查询(type=table),重置\|提交(type=form)|data: `FormOptionProps`|
+|options-render|自定义工具栏(tool-bar) 右侧表格操作按钮(如果options设置false则不显示),默认：reload(刷新)\|density(表格密度)\|setting(列设置)\|fullScreen(全屏 默认不显示)|data: `ToolBarProps`<br>settings: `JSX.Element[]`|
+|tool-bar|自定义操作栏右侧操作按钮|action: `UseFetchDataAction`<br>selectedRowKeys: `any[]`<br>selectedRows: `any[]`|
 |header-title|自定义表格标题|action: `UseFetchDataAction`<br>selectedRowKeys: `any[]`<br>selectedRows: `any[]`|
-|index|columns配置自定义索引列|pagination: `PaginationProps`|
+|index|columns配置自定义索引列|data: `RenderData`|
 |form-search|自定义搜索表单|formData: `any`|
 |columns|表格列定义。启用时会屏蔽 columns 属性|-|
 
@@ -189,7 +191,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |request|获取 `data` 的方法 \| `(params?: {pageSize,current},sort,filter) => {data,success,total}` 组件内部有维护loading，不需要传loading|`(    params: {      pageSize?: number;      current?: number;      [key: string]: any;    },    sort: {      [key: string]: 'ascend' \| 'descend';    },    filter: { [key: string]: string }  ) => Promise<RequestData<any>>`|`-`|
 |toolBarRender|渲染工具栏，支持返回一个 dom 数组，会自动增加 margin-right|`ToolBarProps<any>['toolBarRender'] \| false`|`-`|
 |optionRender|自定义操作栏|`ToolBarProps<any>['optionsRender'] \| false`|`-`|
-|options|table 工具栏，设为 false 时不显示，传入 function 会点击时触发|`OptionConfig \| false`|`-`|
+|options|配置table 工具栏右侧表格操作按钮，设为 false 时不显示，传入 function 会点击时触发,默认按钮:reload(刷新)\|density(表格密度)\|setting(列设置)\|fullScreen(全屏 默认不显示)|`OptionConfig \| false`|`-`|
 |headerTitle|表格标题|`ToolBarProps<any>['headerTitle']`|`-`|
 |search|是否显示搜索表单，传入对象时为搜索表单的配置|`boolean \| SearchConfig`|`-`|
 |beforeSearchSubmit|格式化搜索表单提交数据|`(params: Partial<any>) => Partial<any>`|`-`|
@@ -231,6 +233,31 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 
 
 
+### ToolBarProps
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|headerTitle|工具栏 标题,为false不显示|`string    \| boolean    \| VNode    \| ((data: ToolBarData<T>) => VNodeTypes)`|`-`|
+|toolBarRender|自定义工具栏右侧操作按钮,为false则不显示工具栏|`false \| ((data: ToolBarData<T>) => VNodeTypes[])`|`-`|
+|options|配置工具栏右侧表格操作按钮是否显示及图标,为false不显示,可配置以下按钮显不显示：reload(刷新)\|density(表格密度)\|setting(列设置)\|fullScreen(全屏 默认不显示)|`OptionConfig \| boolean`|`-`|
+|optionsRender|自定义工具栏右侧表格操作按钮,为false则显示默认：reload(刷新)\|density(表格密度)\|setting(列设置)\|fullScreen(全屏 默认不显示)|`false    \| ((props: ToolBarProps<T>, defaultDom: Element[]) => VNodeTypes[])`|`-`|
+|action|表格action方法|`ActionType`|`-`|
+|selectedRowKeys|列表选中键值数组|`(string \| number)[]`|`-`|
+|selectedRows|列表选中行数据|`any[]`|`-`|
+|columns|表格columns|`ProColumns[]`|`-`|
+
+
+
+### RequestData
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|data|返回的数据放这里面|`T[]`|`-`|
+|success|是否成功|`boolean`|`false`|
+|total|数据总条数|`number`|`-`|
+
+
+
 ### RenderData
 
 |参数名|描述|类型|默认值|
@@ -240,6 +267,16 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |rowIndex|行索引|`number`|`-`|
 |dom|表格里面默认的渲染虚拟节点数据|`VNodeChild`|`-`|
 |action|表格里面默认的渲染虚拟节点数据|`UseFetchDataAction<RequestData<any>>`|`-`|
+
+
+
+### LightSearchConfig
+
+|参数名|描述|类型|默认值|
+|---|---|---|:---:|
+|rowNumber|设置右侧直接搜索表单项显示几个： 默认是2个，其他表单项在高级筛选弹框里面|`number`|`-`|
+|name|设置左侧文本框名称(传值给后台的字段)，默认：keyword|`string`|`-`|
+|search|传给左侧文本搜索框props，左侧文本搜索框为false不显示|`InputSearchInstance \| boolean \| { placeholder: string }`|`-`|
 
 
 
@@ -373,7 +410,232 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 
 ## Demos
 
-### 高级筛选表格 
+### 默认表格可互动 [demo](http://47.120.3.125:6006/?path=/story/pro-table--basic-demo)
+```tsx
+import { defineComponent, ref } from 'vue';
+import { Button, Link } from '@arco-design/web-vue';
+import type {
+  ActionType,
+  ProColumns,
+  RenderData,
+  TableData,
+  ToolBarData,
+} from '../index';
+import ProTable from '../index';
+
+const valueEnum: any = {
+  0: 'close',
+  1: 'running',
+  2: 'online',
+  3: 'error',
+};
+
+const ProcessMap: any = {
+  close: 'normal',
+  running: 'warning',
+  online: 'success',
+  error: 'danger',
+};
+
+export interface TableListItem extends TableData {
+  key: string;
+  name: string;
+  progress: number;
+  containers: number;
+  callNumber: number;
+  creator: string;
+  status: string;
+  createdAt: number;
+  memo: string;
+  children?: any[];
+}
+const tableListDataSource: TableListItem[] = [];
+
+const creators = ['付小小', '曲丽丽', '林东东', '陈帅帅', '兼某某'];
+
+function generateDataItem(i: number) {
+  const progress = Math.random() * 1;
+  return {
+    key: `${i}`,
+    name: `AppName-${i}`,
+    containers: Math.floor(Math.random() * 20),
+    callNumber: Math.floor(Math.random() * 2000),
+    progress: parseFloat(progress.toFixed(2)),
+    creator: creators[Math.floor(Math.random() * creators.length)],
+    status: valueEnum[Math.floor(Math.random() * 10) % 4],
+    createdAt: Date.now() - Math.floor(Math.random() * 100000),
+    memo:
+      i % 2 === 1
+        ? '很长很长很长很长很长很长很长的文字要展示但是要留下尾巴'
+        : '简短备注文案',
+  };
+}
+for (let i = 0; i < 10; i += 1) {
+  tableListDataSource.push(generateDataItem(i));
+}
+
+export default defineComponent({
+  name: 'Basic',
+  setup(props) {
+    const actionRef = ref();
+    const setActionRef = (ref: ActionType) => {
+      actionRef.value = ref;
+    };
+    const columns: ProColumns[] = [
+      {
+        title: '应用名称',
+        width: 200,
+        dataIndex: 'name',
+        fixed: 'left',
+        render: (data: RenderData) => <Link>{data.dom}</Link>,
+      },
+      {
+        title: '容器量',
+        width: 120,
+        dataIndex: 'containers',
+        align: 'right',
+        sorter: true,
+      },
+      {
+        title: '调用次数',
+        width: 120,
+        align: 'right',
+        dataIndex: 'callNumber',
+      },
+      {
+        title: '执行进度',
+        dataIndex: 'progress',
+        valueType: (item) => ({
+          type: 'progress',
+          status: ProcessMap[item.status],
+        }),
+      },
+      {
+        title: '创建者',
+        width: 120,
+        dataIndex: 'creator',
+        valueType: 'select',
+        valueEnum: {
+          all: { text: '全部' },
+          付小小: { text: '付小小' },
+          曲丽丽: { text: '曲丽丽' },
+          林东东: { text: '林东东' },
+          陈帅帅: { text: '陈帅帅' },
+          兼某某: { text: '兼某某' },
+        },
+      },
+      {
+        title: '创建时间',
+        width: 140,
+        key: 'since',
+        dataIndex: 'createdAt',
+        valueType: 'date',
+        sorter: true,
+      },
+      {
+        title: '备注',
+        dataIndex: 'memo',
+        ellipsis: true,
+        copyable: true,
+      },
+      {
+        title: '操作',
+        width: 80,
+        key: 'option',
+        dataIndex: 'option',
+        valueType: 'option',
+        hideInSearch: true,
+        fixed: 'right',
+        render: () => {
+          return [<Link key="link">链路</Link>];
+        },
+      },
+    ];
+    const selectedKeys = ref(['1']);
+    const expandedKeys = ref([]);
+    const render = () => {
+      console.log(
+        'selectedKeys:%o, expandedKeys:%o',
+        selectedKeys.value,
+        expandedKeys.value
+      );
+      return (
+        <ProTable
+          columns={columns}
+          rowSelection={{
+            type: 'checkbox',
+            showCheckedAll: true,
+            checkStrictly: true,
+          }}
+          actionRef={setActionRef}
+          data={tableListDataSource}
+          scroll={{ x: 1300 }}
+          pagination={{
+            pageSize: 5,
+          }}
+          onSelectAll={(checked: boolean) => {
+            console.log('onSelectAll', checked);
+          }}
+          onSelect={(rowKeys, rowKey, record) => {
+            console.log(
+              'onSelect:rowKeys:%o,rowKey:%o,record:%o',
+              rowKeys,
+              rowKey,
+              record
+            );
+          }}
+          v-model:selectedKeys={selectedKeys.value}
+          v-model:expandedKeys={expandedKeys.value}
+          rowKey="key"
+          headerTitle={({
+            selectedRowKeys,
+            selectedRows,
+            action,
+          }: ToolBarData<any>) => {
+            return <Link to="https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#%E9%AB%98%E7%BA%A7%E7%AD%9B%E9%80%89%E8%A1%A8%E6%A0%BC" blank="_target">默认示例(可互动)</Link>;
+          }}
+          options={{ fullScreen: true }}
+          {...props}
+          toolBarRender={
+            props.toolBarRender === false
+              ? false
+              : ({
+                  selectedRowKeys,
+                  selectedRows,
+                  action,
+                }: ToolBarData<any>) => {
+                  return [
+                    <Button
+                      key="selected"
+                      onClick={() => {
+                        // 获取选中的数据
+                        console.log(
+                          'selectedKeys',
+                          actionRef.value.getSelected() // selectedKeys和selectedRows
+                        );
+                      }}
+                    >
+                      获取选中
+                    </Button>,
+                    <Button key="show">查看日志</Button>,
+                  ];
+                }
+          }
+        />
+      );
+    };
+    return {
+      render,
+    };
+  },
+  render() {
+    return this.render();
+  },
+});
+
+```
+
+### 高级筛选表格 [demo](http://47.120.3.125:6006/?path=/story/pro-table--lightfilter-demo)
 ```tsx
 import { defineComponent, h, ref } from 'vue';
 import { Button, Dropdown, Link, Tooltip } from '@arco-design/web-vue';
@@ -720,7 +982,7 @@ export default defineComponent({
 
 ```
 
-### 表格批量操作 
+### 表格批量操作 [demo](http://47.120.3.125:6006/?path=/story/pro-table--batch-option-demo)
 ```tsx
 import { defineComponent, ref } from 'vue';
 import { Button, Link } from '@arco-design/web-vue';
@@ -951,7 +1213,7 @@ export default defineComponent({
 
 ```
 
-### 无查询表单 
+### 无查询表单 [demo](http://47.120.3.125:6006/?path=/story/pro-table--normal-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Button, Dropdown, Link, Tooltip } from '@arco-design/web-vue';
@@ -1142,7 +1404,7 @@ export default defineComponent({
 
 ```
 
-### 嵌套表格 
+### 嵌套表格 [demo](http://47.120.3.125:6006/?path=/story/pro-table--table-nested-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Button, Tooltip, Tag, Link } from '@arco-design/web-vue';
@@ -1357,7 +1619,7 @@ export default defineComponent({
 
 ```
 
-### 左右结构 
+### 左右结构 [demo](http://47.120.3.125:6006/?path=/story/pro-table--split-demo)
 ```tsx
 import { defineComponent, ref, toRefs, watch } from 'vue';
 import { Button, Link, Badge, Split, Card } from '@arco-design/web-vue';
@@ -1593,7 +1855,7 @@ export default defineComponent({
 
 ```
 
-### 表单赋值 
+### 表单赋值 [demo](http://47.120.3.125:6006/?path=/story/pro-table--form-demo)
 ```tsx
 import { Ref, defineComponent, ref } from 'vue';
 import { Button } from '@arco-design/web-vue';
@@ -1716,7 +1978,7 @@ export default defineComponent({
 
 ```
 
-### 表单赋值 
+### 表单赋值 [demo](http://47.120.3.125:6006/?path=/story/pro-table--form-v-demo)
 ```vue
 <template>
   <ProTable
@@ -1825,7 +2087,7 @@ const handleSubmit = (formData) => {
 
 ```
 
-### 拖拽排序 
+### 拖拽排序 [demo](http://47.120.3.125:6006/?path=/story/pro-table--drag-sort-table-demo)
 ```tsx
 import { defineComponent, reactive, ref } from 'vue';
 import { Link, Message } from '@arco-design/web-vue';
@@ -1904,7 +2166,7 @@ export default defineComponent({
 
 ```
 
-### 查询表格 
+### 查询表格 [demo](http://47.120.3.125:6006/?path=/story/pro-table--single-demo)
 ```tsx
 import { defineComponent, ref, h, Ref } from 'vue';
 import {
@@ -2197,7 +2459,7 @@ export default defineComponent({
 
 ```
 
-### 动态自定义搜索栏 
+### 动态自定义搜索栏 [demo](http://47.120.3.125:6006/?path=/story/pro-table--linkage-form-demo)
 ```tsx
 /* eslint-disable no-console */
 import { defineComponent } from 'vue';
@@ -2394,7 +2656,7 @@ export default defineComponent({
 
 ```
 
-### 动态自定义搜索栏 
+### 动态自定义搜索栏 [demo](http://47.120.3.125:6006/?path=/story/pro-table--linkage-form-v-demo)
 ```vue
 <template>
   <ProTable
@@ -2540,7 +2802,7 @@ const columns: ProColumns[] = [
 
 ```
 
-### valueType 选项类
+### valueType 选项类 [demo](http://47.120.3.125:6006/?path=/story/pro-table--value-type-select-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Link } from '@arco-design/web-vue';
@@ -2696,7 +2958,7 @@ export default defineComponent({
 
 ```
 
-### valueType 日期类
+### valueType 日期类 [demo](http://47.120.3.125:6006/?path=/story/pro-table--value-type-date-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Link } from '@arco-design/web-vue';
@@ -2829,7 +3091,7 @@ export default defineComponent({
 
 ```
 
-### valueType 数字类
+### valueType 数字类 [demo](http://47.120.3.125:6006/?path=/story/pro-table--value-type-number-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Link } from '@arco-design/web-vue';
@@ -2958,7 +3220,7 @@ export default defineComponent({
 
 ```
 
-### valueType 样式类
+### valueType 样式类 [demo](http://47.120.3.125:6006/?path=/story/pro-table--value-type-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Link, Space } from '@arco-design/web-vue';
@@ -3119,7 +3381,7 @@ export default defineComponent({
 
 ```
 
-### GroupingColumns 分组表头表格
+### GroupingColumns 分组表头表格 [demo](http://47.120.3.125:6006/?path=/story/pro-table--grouping-columns-demo)
 ```tsx
 import ProTable from '../index';
 import { defineComponent, reactive } from 'vue';

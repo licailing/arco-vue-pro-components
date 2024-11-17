@@ -1,5 +1,7 @@
 English | [简体中文](./README.md)
 
+[API File](./interface.ts)
+
 ```yaml
 meta:
   type: Component
@@ -107,10 +109,10 @@ description: pro-table component based on arco-design web-vue table package
 |expand-row|Expand row content|record: `TableData`|
 |expand-icon|Expand row icon|expanded: `boolean`<br>record: `TableData`|
 |option-render|Customize the search config|data: `FormOptionProps`|
-|options-render|Customize the search config|data: `ToolBarProps`<br>settings: `JSX.Element[]`|
+|options-render|Customize the tool bar options|data: `ToolBarProps`<br>settings: `JSX.Element[]`|
 |tool-bar|Customize the tool bar|action: `UseFetchDataAction`<br>selectedRowKeys: `any[]`<br>selectedRows: `any[]`|
 |header-title|Customize the head title|action: `UseFetchDataAction`<br>selectedRowKeys: `any[]`<br>selectedRows: `any[]`|
-|index|columns Indicates the user-defined index columns|pagination: `PaginationProps`|
+|index|columns Indicates the user-defined index columns|data: `RenderData`|
 |form-search|Customize the search form|formData: `any`|
 |columns|Table column definitions. When enabled, the columns attribute is masked|-|
 
@@ -233,6 +235,31 @@ description: pro-table component based on arco-design web-vue table package
 
 
 
+### ToolBarProps
+
+|Name|Description|Type|Default|
+|---|---|---|:---:|
+|headerTitle|tool bar title|`string    \| boolean    \| VNode    \| ((data: ToolBarData<T>) => VNodeTypes)`|`-`|
+|toolBarRender|Custom tool bar|`false \| ((data: ToolBarData<T>) => VNodeTypes[])`|`-`|
+|options|Custom tool bar right options|`OptionConfig \| boolean`|`-`|
+|optionsRender|Custom tool bar right option-render|`false    \| ((props: ToolBarProps<T>, defaultDom: Element[]) => VNodeTypes[])`|`-`|
+|action|table action|`ActionType`|`-`|
+|selectedRowKeys|Table selected row keys array|`(string \| number)[]`|`-`|
+|selectedRows|Table selected row array|`any[]`|`-`|
+|columns|table column|`ProColumns[]`|`-`|
+
+
+
+### RequestData
+
+|Name|Description|Type|Default|
+|---|---|---|:---:|
+|data|data|`T[]`|`-`|
+|success|whether success|`boolean`|`false`|
+|total|data total number|`number`|`-`|
+
+
+
 ### RenderData
 
 |Name|Description|Type|Default|
@@ -242,6 +269,16 @@ description: pro-table component based on arco-design web-vue table package
 |rowIndex|row index|`number`|`-`|
 |dom|Default rendering of virtual node data in the table|`VNodeChild`|`-`|
 |action|Default rendering of virtual node data in the table|`UseFetchDataAction<RequestData<any>>`|`-`|
+
+
+
+### LightSearchConfig
+
+|Name|Description|Type|Default|
+|---|---|---|:---:|
+|rowNumber|Set the number of direct search form items displayed on the right: the default is 2, and the other form items are in the advanced filter box|`number`|`-`|
+|name|advanced search form setting|`string`|`-`|
+|search|advanced search form setting|`InputSearchInstance \| boolean \| { placeholder: string }`|`-`|
 
 
 
@@ -375,7 +412,232 @@ description: pro-table component based on arco-design web-vue table package
 
 ## Demos
 
-### advanced filter replacement query form
+### basic table [demo](http://47.120.3.125:6006/?path=/story/pro-table--basic-demo)
+```tsx
+import { defineComponent, ref } from 'vue';
+import { Button, Link } from '@arco-design/web-vue';
+import type {
+  ActionType,
+  ProColumns,
+  RenderData,
+  TableData,
+  ToolBarData,
+} from '../index';
+import ProTable from '../index';
+
+const valueEnum: any = {
+  0: 'close',
+  1: 'running',
+  2: 'online',
+  3: 'error',
+};
+
+const ProcessMap: any = {
+  close: 'normal',
+  running: 'warning',
+  online: 'success',
+  error: 'danger',
+};
+
+export interface TableListItem extends TableData {
+  key: string;
+  name: string;
+  progress: number;
+  containers: number;
+  callNumber: number;
+  creator: string;
+  status: string;
+  createdAt: number;
+  memo: string;
+  children?: any[];
+}
+const tableListDataSource: TableListItem[] = [];
+
+const creators = ['付小小', '曲丽丽', '林东东', '陈帅帅', '兼某某'];
+
+function generateDataItem(i: number) {
+  const progress = Math.random() * 1;
+  return {
+    key: `${i}`,
+    name: `AppName-${i}`,
+    containers: Math.floor(Math.random() * 20),
+    callNumber: Math.floor(Math.random() * 2000),
+    progress: parseFloat(progress.toFixed(2)),
+    creator: creators[Math.floor(Math.random() * creators.length)],
+    status: valueEnum[Math.floor(Math.random() * 10) % 4],
+    createdAt: Date.now() - Math.floor(Math.random() * 100000),
+    memo:
+      i % 2 === 1
+        ? '很长很长很长很长很长很长很长的文字要展示但是要留下尾巴'
+        : '简短备注文案',
+  };
+}
+for (let i = 0; i < 10; i += 1) {
+  tableListDataSource.push(generateDataItem(i));
+}
+
+export default defineComponent({
+  name: 'Basic',
+  setup(props) {
+    const actionRef = ref();
+    const setActionRef = (ref: ActionType) => {
+      actionRef.value = ref;
+    };
+    const columns: ProColumns[] = [
+      {
+        title: '应用名称',
+        width: 200,
+        dataIndex: 'name',
+        fixed: 'left',
+        render: (data: RenderData) => <Link>{data.dom}</Link>,
+      },
+      {
+        title: '容器量',
+        width: 120,
+        dataIndex: 'containers',
+        align: 'right',
+        sorter: true,
+      },
+      {
+        title: '调用次数',
+        width: 120,
+        align: 'right',
+        dataIndex: 'callNumber',
+      },
+      {
+        title: '执行进度',
+        dataIndex: 'progress',
+        valueType: (item) => ({
+          type: 'progress',
+          status: ProcessMap[item.status],
+        }),
+      },
+      {
+        title: '创建者',
+        width: 120,
+        dataIndex: 'creator',
+        valueType: 'select',
+        valueEnum: {
+          all: { text: '全部' },
+          付小小: { text: '付小小' },
+          曲丽丽: { text: '曲丽丽' },
+          林东东: { text: '林东东' },
+          陈帅帅: { text: '陈帅帅' },
+          兼某某: { text: '兼某某' },
+        },
+      },
+      {
+        title: '创建时间',
+        width: 140,
+        key: 'since',
+        dataIndex: 'createdAt',
+        valueType: 'date',
+        sorter: true,
+      },
+      {
+        title: '备注',
+        dataIndex: 'memo',
+        ellipsis: true,
+        copyable: true,
+      },
+      {
+        title: '操作',
+        width: 80,
+        key: 'option',
+        dataIndex: 'option',
+        valueType: 'option',
+        hideInSearch: true,
+        fixed: 'right',
+        render: () => {
+          return [<Link key="link">链路</Link>];
+        },
+      },
+    ];
+    const selectedKeys = ref(['1']);
+    const expandedKeys = ref([]);
+    const render = () => {
+      console.log(
+        'selectedKeys:%o, expandedKeys:%o',
+        selectedKeys.value,
+        expandedKeys.value
+      );
+      return (
+        <ProTable
+          columns={columns}
+          rowSelection={{
+            type: 'checkbox',
+            showCheckedAll: true,
+            checkStrictly: true,
+          }}
+          actionRef={setActionRef}
+          data={tableListDataSource}
+          scroll={{ x: 1300 }}
+          pagination={{
+            pageSize: 5,
+          }}
+          onSelectAll={(checked: boolean) => {
+            console.log('onSelectAll', checked);
+          }}
+          onSelect={(rowKeys, rowKey, record) => {
+            console.log(
+              'onSelect:rowKeys:%o,rowKey:%o,record:%o',
+              rowKeys,
+              rowKey,
+              record
+            );
+          }}
+          v-model:selectedKeys={selectedKeys.value}
+          v-model:expandedKeys={expandedKeys.value}
+          rowKey="key"
+          headerTitle={({
+            selectedRowKeys,
+            selectedRows,
+            action,
+          }: ToolBarData<any>) => {
+            return <Link to="https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#%E9%AB%98%E7%BA%A7%E7%AD%9B%E9%80%89%E8%A1%A8%E6%A0%BC" blank="_target">默认示例(可互动)</Link>;
+          }}
+          options={{ fullScreen: true }}
+          {...props}
+          toolBarRender={
+            props.toolBarRender === false
+              ? false
+              : ({
+                  selectedRowKeys,
+                  selectedRows,
+                  action,
+                }: ToolBarData<any>) => {
+                  return [
+                    <Button
+                      key="selected"
+                      onClick={() => {
+                        // 获取选中的数据
+                        console.log(
+                          'selectedKeys',
+                          actionRef.value.getSelected() // selectedKeys和selectedRows
+                        );
+                      }}
+                    >
+                      获取选中
+                    </Button>,
+                    <Button key="show">查看日志</Button>,
+                  ];
+                }
+          }
+        />
+      );
+    };
+    return {
+      render,
+    };
+  },
+  render() {
+    return this.render();
+  },
+});
+
+```
+
+### advanced filter replacement query form [demo](http://47.120.3.125:6006/?path=/story/pro-table--lightfilter-demo)
 ```tsx
 import { defineComponent, h, ref } from 'vue';
 import { Button, Dropdown, Link, Tooltip } from '@arco-design/web-vue';
@@ -722,7 +984,7 @@ export default defineComponent({
 
 ```
 
-### Batch manipulation of tables
+### Batch manipulation of tables [demo](http://47.120.3.125:6006/?path=/story/pro-table--batch-option-demo)
 ```tsx
 import { defineComponent, ref } from 'vue';
 import { Button, Link } from '@arco-design/web-vue';
@@ -953,7 +1215,7 @@ export default defineComponent({
 
 ```
 
-### Downgrade to a normal table
+### Downgrade to a normal table [demo](http://47.120.3.125:6006/?path=/story/pro-table--normal-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Button, Dropdown, Link, Tooltip } from '@arco-design/web-vue';
@@ -1144,7 +1406,7 @@ export default defineComponent({
 
 ```
 
-### Nested tables
+### Nested tables [demo](http://47.120.3.125:6006/?path=/story/pro-table--table-nested-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Button, Tooltip, Tag, Link } from '@arco-design/web-vue';
@@ -1359,7 +1621,7 @@ export default defineComponent({
 
 ```
 
-### Left and right structure
+### Left and right structure [demo](http://47.120.3.125:6006/?path=/story/pro-table--split-demo)
 ```tsx
 import { defineComponent, ref, toRefs, watch } from 'vue';
 import { Button, Link, Badge, Split, Card } from '@arco-design/web-vue';
@@ -1595,7 +1857,7 @@ export default defineComponent({
 
 ```
 
-### Manipulating query forms with formRef
+### Manipulating query forms with formRef [demo](http://47.120.3.125:6006/?path=/story/pro-table--form-demo)
 ```tsx
 import { Ref, defineComponent, ref } from 'vue';
 import { Button } from '@arco-design/web-vue';
@@ -1718,7 +1980,7 @@ export default defineComponent({
 
 ```
 
-### Manipulating query forms with formRef
+### Manipulating query forms with formRef [demo](http://47.120.3.125:6006/?path=/story/pro-table--form-v-demo)
 ```vue
 <template>
   <ProTable
@@ -1827,7 +2089,7 @@ const handleSubmit = (formData) => {
 
 ```
 
-### drag and sort
+### drag and sort [demo](http://47.120.3.125:6006/?path=/story/pro-table--drag-sort-table-demo)
 ```tsx
 import { defineComponent, reactive, ref } from 'vue';
 import { Link, Message } from '@arco-design/web-vue';
@@ -1906,7 +2168,7 @@ export default defineComponent({
 
 ```
 
-### Querying a table
+### Querying a table [demo](http://47.120.3.125:6006/?path=/story/pro-table--single-demo)
 ```tsx
 import { defineComponent, ref, h, Ref } from 'vue';
 import {
@@ -2199,7 +2461,7 @@ export default defineComponent({
 
 ```
 
-### Dynamically customize the search bar
+### Dynamically customize the search bar [demo](http://47.120.3.125:6006/?path=/story/pro-table--linkage-form-demo)
 ```tsx
 /* eslint-disable no-console */
 import { defineComponent } from 'vue';
@@ -2396,7 +2658,7 @@ export default defineComponent({
 
 ```
 
-### Dynamically customize the search bar
+### Dynamically customize the search bar [demo](http://47.120.3.125:6006/?path=/story/pro-table--linkage-form-v-demo)
 ```vue
 <template>
   <ProTable
@@ -2542,7 +2804,7 @@ const columns: ProColumns[] = [
 
 ```
 
-### valueType - Selection Classes
+### valueType - Selection Classes [demo](http://47.120.3.125:6006/?path=/story/pro-table--value-type-select-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Link } from '@arco-design/web-vue';
@@ -2698,7 +2960,7 @@ export default defineComponent({
 
 ```
 
-### valueType - Date class
+### valueType - Date class [demo](http://47.120.3.125:6006/?path=/story/pro-table--value-type-date-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Link } from '@arco-design/web-vue';
@@ -2831,7 +3093,7 @@ export default defineComponent({
 
 ```
 
-### valueType - numeric class
+### valueType - numeric class [demo](http://47.120.3.125:6006/?path=/story/pro-table--value-type-number-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Link } from '@arco-design/web-vue';
@@ -2960,7 +3222,7 @@ export default defineComponent({
 
 ```
 
-### valueType - Style Classes
+### valueType - Style Classes [demo](http://47.120.3.125:6006/?path=/story/pro-table--value-type-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Link, Space } from '@arco-design/web-vue';
@@ -3121,7 +3383,7 @@ export default defineComponent({
 
 ```
 
-### GroupingColumns - grouping table header
+### GroupingColumns - grouping table header [demo](http://47.120.3.125:6006/?path=/story/pro-table--grouping-columns-demo)
 ```tsx
 import ProTable from '../index';
 import { defineComponent, reactive } from 'vue';

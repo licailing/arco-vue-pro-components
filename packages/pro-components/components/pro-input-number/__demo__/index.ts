@@ -6,4 +6,8 @@
  */
 import Basic from './basic.vue';
 
-export const BasicDemo = () => Basic;
+export const BasicDemo = {
+    name: '默认示例',
+    render: () => Basic,
+  };
+  

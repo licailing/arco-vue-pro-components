@@ -146,7 +146,7 @@ export default defineComponent({
       default: 'table',
     },
     /**
-     * @zh 渲染工具栏，支持返回一个 dom 数组，会自动增加 margin-right
+     * @zh 渲染工具栏右侧操作按钮，支持返回一个 dom 数组，会自动增加 margin-right,为false则不显示工具栏
      * @en Render toolbar, support returning a dom array, will automatically increase margin-right
      * @defaultValue undefined
      */
@@ -157,7 +157,7 @@ export default defineComponent({
       default: undefined,
     },
     /**
-     * @zh 自定义操作栏
+     * @zh 自定义工具栏右侧表格操作按钮,为false则显示默认：reload(刷新)|density(表格密度)|setting(列设置)|fullScreen(全屏 默认不显示)
      * @en Custom action bar
      */
     optionsRender: {
@@ -749,7 +749,7 @@ export default defineComponent({
    * @zh columns配置自定义索引列
    * @en columns Indicates the user-defined index columns
    * @slot index
-   * @binding {PaginationProps} pagination
+   * @binding {RenderData} data
    */
   /**
    * @zh 自定义表格标题
@@ -760,7 +760,7 @@ export default defineComponent({
    * @binding {any[]} selectedRows
    */
   /**
-   * @zh 自定义操作栏
+   * @zh 自定义操作栏右侧操作按钮
    * @en Customize the tool bar
    * @slot tool-bar
    * @binding {UseFetchDataAction} action
@@ -768,14 +768,14 @@ export default defineComponent({
    * @binding {any[]} selectedRows
    */
   /**
-   * @zh 自定义工具栏 基础的配置
-   * @en Customize the search config
+   * @zh 自定义工具栏(tool-bar) 右侧表格操作按钮(如果options设置false则不显示),默认：reload(刷新)|density(表格密度)|setting(列设置)|fullScreen(全屏 默认不显示)
+   * @en Customize the tool bar options
    * @slot options-render
    * @binding {ToolBarProps} data
    * @binding {JSX.Element[]} settings
    */
   /**
-   * @zh searchConfig 基础的配置
+   * @zh 自定义普通搜索表单(searchType=query)的按钮(如果search=false则不显示)，默认：重置|查询(type=table),重置|提交(type=form)
    * @en Customize the search config
    * @slot option-render
    * @binding {FormOptionProps} data

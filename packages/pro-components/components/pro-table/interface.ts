@@ -112,6 +112,10 @@ export type ColumnStateType = {
   persistenceKey?: string;
 };
 
+/**
+ * @zh arco-design-vue组件table的columns
+ * @en arco-design-vue table columns
+ */
 export interface TableColumnData {
   /**
    * @zh 列信息的标识，对应 `TableData` 中的数据
@@ -244,6 +248,10 @@ export interface TableColumnData {
   parent?: TableColumnData;
 }
 
+/**
+ * @zh pro-table columns继承arco-design-vue组件table的columns
+ * @en pro-table columns
+ */
 export interface ProColumns
   extends Omit<
     TableColumnData,
@@ -454,7 +462,7 @@ export interface ProTableProps extends Omit<TableProps, 'columns'> {
    */
   optionRender?: ToolBarProps<any>['optionsRender'] | false;
   /**
-   * @zh table 工具栏，设为 false 时不显示，传入 function 会点击时触发
+   * @zh 配置table 工具栏右侧表格操作按钮，设为 false 时不显示，传入 function 会点击时触发,默认按钮:reload(刷新)|density(表格密度)|setting(列设置)|fullScreen(全屏 默认不显示)
    * @en table toolbar, not displayed when set to false
    */
   options?: OptionConfig | false;
@@ -671,7 +679,10 @@ export interface ProTableContext {
   fullscreen?: boolean;
 }
 
-/** 操作类型 */
+/**
+ * @zh 操作类型
+ * @en action type
+ */
 export type ActionType = {
   /**
    * @zh 刷新
@@ -731,19 +742,68 @@ export interface ToolBarData<T> {
   selectedRows: T[];
 }
 
+/**
+ * @zh tool-bar 右侧列设置按钮的相关
+ * @en The right setting button of tool-bar info
+ */
 export type SettingOptionType = {
+  /**
+   * @zh 列设置中的列展示数据是否可以拖拽
+   * @en whether data can be dragged
+   */
   draggable?: boolean;
+  /**
+   * @zh 列设置中的列展示数据是否可以勾选
+   * @en whether data can be check
+   */
   checkable?: boolean;
+  /**
+   * @zh 列设置中的列展示表格操作按钮（固定在左侧|不固定|固定在右侧）是否显示
+   * @en The column in Column Settings shows whether the action button (fixed on the left | not fixed |fixed on the right |) is displayed
+   */
   showListItemOption?: boolean;
+  /**
+   * @zh 列设置中的列展示重置按钮是否显示
+   * @en whether to display reset button
+   */
   checkedReset?: boolean;
 };
+
 export type OptionConfig = {
+  /**
+   * @zh 设置是否显示表格密度按钮
+   * @en Sets whether to display table density button
+   */
   density?: boolean;
+  /**
+   * @zh 设置是否显示全屏按钮或自定义全屏操作
+   * @en Set whether to display full-screen button or custom full-screen button operations
+   */
   fullScreen?: OptionsType;
+  /**
+   * @zh 设置是否显示刷新按钮或自定义刷新按钮操作
+   * @en Sets whether to display a refresh button or to customize refresh button actions
+   */
   reload?: OptionsType;
+  /**
+   * @zh 设置是否显示列设置按钮或设置列设置功能
+   * @en Sets whether to display the column setting button or set the column setting function
+   */
   setting?: boolean | SettingOptionType;
+  /**
+   * @zh 设置刷新按钮的图标
+   * @en Set the reload button icon
+   */
   reloadIcon?: VNode;
+  /**
+   * @zh 设置表格密度按钮的图标
+   * @en Set the density button icon
+   */
   densityIcon?: VNode;
+  /**
+   * @zh 设置列设置按钮的图标
+   * @en Set the setting button icon
+   */
   settingIcon?: VNode;
 };
 export type ListToolBarSetting = {
@@ -752,26 +812,96 @@ export type ListToolBarSetting = {
   key?: string;
   onClick?: (key?: string) => void;
 };
+
+/**
+ * @zh OptionsFunctionType
+ * @en OptionsFunctionType
+ */
 export type OptionsFunctionType = (e: MouseEvent, action?: ActionType) => void;
 
+/**
+ * @zh OptionsType
+ * @en OptionsType
+ */
 export type OptionsType = OptionsFunctionType | boolean;
 
+/**
+ * @zh 工具栏props
+ * @en tool bar props
+ */
 export interface ToolBarProps<T = unknown> {
-  headerTitle?: string | boolean | VNode | ((data: ToolBarData<T>) => VNodeTypes);
+  /**
+   * @zh 工具栏 标题,为false不显示
+   * @en tool bar title
+   */
+  headerTitle?:
+    | string
+    | boolean
+    | VNode
+    | ((data: ToolBarData<T>) => VNodeTypes);
+  /**
+   * @zh 自定义工具栏右侧操作按钮,为false则不显示工具栏
+   * @en Custom tool bar
+   */
   toolBarRender?: false | ((data: ToolBarData<T>) => VNodeTypes[]);
+  /**
+   * @zh 配置工具栏右侧表格操作按钮是否显示及图标,为false不显示,可配置以下按钮显不显示：reload(刷新)|density(表格密度)|setting(列设置)|fullScreen(全屏 默认不显示)
+   * @en Custom tool bar right options
+   */
   options?: OptionConfig | boolean;
+  /**
+   * @zh 自定义工具栏右侧表格操作按钮,为false则显示默认：reload(刷新)|density(表格密度)|setting(列设置)|fullScreen(全屏 默认不显示)
+   * @en Custom tool bar right option-render
+   */
   optionsRender?:
     | false
     | ((props: ToolBarProps<T>, defaultDom: Element[]) => VNodeTypes[]);
+  /**
+   * @zh 表格action方法
+   * @en table action
+   */
   action?: ActionType;
+  /**
+   * @zh 列表选中键值数组
+   * @en Table selected row keys array
+   */
   selectedRowKeys: (string | number)[];
+  /**
+   * @zh 列表选中行数据
+   * @en Table selected row array
+   */
   selectedRows: any[];
+  /**
+   * @zh 表格columns
+   * @en table column
+   */
   columns: ProColumns[];
 }
+
+/**
+ * @zh request 方法返回的数据类型
+ * @en request return data type
+ */
 export interface RequestData<T> {
+  /**
+   * @zh 返回的数据放这里面
+   * @en data
+   */
   data: T[];
+  /**
+   * @zh 是否成功
+   * @en whether success
+   */
   success?: boolean;
+  /**
+   * @zh 数据总条数
+   * @en data total number
+   */
   total?: number;
+  /**
+   * @zh 其他数据
+   * @en Other info
+   */
   [key: string]: any;
 }
 export interface UseFetchDataAction<T = any> {
@@ -790,6 +920,10 @@ export interface PageInfo {
   pageSize: number;
   total?: number;
 }
+/**
+ * @zh 行数据
+ * @en row data
+ */
 export interface RenderData {
   /**
    * @zh 行数据
@@ -817,6 +951,7 @@ export interface RenderData {
    */
   action?: UseFetchDataAction<RequestData<any>>;
 }
+
 export interface RenderFormItemData {
   item: ProColumns;
   formModel: Ref;
@@ -832,9 +967,25 @@ export type ProColumnsValueObjectType = {
   showSymbol?: boolean;
   precision?: number;
 };
+/**
+ * @zh 高级搜索表单配置(searchType=light)
+ * @en advanced search form setting
+ */
 export interface LightSearchConfig {
+  /**
+   * @zh 设置右侧直接搜索表单项显示几个： 默认是2个，其他表单项在高级筛选弹框里面
+   * @en Set the number of direct search form items displayed on the right: the default is 2, and the other form items are in the advanced filter box
+   */
   rowNumber?: number;
+  /**
+   * @zh 设置左侧文本框名称(传值给后台的字段)，默认：keyword
+   * @en advanced search form setting
+   */
   name?: string;
+  /**
+   * @zh 传给左侧文本搜索框props，左侧文本搜索框为false不显示
+   * @en advanced search form setting
+   */
   search?: InputSearchInstance | boolean | { placeholder: string };
 }
 export interface FormOptionProps {
