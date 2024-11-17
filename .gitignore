@@ -75,4 +75,4 @@ packages/*/docs
 
 # Don't ignore arco-block src/lib
 !packages/*/src/lib
-storybook-static/*/*
+storybook-static/*

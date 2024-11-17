@@ -214,7 +214,6 @@ export const BasicDemo = {
     pagination: true,
   },
   render: (args: any) => ({
-    components: { Basic },
     setup() {
       const props = reactive<any>({
         options: { fullScreen: true },
@@ -242,7 +241,7 @@ export const BasicDemo = {
                 // 获取选中的数据
                 console.log(
                   'selectedKeys',
-                  action.value.getSelected() // selectedKeys和selectedRows
+                  action.getSelected() // selectedKeys和selectedRows
                 );
               }}
             >
@@ -255,11 +254,11 @@ export const BasicDemo = {
         props.toolBarRender = false;
       }
       props.searchType = args.searchType === '普通表格' ? 'query' : 'light';
-      return { args, props };
+      return () => <Basic {...args} {...props} />;
     },
-    template: '<Basic v-bind="args" v-bind="props" />',
   }),
 };
+
 export const SignleDemo = {
   name: '查询表格',
   render: () => Signle,
