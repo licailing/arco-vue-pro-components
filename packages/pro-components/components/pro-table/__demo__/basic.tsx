@@ -1,5 +1,5 @@
 import { defineComponent, ref } from 'vue';
-import { Button, Link } from '@arco-design/web-vue';
+import { Link } from '@arco-design/web-vue';
 import type {
   ActionType,
   ProColumns,
@@ -182,34 +182,18 @@ export default defineComponent({
             selectedRows,
             action,
           }: ToolBarData<any>) => {
-            return <Link href={encodeURI('https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#默认表格可互动-demo')} target="_blank">默认示例(可互动)[查看源代码]</Link>;
+            return (
+              <Link
+                href={encodeURI(
+                  'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#默认表格可互动-demo'
+                )}
+                target="_blank"
+              >
+                默认示例(可互动)[查看源代码]
+              </Link>
+            );
           }}
           {...props}
-          toolBarRender={
-            props.toolBarRender === false
-              ? false
-              : ({
-                  selectedRowKeys,
-                  selectedRows,
-                  action,
-                }: ToolBarData<any>) => {
-                  return [
-                    <Button
-                      key="selected"
-                      onClick={() => {
-                        // 获取选中的数据
-                        console.log(
-                          'selectedKeys',
-                          actionRef.value.getSelected() // selectedKeys和selectedRows
-                        );
-                      }}
-                    >
-                      获取选中
-                    </Button>,
-                    <Button key="show">查看日志</Button>,
-                  ];
-                }
-          }
         />
       );
     };

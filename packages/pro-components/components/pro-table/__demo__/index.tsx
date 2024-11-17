@@ -118,6 +118,7 @@ import ValueType from './value-type.tsx';
  */
 import GroupingColumns from './grouping-columns.tsx';
 import { reactive } from 'vue';
+import { Button } from '@arco-design/web-vue';
 
 export const BasicDemo = {
   name: '默认示例(可互动)',
@@ -155,7 +156,9 @@ export const BasicDemo = {
       table: {
         type: { summary: '取值false|function' },
         defaultValue: {
-          summary: 'undefined',
+          summary: `此案列配置的({ action }: ToolBarData<any>) => {
+            ...
+          }`,
         },
       },
       control: 'inline-radio',
@@ -231,7 +234,23 @@ export const BasicDemo = {
         }
       }
       if (args.toolBarRender === '显示已配置的') {
-        props.toolBarRender = undefined;
+        props.toolBarRender = ({ action }: any) => {
+          return [
+            <Button
+              key="selected"
+              onClick={() => {
+                // 获取选中的数据
+                console.log(
+                  'selectedKeys',
+                  action.value.getSelected() // selectedKeys和selectedRows
+                );
+              }}
+            >
+              获取选中
+            </Button>,
+            <Button key="show">查看日志</Button>,
+          ];
+        };
       } else {
         props.toolBarRender = false;
       }

@@ -1,5 +1,9 @@
 ## Demos
 
+pro-table可互动(在线编辑属性)：[http://47.120.3.125:6006/?path=/story/pro-table--basic-demo](http://47.120.3.125:6006/?path=/story/pro-table--basic-demo)
+
+![pro-table可互动(在线编辑属性)](/packages/pro-components/assets/images/storybook_pro-table_basic.png)
+
 在线预览：[http://47.120.3.125:6006/?path=/story/pro-table--lightfilter-demo](http://47.120.3.125:6006/?path=/story/pro-table--lightfilter-demo)
 
 ![pro-table筛选](/packages/pro-components/assets/images/pro-table.png)
