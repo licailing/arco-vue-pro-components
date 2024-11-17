@@ -137,7 +137,14 @@ export default defineComponent({
             status3: ['all'],
           }}
           rowKey="key"
-          headerTitle="选项类"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-选项类-demo")}
+              target="_blank"
+            >
+              选项类[查看源代码]
+            </Link>
+          }
         />
       );
     };

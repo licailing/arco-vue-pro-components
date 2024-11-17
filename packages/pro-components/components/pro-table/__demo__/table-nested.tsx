@@ -186,7 +186,14 @@ export default defineComponent({
           }}
           expandable={{ expandedRowRender }}
           search={false}
-          headerTitle="嵌套表格"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#嵌套表格-demo")}
+              target="_blank"
+            >
+              嵌套表格[查看源代码]
+            </Link>
+          }
           toolBarRender={() => [
             <Button key="show">查看日志</Button>,
             <Button key="out">

@@ -7,7 +7,12 @@
     :options="{ fullScreen: true }"
   >
     <template #header-title="{ action, selectedRowKeys, selectedRows }">
-      <div>动态自定义搜索栏 <IconFullscreen @click="action?.fullScreen?.()"></IconFullscreen></div>
+      <Link
+        :href="encodeURI(`https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#动态自定义搜索栏-demo-1`)"
+        target="_blank"
+      >
+        动态自定义搜索栏(vue)[查看源代码]
+      </Link>
     </template>
     <template #index="{ rowIndex, action }">
       <span
@@ -73,7 +78,11 @@
 <script setup lang="ts">
 import { h } from 'vue';
 import { Button, Input, Link, Space, Tooltip } from '@arco-design/web-vue';
-import { IconSend, IconStar, IconFullscreen } from '@arco-design/web-vue/es/icon';
+import {
+  IconSend,
+  IconStar,
+  IconFullscreen,
+} from '@arco-design/web-vue/es/icon';
 import type {
   ProColumns,
   RenderData,

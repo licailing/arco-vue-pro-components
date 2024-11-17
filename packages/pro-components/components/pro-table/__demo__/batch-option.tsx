@@ -178,17 +178,14 @@ export default defineComponent({
           v-model:selectedKeys={selectedKeys.value}
           v-model:expandedKeys={expandedKeys.value}
           rowKey="key"
-          headerTitle={({
-            selectedRowKeys,
-            selectedRows,
-            action,
-          }: ToolBarData<any>) => {
-            return (
-              <div>
-                表格批量操作
-              </div>
-            );
-          }}
+          headerTitle={
+            <Link
+              href={encodeURI('https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#表格批量操作-demo')}
+              target="_blank"
+            >
+              表格批量操作[查看源代码]
+            </Link>
+          }
           options={{ fullScreen: true }}
           toolBarRender={({
             selectedRowKeys,

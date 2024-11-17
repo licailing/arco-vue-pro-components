@@ -282,7 +282,14 @@ export default defineComponent({
             }}
             params={{ type: 1 }}
             defaultFormData={{ status: 'all', name: 'aaa' }}
-            headerTitle="高级筛选表格"
+            headerTitle={
+              <Link
+                href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#高级筛选表格-demo")}
+                target="_blank"
+              >
+                高级筛选表格[查看源代码]
+              </Link>
+            }
             toolBarRender={() => [
               <Button key="show">查看日志</Button>,
               <Button key="out">

@@ -5,6 +5,7 @@
     "packages/*"
   ],
   "scripts": {
+    "build-storybook": "build-storybook",
     "dev": "start-storybook -p 6006",
     "build": "lerna run build --stream",
     "test": "lerna run test --stream",

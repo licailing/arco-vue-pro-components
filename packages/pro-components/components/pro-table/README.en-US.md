@@ -570,11 +570,15 @@ export default defineComponent({
             checkStrictly: true,
           }}
           actionRef={setActionRef}
-          data={tableListDataSource}
-          scroll={{ x: 1300 }}
-          pagination={{
-            pageSize: 5,
+          request={(params) => {
+            console.log('request reload', params);
+            return Promise.resolve({
+              data: tableListDataSource,
+              total: 10,
+              success: true,
+            });
           }}
+          scroll={{ x: 1300 }}
           onSelectAll={(checked: boolean) => {
             console.log('onSelectAll', checked);
           }}
@@ -594,9 +598,8 @@ export default defineComponent({
             selectedRows,
             action,
           }: ToolBarData<any>) => {
-            return <Link to="https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#%E9%AB%98%E7%BA%A7%E7%AD%9B%E9%80%89%E8%A1%A8%E6%A0%BC" blank="_target">默认示例(可互动)</Link>;
+            return <Link href={encodeURI('https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#默认表格可互动-demo')} target="_blank">默认示例(可互动)[查看源代码]</Link>;
           }}
-          options={{ fullScreen: true }}
           {...props}
           toolBarRender={
             props.toolBarRender === false
@@ -923,7 +926,14 @@ export default defineComponent({
             }}
             params={{ type: 1 }}
             defaultFormData={{ status: 'all', name: 'aaa' }}
-            headerTitle="高级筛选表格"
+            headerTitle={
+              <Link
+                href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#高级筛选表格-demo")}
+                target="_blank"
+              >
+                高级筛选表格[查看源代码]
+              </Link>
+            }
             toolBarRender={() => [
               <Button key="show">查看日志</Button>,
               <Button key="out">
@@ -1166,17 +1176,14 @@ export default defineComponent({
           v-model:selectedKeys={selectedKeys.value}
           v-model:expandedKeys={expandedKeys.value}
           rowKey="key"
-          headerTitle={({
-            selectedRowKeys,
-            selectedRows,
-            action,
-          }: ToolBarData<any>) => {
-            return (
-              <div>
-                表格批量操作
-              </div>
-            );
-          }}
+          headerTitle={
+            <Link
+              href={encodeURI('https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#表格批量操作-demo')}
+              target="_blank"
+            >
+              表格批量操作[查看源代码]
+            </Link>
+          }
           options={{ fullScreen: true }}
           toolBarRender={({
             selectedRowKeys,
@@ -1381,7 +1388,14 @@ export default defineComponent({
           size="small"
           search={false}
           defaultFormData={{ status: 'all' }}
-          headerTitle="无查询表单"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#无查询表单-demo")}
+              target="_blank"
+            >
+              无查询表单[查看源代码]
+            </Link>
+          }
           toolBarRender={() => [
             <Button key="show">查看日志</Button>,
             <Button key="out">
@@ -1596,7 +1610,14 @@ export default defineComponent({
           }}
           expandable={{ expandedRowRender }}
           search={false}
-          headerTitle="嵌套表格"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#嵌套表格-demo")}
+              target="_blank"
+            >
+              嵌套表格[查看源代码]
+            </Link>
+          }
           toolBarRender={() => [
             <Button key="show">查看日志</Button>,
             <Button key="out">
@@ -1799,7 +1820,14 @@ const IPList = defineComponent({
               </Button>,
             ];
           }}
-          headerTitle="左右结构"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#左右结构-demo")}
+              target="_blank"
+            >
+              左右结构[查看源代码]
+            </Link>
+          }
           pagination={false}
           search={false}
           onRowClick={(record) => {
@@ -1860,7 +1888,7 @@ export default defineComponent({
 ### Manipulating query forms with formRef [demo](http://47.120.3.125:6006/?path=/story/pro-table--form-demo)
 ```tsx
 import { Ref, defineComponent, ref } from 'vue';
-import { Button } from '@arco-design/web-vue';
+import { Button, Link } from '@arco-design/web-vue';
 import type { ActionType, ProColumns } from '../index';
 import ProTable from '../index';
 
@@ -1965,7 +1993,14 @@ export default defineComponent({
               刷新
             </Button>,
           ]}
-          headerTitle="表单赋值"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#表单赋值-demo")}
+              target="_blank"
+            >
+              表单赋值[查看源代码]
+            </Link>
+          }
         />
       );
     };
@@ -1991,9 +2026,16 @@ export default defineComponent({
     :action-ref="setActionRef"
     :search="search"
     :form-ref="setFormRef"
-    header-title="表单赋值"
     @submit="handleSubmit"
   >
+    <template #header-title>
+      <Link
+        :href="encodeURI(`https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#表单赋值-demo-1`)"
+        target="_blank"
+      >
+        表单赋值(vue)[查看源代码]
+      </Link>
+    </template>
     <template #tool-bar>
       <Button key="set" @click="onSet">赋值</Button>
       <Button key="submit" @click="onSubmit">提交</Button>
@@ -2003,7 +2045,7 @@ export default defineComponent({
 </template>
 <script setup lang="ts">
 import { defineComponent, ref, Ref, toRaw } from 'vue';
-import { Button } from '@arco-design/web-vue';
+import { Button, Link } from '@arco-design/web-vue';
 import type { ProColumns, RenderData } from '../index';
 import ProTable from '../index';
 
@@ -2084,7 +2126,7 @@ const onReload = () => {
 };
 const handleSubmit = (formData) => {
   console.log('formData', formData);
-}
+};
 </script>
 
 ```
@@ -2147,7 +2189,14 @@ export default defineComponent({
     const render = () => {
       return (
         <ProTable
-          headerTitle="拖拽排序"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#拖拽排序-demo")}
+              target="_blank"
+            >
+              拖拽排序[查看源代码]
+            </Link>
+          }
           columns={columns}
           draggable={{ type: 'handle', width: 40 }}
           rowKey="key"
@@ -2412,7 +2461,14 @@ export default defineComponent({
         }}
         defaultFormData={{ state: 'open' }}
         onPageChange={(page: number) => console.log(page)}
-        headerTitle="查询表格"
+        headerTitle={
+          <Link
+            href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#查询表格-demo")}
+            target="_blank"
+          >
+            查询表格[查看源代码]
+          </Link>
+        }
         beforeSearchSubmit={beforeSearchSubmit}
         toolBarRender={() => [
           <Button
@@ -2584,7 +2640,14 @@ export default defineComponent({
             };
           }}
           rowKey="key"
-          headerTitle={<div>动态自定义搜索栏<IconStar /></div>}
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#动态自定义搜索栏-demo")}
+              target="_blank"
+            >
+              动态自定义搜索栏[查看源代码]
+            </Link>
+          }
           search={{
             collapsed: false,
             optionRender: ({ dom }: FormOptionProps) => [
@@ -2669,7 +2732,12 @@ export default defineComponent({
     :options="{ fullScreen: true }"
   >
     <template #header-title="{ action, selectedRowKeys, selectedRows }">
-      <div>动态自定义搜索栏 <IconFullscreen @click="action?.fullScreen?.()"></IconFullscreen></div>
+      <Link
+        :href="encodeURI(`https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#动态自定义搜索栏-demo-1`)"
+        target="_blank"
+      >
+        动态自定义搜索栏(vue)[查看源代码]
+      </Link>
     </template>
     <template #index="{ rowIndex, action }">
       <span
@@ -2735,7 +2803,11 @@ export default defineComponent({
 <script setup lang="ts">
 import { h } from 'vue';
 import { Button, Input, Link, Space, Tooltip } from '@arco-design/web-vue';
-import { IconSend, IconStar, IconFullscreen } from '@arco-design/web-vue/es/icon';
+import {
+  IconSend,
+  IconStar,
+  IconFullscreen,
+} from '@arco-design/web-vue/es/icon';
 import type {
   ProColumns,
   RenderData,
@@ -2945,7 +3017,14 @@ export default defineComponent({
             status3: ['all'],
           }}
           rowKey="key"
-          headerTitle="选项类"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-选项类-demo")}
+              target="_blank"
+            >
+              选项类[查看源代码]
+            </Link>
+          }
         />
       );
     };
@@ -3078,7 +3157,14 @@ export default defineComponent({
             return params;
           }}
           rowKey="key"
-          headerTitle="日期类"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-日期类-demo")}
+              target="_blank"
+            >
+              日期类[查看源代码]
+            </Link>
+          }
         />
       );
     };
@@ -3207,7 +3293,14 @@ export default defineComponent({
             });
           }}
           rowKey="key"
-          headerTitle="数字类"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-数字类-demo")}
+              target="_blank"
+            >
+              数字类[查看源代码]
+            </Link>
+          }
         />
       );
     };
@@ -3368,7 +3461,14 @@ export default defineComponent({
           }}
           rowKey="key"
           pagination={{ pageSize: 10 }}
-          headerTitle="样式类"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-样式类-demo")}
+              target="_blank"
+            >
+              样式类[查看源代码]
+            </Link>
+          }
         />
       );
     };
@@ -3389,6 +3489,7 @@ import ProTable from '../index';
 import { defineComponent, reactive } from 'vue';
 import { IconQuestionCircle } from '@arco-design/web-vue/es/icon';
 import MyToolTip from '../my-tool-tip';
+import { Link } from '@arco-design/web-vue';
 
 export default defineComponent({
   name: 'GroupingColumns',
@@ -3563,7 +3664,14 @@ export default defineComponent({
           pagination={{
             pageSize: 5,
           }}
-          headerTitle="分组表头表格及工具栏"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#groupingcolumns-分组表头表格-demo")}
+              target="_blank"
+            >
+              分组表头表格[查看源代码]
+            </Link>
+          }
         />
       );
     };

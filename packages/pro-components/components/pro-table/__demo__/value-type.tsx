@@ -142,7 +142,14 @@ export default defineComponent({
           }}
           rowKey="key"
           pagination={{ pageSize: 10 }}
-          headerTitle="样式类"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-样式类-demo")}
+              target="_blank"
+            >
+              样式类[查看源代码]
+            </Link>
+          }
         />
       );
     };

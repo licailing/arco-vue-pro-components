@@ -240,7 +240,14 @@ export default defineComponent({
         }}
         defaultFormData={{ state: 'open' }}
         onPageChange={(page: number) => console.log(page)}
-        headerTitle="查询表格"
+        headerTitle={
+          <Link
+            href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#查询表格-demo")}
+            target="_blank"
+          >
+            查询表格[查看源代码]
+          </Link>
+        }
         beforeSearchSubmit={beforeSearchSubmit}
         toolBarRender={() => [
           <Button

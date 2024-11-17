@@ -2,6 +2,7 @@ import ProTable from '../index';
 import { defineComponent, reactive } from 'vue';
 import { IconQuestionCircle } from '@arco-design/web-vue/es/icon';
 import MyToolTip from '../my-tool-tip';
+import { Link } from '@arco-design/web-vue';
 
 export default defineComponent({
   name: 'GroupingColumns',
@@ -176,7 +177,14 @@ export default defineComponent({
           pagination={{
             pageSize: 5,
           }}
-          headerTitle="分组表头表格及工具栏"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#groupingcolumns-分组表头表格-demo")}
+              target="_blank"
+            >
+              分组表头表格[查看源代码]
+            </Link>
+          }
         />
       );
     };

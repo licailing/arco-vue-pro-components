@@ -174,7 +174,14 @@ const IPList = defineComponent({
               </Button>,
             ];
           }}
-          headerTitle="左右结构"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#左右结构-demo")}
+              target="_blank"
+            >
+              左右结构[查看源代码]
+            </Link>
+          }
           pagination={false}
           search={false}
           onRowClick={(record) => {

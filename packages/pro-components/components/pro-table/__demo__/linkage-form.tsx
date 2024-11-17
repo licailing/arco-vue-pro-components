@@ -119,7 +119,14 @@ export default defineComponent({
             };
           }}
           rowKey="key"
-          headerTitle={<div>动态自定义搜索栏<IconStar /></div>}
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#动态自定义搜索栏-demo")}
+              target="_blank"
+            >
+              动态自定义搜索栏[查看源代码]
+            </Link>
+          }
           search={{
             collapsed: false,
             optionRender: ({ dom }: FormOptionProps) => [

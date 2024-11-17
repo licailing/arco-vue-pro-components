@@ -7,9 +7,16 @@
     :action-ref="setActionRef"
     :search="search"
     :form-ref="setFormRef"
-    header-title="表单赋值"
     @submit="handleSubmit"
   >
+    <template #header-title>
+      <Link
+        :href="encodeURI(`https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#表单赋值-demo-1`)"
+        target="_blank"
+      >
+        表单赋值(vue)[查看源代码]
+      </Link>
+    </template>
     <template #tool-bar>
       <Button key="set" @click="onSet">赋值</Button>
       <Button key="submit" @click="onSubmit">提交</Button>
@@ -19,7 +26,7 @@
 </template>
 <script setup lang="ts">
 import { defineComponent, ref, Ref, toRaw } from 'vue';
-import { Button } from '@arco-design/web-vue';
+import { Button, Link } from '@arco-design/web-vue';
 import type { ProColumns, RenderData } from '../index';
 import ProTable from '../index';
 
@@ -100,5 +107,5 @@ const onReload = () => {
 };
 const handleSubmit = (formData) => {
   console.log('formData', formData);
-}
+};
 </script>

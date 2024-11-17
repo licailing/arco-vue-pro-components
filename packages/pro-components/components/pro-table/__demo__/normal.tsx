@@ -162,7 +162,14 @@ export default defineComponent({
           size="small"
           search={false}
           defaultFormData={{ status: 'all' }}
-          headerTitle="无查询表单"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#无查询表单-demo")}
+              target="_blank"
+            >
+              无查询表单[查看源代码]
+            </Link>
+          }
           toolBarRender={() => [
             <Button key="show">查看日志</Button>,
             <Button key="out">

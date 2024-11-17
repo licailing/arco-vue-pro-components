@@ -1,5 +1,5 @@
 import { Ref, defineComponent, ref } from 'vue';
-import { Button } from '@arco-design/web-vue';
+import { Button, Link } from '@arco-design/web-vue';
 import type { ActionType, ProColumns } from '../index';
 import ProTable from '../index';
 
@@ -104,7 +104,14 @@ export default defineComponent({
               刷新
             </Button>,
           ]}
-          headerTitle="表单赋值"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#表单赋值-demo")}
+              target="_blank"
+            >
+              表单赋值[查看源代码]
+            </Link>
+          }
         />
       );
     };

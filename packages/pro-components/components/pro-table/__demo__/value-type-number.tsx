@@ -110,7 +110,14 @@ export default defineComponent({
             });
           }}
           rowKey="key"
-          headerTitle="数字类"
+          headerTitle={
+            <Link
+              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-数字类-demo")}
+              target="_blank"
+            >
+              数字类[查看源代码]
+            </Link>
+          }
         />
       );
     };
