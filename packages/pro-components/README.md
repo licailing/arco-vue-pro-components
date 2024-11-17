@@ -37,7 +37,7 @@ pnpm:
 
 ```bash
 $ npm install -g pnpm
-$ pnpm install --save @acro-vue-pro-components/pro-components
+$ pnpm install --save @arco-vue-pro-components/pro-components
 ```
 
 # Arco 物料项目
