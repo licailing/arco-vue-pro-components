@@ -182,7 +182,7 @@ export default defineComponent({
             selectedRows,
             action,
           }: ToolBarData<any>) => {
-            return <Link to="https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#%E9%AB%98%E7%BA%A7%E7%AD%9B%E9%80%89%E8%A1%A8%E6%A0%BC" blank="_target">默认示例(可互动)</Link>;
+            return <Link to="/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#默认示例(可互动)" blank="_target">默认示例(可互动)</Link>;
           }}
           {...props}
           toolBarRender={
