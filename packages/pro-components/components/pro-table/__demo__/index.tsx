@@ -67,7 +67,7 @@ import DragSortTable from './drag-sort-table.tsx';
  * @zh 查询表格 [demo](http://47.120.3.125:6006/?path=/story/pro-table--single-demo)
  * @en Querying a table [demo](http://47.120.3.125:6006/?path=/story/pro-table--single-demo)
  */
-import Signle from './single.tsx';
+import Single from './single.tsx';
 /**
  * @fileName linkage-form.tsx
  * @fileType tsx
@@ -261,7 +261,7 @@ export const BasicDemo = {
 
 export const SignleDemo = {
   name: '查询表格',
-  render: () => Signle,
+  render: () => Single,
 };
 export const BatchOptionDemo = {
   name: '表格批量操作',
