@@ -259,7 +259,7 @@ export const BasicDemo = {
   }),
 };
 
-export const SignleDemo = {
+export const SingleDemo = {
   name: '查询表格',
   render: () => Single,
 };
