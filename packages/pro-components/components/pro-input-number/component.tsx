@@ -1,10 +1,9 @@
 import { PropType, defineComponent, ref, computed, toRefs, watch } from 'vue';
 import { omit } from '../_utils/omit';
 import { formatterDecimal, toCapital } from './util';
-import InputNumber from './input-number';
 import { CapitalUnitType, ProInputNumberType } from './interface';
 import { getPrefixCls } from '../_utils';
-import { Size } from '@arco-design/web-vue';
+import { Size, InputNumber } from '@arco-design/web-vue';
 
 /**
  * 金额
@@ -121,7 +120,6 @@ export default defineComponent({
      */
     max: {
       type: Number,
-      default: Infinity,
     },
     /**
      * @zh 最小值
@@ -259,9 +257,9 @@ export default defineComponent({
           break;
         case 'money': // 金额
           // 万元时：整数最大9位，小数最大6位
-          // 元时：按999999999999999.9999; // 最大处理的数字:整数最大15位，小数最大4位、
+          // 元时：按9999999999999.99; // 最大处理的数字:整数最大13位，小数最大2位、
           newPrecision = props.capitalUnit === '万元' ? 6 : 2;
-          newIntPartNumber = props.capitalUnit === '万元' ? 9 : 15;
+          newIntPartNumber = props.capitalUnit === '万元' ? 9 : 13;
           isCapital = true;
           break;
         case 'percent': // 百分比
@@ -293,12 +291,7 @@ export default defineComponent({
           : props.type === 'percent'
           ? '%'
           : undefined,
-        max:
-          props.max ||
-          (props.type === 'decimal' ? 100 : undefined) ||
-          (newIntPartNumber
-            ? parseFloat(``.padEnd(newIntPartNumber, '9'))
-            : undefined),
+        max: props.max || (props.type === 'percent' ? 100 : undefined),
       };
     });
     const formatter = (value: string) => {
@@ -336,13 +329,15 @@ export default defineComponent({
         <div class={`${prefixCls}-container`} style={{ width: '100%' }}>
           <InputNumber
             class={`${prefixCls}-input`}
-            precision={config.value.precision}
             formatter={formatter}
             parser={(value: any) => {
               return value.replace(/[^0-9.]/g, '');
             }}
             {...restProps.value}
-            modelEvent="input"
+            onClear={() => {
+              capitalStr.value = '';
+            }}
+            hideButton            
             v-slots={_slots}
             min={props.min || 0}
             max={config.value.max}

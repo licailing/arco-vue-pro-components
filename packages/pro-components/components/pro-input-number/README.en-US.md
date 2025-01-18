@@ -89,22 +89,6 @@ description: Only input boxes in numeric format are allowed, money percent int d
 ```vue
 <template>
   <Space direction="vertical" size="large">
-    <Divider orientation="left">切换</Divider>
-    类型：<RadioGroup :options="types" v-model="type"></RadioGroup>
-    <template v-if="type === 'money'">
-      金额单位：<RadioGroup
-        :options="capitalUnitTypes"
-        v-model="capitalUnit"
-      ></RadioGroup>
-    </template>
-    <ProInputNumber
-      placeholder="请输入"
-      :type="type"
-      :style="{ width: '480px' }"
-      v-model="value"
-      :capital-unit="capitalUnit"
-      show-capital
-    />
     <Divider orientation="left">金额</Divider>
     <ProInputNumber
       :style="{ width: '480px' }"
@@ -164,7 +148,6 @@ import {
 } from '@arco-design/web-vue';
 import ProInputNumber from '../index';
 
-const value = ref();
 const type = ref('money');
 const capitalUnit = ref('元');
 const capitalUnitTypes = [

@@ -119,34 +119,6 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 ## Type
 
 
-### TableColumnData
-
-|参数名|描述|类型|默认值|版本|
-|---|---|---|:---:|:---|
-|dataIndex|列信息的标识，对应 `TableData` 中的数据|`string`|`-`||
-|title|列标题|`string \| RenderFunction`|`-`||
-|width|列宽度|`number`|`-`||
-|align|对齐方向|`'left' \| 'center' \| 'right'`|`-`||
-|fixed|固定位置|`'left' \| 'right'`|`-`||
-|ellipsis|是否显示省略号|`boolean`|`false`||
-|tooltip|是否在显示省略号时显示文本提示。可填入 tooltip 组件属性|`boolean \| Record<string, any>`|`-`|2.26.0|
-|sortable|排序相关选项|`TableSortable`|`-`||
-|filterable|过滤相关选项|`TableFilterable`|`-`||
-|children|表头子数据，用于表头分组|`TableColumnData[]`|`-`||
-|cellClass|自定义单元格类名|`ClassName`|`-`|2.36.0|
-|headerCellClass|自定义表头单元格类名|`ClassName`|`-`|2.36.0|
-|bodyCellClass|自定义内容单元格类名|`ClassName \| ((record: TableData) => ClassName)`|`-`|2.36.0|
-|summaryCellClass|自定义总结栏单元格类名|`ClassName \| ((record: TableData) => ClassName)`|`-`|2.36.0|
-|cellStyle|自定义单元格样式|`CSSProperties`|`-`|2.11.0|
-|headerCellStyle|自定义表头单元格样式|`CSSProperties`|`-`|2.29.0|
-|bodyCellStyle|自定义内容单元格样式|`CSSProperties \| ((record: TableData) => CSSProperties)`|`-`|2.29.0|
-|summaryCellStyle|自定义总结栏单元格样式|`CSSProperties \| ((record: TableData) => CSSProperties)`|`-`|2.30.0|
-|render|自定义列单元格的渲染|`(data: {    record: TableData;    column: TableColumnData;    rowIndex: number;  }) => VNodeChild`|`-`||
-|slotName|设置当前列的渲染插槽的名字。插槽参数同 #cell|`string`|`-`|2.18.0|
-|titleSlotName|设置当前列的标题的渲染插槽的名字|`string`|`-`|2.23.0|
-
-
-
 ### ProColumns
 
 |参数名|描述|类型|默认值|
@@ -413,7 +385,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 ### 默认表格可互动 [demo](http://47.120.3.125:6006/?path=/story/pro-table--basic-demo)
 ```tsx
 import { defineComponent, ref } from 'vue';
-import { Button, Link } from '@arco-design/web-vue';
+import { Link } from '@arco-design/web-vue';
 import type {
   ActionType,
   ProColumns,
@@ -596,7 +568,16 @@ export default defineComponent({
             selectedRows,
             action,
           }: ToolBarData<any>) => {
-            return <Link href={encodeURI('https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#默认表格可互动-demo')} target="_blank">默认示例(可互动)[查看源代码]</Link>;
+            return (
+              <Link
+                href={encodeURI(
+                  'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#默认表格可互动-demo'
+                )}
+                target="_blank"
+              >
+                默认示例(可互动)[查看源代码]
+              </Link>
+            );
           }}
           {...props}
         />
@@ -2542,6 +2523,7 @@ export default defineComponent({
             </span>
           );
         },
+        minWidth: 100,
       },
       {
         title: '标题',
@@ -2549,6 +2531,7 @@ export default defineComponent({
         render: ({ record }: RenderData) => {
           return <Link>{record.name}</Link>;
         },
+        minWidth: 300,
       },
       {
         title: '状态',
@@ -2562,6 +2545,7 @@ export default defineComponent({
         render: ({ record }: RenderData) => {
           return getDictLabel(stateDict, record.state);
         },
+        minWidth: 200,
       },
       {
         title: '动态表单',
@@ -2628,6 +2612,8 @@ export default defineComponent({
               <Button key="out">导出</Button>,
             ],
           }}
+          columnResizable
+          bordered={{cell:true}}
           // 自定义图标
           // options={{fullScreen: true, reloadIcon: <IconSend />, settingIcon: <IconStar />}}
           options={{
@@ -2703,6 +2689,8 @@ export default defineComponent({
     row-key="key"
     :search="search"
     :options="{ fullScreen: true }"
+    column-resizable
+    :bordered="{cell:true}"
   >
     <template #header-title="{ action, selectedRowKeys, selectedRows }">
       <Link
@@ -2758,8 +2746,8 @@ export default defineComponent({
               id: '2',
             },
           ]"
-          label-column="word"
-          value-column="id"
+          label-key="word"
+          value-key="id"
       /></template>
     </template>
     <!-- options自定义 -->
@@ -2822,11 +2810,13 @@ const columns: ProColumns[] = [
     dataIndex: 'index',
     valueType: 'index',
     slotName: 'index',
+    minWidth: 100,
   },
   {
     title: '标题',
     dataIndex: 'name',
     slotName: 'name',
+    minWidth: 300,
   },
   {
     title: '状态',
@@ -2836,6 +2826,7 @@ const columns: ProColumns[] = [
     fieldProps: {
       request: async () => stateDict,
     },
+    minWidth: 120,
   },
   {
     title: '动态表单',

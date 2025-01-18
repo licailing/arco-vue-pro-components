@@ -76,3 +76,6 @@ packages/*/docs
 # Don't ignore arco-block src/lib
 !packages/*/src/lib
 storybook-static/*
+pnpm-lock.yaml
+.npmrc
+package-lock.json

@@ -12,6 +12,7 @@ import {
   provide,
   inject,
 } from 'vue';
+import type { TableColumnData } from '@arco-design/web-vue';
 import {
   PaginationProps,
   Table,
@@ -22,7 +23,7 @@ import {
   TableRowSelection,
   TableExpandable,
   TableDraggable,
-  ScrollbarProps,
+  ScrollbarProps
 } from '@arco-design/web-vue';
 import { useFilterSorter } from './hooks/useFilterSorter';
 import type {
@@ -36,7 +37,6 @@ import type {
   ToolBarProps,
   RequestData,
   SearchConfig,
-  TableColumnData,
   TableOperationColumn,
   TablePagePosition,
   TableComponents,

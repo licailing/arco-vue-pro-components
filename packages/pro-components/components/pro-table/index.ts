@@ -13,7 +13,6 @@ export type {
   ProColumnsValueType,
   ProColumnsValueObjectType,
   ValueEnumObj,
-  TableColumnData,
   RequestData,
   TableProps,
   UseFetchDataAction,

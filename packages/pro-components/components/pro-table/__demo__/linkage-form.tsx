@@ -48,6 +48,7 @@ export default defineComponent({
             </span>
           );
         },
+        minWidth: 100,
       },
       {
         title: '标题',
@@ -55,6 +56,7 @@ export default defineComponent({
         render: ({ record }: RenderData) => {
           return <Link>{record.name}</Link>;
         },
+        minWidth: 300,
       },
       {
         title: '状态',
@@ -68,6 +70,7 @@ export default defineComponent({
         render: ({ record }: RenderData) => {
           return getDictLabel(stateDict, record.state);
         },
+        minWidth: 200,
       },
       {
         title: '动态表单',
@@ -134,6 +137,8 @@ export default defineComponent({
               <Button key="out">导出</Button>,
             ],
           }}
+          columnResizable
+          bordered={{cell:true}}
           // 自定义图标
           // options={{fullScreen: true, reloadIcon: <IconSend />, settingIcon: <IconStar />}}
           options={{

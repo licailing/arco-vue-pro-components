@@ -121,34 +121,6 @@ description: pro-table component based on arco-design web-vue table package
 ## Type
 
 
-### TableColumnData
-
-|Name|Description|Type|Default|version|
-|---|---|---|:---:|:---|
-|dataIndex|The identifier of the column information, corresponding to the data in `TableData`|`string`|`-`||
-|title|Column header|`string \| RenderFunction`|`-`||
-|width|Column width|`number`|`-`||
-|align|Alignment direction|`'left' \| 'center' \| 'right'`|`-`||
-|fixed|Fixed position|`'left' \| 'right'`|`-`||
-|ellipsis|Whether to show ellipsis|`boolean`|`false`||
-|tooltip|Whether to show a text hint when an ellipsis is displayed. Can be filled in tooltip component properties|`boolean \| Record<string, any>`|`-`|2.26.0|
-|sortable|Sorting related options|`TableSortable`|`-`||
-|filterable|Filter related options|`TableFilterable`|`-`||
-|children|Header sub-data, used for header grouping|`TableColumnData[]`|`-`||
-|cellClass|Custom cell class|`ClassName`|`-`|2.36.0|
-|headerCellClass|Custom header cell class|`ClassName`|`-`|2.36.0|
-|bodyCellClass|Custom body cell class|`ClassName \| ((record: TableData) => ClassName)`|`-`|2.36.0|
-|summaryCellClass|Custom body cell class|`ClassName \| ((record: TableData) => ClassName)`|`-`|2.36.0|
-|cellStyle|Custom cell style|`CSSProperties`|`-`|2.11.0|
-|headerCellStyle|Custom header cell style|`CSSProperties`|`-`|2.29.0|
-|bodyCellStyle|Custom body cell style|`CSSProperties \| ((record: TableData) => CSSProperties)`|`-`|2.29.0|
-|summaryCellStyle|Custom summary cell style|`CSSProperties \| ((record: TableData) => CSSProperties)`|`-`|2.30.0|
-|render|Customize the rendering of column cells|`(data: {    record: TableData;    column: TableColumnData;    rowIndex: number;  }) => VNodeChild`|`-`||
-|slotName|Sets the name of the render slot for the current column. Slot parameters are the same as #cell|`string`|`-`|2.18.0|
-|titleSlotName|Set the name of the render slot for the header of the current column|`string`|`-`|2.23.0|
-
-
-
 ### ProColumns
 
 |Name|Description|Type|Default|
@@ -415,7 +387,7 @@ description: pro-table component based on arco-design web-vue table package
 ### basic table [demo](http://47.120.3.125:6006/?path=/story/pro-table--basic-demo)
 ```tsx
 import { defineComponent, ref } from 'vue';
-import { Button, Link } from '@arco-design/web-vue';
+import { Link } from '@arco-design/web-vue';
 import type {
   ActionType,
   ProColumns,
@@ -598,7 +570,16 @@ export default defineComponent({
             selectedRows,
             action,
           }: ToolBarData<any>) => {
-            return <Link href={encodeURI('https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#默认表格可互动-demo')} target="_blank">默认示例(可互动)[查看源代码]</Link>;
+            return (
+              <Link
+                href={encodeURI(
+                  'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#默认表格可互动-demo'
+                )}
+                target="_blank"
+              >
+                默认示例(可互动)[查看源代码]
+              </Link>
+            );
           }}
           {...props}
         />
@@ -2544,6 +2525,7 @@ export default defineComponent({
             </span>
           );
         },
+        minWidth: 100,
       },
       {
         title: '标题',
@@ -2551,6 +2533,7 @@ export default defineComponent({
         render: ({ record }: RenderData) => {
           return <Link>{record.name}</Link>;
         },
+        minWidth: 300,
       },
       {
         title: '状态',
@@ -2564,6 +2547,7 @@ export default defineComponent({
         render: ({ record }: RenderData) => {
           return getDictLabel(stateDict, record.state);
         },
+        minWidth: 200,
       },
       {
         title: '动态表单',
@@ -2630,6 +2614,8 @@ export default defineComponent({
               <Button key="out">导出</Button>,
             ],
           }}
+          columnResizable
+          bordered={{cell:true}}
           // 自定义图标
           // options={{fullScreen: true, reloadIcon: <IconSend />, settingIcon: <IconStar />}}
           options={{
@@ -2705,6 +2691,8 @@ export default defineComponent({
     row-key="key"
     :search="search"
     :options="{ fullScreen: true }"
+    column-resizable
+    :bordered="{cell:true}"
   >
     <template #header-title="{ action, selectedRowKeys, selectedRows }">
       <Link
@@ -2760,8 +2748,8 @@ export default defineComponent({
               id: '2',
             },
           ]"
-          label-column="word"
-          value-column="id"
+          label-key="word"
+          value-key="id"
       /></template>
     </template>
     <!-- options自定义 -->
@@ -2824,11 +2812,13 @@ const columns: ProColumns[] = [
     dataIndex: 'index',
     valueType: 'index',
     slotName: 'index',
+    minWidth: 100,
   },
   {
     title: '标题',
     dataIndex: 'name',
     slotName: 'name',
+    minWidth: 300,
   },
   {
     title: '状态',
@@ -2838,6 +2828,7 @@ const columns: ProColumns[] = [
     fieldProps: {
       request: async () => stateDict,
     },
+    minWidth: 120,
   },
   {
     title: '动态表单',

@@ -38,4 +38,4 @@ description: pro-table component based on arco-design web-vue table package
 
 ## Demos
 
-%%MATERIAL(__demo__/index.ts)%%
+%%MATERIAL(__demo__/index.tsx)%%

@@ -5,6 +5,8 @@
     row-key="key"
     :search="search"
     :options="{ fullScreen: true }"
+    column-resizable
+    :bordered="{cell:true}"
   >
     <template #header-title="{ action, selectedRowKeys, selectedRows }">
       <Link
@@ -60,8 +62,8 @@
               id: '2',
             },
           ]"
-          label-column="word"
-          value-column="id"
+          label-key="word"
+          value-key="id"
       /></template>
     </template>
     <!-- options自定义 -->
@@ -124,11 +126,13 @@ const columns: ProColumns[] = [
     dataIndex: 'index',
     valueType: 'index',
     slotName: 'index',
+    minWidth: 100,
   },
   {
     title: '标题',
     dataIndex: 'name',
     slotName: 'name',
+    minWidth: 300,
   },
   {
     title: '状态',
@@ -138,6 +142,7 @@ const columns: ProColumns[] = [
     fieldProps: {
       request: async () => stateDict,
     },
+    minWidth: 120,
   },
   {
     title: '动态表单',

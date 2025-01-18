@@ -39,7 +39,7 @@ export function toCapital(money: any, unit: string, precision: number = 2) {
   const cnDecUnits = ['角', '分', '毫', '厘']; // 对应小数部分单位
   const cnInteger = '整'; // 整数金额时后面跟的字符
   const cnIntLast = '元'; // 整型完以后的单位
-  const maxNum = 999999999999.9999; // 最大处理的数字
+  const maxNum = 999999999999999.9999; // 最大处理的数字
   let IntegerNum; // 金额整数部分
   let DecimalNum; // 金额小数部分
   let ChineseStr = ''; // 输出的中文金额字符串
@@ -59,8 +59,8 @@ export function toCapital(money: any, unit: string, precision: number = 2) {
     default:
       break;
   }
+  // 超出最大处理数字
   if (money >= maxNum) {
-    // toastShort('超出最大处理数字');
     return '';
   }
   if (money === 0) {

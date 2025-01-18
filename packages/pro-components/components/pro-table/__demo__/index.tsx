@@ -259,6 +259,12 @@ export const BasicDemo = {
   }),
 };
 
+// 生成文档打开
+// export const BasicDemo = {
+//   name: '默认示例(可互动)',
+//   render: () => Basic,
+// };
+
 export const SingleDemo = {
   name: '查询表格',
   render: () => Single,
