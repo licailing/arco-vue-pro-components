@@ -384,7 +384,7 @@ description: pro-table component based on arco-design web-vue table package
 
 ## Demos
 
-### basic table [demo](http://47.120.3.125:6006/?path=/story/pro-table--basic-demo)
+### basic table [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--basic-demo)
 ```tsx
 import { defineComponent, ref } from 'vue';
 import { Link } from '@arco-design/web-vue';
@@ -596,7 +596,7 @@ export default defineComponent({
 
 ```
 
-### advanced filter replacement query form [demo](http://47.120.3.125:6006/?path=/story/pro-table--lightfilter-demo)
+### advanced filter replacement query form [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--lightfilter-demo)
 ```tsx
 import { defineComponent, h, ref } from 'vue';
 import { Button, Dropdown, Link, Tooltip } from '@arco-design/web-vue';
@@ -950,7 +950,7 @@ export default defineComponent({
 
 ```
 
-### Batch manipulation of tables [demo](http://47.120.3.125:6006/?path=/story/pro-table--batch-option-demo)
+### Batch manipulation of tables [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--batch-option-demo)
 ```tsx
 import { defineComponent, ref } from 'vue';
 import { Button, Link } from '@arco-design/web-vue';
@@ -1178,7 +1178,7 @@ export default defineComponent({
 
 ```
 
-### Downgrade to a normal table [demo](http://47.120.3.125:6006/?path=/story/pro-table--normal-demo)
+### Downgrade to a normal table [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--normal-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Button, Dropdown, Link, Tooltip } from '@arco-design/web-vue';
@@ -1376,7 +1376,7 @@ export default defineComponent({
 
 ```
 
-### Nested tables [demo](http://47.120.3.125:6006/?path=/story/pro-table--table-nested-demo)
+### Nested tables [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--table-nested-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Button, Tooltip, Tag, Link } from '@arco-design/web-vue';
@@ -1598,7 +1598,7 @@ export default defineComponent({
 
 ```
 
-### Left and right structure [demo](http://47.120.3.125:6006/?path=/story/pro-table--split-demo)
+### Left and right structure [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--split-demo)
 ```tsx
 import { defineComponent, ref, toRefs, watch } from 'vue';
 import { Button, Link, Badge, Split, Card } from '@arco-design/web-vue';
@@ -1841,7 +1841,7 @@ export default defineComponent({
 
 ```
 
-### Manipulating query forms with formRef [demo](http://47.120.3.125:6006/?path=/story/pro-table--form-demo)
+### Manipulating query forms with formRef [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--form-demo)
 ```tsx
 import { Ref, defineComponent, ref } from 'vue';
 import { Button, Link } from '@arco-design/web-vue';
@@ -1971,7 +1971,7 @@ export default defineComponent({
 
 ```
 
-### Manipulating query forms with formRef [demo](http://47.120.3.125:6006/?path=/story/pro-table--form-v-demo)
+### Manipulating query forms with formRef [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--form-v-demo)
 ```vue
 <template>
   <ProTable
@@ -2087,7 +2087,7 @@ const handleSubmit = (formData) => {
 
 ```
 
-### drag and sort [demo](http://47.120.3.125:6006/?path=/story/pro-table--drag-sort-table-demo)
+### drag and sort [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--drag-sort-table-demo)
 ```tsx
 import { defineComponent, reactive, ref } from 'vue';
 import { Link, Message } from '@arco-design/web-vue';
@@ -2173,7 +2173,7 @@ export default defineComponent({
 
 ```
 
-### Querying a table [demo](http://47.120.3.125:6006/?path=/story/pro-table--single-demo)
+### Querying a table [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--single-demo)
 ```tsx
 import { defineComponent, ref, h, Ref } from 'vue';
 import {
@@ -2473,7 +2473,7 @@ export default defineComponent({
 
 ```
 
-### Dynamically customize the search bar [demo](http://47.120.3.125:6006/?path=/story/pro-table--linkage-form-demo)
+### Dynamically customize the search bar [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--linkage-form-demo)
 ```tsx
 /* eslint-disable no-console */
 import { defineComponent } from 'vue';
@@ -2682,7 +2682,7 @@ export default defineComponent({
 
 ```
 
-### Dynamically customize the search bar [demo](http://47.120.3.125:6006/?path=/story/pro-table--linkage-form-v-demo)
+### Dynamically customize the search bar [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--linkage-form-v-demo)
 ```vue
 <template>
   <ProTable
@@ -2842,7 +2842,7 @@ const columns: ProColumns[] = [
 
 ```
 
-### valueType - Selection Classes [demo](http://47.120.3.125:6006/?path=/story/pro-table--value-type-select-demo)
+### valueType - Selection Classes [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-select-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Link } from '@arco-design/web-vue';
@@ -3005,7 +3005,7 @@ export default defineComponent({
 
 ```
 
-### valueType - Date class [demo](http://47.120.3.125:6006/?path=/story/pro-table--value-type-date-demo)
+### valueType - Date class [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-date-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Link } from '@arco-design/web-vue';
@@ -3145,7 +3145,7 @@ export default defineComponent({
 
 ```
 
-### valueType - numeric class [demo](http://47.120.3.125:6006/?path=/story/pro-table--value-type-number-demo)
+### valueType - numeric class [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-number-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Link } from '@arco-design/web-vue';
@@ -3281,7 +3281,7 @@ export default defineComponent({
 
 ```
 
-### valueType - Style Classes [demo](http://47.120.3.125:6006/?path=/story/pro-table--value-type-demo)
+### valueType - Style Classes [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-demo)
 ```tsx
 import { defineComponent } from 'vue';
 import { Link, Space } from '@arco-design/web-vue';
