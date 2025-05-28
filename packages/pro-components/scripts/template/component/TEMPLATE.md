@@ -1,1 +1,0 @@
-%%API(component.vue)%%
