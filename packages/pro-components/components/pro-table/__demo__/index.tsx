@@ -144,7 +144,7 @@ export const BasicDemo = {
       },
     },
     lightSearchConfig: {
-      description: `是否显示表格的搜索表单或配置搜索表单, lightSearchConfig: { rowNumber: 2, name: 'keyword', search: true } rowNumber:设置右侧直接搜索表单项显示几个： 默认是2个，其他表单项在高级筛选弹框里面,name: 设置左侧文本框名称(传值给后台的字段)，默认：keyword,search:传给左侧文本搜索框props，左侧文本搜索框为false不显示`,
+      description: `是否显示表格的搜索表单或配置搜索表单, lightSearchConfig: { rowNumber: 2, name: 'keyword', search: true, clearToSearch: false } rowNumber:设置右侧直接搜索表单项显示几个： 默认是2个，其他表单项在高级筛选弹框里面,name: 设置左侧文本框名称(传值给后台的字段)，默认：keyword,search:传给左侧文本搜索框props，左侧文本搜索框为false不显示,clearToSearch:设置左侧文本搜索框清空时，为true时候，立即搜索数据`,
       table: {
         type: { summary: 'object' },
       },

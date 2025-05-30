@@ -273,6 +273,7 @@ export default defineComponent({
               search: {
                 placeholder: '搜索应用名称/创建者',
               },
+              clearToSearch: true,
             }}
             actionRef={setActionRef}
             options={{ fullScreen: true }} // 显示全屏

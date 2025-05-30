@@ -211,7 +211,7 @@ export interface ProColumns
     data: {
       record: any;
       rowIndex: number;
-      action: UseFetchDataAction<RequestData<any>>;
+      action: ActionType;
     }
   ) => any;
   /**
@@ -592,7 +592,7 @@ export interface ToolBarData<T> {
   /**
    * @zh 表格action方法
    * @en table action
-   * @type UseFetchDataAction
+   * @type ActionType
    */
   action?: ActionType;
   /**
@@ -814,7 +814,7 @@ export interface RenderData {
    * @zh 表格里面默认的渲染虚拟节点数据
    * @en Default rendering of virtual node data in the table
    */
-  action?: UseFetchDataAction<RequestData<any>>;
+  action?: ActionType;
 }
 
 export interface RenderFormItemData {
@@ -844,14 +844,22 @@ export interface LightSearchConfig {
   rowNumber?: number;
   /**
    * @zh 设置左侧文本框名称(传值给后台的字段)，默认：keyword
-   * @en advanced search form setting
+   * @en Set the name of the left text box (The search name passed to the background), with the default being: keyword
    */
   name?: string;
   /**
    * @zh 传给左侧文本搜索框props，左侧文本搜索框为false不显示
-   * @en advanced search form setting
+   * @en Pass props to the left input search box, and the left text search box will be false and not displayed
    */
   search?: InputSearchInstance | boolean | { placeholder: string };
+  /**
+   * 
+   * @zh 设置左侧文本搜索框清空时，为true时候，立即搜索数据
+   * @en When the left input search box is clear and the value is true, search for data immediately
+   * @defaultValue false
+   * @version 1.1.1
+   */
+  clearToSearch?: boolean;
 }
 export interface FormOptionProps {
   searchConfig: SearchConfig;
