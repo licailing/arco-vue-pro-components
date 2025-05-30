@@ -141,7 +141,7 @@ description: pro-table component based on arco-design web-vue table package
 |formSlotName|Specifies the slot name of the query table item|`string`|`-`|
 |valueEnum|The value enumeration will automatically convert the value as a key to retrieve the content to be displayed|`((data: RenderFormItemData) => ValueEnumObj) \| ValueEnumObj`|`-`|
 |render|Custom render|`(data: RenderData) => VNodeChild`|`-`|
-|renderText|Custom render, but requires a string|`(    text: any,    data: {      record: any;      rowIndex: number;      action: UseFetchDataAction<RequestData<any>>;    }  ) => any`|`-`|
+|renderText|Custom render, but requires a string|`(    text: any,    data: {      record: any;      rowIndex: number;      action: ActionType;    }  ) => any`|`-`|
 |copyable|Whether to support copying|`boolean`|`false`|
 |sorter|column sort|`boolean`|`false`|
 |filters|The filter menu item in the header. When the value is true, valueEnum is automatically generated|`boolean`|`false`|
@@ -240,17 +240,18 @@ description: pro-table component based on arco-design web-vue table package
 |column|column info|`any`|`-`|
 |rowIndex|row index|`number`|`-`|
 |dom|Default rendering of virtual node data in the table|`VNodeChild`|`-`|
-|action|Default rendering of virtual node data in the table|`UseFetchDataAction<RequestData<any>>`|`-`|
+|action|Default rendering of virtual node data in the table|`ActionType`|`-`|
 
 
 
 ### LightSearchConfig
 
-|Name|Description|Type|Default|
-|---|---|---|:---:|
-|rowNumber|Set the number of direct search form items displayed on the right: the default is 2, and the other form items are in the advanced filter box|`number`|`-`|
-|name|advanced search form setting|`string`|`-`|
-|search|advanced search form setting|`InputSearchInstance \| boolean \| { placeholder: string }`|`-`|
+|Name|Description|Type|Default|version|
+|---|---|---|:---:|:---|
+|rowNumber|Set the number of direct search form items displayed on the right: the default is 2, and the other form items are in the advanced filter box|`number`|`-`||
+|name|Set the name of the left text box (The search name passed to the background), with the default being: keyword|`string`|`-`||
+|search|Pass props to the left input search box, and the left text search box will be false and not displayed|`InputSearchInstance \| boolean \| { placeholder: string }`|`-`||
+|clearToSearch|When the left input search box is clear and the value is true, search for data immediately|`boolean`|`false`|1.1.1|
 
 
 
@@ -753,7 +754,7 @@ export default defineComponent({
         title: '应用名称',
         width: 140,
         dataIndex: 'name',
-        hideInSetting: true,// 不显示在设置里面
+        hideInSetting: true, // 不显示在设置里面
         render: ({ dom }) => <Link>{dom}</Link>,
       },
       {
@@ -873,6 +874,7 @@ export default defineComponent({
               search: {
                 placeholder: '搜索应用名称/创建者',
               },
+              // clearToSearch: true, // 左侧搜索框清除内容时 触发搜索
             }}
             actionRef={setActionRef}
             options={{ fullScreen: true }} // 显示全屏
@@ -884,7 +886,9 @@ export default defineComponent({
             defaultFormData={{ status: 'all', name: 'aaa' }}
             headerTitle={
               <Link
-                href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#高级筛选表格-demo")}
+                href={encodeURI(
+                  'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#高级筛选表格-demo'
+                )}
                 target="_blank"
               >
                 高级筛选表格[查看源代码]
@@ -918,7 +922,7 @@ export default defineComponent({
               defaultPageSize: 5,
               hideOnSinglePage: false,
             }}
-            options={{ fullScreen: true, density: false  }} // 显示全屏
+            options={{ fullScreen: true, density: false }} // 显示全屏
             columnsState={{
               persistenceKey: 'pro-table-lightfilter-demos1',
               persistenceType: 'localStorage',
@@ -3449,7 +3453,7 @@ export default defineComponent({
 
 ```
 
-### GroupingColumns - grouping table header [demo](http://47.120.3.125:6006/?path=/story/pro-table--grouping-columns-demo)
+### GroupingColumns - grouping table header [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--grouping-columns-demo)
 ```tsx
 import ProTable from '../index';
 import { defineComponent, reactive } from 'vue';

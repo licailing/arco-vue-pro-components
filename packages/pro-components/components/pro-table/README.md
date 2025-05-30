@@ -139,7 +139,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |formSlotName|自定义查询表单项slot名|`string`|`-`|
 |valueEnum|值的枚举，会自动转化把值当成key来取出要显示的内容|`((data: RenderFormItemData) => ValueEnumObj) \| ValueEnumObj`|`-`|
 |render|自定义render|`(data: RenderData) => VNodeChild`|`-`|
-|renderText|自定义render，但是需要返回string|`(    text: any,    data: {      record: any;      rowIndex: number;      action: UseFetchDataAction<RequestData<any>>;    }  ) => any`|`-`|
+|renderText|自定义render，但是需要返回string|`(    text: any,    data: {      record: any;      rowIndex: number;      action: ActionType;    }  ) => any`|`-`|
 |copyable|是否支持复制|`boolean`|`false`|
 |sorter|列排序，当值为true时，包含ascend和descend|`boolean`|`false`|
 |filters|表头的筛选菜单项，当值为 true 时，自动使用 valueEnum 生成|`boolean`|`false`|
@@ -238,17 +238,18 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |column|列配置数据|`any`|`-`|
 |rowIndex|行索引|`number`|`-`|
 |dom|表格里面默认的渲染虚拟节点数据|`VNodeChild`|`-`|
-|action|表格里面默认的渲染虚拟节点数据|`UseFetchDataAction<RequestData<any>>`|`-`|
+|action|表格里面默认的渲染虚拟节点数据|`ActionType`|`-`|
 
 
 
 ### LightSearchConfig
 
-|参数名|描述|类型|默认值|
-|---|---|---|:---:|
-|rowNumber|设置右侧直接搜索表单项显示几个： 默认是2个，其他表单项在高级筛选弹框里面|`number`|`-`|
-|name|设置左侧文本框名称(传值给后台的字段)，默认：keyword|`string`|`-`|
-|search|传给左侧文本搜索框props，左侧文本搜索框为false不显示|`InputSearchInstance \| boolean \| { placeholder: string }`|`-`|
+|参数名|描述|类型|默认值|版本|
+|---|---|---|:---:|:---|
+|rowNumber|设置右侧直接搜索表单项显示几个： 默认是2个，其他表单项在高级筛选弹框里面|`number`|`-`||
+|name|设置左侧文本框名称(传值给后台的字段)，默认：keyword|`string`|`-`||
+|search|传给左侧文本搜索框props，左侧文本搜索框为false不显示|`InputSearchInstance \| boolean \| { placeholder: string }`|`-`||
+|clearToSearch|设置左侧文本搜索框清空时，为true时候，立即搜索数据|`boolean`|`false`|1.1.1|
 
 
 
@@ -751,7 +752,7 @@ export default defineComponent({
         title: '应用名称',
         width: 140,
         dataIndex: 'name',
-        hideInSetting: true,// 不显示在设置里面
+        hideInSetting: true, // 不显示在设置里面
         render: ({ dom }) => <Link>{dom}</Link>,
       },
       {
@@ -871,6 +872,7 @@ export default defineComponent({
               search: {
                 placeholder: '搜索应用名称/创建者',
               },
+              // clearToSearch: true, // 左侧搜索框清除内容时 触发搜索
             }}
             actionRef={setActionRef}
             options={{ fullScreen: true }} // 显示全屏
@@ -882,7 +884,9 @@ export default defineComponent({
             defaultFormData={{ status: 'all', name: 'aaa' }}
             headerTitle={
               <Link
-                href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#高级筛选表格-demo")}
+                href={encodeURI(
+                  'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#高级筛选表格-demo'
+                )}
                 target="_blank"
               >
                 高级筛选表格[查看源代码]
@@ -916,7 +920,7 @@ export default defineComponent({
               defaultPageSize: 5,
               hideOnSinglePage: false,
             }}
-            options={{ fullScreen: true, density: false  }} // 显示全屏
+            options={{ fullScreen: true, density: false }} // 显示全屏
             columnsState={{
               persistenceKey: 'pro-table-lightfilter-demos1',
               persistenceType: 'localStorage',

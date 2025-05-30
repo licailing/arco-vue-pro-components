@@ -153,7 +153,7 @@ export default defineComponent({
         title: '应用名称',
         width: 140,
         dataIndex: 'name',
-        hideInSetting: true,// 不显示在设置里面
+        hideInSetting: true, // 不显示在设置里面
         render: ({ dom }) => <Link>{dom}</Link>,
       },
       {
@@ -273,7 +273,7 @@ export default defineComponent({
               search: {
                 placeholder: '搜索应用名称/创建者',
               },
-              clearToSearch: true,
+              // clearToSearch: true, // 左侧搜索框清除内容时 触发搜索
             }}
             actionRef={setActionRef}
             options={{ fullScreen: true }} // 显示全屏
@@ -285,7 +285,9 @@ export default defineComponent({
             defaultFormData={{ status: 'all', name: 'aaa' }}
             headerTitle={
               <Link
-                href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#高级筛选表格-demo")}
+                href={encodeURI(
+                  'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#高级筛选表格-demo'
+                )}
                 target="_blank"
               >
                 高级筛选表格[查看源代码]
@@ -319,7 +321,7 @@ export default defineComponent({
               defaultPageSize: 5,
               hideOnSinglePage: false,
             }}
-            options={{ fullScreen: true, density: false  }} // 显示全屏
+            options={{ fullScreen: true, density: false }} // 显示全屏
             columnsState={{
               persistenceKey: 'pro-table-lightfilter-demos1',
               persistenceType: 'localStorage',

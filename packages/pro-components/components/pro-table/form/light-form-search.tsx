@@ -286,7 +286,7 @@ export default defineComponent({
                 emit('search', { [searchConfig.value.name]: keyword });
               }}
               onClear={() => {
-                if(searchConfig.value.clearToSearch) {
+                if (searchConfig.value.clearToSearch) {
                   emit('search', { [searchConfig.value.name]: '' });
                 }
               }}

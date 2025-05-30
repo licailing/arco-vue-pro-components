@@ -853,7 +853,6 @@ export interface LightSearchConfig {
    */
   search?: InputSearchInstance | boolean | { placeholder: string };
   /**
-   * 
    * @zh 设置左侧文本搜索框清空时，为true时候，立即搜索数据
    * @en When the left input search box is clear and the value is true, search for data immediately
    * @defaultValue false
