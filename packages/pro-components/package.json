@@ -1,6 +1,6 @@
 {
   "name": "@arco-vue-pro-components/pro-components",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "基于@arco-design/web-vue组件的高级组件，包括pro-table",
   "repository": {
     "type": "git",
