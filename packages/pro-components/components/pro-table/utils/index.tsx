@@ -112,24 +112,14 @@ export const reduceWidth = (
 };
 
 /**
- * 生成 Ellipsis 的 tooltip
+ * 生成 Ellipsis 的 tooltip及 复制
  * @param dom
  * @param item
  * @param text
  */
-const genEllipsis = (dom: VNodeChild, item: ProColumns, text: string) => {
-  if (!item.ellipsis) {
-    return dom;
-  }
-  return (
-    <MyToolTip position="bottom" content={text}>
-      <span>{dom}</span>
-    </MyToolTip>
-  );
-};
-
-const genCopyable = (dom: VNodeChild, item: ProColumns) => {
+const genEllipsisCopy = (dom: VNodeChild, item: ProColumns, text: string) => {
   if (item.copyable || item.ellipsis) {
+    console.log('dom', dom, text)
     return (
       <TypographyParagraph
         style={{
@@ -137,9 +127,16 @@ const genCopyable = (dom: VNodeChild, item: ProColumns) => {
           margin: 0,
           padding: 0,
         }}
+        copyText={text}
         // @ts-ignore
         copyable={item.copyable}
-        ellipsis={item.ellipsis}
+        ellipsis={
+          item.ellipsis
+            ? {
+                showTooltip: { type: 'tooltip', props: { position: 'bottom' } },
+              }
+            : false
+        }
       >
         {dom}
       </TypographyParagraph>
@@ -361,11 +358,11 @@ const columRender = ({
     record,
     columnEmptyText,
     item,
-    columnKey,
+    columnKey
   );
 
-  const dom: VNodeChild = genEllipsis(
-    genCopyable(textDom, item),
+  const dom: VNodeChild = genEllipsisCopy(
+    textDom,
     item,
     renderText(parsingText(text, ObjToMap(valueEnum), true), {
       record,
