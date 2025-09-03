@@ -119,7 +119,6 @@ export const reduceWidth = (
  */
 const genEllipsisCopy = (dom: VNodeChild, item: ProColumns, text: string) => {
   if (item.copyable || item.ellipsis) {
-    console.log('dom', dom, text)
     return (
       <TypographyParagraph
         style={{
