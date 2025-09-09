@@ -14,6 +14,7 @@ import type {
   GridProps,
   Size,
   TableColumnData,
+  FormInstance
 } from '@arco-design/web-vue';
 import { TriggerEvent, TriggerPosition } from '../_utils/constant';
 import { ClassName, Data } from '../_utils/types';
@@ -908,6 +909,10 @@ export interface SearchConfig {
    */
   submitText?: string;
   gridProps?: GridProps;
+  /**
+   * 设置搜索表单的Form props
+   */
+  formProps?: Omit<FormInstance, "model" | "scrollToFirstError">;
   optionRender?: ((props: FormOptionProps) => VNodeTypes) | false;
 }
 export type StatusType = {

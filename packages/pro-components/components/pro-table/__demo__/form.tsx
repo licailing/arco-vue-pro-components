@@ -27,7 +27,9 @@ export default defineComponent({
     };
     const columns: ProColumns[] = [
       {
-        title: '标题',
+        title: (_, type) => {
+          return type === 'table' ? '标题' : '标题长度自适应';
+        },
         dataIndex: 'name',
         key: 'name',
       },
@@ -70,6 +72,9 @@ export default defineComponent({
           }}
           rowKey="key"
           search={{
+            formProps: {
+              autoLabelWidth: true, // 长label不换行
+            },
             collapsed: collapsed.value,
             onCollapse: (value: boolean) => {
               collapsed.value = value;

@@ -48,6 +48,7 @@ import {
 } from '../utils';
 import { getPrefixCls } from '../../_utils';
 import { ProInputNumberType } from '../../pro-input-number';
+import { omit } from '../../_utils/omit';
 
 const inputDecimalTypes = ['digit', 'decimal', 'money', 'percent'];
 export const renderFormInput = (
@@ -406,7 +407,6 @@ export default defineComponent({
         emit('submit', values || {});
       }
     };
-
     const renderGridFormItems = () => {
       return (
         <Grid
@@ -438,6 +438,15 @@ export default defineComponent({
             return (
               <GridItem key={key} hidden={hidden} {...item.girdItemProps}>
                 <FormItem
+                  {...(isForm.value
+                    ? item.formItemProps
+                    : omit(item.formItemProps, [
+                        'rules',
+                        'disabled',
+                        'required',
+                        'validateStatus',
+                        'validateTrigger',
+                      ]))}
                   field={item.dataIndex}
                   label={
                     !hidden && typeof title === 'string' ? title : undefined
@@ -447,8 +456,6 @@ export default defineComponent({
                       return hidden ? '' : title;
                     },
                   }}
-                  tooltip={item.formItemProps?.tooltip}
-                  {...(isForm.value ? item.formItemProps : {})}
                 >
                   {cloneVNode(
                     renderFormInput(
@@ -554,12 +561,20 @@ export default defineComponent({
             collapsed: collapsed.value,
           }
     );
-
+    const formProps = computed(() => {
+      return isForm.value
+        ? searchConfig.value.formProps
+        : omit(searchConfig.value.formProps || {}, [
+            'rules',
+            'disabled',
+          ]);
+    });
     const render = () => (
       <Form
+        layout={isForm.value ? 'vertical' : 'horizontal'}
+        {...formProps.value}
         model={formModel.value}
         ref={formSearchRef}
-        layout={isForm.value ? 'vertical' : 'horizontal'}
         onSubmit={handleSubmit}
       >
         {renderGridFormItems()}

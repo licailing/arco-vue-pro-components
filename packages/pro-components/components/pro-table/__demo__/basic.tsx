@@ -69,11 +69,16 @@ export default defineComponent({
     };
     const columns: ProColumns[] = [
       {
-        title: '应用名称',
+        title: (_, type) => {
+          return type === 'table' ? '应用名称' : '应用名称长度自适应';
+        },
         width: 200,
         dataIndex: 'name',
         fixed: 'left',
         render: (data: RenderData) => <Link>{data.dom}</Link>,
+        formItemProps: {
+          labelColFlex: 'none', // 长label不换行
+        },
       },
       {
         title: '容器量',
