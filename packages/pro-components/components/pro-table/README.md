@@ -263,6 +263,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |collapsed|是否收起|`boolean`|`false`|
 |onCollapse|收起按钮的事件|`(collapsed: boolean) => void`|`-`|
 |submitText|提交按钮的文本|`string`|`-`|
+|formProps|设置搜索表单的Form props|`Omit<FormInstance, "model" \| "scrollToFirstError">`|`-`|
 
 
 
@@ -456,11 +457,16 @@ export default defineComponent({
     };
     const columns: ProColumns[] = [
       {
-        title: '应用名称',
+        title: (_, type) => {
+          return type === 'table' ? '应用名称' : '应用名称长度自适应';
+        },
         width: 200,
         dataIndex: 'name',
         fixed: 'left',
         render: (data: RenderData) => <Link>{data.dom}</Link>,
+        formItemProps: {
+          labelColFlex: 'none', // 长label不换行
+        },
       },
       {
         title: '容器量',
@@ -1874,7 +1880,9 @@ export default defineComponent({
     };
     const columns: ProColumns[] = [
       {
-        title: '标题',
+        title: (_, type) => {
+          return type === 'table' ? '标题' : '标题长度自适应';
+        },
         dataIndex: 'name',
         key: 'name',
       },
@@ -1917,6 +1925,9 @@ export default defineComponent({
           }}
           rowKey="key"
           search={{
+            formProps: {
+              autoLabelWidth: true, // 长label不换行
+            },
             collapsed: collapsed.value,
             onCollapse: (value: boolean) => {
               collapsed.value = value;
