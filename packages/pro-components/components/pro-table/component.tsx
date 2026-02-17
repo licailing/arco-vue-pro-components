@@ -49,6 +49,7 @@ import type {
 import {
   mergePagination,
   useActionType,
+  deepClone,
 } from './utils';
 import { useRequestData } from './hooks/use-request';
 import { useRowSelection } from './hooks/useRowSelection';
@@ -1104,15 +1105,33 @@ export default defineComponent({
       }
       emit('submit', formData);
     };
+    const buildResetFormData = (formData: Record<string, any> = {}) => {
+      const defaults = props.defaultFormData || {};
+      const next: Record<string, any> = {};
+      const keys = new Set<string>();
+      Object.keys(formData || {}).forEach((key) => keys.add(key));
+      Object.keys(defaults || {}).forEach((key) => keys.add(key));
+      (props.columns || []).forEach((item: any) => {
+        if (item?.dataIndex && typeof item.dataIndex === 'string') {
+          keys.add(item.dataIndex);
+        }
+      });
+      keys.forEach((key) => {
+        const defaultVal = defaults[key];
+        next[key] = defaultVal === undefined ? undefined : deepClone(defaultVal);
+      });
+      return next;
+    };
     const onReset = (formData: any = {}) => {
+      const resetFormData = buildResetFormData(formData);
       formSearch.value = props.beforeSearchSubmit({
-        ...formData,
+        ...resetFormData,
         _timestamp: Date.now(),
       });
       action.setPageInfo?.({
         current: 1,
       });
-      emit('reset');
+      emit('reset', resetFormData);
     };
 
     const formData = {

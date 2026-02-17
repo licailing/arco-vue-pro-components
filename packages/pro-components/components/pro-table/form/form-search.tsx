@@ -305,6 +305,7 @@ export default defineComponent({
       gridCollapsedLimit,
       columnsList,
       gridKey,
+      resetKey,
       gridProps,
       formProps,
       onSubmit,
@@ -327,6 +328,7 @@ export default defineComponent({
                 item.key || item.dataIndex?.toString(),
                 index
               );
+              const formKey = `${key}-${resetKey.value}`;
               // 支持 function 的 title
               const getTitle = () => {
                 if (item.title && typeof item.title === 'function') {
@@ -339,6 +341,7 @@ export default defineComponent({
                 typeof item.valueType === 'function'
                   ? item.valueType({})
                   : item.valueType;
+
               const hidden = valueType === 'hidden';
               const formItemProps =
                 typeof item.formItemProps === 'function'
@@ -346,7 +349,7 @@ export default defineComponent({
                   : item.formItemProps;
               return (
                 <FormItem
-                  key={key}
+                  key={formKey}
                   hidden={hidden}
                   {...(isForm.value
                     ? formItemProps
@@ -377,7 +380,8 @@ export default defineComponent({
                       t
                     ),
                     {
-                      'modelValue': formModel.value[item.dataIndex],
+                      key: `${formKey}-input`,
+                      'modelValue': formModel.value[item.dataIndex] ?? null,
                       'onUpdate:modelValue': (value: any) => {
                         // 更新表单数据
                         formModel.value[item.dataIndex] = value;
@@ -414,31 +418,33 @@ export default defineComponent({
               item.key || item.dataIndex?.toString(),
               index
             );
-            // 支持 function 的 title
-            const getTitle = () => {
-              if (item.title && typeof item.title === 'function') {
-                return item.title(item, 'form');
-              }
-              return item.title;
-            };
-            const title = getTitle();
-            const data: FormItemPropsData = {
-              formModel,
-              item,
-              type: props.type,
-            };
-            const valueType =
-              typeof item.valueType === 'function'
-                ? item.valueType({})
-                : item.valueType;
-            const hidden = valueType === 'hidden';
+            const formKey = `${key}-${resetKey.value}`;
+              // 支持 function 的 title
+              const getTitle = () => {
+                if (item.title && typeof item.title === 'function') {
+                  return item.title(item, 'form');
+                }
+                return item.title;
+              };
+              const title = getTitle();
+              const data: FormItemPropsData = {
+                formModel,
+                item,
+                type: props.type,
+              };
+              const valueType =
+                typeof item.valueType === 'function'
+                  ? item.valueType({})
+                  : item.valueType;
+
+              const hidden = valueType === 'hidden';
             const formItemProps =
               typeof item.formItemProps === 'function'
                 ? item.formItemProps(data)
                 : item.formItemProps;
             const gridItemProps = item.girdItemProps || {};
             return (
-              <GridItem key={key} hidden={hidden} suffix={false} {...gridItemProps}>
+              <GridItem key={formKey} hidden={hidden} suffix={false} {...gridItemProps}>
                 <FormItem
                   {...(isForm.value
                     ? formItemProps
@@ -469,7 +475,8 @@ export default defineComponent({
                       t
                     ),
                     {
-                      'modelValue': formModel.value[item.dataIndex],
+                      key: `${formKey}-input`,
+                      'modelValue': formModel.value[item.dataIndex] ?? null,
                       'onUpdate:modelValue': (value: any) => {
                         // 更新表单数据
                         formModel.value[item.dataIndex] = value;
@@ -556,6 +563,7 @@ export default defineComponent({
     };
     const render = () => (
       <Form
+        key={resetKey.value}
         layout={
           searchConfigState.value.layout ||
           (isForm.value ? 'vertical' : 'horizontal')

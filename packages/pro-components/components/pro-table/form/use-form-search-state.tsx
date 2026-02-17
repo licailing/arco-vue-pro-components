@@ -10,6 +10,7 @@ import {
   watchEffect,
 } from 'vue';
 import type { SearchConfig } from '../interface';
+import { deepClone } from '../utils';
 import { omit } from '../../_utils/omit';
 import ResponsiveObserve, { ScreenMap } from '../../_utils/responsive-observe';
 
@@ -54,19 +55,63 @@ export const useFormSearchState = ({
 
   const inlineCollapsedLimit = ref(resolveInlineLimit());
   const gridCollapsedLimit = ref(resolveGridLimit());
+  const resetKey = ref(0);
   let responsiveToken = '';
 
   const formModel = ref<{ [propName: string]: any }>(
     props.defaultFormData || {}
   );
+  
   const collapsed = ref(searchConfig.value.collapsed ?? true);
 
   const handleReset = () => {
     emit('reset', formModel.value);
   };
   const onReset = () => {
-    formSearchRef.value?.resetFields();
-    handleReset();
+    formSearchRef.value?.clearValidate();
+
+    const defaults = defaultFormData.value || {};
+    // Create a fresh object based on defaults, NOT formModel.value
+    // This ensures we start clean and only keep valid defaults
+    const nextModel = { ...defaults } as Record<string, any>;
+
+    columnsList.value.forEach((item) => {
+      if (item.dataIndex) {
+        const key = item.dataIndex as string;
+        
+        const valueType =
+          typeof item.valueType === 'function' ? item.valueType({}) : item.valueType;
+
+        if (
+          valueType === 'date' ||
+          valueType === 'dateTime' ||
+          valueType === 'time'
+        ) {
+          nextModel[key] = null;
+          return;
+        }
+        
+        const defaultVal = defaults[key];
+        if (defaultVal !== undefined) {
+          nextModel[key] = deepClone(defaultVal);
+          return;
+        }
+        if (valueType === 'dateRange' || valueType === 'dateTimeRange') {
+          nextModel[key] = [];
+          return;
+        }
+        nextModel[key] = undefined;
+      }
+    });
+
+
+    // console.log('Manually assigning formModel.value to clean object:', JSON.stringify(nextModel));
+    formModel.value = nextModel;
+    resetKey.value += 1;
+
+    setTimeout(() => {
+      handleReset();
+    }, 0);
   };
   const onSubmit = async () => {
     const res = await formSearchRef.value?.validate();
@@ -248,6 +293,7 @@ export const useFormSearchState = ({
     gridCollapsedLimit,
     columnsList,
     gridKey,
+    resetKey,
     gridProps,
     formProps,
     onSubmit,
