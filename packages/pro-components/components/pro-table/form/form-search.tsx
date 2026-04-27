@@ -3,7 +3,6 @@ import {
   computed,
   defineComponent,
   Ref,
-  ref,
   cloneVNode,
   onMounted,
   watch,
@@ -15,7 +14,6 @@ import {
   Grid,
   FormItem,
   GridItem,
-  ValidatedError,
   RadioGroup,
   CheckboxGroup,
   Upload,
@@ -49,6 +47,7 @@ import {
 import { getPrefixCls } from '../../_utils';
 import { ProInputNumberType } from '../../pro-input-number';
 import { omit } from '../../_utils/omit';
+import { useFormSearchState } from './use-form-search-state';
 
 const inputDecimalTypes = ['digit', 'decimal', 'money', 'percent'];
 export const renderFormInput = (
@@ -220,65 +219,6 @@ export const renderFormInput = (
   );
 };
 
-/**
- * 默认的设置
- */
-const defaultSearch: SearchConfig = {
-  searchText: '查询',
-  resetText: '重置',
-  submitText: '提交',
-  collapseRender: (collapsed: boolean) => (collapsed ? '展开' : '收起'),
-};
-const getDefaultSearch = (
-  search: boolean | SearchConfig | undefined,
-  t: (s: string) => any,
-  isForm: boolean
-): SearchConfig => {
-  const config = {
-    collapseRender: (collapsed: boolean) => {
-      if (collapsed) {
-        return (
-          <>
-            {t('tableForm.collapsed')}
-            <IconDown
-              style={{
-                verticalAlign: 'middle',
-                fontSize: '16px',
-                marginLeft: '8px',
-                transition: '0.3s all',
-                transform: `rotate(${collapsed ? 0 : 0.5}turn)`,
-              }}
-            />
-          </>
-        );
-      }
-      return (
-        <>
-          {t('tableForm.expand')}
-          <IconDown
-            style={{
-              verticalAlign: 'baseline',
-              fontSize: '16px',
-              marginLeft: '8px',
-              transition: '0.3s all',
-              transform: `rotate(${collapsed ? 0 : 0.5}turn)`,
-            }}
-          />
-        </>
-      );
-    },
-    searchText: defaultSearch.searchText || t('tableForm.search'),
-    resetText: defaultSearch.resetText || t('tableForm.reset'),
-    submitText: defaultSearch.submitText || t('tableForm.submit'),
-  };
-
-  if (search === undefined || search === true) {
-    return config;
-  }
-
-  return { ...config, ...search } as Required<SearchConfig>;
-};
-
 export default defineComponent({
   name: 'ProFormSearch',
   props: {
@@ -311,108 +251,158 @@ export default defineComponent({
     cancel: () => true,
   },
   setup(props, { slots, attrs, emit }) {
-    const columns = toRef(props, 'columns');
-    const defaultFormData = toRef(props, 'defaultFormData');
-    const formSearchRef = ref();
     const { t } = useI18n();
     const prefixCls = getPrefixCls('pro-table');
-    const searchConfig = computed(() =>
-      getDefaultSearch(props.search, t, props.type === 'form')
-    );
-    const isForm = computed(() => props.type === 'form');
-    const onReset = () => {
-      formSearchRef.value.resetFields();
-      handleReset();
-    };
-    const onSubmit = async () => {
-      const res = await formSearchRef.value?.validate();
-      if (!res) {
-        emit('submit', formModel.value);
-      }
-    };
-
-    function getFieldsValues() {
-      return formModel.value;
-    }
-
-    onMounted(() => {
-      // 首次加载带上查询
-      if (props.type === 'table') {
-        emit('submit', defaultFormData.value, true);
-      }
+    const searchConfig = computed((): SearchConfig => {
+      return Object.assign(
+        {
+          searchText: t('tableForm.search'),
+          resetText: t('tableForm.reset'),
+          submitText: t('tableForm.submit'),
+          collapseRender: (collapsed: boolean) => {
+            if (collapsed) {
+              return (
+                <>
+                  {t('tableForm.collapsed')}
+                  <IconDown
+                    style={{
+                      verticalAlign: 'middle',
+                      fontSize: '16px',
+                      marginLeft: '8px',
+                      transition: '0.3s all',
+                      transform: `rotate(${collapsed ? 0 : 0.5}turn)`,
+                    }}
+                  />
+                </>
+              );
+            }
+            return (
+              <>
+                {t('tableForm.expand')}
+                <IconDown
+                  style={{
+                    verticalAlign: 'baseline',
+                    fontSize: '16px',
+                    marginLeft: '8px',
+                    transition: '0.3s all',
+                    transform: `rotate(${collapsed ? 0 : 0.5}turn)`,
+                  }}
+                />
+              </>
+            );
+          },
+        },
+        props.search === true ? {} : props.search
+      ) as SearchConfig;
     });
-
-    watchEffect(() => {
-      if (typeof props.formRef === 'function' && formSearchRef.value) {
-        formSearchRef.value.submit = onSubmit;
-        formSearchRef.value.reset = onReset;
-        formSearchRef.value.getFieldsValues = getFieldsValues;
-        props.formRef(formSearchRef.value);
-      }
-    });
-
-    const formModel = ref<{ [propName: string]: any }>(
-      props.defaultFormData || {}
-    );
-    const collapsed = ref(searchConfig.value.collapsed ?? true);
-
-    const columnsList = ref<any[]>([]);
-    const gridKey = ref(Date.now());
-    watch(
-      columns,
-      (columns) => {
-        columnsList.value =
-          columns
-            .filter((item) => {
-              if (item.hideInSearch && props.type !== 'form') {
-                return false;
-              }
-              if (props.type === 'form' && item.hideInForm) {
-                return false;
-              }
-              if (
-                !(
-                  item.valueType === 'index' || item.valueType === 'indexBorder'
-                ) &&
-                (item.key || item.dataIndex)
-              ) {
-                return true;
-              }
-              return false;
-            })
-            .sort((a, b) => {
-              if (a && b) {
-                return (b.order || 0) - (a.order || 0);
-              }
-              if (a && a.order) {
-                return -1;
-              }
-              if (b && b.order) {
-                return 1;
-              }
-              return 0;
-            }) || [];
-        gridKey.value = Date.now();
-      },
-      { deep: true, immediate: true }
-    );
-
-    const handleReset = () => {
-      emit('reset', formModel.value);
-    };
-
-    const handleSubmit = ({
-      values,
-      errors,
-    }: {
-      values?: Record<string, any>;
-      errors?: Record<string, ValidatedError> | undefined;
-    } = {}) => {
-      if (!errors) {
-        emit('submit', values || {});
-      }
-    };
+    const {
+      searchConfig: searchConfigState,
+      isForm,
+      formSearchRef,
+      formModel,
+      collapsed,
+      inlineCollapsedLimit,
+      gridCollapsedLimit,
+      columnsList,
+      gridKey,
+      resetKey,
+      gridProps,
+      formProps,
+      onSubmit,
+      onReset,
+      handleReset,
+      handleSubmit,
+    } = useFormSearchState({ props, emit, searchConfig });
     const renderGridFormItems = () => {
+      if (searchConfigState.value.layout === 'inline') {
+        const collapsedLimit = inlineCollapsedLimit.value;
+        const showCollapseButton = columnsList.value.length > collapsedLimit;
+        const visibleColumns =
+          collapsed.value && showCollapseButton
+            ? columnsList.value.slice(0, collapsedLimit)
+            : columnsList.value;
+        return (
+          <>
+            {visibleColumns.map((item, index) => {
+              const key = genColumnKey(
+                item.key || item.dataIndex?.toString(),
+                index
+              );
+              const formKey = `${key}-${resetKey.value}`;
+              // 支持 function 的 title
+              const getTitle = () => {
+                if (item.title && typeof item.title === 'function') {
+                  return item.title(item, 'form');
+                }
+                return item.title;
+              };
+              const title = getTitle();
+              const valueType =
+                typeof item.valueType === 'function'
+                  ? item.valueType({})
+                  : item.valueType;
+              const hidden = valueType === 'hidden';
+              const formItemProps =
+                typeof item.formItemProps === 'function'
+                  ? item.formItemProps({ formModel, item, type: props.type })
+                  : item.formItemProps;
+              return (
+                <FormItem
+                  key={formKey}
+                  hidden={hidden}
+                  {...(isForm.value
+                    ? formItemProps
+                    : omit(formItemProps, [
+                        'rules',
+                        'disabled',
+                        'required',
+                        'validateStatus',
+                        'validateTrigger',
+                      ]))}
+                  field={item.dataIndex}
+                  label={
+                    !hidden && typeof title === 'string' ? title : undefined
+                  }
+                  v-slots={{
+                    label: () => {
+                      return hidden ? '' : title;
+                    },
+                  }}
+                >
+                  {cloneVNode(
+                    renderFormInput(
+                      item,
+                      props.type,
+                      formModel,
+                      formSearchRef,
+                      slots,
+                      t
+                    ),
+                    {
+                      key: `${formKey}-input`,
+                      'modelValue': formModel.value[item.dataIndex] ?? null,
+                      'onUpdate:modelValue': (value: any) => {
+                        // 更新表单数据
+                        formModel.value[item.dataIndex] = value;
+                      },
+                    }
+                  )}
+                </FormItem>
+              );
+            })}
+            <FormItem key="action">
+              {renderFormOption(showCollapseButton)}
+            </FormItem>
+          </>
+        );
+      }
+      const baseColumns = columnsList.value || [];
+      const limit = gridCollapsedLimit.value ?? baseColumns.length;
+      const showCollapseButton = !isForm.value && baseColumns.length > limit;
+      const visibleColumns =
+        collapsed.value && showCollapseButton
+          ? baseColumns.slice(0, limit)
+          : baseColumns;
       return (
         <Grid
           {...gridProps.value}
@@ -420,13 +410,14 @@ export default defineComponent({
             ? props.search.gridProps
             : undefined)}
           key={gridKey.value}
-          collapsedRows={1}
+          collapsed={false}
         >
-          {columnsList.value.map((item, index) => {
+          {visibleColumns.map((item, index) => {
             const key = genColumnKey(
               item.key || item.dataIndex?.toString(),
               index
             );
+            const formKey = `${key}-${resetKey.value}`;
             // 支持 function 的 title
             const getTitle = () => {
               if (item.title && typeof item.title === 'function') {
@@ -449,8 +440,9 @@ export default defineComponent({
               typeof item.formItemProps === 'function'
                 ? item.formItemProps(data)
                 : item.formItemProps;
+            const gridItemProps = item.girdItemProps || {};
             return (
-              <GridItem key={key} hidden={hidden} {...item.girdItemProps}>
+              <GridItem key={formKey} hidden={hidden} suffix={false} {...gridItemProps}>
                 <FormItem
                   {...(isForm.value
                     ? formItemProps
@@ -481,7 +473,8 @@ export default defineComponent({
                       t
                     ),
                     {
-                      'modelValue': formModel.value[item.dataIndex],
+                      key: `${formKey}-input`,
+                      'modelValue': formModel.value[item.dataIndex] ?? null,
                       'onUpdate:modelValue': (value: any) => {
                         // 更新表单数据
                         formModel.value[item.dataIndex] = value;
@@ -500,8 +493,11 @@ export default defineComponent({
               !isForm.value ? { 'margin-bottom': '20px' } : {},
             ]}
             v-slots={{
-              default: ({ overflow }: { overflow: boolean }) => {
-                return renderFormOption(collapsed.value ? overflow : true);
+              default: (slotProps: { overflow?: boolean } = {}) => {
+                const showCollapse =
+                  !isForm.value &&
+                  (showCollapseButton || !!slotProps.overflow);
+                return renderFormOption(showCollapse);
               },
             }}
           ></GridItem>
@@ -510,11 +506,11 @@ export default defineComponent({
     };
 
     const renderFormOption = (showCollapseButton: boolean) => {
-      if (searchConfig.value.optionRender === false) {
+      if (searchConfigState.value.optionRender === false) {
         return null;
       }
       const optionProps: FormOptionProps = {
-        searchConfig: searchConfig.value,
+        searchConfig: searchConfigState.value,
         collapse: collapsed.value,
         setCollapse: (value: boolean) => {
           collapsed.value = value;
@@ -523,27 +519,27 @@ export default defineComponent({
         submit: onSubmit,
         reset: onReset,
         dom: [
-          <Button onClick={onReset}>{searchConfig.value.resetText}</Button>,
+          <Button onClick={onReset}>{searchConfigState.value.resetText}</Button>,
           <Button
             type="primary"
             htmlType="submit"
             loading={props.submitButtonLoading}
           >
             {isForm.value
-              ? searchConfig.value.submitText
-              : searchConfig.value.searchText}
+              ? searchConfigState.value.submitText
+              : searchConfigState.value.searchText}
           </Button>,
         ],
         form: formSearchRef,
         showCollapseButton,
       };
       let dom: any = null;
-      if (searchConfig.value.optionRender || slots?.['option-render']) {
+      if (searchConfigState.value.optionRender || slots?.['option-render']) {
         if (slots?.['option-render']) {
           dom = slots?.['option-render'](optionProps);
         }
-        if (searchConfig.value.optionRender) {
-          dom = searchConfig.value.optionRender(optionProps);
+        if (searchConfigState.value.optionRender) {
+          dom = searchConfigState.value.optionRender(optionProps);
         }
       }
       return (
@@ -556,35 +552,20 @@ export default defineComponent({
                 collapsed.value = !collapsed.value;
               }}
             >
-              {searchConfig.value.collapseRender &&
-                searchConfig.value.collapseRender(collapsed.value)}
+              {searchConfigState.value.collapseRender &&
+                searchConfigState.value.collapseRender(collapsed.value)}
             </a>
           )}
         </Space>
       );
     };
-
-    const gridProps = computed(() =>
-      props.type === 'form'
-        ? {
-            cols: 1,
-            collapsed: false,
-          }
-        : {
-            cols: { xs: 1, sm: 2, md: 3 },
-            collapsed: collapsed.value,
-          }
-    );
-    const formProps = computed(() => {
-      const data =
-        typeof searchConfig.value.formProps === 'function'
-          ? searchConfig.value.formProps({ formModel, type: props.type })
-          : searchConfig.value.formProps;
-      return isForm.value ? data : omit(data || {}, ['rules', 'disabled']);
-    });
     const render = () => (
       <Form
-        layout={isForm.value ? 'vertical' : 'horizontal'}
+        key={resetKey.value}
+        layout={
+          searchConfigState.value.layout ||
+          (isForm.value ? 'vertical' : 'horizontal')
+        }
         {...formProps.value}
         model={formModel.value}
         ref={formSearchRef}

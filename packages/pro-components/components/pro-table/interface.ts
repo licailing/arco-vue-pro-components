@@ -62,7 +62,8 @@ export type ProColumnsValueType =
   | 'code'
   | 'avatar'
   | 'image'
-  | 'uploadFile';
+  | 'uploadFile'
+  | 'hidden';
 
 /**
  * value type by function
@@ -917,6 +918,10 @@ export interface SearchConfig {
    * 提交按钮的文本
    */
   submitText?: string;
+  /**
+   * 表单布局方式
+   */
+  layout?: 'horizontal' | 'vertical' | 'inline';
   gridProps?: GridProps;
   /**
    * 设置搜索表单的Form props

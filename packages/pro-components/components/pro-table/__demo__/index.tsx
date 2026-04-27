@@ -4,49 +4,49 @@
  * @zh 默认表格可互动 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--basic-demo)
  * @en basic table [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--basic-demo)
  */
-import Basic from './basic.tsx';
+import Basic from './basic';
 /**
  * @fileName lightfilter.tsx
  * @fileType tsx
  * @zh 高级筛选表格 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--lightfilter-demo)
  * @en advanced filter replacement query form [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--lightfilter-demo)
  */
-import Lightfilter from './lightfilter.tsx';
+import Lightfilter from './lightfilter';
 /**
  * @fileName batch-option.tsx
  * @fileType tsx
  * @zh 表格批量操作 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--batch-option-demo)
  * @en Batch manipulation of tables [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--batch-option-demo)
  */
-import BatchOption from './batch-option.tsx';
+import BatchOption from './batch-option';
 /**
  * @fileName normal.tsx
  * @fileType tsx
  * @zh 无查询表单 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--normal-demo)
  * @en Downgrade to a normal table [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--normal-demo)
  */
-import Normal from './normal.tsx';
+import Normal from './normal';
 /**
  * @fileName table-nested.tsx
  * @fileType tsx
  * @zh 嵌套表格 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--table-nested-demo)
  * @en Nested tables [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--table-nested-demo)
  */
-import TableNested from './table-nested.tsx';
+import TableNested from './table-nested';
 /**
  * @fileName split.tsx
  * @fileType tsx
  * @zh 左右结构 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--split-demo)
  * @en Left and right structure [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--split-demo)
  */
-import Split from './split.tsx';
+import Split from './split';
 /**
  * @fileName form.tsx
  * @fileType tsx
  * @zh 表单赋值 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--form-demo)
  * @en Manipulating query forms with formRef [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--form-demo)
  */
-import Form from './form.tsx';
+import Form from './form';
 /**
  * @fileName formV.vue
  * @fileType vue
@@ -60,21 +60,21 @@ import FormV from './formV.vue';
  * @zh 拖拽排序 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--drag-sort-table-demo)
  * @en drag and sort [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--drag-sort-table-demo)
  */
-import DragSortTable from './drag-sort-table.tsx';
+import DragSortTable from './drag-sort-table';
 /**
  * @fileName single.tsx
  * @fileType tsx
  * @zh 查询表格 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--single-demo)
  * @en Querying a table [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--single-demo)
  */
-import Single from './single.tsx';
+import Single from './single';
 /**
  * @fileName linkage-form.tsx
  * @fileType tsx
  * @zh 动态自定义搜索栏 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--linkage-form-demo)
  * @en Dynamically customize the search bar [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--linkage-form-demo)
  */
-import LinkageForm from './linkage-form.tsx';
+import LinkageForm from './linkage-form';
 /**
  * @fileName linkage-formV.vue
  * @fileType vue
@@ -88,35 +88,35 @@ import LinkageFormV from './linkage-formV.vue';
  * @zh valueType 选项类 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-select-demo)
  * @en valueType - Selection Classes [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-select-demo)
  */
-import ValueTypeSelect from './value-type-select.tsx';
+import ValueTypeSelect from './value-type-select';
 /**
  * @fileName value-type-date.tsx
  * @fileType tsx
  * @zh valueType 日期类 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-date-demo)
  * @en valueType - Date class [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-date-demo)
  */
-import ValueTypeDate from './value-type-date.tsx';
+import ValueTypeDate from './value-type-date';
 /**
  * @fileName value-type-number.tsx
  * @fileType tsx
  * @zh valueType 数字类 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-number-demo)
  * @en valueType - numeric class [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-number-demo)
  */
-import ValueTypeNumber from './value-type-number.tsx';
+import ValueTypeNumber from './value-type-number';
 /**
  * @fileName value-type.tsx
  * @fileType tsx
  * @zh valueType 样式类 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-demo)
  * @en valueType - Style Classes [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-demo)
  */
-import ValueType from './value-type.tsx';
+import ValueType from './value-type';
 /**
  * @fileName grouping-columns.tsx
  * @fileType tsx
  * @zh GroupingColumns 分组表头表格 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--grouping-columns-demo)
  * @en GroupingColumns - grouping table header [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--grouping-columns-demo)
  */
-import GroupingColumns from './grouping-columns.tsx';
+import GroupingColumns from './grouping-columns';
 import { reactive } from 'vue';
 import { Button } from '@arco-design/web-vue';
 
@@ -142,6 +142,18 @@ export const BasicDemo = {
           summary: 'true',
         },
       },
+    },
+    searchLayout: {
+      description: '搜索表单布局方式',
+      table: {
+        type: { summary: 'horizontal|vertical|inline' },
+        defaultValue: {
+          summary: 'horizontal',
+        },
+      },
+      if: { arg: 'searchType', eq: '普通表格' },
+      control: 'inline-radio',
+      options: ['horizontal', 'vertical', 'inline'],
     },
     lightSearchConfig: {
       description: `是否显示表格的搜索表单或配置搜索表单, lightSearchConfig: { rowNumber: 2, name: 'keyword', search: true, clearToSearch: false } rowNumber:设置右侧直接搜索表单项显示几个： 默认是2个，其他表单项在高级筛选弹框里面,name: 设置左侧文本框名称(传值给后台的字段)，默认：keyword,search:传给左侧文本搜索框props，左侧文本搜索框为false不显示,clearToSearch:设置左侧文本搜索框清空时，为true时候，立即搜索数据`,
@@ -206,6 +218,7 @@ export const BasicDemo = {
   },
   args: {
     search: true,
+    searchLayout: 'horizontal',
     searchType: '普通表格',
     lightSearchConfig: { rowNumber: 2, name: 'keyword', search: true },
     toolBarRender: '显示已配置的',
@@ -254,6 +267,10 @@ export const BasicDemo = {
         props.toolBarRender = false;
       }
       props.searchType = args.searchType === '普通表格' ? 'query' : 'light';
+      if (args.search) {
+        const searchConfig = args.search === true ? {} : args.search || {};
+        props.search = { ...searchConfig, layout: args.searchLayout };
+      }
       return () => <Basic {...args} {...props} />;
     },
   }),

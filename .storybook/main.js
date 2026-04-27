@@ -1,6 +1,7 @@
 const path = require('path');
 const glob = require('glob');
 const fs = require('fs-extra');
+const webpack = require('webpack');
 
 const packagePaths = glob.sync('packages/*');
 
@@ -63,6 +64,13 @@ module.exports = {
       test: /\.svg$/,
       use: ['vue-loader', 'vue-svg-loader'],
     });
+
+    config.plugins = config.plugins || [];
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: JSON.stringify(false),
+      })
+    );
 
     return config;
   },

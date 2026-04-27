@@ -44,7 +44,8 @@ export default defineComponent({
             >
               {rowIndex +
                 1 +
-                (action?.pageInfo?.current - 1) * action?.pageInfo?.pageSize}
+                ((action?.pageInfo?.value?.current || 1) - 1) *
+                  (action?.pageInfo?.value?.pageSize || 10)}
             </span>
           );
         },

@@ -46,11 +46,14 @@ for (let i = 0; i < 5; i += 1) {
 export default defineComponent({
   name: 'Lightfilter1',
   setup() {
+    const params = ref<any>({ type: 1 });
+    const handleChange = () => {
+      params.value.type = 2;
+    };
     const actionRef = ref();
     const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
     };
-    const params = ref<any>({ type: 1 });
     const columns: ProColumns[] = [
       {
         title: '应用名称',
@@ -230,7 +233,7 @@ export default defineComponent({
               onSelect={(value) => {
                 action?.reload();
               }}
-              popupContainer={action?.getPopupContainer()}
+              popupContainer={action?.getPopupContainer?.()}
               v-slots={{
                 default: () => {
                   return <IconMore style={{ color: '#1677FF' }} />;
@@ -249,9 +252,6 @@ export default defineComponent({
         },
       },
     ];
-    const handleChange = () => {
-      params.value.type = 2;
-    }
     const render = () => {
       return (
         <div>

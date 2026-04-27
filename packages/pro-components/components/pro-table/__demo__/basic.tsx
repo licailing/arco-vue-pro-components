@@ -62,7 +62,7 @@ for (let i = 0; i < 10; i += 1) {
 
 export default defineComponent({
   name: 'Basic',
-  setup(props) {
+  setup(props, { attrs }) {
     const actionRef = ref();
     const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
@@ -183,6 +183,19 @@ export default defineComponent({
         selectedKeys.value,
         expandedKeys.value
       );
+      const allProps = { ...props, ...attrs };
+      const { search, searchLayout } = allProps as any;
+      let searchConfig = search;
+
+      if (search !== false && searchLayout) {
+        const baseConfig =
+          typeof search === 'object' && search !== null ? search : {};
+        searchConfig = {
+          ...baseConfig,
+          layout: searchLayout,
+        };
+      }
+
       return (
         <div>
           <ProTable
@@ -232,7 +245,8 @@ export default defineComponent({
                 </Link>
               );
             }}
-            {...props}
+            {...allProps}
+            search={searchConfig}
           />
           <Modal
             titleAlign="start"
