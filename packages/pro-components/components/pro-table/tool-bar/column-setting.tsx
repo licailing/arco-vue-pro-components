@@ -12,7 +12,7 @@ import {
   watch,
 } from 'vue';
 import { Checkbox, Popover, Space, Tree } from '@arco-design/web-vue';
-import { useI18n } from '../../../locale';
+import { useI18n } from '../../locale';
 import { getPrefixCls } from '../../_utils';
 import MyToolTip from '../my-tool-tip';
 import MyIcon from '../my-icon/index.vue';
@@ -110,7 +110,7 @@ export default defineComponent({
       if (!data || !isArray(data) || !data.length) {
         return undefined;
       }
-      let newData = [];
+      let newData: any[] = [];
       let index = 0;
       for (let [_, columnItem] of data.entries()) {
         // 不把title(有vnode类型)传给tree 会有提示

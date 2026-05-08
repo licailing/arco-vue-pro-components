@@ -27,7 +27,7 @@ description: Only input boxes in numeric format are allowed, money percent int d
 |precision|Precision|`number`|`-`|
 |disabled|Whether to disable|`boolean`|`false`|
 |error|Whether it is an error state|`boolean`|`false`|
-|max|Max|`number`|`Infinity (100 by default for percent mode)`|
+|max|Max (100 by default for percent mode)|`number`|`Infinity`|
 |min|Min|`number`|`-Infinity`|
 |placeholder|Input prompt text|`string`|`-`|
 |size|Input size|`'mini' \| 'small' \| 'medium' \| 'large'`|`'medium'`|
@@ -66,7 +66,7 @@ description: Only input boxes in numeric format are allowed, money percent int d
 |precision|Precision|`number`|`-`|
 |disabled|Whether to disable|`boolean`|`false`|
 |error|Whether it is an error state|`boolean`|`false`|
-|max|Max|`number`|`Infinity (100 by default for percent mode)`|
+|max|Max (100 by default for percent mode)|`number`|`Infinity`|
 |min|Min|`number`|`-Infinity`|
 |formatter|Define the display value of the input|`(value: any) => any`|`-`|
 |parser|Convert from `formatter` to number; and use with `formatter`|`(value: any) => any`|`-`|

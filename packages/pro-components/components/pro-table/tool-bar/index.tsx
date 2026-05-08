@@ -18,7 +18,7 @@ import type {
   ToolBarProps,
 } from '../interface';
 import ColumnSetting from './column-setting';
-import { useI18n } from '../../../locale/index';
+import { useI18n } from '../../locale';
 import { getPrefixCls } from '../../_utils';
 import DensityIcon from './density-icon';
 import FullScreenIcon from './fullscreen-icon';

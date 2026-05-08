@@ -2,14 +2,14 @@
   <icon-font :type="type" :size="size" />
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import { Icon } from '@arco-design/web-vue';
 
 const IconFont = Icon.addFromIconFontCn({
   src: '//at.alicdn.com/t/c/font_4386265_m1qdgig5wh.js',
 });
-
-export default {
+export default defineComponent({
   name: 'MyIcon',
   props: {
     type: String,
@@ -18,5 +18,5 @@ export default {
   components: {
     IconFont,
   },
-};
+});
 </script>

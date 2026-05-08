@@ -7,6 +7,11 @@ export interface ProSelectProps {
    * @defaultValue false
    */
   cacheForSwr?: boolean;
+  /**
+   * @zh 缓存 key，用于区分请求缓存
+   * @en Cache key for request data
+   * @defaultValue ''
+   */
   columnKey?: string;
   /**
    * @zh 是否开启 request 远程搜索
@@ -14,6 +19,11 @@ export interface ProSelectProps {
    * @defaultValue false
    */
   requestSearch?: boolean;
+  /**
+   * @zh 只读模式 mode='read'
+   * @en read only when mode='read'
+   * @defaultValue undefined
+   */
   mode?: 'read';
   /**
    * @zh 是否开启多选模式（多选模式默认开启搜索）

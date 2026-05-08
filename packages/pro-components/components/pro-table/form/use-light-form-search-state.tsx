@@ -10,7 +10,7 @@ import {
   watch,
   watchEffect,
 } from 'vue';
-import { useI18n } from '../../../locale/index';
+import { useI18n } from '../../locale';
 import { isEmptyObject } from '../../_utils/is';
 import { genColumnKey, setFields } from '../utils';
 import type { LightSearchConfig, ProColumns } from '../interface';

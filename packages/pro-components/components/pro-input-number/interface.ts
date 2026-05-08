@@ -72,8 +72,8 @@ export interface ProInputNumberProps {
    */
   error?: boolean;
   /**
-   * @zh 最大值
-   * @en Max
+   * @zh 最大值 （percent 模式默认 100）
+   * @en Max (100 by default for percent mode)
    * @defaultValue Infinity
    */
   max?: number;

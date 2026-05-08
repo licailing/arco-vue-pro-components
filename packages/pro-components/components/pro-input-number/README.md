@@ -25,7 +25,7 @@ description: 仅允许输入数字格式的输入框。
 |precision|数字精度|`number`|`-`|
 |disabled|是否禁用|`boolean`|`false`|
 |error|是否为错误状态|`boolean`|`false`|
-|max|最大值|`number`|`Infinity（percent 模式默认 100）`|
+|max|最大值（percent 模式默认 100）|`number`|`Infinity`|
 |min|最小值|`number`|`-Infinity`|
 |placeholder|输入框提示文字|`string`|`-`|
 |size|输入框大小|`'mini' \| 'small' \| 'medium' \| 'large'`|`'medium'`|
@@ -64,7 +64,7 @@ description: 仅允许输入数字格式的输入框。
 |precision|数字精度|`number`|`-`|
 |disabled|是否禁用|`boolean`|`false`|
 |error|是否为错误状态|`boolean`|`false`|
-|max|最大值|`number`|`Infinity（percent 模式默认 100）`|
+|max|最大值 （percent 模式默认 100）|`number`|`Infinity`|
 |min|最小值|`number`|`-Infinity`|
 |formatter|定义输入框展示值|`(value: any) => any`|`-`|
 |parser|从 `formatter` 转换为数字，和 `formatter` 搭配使用|`(value: any) => any`|`-`|

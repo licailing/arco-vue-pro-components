@@ -25,4 +25,5 @@ module.exports = {
     '@babel/plugin-proposal-class-properties',
     '@vue/babel-plugin-jsx',
   ],
+  ignore: [/node_modules/, /\.d\.ts$/], // 排除类型声明文件
 };

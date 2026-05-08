@@ -18,7 +18,7 @@ import {
 } from '@arco-design/web-vue';
 import ProSelect from '../../pro-select';
 import ProInputNumber from '../../pro-input-number';
-import { useI18n } from '../../../locale/index';
+import { useI18n } from '../../locale';
 import type {
   ProColumns,
   ProTableTypes,

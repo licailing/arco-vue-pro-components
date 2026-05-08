@@ -1,4 +1,4 @@
-import { useI18n } from '../../../locale';
+import { useI18n } from '../../locale';
 import { defineComponent, inject } from 'vue';
 import {
   IconFullscreen,

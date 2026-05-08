@@ -22,8 +22,8 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |row-key|表格行 `key` 的取值字段|`string`|`'id'`|
 |params|request 的参数，修改之后会触发更新|`object`|`-`|
 |request|获取 `data` 的方法 \| `(params?: {pageSize,current},sort,filter) => {data,success,total}`|`(  params: {    pageSize?: number;    current?: number;    [key: string]: any;  },  sort: {    [key: string]: 'ascend' \| 'descend';  },  filter: { [key: string]: any }) => Promise<RequestData<any>>`|`-`|
-|default-data|默认的数据|`array`|`-`|
 |data-cache|数据缓存|`boolean \| ProTableCacheConfig<TableData[]>`|`-`|
+|default-data|默认的数据|`array`|`-`|
 |before-search-submit|格式化搜索表单提交数据|`(searchParams: any) => any`|`(searchParams: any) => searchParams`|
 |search|是否显示搜索表单，传入对象时为搜索表单的配置|`SearchConfig \| boolean`|`true`|
 |type|pro-table 类型|`ProTableTypes`|`'table'`|
@@ -31,6 +31,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |options-render|自定义工具栏右侧表格操作按钮,为false则显示默认：reload(刷新)\|density(表格密度)\|setting(列设置)\|fullScreen(全屏 默认不显示)|`false \| ToolBarProps<any>['optionsRender']`|`false`|
 |options|table 工具栏，设为 false 时不显示，传入 function 会点击时触发|`boolean \| ToolBarProps<any>['options']`|`false`|
 |header-title|表格标题|`ToolBarProps<any>['headerTitle']`|`'列表数据'`|
+|card-props|Card 组件的 props，设置为 false 时不显示 Card|`boolean \| Record<string, any>`|`-`|
 |default-form-data|表单初始化数据|`object`|`-`|
 |search-type|搜索表单类型|`ProTableProps['searchType']`|`'query'`|
 |light-search-config|高级搜索表单配置|`LightSearchConfig`|`-`|
@@ -52,6 +53,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |page-position|分页选择器的位置|`'tl' \| 'top' \| tr' \| 'bl' \| 'bottom' \| 'br'`|`'br'`|
 |indent-size|树形表格的缩进距离|`number`|`16`|
 |show-header|是否显示表头|`boolean`|`true`|
+|virtual-list-props|传递虚拟列表属性，传入此参数以开启虚拟滚动 [VirtualListProps](#VirtualListProps)|`VirtualListProps`|`-`|
 |span-method|单元格合并方法（索引从数据项开始计数）|`(data: {  record: TableData;  column: TableColumnData \| TableOperationColumn;  rowIndex: number;  columnIndex: number;}) => { rowspan?: number; colspan?: number } \| void`|`-`|
 |span-all|是否让合并方法的索引包含所有|`boolean`|`false`|
 |load-more|数据懒加载函数，传入时开启懒加载功能|`(record: TableData, done: (children?: TableData[]) => void) => void`|`-`|
@@ -89,6 +91,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |on-header-click|点击表头数据时触发|`(column: TableColumnData, ev: Event) => void`|`-`|
 |on-column-resize|调整列宽时触发|`(dataIndex: string, width: number) => void`|`-`|
 |columns-state|列状态的配置，可以用来操作列功能|`ColumnStateType`|`-`|
+|always-show-alert|是否一直显示alert栏|`boolean`|`false`|
 |alert-render|自定义 table 的 alert 的操作|`AlertRenderType`|`-`|
 ### `<pro-table>` Slots
 
@@ -133,7 +136,7 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |girdItemProps|传递给查询表单a-grid-item的配置|`GridItemProps`|`-`|
 |defaultValue|查询表单的默认值|`any`|`-`|
 |valueType|值的类型,会生成不同的渲染器|`ProColumnsValueType \| ProColumnsValueTypeFunction<any>`|`-`|
-|renderFormItem|渲染查询表单的输入组件|`(data: RenderFormItemData) => VNodeTypes \| 'hidden'`|`-`|
+|renderFormItem|渲染查询表单的输入组件|`(data: RenderFormItemData) => VNode`|`-`|
 |hideInSearch|在查询表单中不展示此项|`boolean`|`false`|
 |hideInTable|在Table中不展示此列|`boolean`|`false`|
 |hideInForm|在Form中不展示此列|`boolean`|`false`|
@@ -159,15 +162,16 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |---|---|---|:---:|
 |columns|columns|`ProColumns[]`|`-`|
 |columnsCache|列配置缓存|`boolean \| ProTableCacheConfig<TableColumnData[]>`|`-`|
+|dataCache|列配置缓存|`boolean \| ProTableCacheConfig<TableData[]>`|`-`|
 |type|pro-table类型|`ProTableTypes`|`-`|
 |params|request的参数，修改之后会触发更新|`{ [key: string]: any }`|`-`|
-|dataCache|数据缓存|`boolean \| ProTableCacheConfig<TableData[]>`|`-`|
 |size|表格的大小|`Size`|`'large'`|
 |request|获取 `data` 的方法 \| `(params?: {pageSize,current},sort,filter) => {data,success,total}` 组件内部有维护loading，不需要传loading|`(    params: {      pageSize?: number;      current?: number;      [key: string]: any;    },    sort: {      [key: string]: 'ascend' \| 'descend';    },    filter: { [key: string]: string }  ) => Promise<RequestData<any>>`|`-`|
 |toolBarRender|渲染工具栏，支持返回一个 dom 数组，会自动增加 margin-right|`ToolBarProps<any>['toolBarRender'] \| false`|`-`|
-|optionsRender|自定义操作栏|`ToolBarProps<any>['optionsRender'] \| false`|`-`|
+|optionRender|自定义操作栏|`ToolBarProps<any>['optionsRender'] \| false`|`-`|
 |options|配置table 工具栏右侧表格操作按钮，设为 false 时不显示，传入 function 会点击时触发,默认按钮:reload(刷新)\|density(表格密度)\|setting(列设置)\|fullScreen(全屏 默认不显示)|`OptionConfig \| false`|`-`|
 |headerTitle|表格标题|`ToolBarProps<any>['headerTitle']`|`-`|
+|cardProps|Card 组件的 props，设置为 false 时不显示 Card|`Record<string, any> \| boolean`|`-`|
 |search|是否显示搜索表单，传入对象时为搜索表单的配置|`boolean \| SearchConfig`|`-`|
 |beforeSearchSubmit|格式化搜索表单提交数据|`(params: Partial<any>) => Partial<any>`|`-`|
 |defaultFormData|表单初始化数据|`Record<string, unknown>`|`-`|
@@ -262,11 +266,16 @@ description: 基于arco-design web-vue 的table封装的pro-table组件
 |---|---|---|:---:|
 |searchText|查询按钮的文本|`string`|`-`|
 |resetText|重置按钮的文本|`string`|`-`|
-|collapseRender|收起按钮的 render|`(    collapsed: boolean,    /**     * 是否应该展示，有两种情况     * 列只有三列，不需要收起     * form 模式 不需要收起     */    showCollapseButton?: boolean  ) => VNodeChild`|`-`|
+|collapseRender|设置渲染收起按钮|`(    collapsed: boolean,    /**     * 是否应该展示，有两种情况     * 列只有三列，不需要收起     * form 模式 不需要收起     */    showCollapseButton?: boolean  ) => VNodeChild`|`-`|
 |collapsed|是否收起|`boolean`|`false`|
 |onCollapse|收起按钮的事件|`(collapsed: boolean) => void`|`-`|
 |submitText|提交按钮的文本|`string`|`-`|
-|formProps|设置搜索表单的Form props|`((data: FormPropsData) => Omit<FormInstance, 'model' \| 'scrollToFirstError'>)  \| Omit<FormInstance, 'model' \| 'scrollToFirstError'>`|`-`|
+|layout|表单布局方式|`'horizontal' \| 'vertical' \| 'inline'`|`-`|
+|gridSuffixType|表单后缀元素（重置、查询、展开按钮）显示类型column:占一列\|rowLeft:占一行(在左边)\|rowRight: 占一行(在右边)，默认：column|`'column' \| 'rowLeft' \| 'rowRight'`|`-`|
+|gridSuffixProps|表单后缀元素（重置、查询、展开按钮）props|`GridItemProps`|`-`|
+|gridProps|设置表单Grid props|`GridProps`|`-`|
+|formProps|设置表单的Form props|`((data: FormPropsData) => Omit<FormInstance, 'model' \| 'scrollToFirstError'>)  \| Omit<FormInstance, 'model' \| 'scrollToFirstError'>`|`-`|
+|optionRender|自定义普通搜索表单(searchType=query)的按钮(如果search=false则不显示)，默认：重置\|查询(type=table),重置\|提交(type=form)|`((props: FormOptionProps) => VNodeTypes) \| false`|`-`|
 
 
 
@@ -453,7 +462,7 @@ for (let i = 0; i < 10; i += 1) {
 
 export default defineComponent({
   name: 'Basic',
-  setup(props) {
+  setup(props, { attrs }) {
     const actionRef = ref();
     const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
@@ -574,6 +583,7 @@ export default defineComponent({
         selectedKeys.value,
         expandedKeys.value
       );
+
       return (
         <div>
           <ProTable
@@ -623,6 +633,7 @@ export default defineComponent({
                 </Link>
               );
             }}
+            {...attrs}
             {...props}
           />
           <Modal
@@ -726,6 +737,10 @@ for (let i = 0; i < 5; i += 1) {
 export default defineComponent({
   name: 'Lightfilter1',
   setup() {
+    const params = ref<any>({ type: 1 });
+    const handleChange = () => {
+      params.value.type = 2;
+    };
     const actionRef = ref();
     const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
@@ -909,7 +924,7 @@ export default defineComponent({
               onSelect={(value) => {
                 action?.reload();
               }}
-              popupContainer={action?.getPopupContainer()}
+              popupContainer={action?.getPopupContainer?.()}
               v-slots={{
                 default: () => {
                   return <IconMore style={{ color: '#1677FF' }} />;
@@ -961,7 +976,7 @@ export default defineComponent({
               persistenceKey: 'pro-table-lightfilter-demos',
               persistenceType: 'localStorage',
             }}
-            params={{ type: 1 }}
+            params={params.value}
             defaultFormData={{ status: 'all', name: 'aaa' }}
             headerTitle={
               <Link
@@ -974,6 +989,7 @@ export default defineComponent({
               </Link>
             }
             toolBarRender={() => [
+              <Button key="show" onClick={handleChange}>切换请求参数</Button>,
               <Button key="show">查看日志</Button>,
               <Button key="out">
                 导出数据
@@ -2609,7 +2625,8 @@ export default defineComponent({
             >
               {rowIndex +
                 1 +
-                (action?.pageInfo?.current - 1) * action?.pageInfo?.pageSize}
+                ((action?.pageInfo?.value?.current || 1) - 1) *
+                  (action?.pageInfo?.value?.pageSize || 10)}
             </span>
           );
         },
@@ -3737,3 +3754,4 @@ export default defineComponent({
 });
 
 ```
+

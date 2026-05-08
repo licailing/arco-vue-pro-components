@@ -4,49 +4,49 @@
  * @zh 默认表格可互动 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--basic-demo)
  * @en basic table [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--basic-demo)
  */
-import Basic from './basic';
+import Basic from './basic.tsx';
 /**
  * @fileName lightfilter.tsx
  * @fileType tsx
  * @zh 高级筛选表格 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--lightfilter-demo)
  * @en advanced filter replacement query form [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--lightfilter-demo)
  */
-import Lightfilter from './lightfilter';
+import Lightfilter from './lightfilter.tsx';
 /**
  * @fileName batch-option.tsx
  * @fileType tsx
  * @zh 表格批量操作 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--batch-option-demo)
  * @en Batch manipulation of tables [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--batch-option-demo)
  */
-import BatchOption from './batch-option';
+import BatchOption from './batch-option.tsx';
 /**
  * @fileName normal.tsx
  * @fileType tsx
  * @zh 无查询表单 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--normal-demo)
  * @en Downgrade to a normal table [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--normal-demo)
  */
-import Normal from './normal';
+import Normal from './normal.tsx';
 /**
  * @fileName table-nested.tsx
  * @fileType tsx
  * @zh 嵌套表格 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--table-nested-demo)
  * @en Nested tables [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--table-nested-demo)
  */
-import TableNested from './table-nested';
+import TableNested from './table-nested.tsx';
 /**
  * @fileName split.tsx
  * @fileType tsx
  * @zh 左右结构 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--split-demo)
  * @en Left and right structure [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--split-demo)
  */
-import Split from './split';
+import Split from './split.tsx';
 /**
  * @fileName form.tsx
  * @fileType tsx
  * @zh 表单赋值 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--form-demo)
  * @en Manipulating query forms with formRef [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--form-demo)
  */
-import Form from './form';
+import Form from './form.tsx';
 /**
  * @fileName formV.vue
  * @fileType vue
@@ -60,21 +60,21 @@ import FormV from './formV.vue';
  * @zh 拖拽排序 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--drag-sort-table-demo)
  * @en drag and sort [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--drag-sort-table-demo)
  */
-import DragSortTable from './drag-sort-table';
+import DragSortTable from './drag-sort-table.tsx';
 /**
  * @fileName single.tsx
  * @fileType tsx
  * @zh 查询表格 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--single-demo)
  * @en Querying a table [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--single-demo)
  */
-import Single from './single';
+import Single from './single.tsx';
 /**
  * @fileName linkage-form.tsx
  * @fileType tsx
  * @zh 动态自定义搜索栏 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--linkage-form-demo)
  * @en Dynamically customize the search bar [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--linkage-form-demo)
  */
-import LinkageForm from './linkage-form';
+import LinkageForm from './linkage-form.tsx';
 /**
  * @fileName linkage-formV.vue
  * @fileType vue
@@ -88,38 +88,41 @@ import LinkageFormV from './linkage-formV.vue';
  * @zh valueType 选项类 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-select-demo)
  * @en valueType - Selection Classes [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-select-demo)
  */
-import ValueTypeSelect from './value-type-select';
+import ValueTypeSelect from './value-type-select.tsx';
 /**
  * @fileName value-type-date.tsx
  * @fileType tsx
  * @zh valueType 日期类 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-date-demo)
  * @en valueType - Date class [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-date-demo)
  */
-import ValueTypeDate from './value-type-date';
+import ValueTypeDate from './value-type-date.tsx';
 /**
  * @fileName value-type-number.tsx
  * @fileType tsx
  * @zh valueType 数字类 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-number-demo)
  * @en valueType - numeric class [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-number-demo)
  */
-import ValueTypeNumber from './value-type-number';
+import ValueTypeNumber from './value-type-number.tsx';
 /**
  * @fileName value-type.tsx
  * @fileType tsx
  * @zh valueType 样式类 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-demo)
  * @en valueType - Style Classes [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--value-type-demo)
  */
-import ValueType from './value-type';
+import ValueType from './value-type.tsx';
 /**
  * @fileName grouping-columns.tsx
  * @fileType tsx
  * @zh GroupingColumns 分组表头表格 [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--grouping-columns-demo)
  * @en GroupingColumns - grouping table header [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--grouping-columns-demo)
  */
-import GroupingColumns from './grouping-columns';
+import GroupingColumns from './grouping-columns.tsx';
+
+// 生成文档关闭
 import { reactive } from 'vue';
 import { Button } from '@arco-design/web-vue';
 
+// 生成文档关闭
 export const BasicDemo = {
   name: '默认示例(可互动)',
   argTypes: {

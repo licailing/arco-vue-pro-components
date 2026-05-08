@@ -10,7 +10,6 @@ import {
   watchEffect,
   provide,
   inject,
-  defineAsyncComponent,
 } from 'vue';
 import type { TableColumnData } from '@arco-design/web-vue';
 import {
@@ -23,7 +22,7 @@ import {
   TableRowSelection,
   TableExpandable,
   TableDraggable,
-  ScrollbarProps
+  ScrollbarProps,
 } from '@arco-design/web-vue';
 import { useFilterSorter } from './hooks/useFilterSorter';
 import type {
@@ -46,10 +45,7 @@ import type {
   ColumnStateType,
   AlertRenderType,
 } from './interface';
-import {
-  mergePagination,
-  useActionType,
-} from './utils';
+import { mergePagination, useActionType } from './utils';
 import { useRequestData } from './hooks/use-request';
 import { useRowSelection } from './hooks/useRowSelection';
 import { useColumnsPipeline } from './hooks/use-columns-pipeline';
@@ -59,11 +55,10 @@ import { proTableInjectionKey } from './form/context';
 import { usePureProp } from '../_hooks/use-pure-prop';
 import { configProviderInjectionKey } from '../_utils/context';
 import useState from '../_hooks/use-state';
-
-const FormSearch = defineAsyncComponent(() => import('./form/form-search'));
-const ToolBar = defineAsyncComponent(() => import('./tool-bar'));
-const Alert = defineAsyncComponent(() => import('./alert'));
-const LightFormSearch = defineAsyncComponent(() => import('./form/light-form-search'));
+import FormSearch from './form/form-search';
+import ToolBar from './tool-bar';
+import Alert from './alert';
+import LightFormSearch from './form/light-form-search';
 
 Table.inheritAttrs = false;
 export default defineComponent({
@@ -78,6 +73,10 @@ export default defineComponent({
       type: Array as PropType<ProColumns[]>,
       default: () => [],
     },
+    /**
+     * @zh 列配置缓存
+     * @en Column cache config
+     */
     columnsCache: {
       type: [Boolean, Object] as PropType<
         boolean | ProTableCacheConfig<TableColumnData[]>
@@ -117,6 +116,10 @@ export default defineComponent({
         ) => Promise<RequestData<any>>
       >,
     },
+    /**
+     * @zh 数据缓存
+     * @en Data cache config
+     */
     dataCache: {
       type: [Boolean, Object] as PropType<
         boolean | ProTableCacheConfig<TableData[]>
@@ -741,6 +744,15 @@ export default defineComponent({
       type: Object as PropType<ColumnStateType>,
     },
     /**
+     * @zh 是否一直显示alert栏
+     * @en Whether to always show the alert bar
+     * @defaultValue false
+     */
+    alwaysShowAlert: {
+      type: Boolean,
+      default: false,
+    },
+    /**
      * @zh 自定义 table 的 alert 的操作
      * @en Custom table alert operation
      */
@@ -1003,7 +1015,7 @@ export default defineComponent({
     const onCleanSelected = () => {
       selectedRowKeys.value = [];
       selectedRows.value = [];
-      emit('update:selectedKeys', [])
+      emit('update:selectedKeys', []);
     };
     const getSelected = () => {
       return {
@@ -1183,7 +1195,7 @@ export default defineComponent({
               {!noRowSelection.value ? (
                 <Alert
                   alertRender={props.alertRender}
-                  alwaysShowAlert={rowSelection.value?.alwaysShowAlert}
+                  alwaysShowAlert={props.alwaysShowAlert}
                   v-slots={slots}
                 />
               ) : null}

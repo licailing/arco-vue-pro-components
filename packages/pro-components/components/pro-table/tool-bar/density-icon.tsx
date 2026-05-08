@@ -1,5 +1,5 @@
 import { Dropdown } from '@arco-design/web-vue';
-import { useI18n } from '../../../locale';
+import { useI18n } from '../../locale';
 import { inject } from 'vue';
 import { proTableInjectionKey } from '../form/context';
 import { ProTableContext } from '../interface';

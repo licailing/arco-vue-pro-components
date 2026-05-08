@@ -29,6 +29,11 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    /**
+     * @zh 缓存 key，用于区分请求缓存
+     * @en Cache key for request data
+     * @defaultValue ''
+     */
     columnKey: {
       type: String,
       default: '',
@@ -42,6 +47,11 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    /**
+     * @zh 只读模式 mode='read'
+     * @en read only when mode='read'
+     * @defaultValue undefined
+     */
     mode: {
       type: String as PropType<ProSelectProps['mode']>,
       default: undefined,
@@ -227,7 +237,7 @@ export default defineComponent({
      * @zh 更新时触发
      * @en Triggered when value changes
      * @param {any} value
-     * @param {Record<string, any>} option
+     * @param {Record<string, any> | any[]} option
      */
     'change': (value: any, option?: Record<string, any> | any[]) => true,
   },

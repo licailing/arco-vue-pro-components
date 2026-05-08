@@ -1,6 +1,6 @@
 import { PropType, defineComponent, inject, isVNode, toRefs } from 'vue';
 import { Space, Alert } from '@arco-design/web-vue';
-import { useI18n } from '../../../locale';
+import { useI18n } from '../../locale';
 import { getPrefixCls } from '../../_utils';
 import { AlertRenderType, ProTableContext } from '../interface';
 import { proTableInjectionKey } from '../form/context';

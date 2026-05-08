@@ -1,6 +1,6 @@
 import { ref, reactive, inject, computed } from 'vue';
-import { configProviderInjectionKey } from '../components/_utils/context';
-import { isString } from '../components/_utils/is';
+import { configProviderInjectionKey } from '../_utils/context';
+import { isString } from '../_utils/is';
 import type {
   ArcoVueProComponentI18nMessages,
   ArcoVueProComponentLang,

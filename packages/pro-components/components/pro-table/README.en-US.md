@@ -24,8 +24,8 @@ description: pro-table component based on arco-design web-vue table package
 |row-key|Value field of table row `key`|`string`|`'id'`|
 |params|Additional parameters used for `request` query, once changed will trigger reloading|`object`|`-`|
 |request|How to get `data` \| `(params?: {pageSize,current},sort,filter) => {data,success,total}`|`(  params: {    pageSize?: number;    current?: number;    [key: string]: any;  },  sort: {    [key: string]: 'ascend' \| 'descend';  },  filter: { [key: string]: any }) => Promise<RequestData<any>>`|`-`|
-|default-data|Default data|`array`|`-`|
 |data-cache|Data cache config|`boolean \| ProTableCacheConfig<TableData[]>`|`-`|
+|default-data|Default data|`array`|`-`|
 |before-search-submit|Make some changes before searching|`(searchParams: any) => any`|`(searchParams: any) => searchParams`|
 |search|Configuration column search related, false is hidden|`SearchConfig \| boolean`|`true`|
 |type|pro-table type|`ProTableTypes`|`'table'`|
@@ -33,6 +33,7 @@ description: pro-table component based on arco-design web-vue table package
 |options-render|Custom action bar|`false \| ToolBarProps<any>['optionsRender']`|`false`|
 |options|table toolbar, not displayed when set to false|`boolean \| ToolBarProps<any>['options']`|`false`|
 |header-title|table tilte|`ToolBarProps<any>['headerTitle']`|`'列表数据'`|
+|card-props|Props of the Card component, not displayed when set to false|`boolean \| Record<string, any>`|`-`|
 |default-form-data|form init data|`object`|`-`|
 |search-type|search from type|`ProTableProps['searchType']`|`'query'`|
 |light-search-config|advanced search form setting|`LightSearchConfig`|`-`|
@@ -54,6 +55,7 @@ description: pro-table component based on arco-design web-vue table package
 |page-position|The position of the page selector|`'tl' \| 'top' \| tr' \| 'bl' \| 'bottom' \| 'br'`|`'br'`|
 |indent-size|The indentation distance of the tree table|`number`|`16`|
 |show-header|Whether to show the header|`boolean`|`true`|
+|virtual-list-props|Pass the virtual list attribute, pass in this parameter to turn on virtual scrolling [VirtualListProps](#VirtualListProps)|`VirtualListProps`|`-`|
 |span-method|Cell merge method (The index starts counting from the data item)|`(data: {  record: TableData;  column: TableColumnData \| TableOperationColumn;  rowIndex: number;  columnIndex: number;}) => { rowspan?: number; colspan?: number } \| void`|`-`|
 |span-all|Whether to make the index of the span method contain all|`boolean`|`false`|
 |load-more|Data lazy loading function, open the lazy loading function when it is passed in|`(record: TableData, done: (children?: TableData[]) => void) => void`|`-`|
@@ -91,6 +93,7 @@ description: pro-table component based on arco-design web-vue table package
 |on-header-click|Triggered when the header data is clicked|`(column: TableColumnData, ev: Event) => void`|`-`|
 |on-column-resize|Triggered when column width is adjusted|`(dataIndex: string, width: number) => void`|`-`|
 |columns-state|Column state configuration, which can be used to operate column functions|`ColumnStateType`|`-`|
+|always-show-alert|Whether to always show the alert bar|`boolean`|`false`|
 |alert-render|Custom table alert operation|`AlertRenderType`|`-`|
 ### `<pro-table>` Slots
 
@@ -135,7 +138,7 @@ description: pro-table component based on arco-design web-vue table package
 |girdItemProps|The configuration passed to the query form a-grid-item|`GridItemProps`|`-`|
 |defaultValue|query form default value|`any`|`-`|
 |valueType|The type of value, which will generate different renderers|`ProColumnsValueType \| ProColumnsValueTypeFunction<any>`|`-`|
-|renderFormItem|Render the input component of the query form|`(data: RenderFormItemData) => VNodeTypes \| 'hidden'`|`-`|
+|renderFormItem|Render the input component of the query form|`(data: RenderFormItemData) => VNode`|`-`|
 |hideInSearch|This item is not displayed in the query form|`boolean`|`false`|
 |hideInTable|This column is not displayed in the Table|`boolean`|`false`|
 |hideInForm|This column is not displayed in the Form|`boolean`|`false`|
@@ -161,15 +164,16 @@ description: pro-table component based on arco-design web-vue table package
 |---|---|---|:---:|
 |columns|table column|`ProColumns[]`|`-`|
 |columnsCache|Column cache config|`boolean \| ProTableCacheConfig<TableColumnData[]>`|`-`|
+|dataCache|Data cache config|`boolean \| ProTableCacheConfig<TableData[]>`|`-`|
 |type|pro-table type|`ProTableTypes`|`-`|
 |params|Additional parameters used for `request` query, once changed will trigger reloading|`{ [key: string]: any }`|`-`|
-|dataCache|Data cache config|`boolean \| ProTableCacheConfig<TableData[]>`|`-`|
 |size|The size of the select|`Size`|`'large'`|
 |request|How to get `data` \| `(params?: {pageSize,current},sort,filter) => {data,success,total}`|`(    params: {      pageSize?: number;      current?: number;      [key: string]: any;    },    sort: {      [key: string]: 'ascend' \| 'descend';    },    filter: { [key: string]: string }  ) => Promise<RequestData<any>>`|`-`|
 |toolBarRender|Render toolbar, support returning a dom array, will automatically increase margin-right|`ToolBarProps<any>['toolBarRender'] \| false`|`-`|
-|optionsRender|Custom action bar|`ToolBarProps<any>['optionsRender'] \| false`|`-`|
+|optionRender|Custom action bar|`ToolBarProps<any>['optionsRender'] \| false`|`-`|
 |options|table toolbar, not displayed when set to false|`OptionConfig \| false`|`-`|
 |headerTitle|table tilte|`ToolBarProps<any>['headerTitle']`|`-`|
+|cardProps|Props of the Card component, not displayed when set to false|`Record<string, any> \| boolean`|`-`|
 |search|Configuration column search related, false is hidden|`boolean \| SearchConfig`|`-`|
 |beforeSearchSubmit|Make some changes before searching|`(params: Partial<any>) => Partial<any>`|`-`|
 |defaultFormData|form init data|`Record<string, unknown>`|`-`|
@@ -262,13 +266,18 @@ description: pro-table component based on arco-design web-vue table package
 
 |Name|Description|Type|Default|
 |---|---|---|:---:|
-|searchText|查询按钮的文本|`string`|`-`|
-|resetText|重置按钮的文本|`string`|`-`|
-|collapseRender|收起按钮的 render|`(    collapsed: boolean,    /**     * 是否应该展示，有两种情况     * 列只有三列，不需要收起     * form 模式 不需要收起     */    showCollapseButton?: boolean  ) => VNodeChild`|`-`|
-|collapsed|是否收起|`boolean`|`false`|
-|onCollapse|收起按钮的事件|`(collapsed: boolean) => void`|`-`|
-|submitText|提交按钮的文本|`string`|`-`|
-|formProps|设置搜索表单的Form props|`((data: FormPropsData) => Omit<FormInstance, 'model' \| 'scrollToFirstError'>)  \| Omit<FormInstance, 'model' \| 'scrollToFirstError'>`|`-`|
+|searchText|The text of the query button|`string`|`-`|
+|resetText|Text of the reset button|`string`|`-`|
+|collapseRender|Set the rendering collapse button|`(    collapsed: boolean,    /**     * 是否应该展示，有两种情况     * 列只有三列，不需要收起     * form 模式 不需要收起     */    showCollapseButton?: boolean  ) => VNodeChild`|`-`|
+|collapsed|Set whether to collapse|`boolean`|`false`|
+|onCollapse|The event of the "Collapse" button|`(collapsed: boolean) => void`|`-`|
+|submitText|The text of the submit button|`string`|`-`|
+|layout|Form layout|`'horizontal' \| 'vertical' \| 'inline'`|`-`|
+|gridSuffixType|Form suffix element (reset, query, collapse button) display type, column: one column\|rowLeft: one row (on the left)\|rowRight: one row (on the right), default: column|`'column' \| 'rowLeft' \| 'rowRight'`|`-`|
+|gridSuffixProps|Form suffix element (reset, query, collapse button) props|`GridItemProps`|`-`|
+|gridProps|Set the Grid props for the form|`GridProps`|`-`|
+|formProps|Set the Form props for the form|`((data: FormPropsData) => Omit<FormInstance, 'model' \| 'scrollToFirstError'>)  \| Omit<FormInstance, 'model' \| 'scrollToFirstError'>`|`-`|
+|optionRender|Customize the search config|`((props: FormOptionProps) => VNodeTypes) \| false`|`-`|
 
 
 
@@ -455,7 +464,7 @@ for (let i = 0; i < 10; i += 1) {
 
 export default defineComponent({
   name: 'Basic',
-  setup(props) {
+  setup(props, { attrs }) {
     const actionRef = ref();
     const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
@@ -576,6 +585,7 @@ export default defineComponent({
         selectedKeys.value,
         expandedKeys.value
       );
+
       return (
         <div>
           <ProTable
@@ -625,6 +635,7 @@ export default defineComponent({
                 </Link>
               );
             }}
+            {...attrs}
             {...props}
           />
           <Modal
@@ -728,6 +739,10 @@ for (let i = 0; i < 5; i += 1) {
 export default defineComponent({
   name: 'Lightfilter1',
   setup() {
+    const params = ref<any>({ type: 1 });
+    const handleChange = () => {
+      params.value.type = 2;
+    };
     const actionRef = ref();
     const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
@@ -911,7 +926,7 @@ export default defineComponent({
               onSelect={(value) => {
                 action?.reload();
               }}
-              popupContainer={action?.getPopupContainer()}
+              popupContainer={action?.getPopupContainer?.()}
               v-slots={{
                 default: () => {
                   return <IconMore style={{ color: '#1677FF' }} />;
@@ -963,7 +978,7 @@ export default defineComponent({
               persistenceKey: 'pro-table-lightfilter-demos',
               persistenceType: 'localStorage',
             }}
-            params={{ type: 1 }}
+            params={params.value}
             defaultFormData={{ status: 'all', name: 'aaa' }}
             headerTitle={
               <Link
@@ -976,6 +991,7 @@ export default defineComponent({
               </Link>
             }
             toolBarRender={() => [
+              <Button key="show" onClick={handleChange}>切换请求参数</Button>,
               <Button key="show">查看日志</Button>,
               <Button key="out">
                 导出数据
@@ -2611,7 +2627,8 @@ export default defineComponent({
             >
               {rowIndex +
                 1 +
-                (action?.pageInfo?.current - 1) * action?.pageInfo?.pageSize}
+                ((action?.pageInfo?.value?.current || 1) - 1) *
+                  (action?.pageInfo?.value?.pageSize || 10)}
             </span>
           );
         },
@@ -3739,3 +3756,4 @@ export default defineComponent({
 });
 
 ```
+

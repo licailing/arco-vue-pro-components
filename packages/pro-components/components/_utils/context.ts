@@ -1,11 +1,11 @@
 import { InjectionKey, Slots } from 'vue';
-import { ArcoLang } from '../../locale/interface';
+import type { ArcoVueProComponentLang } from '../locale/interface';
 import { Size } from '../_utils/constant';
 
 export interface ConfigProvider {
   slots: Slots;
   prefixCls?: string;
-  locale?: ArcoLang;
+  locale?: ArcoVueProComponentLang;
   size?: Size;
   updateAtScroll?: boolean;
 }

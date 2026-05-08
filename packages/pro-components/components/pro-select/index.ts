@@ -3,7 +3,7 @@ import _ProSelect from './component';
 
 const ProSelect = Object.assign(_ProSelect, {
   install: (app: App) => {
-    app.component(_ProSelect.name, _ProSelect);
+    app.component(_ProSelect.name ?? 'ProSelect', _ProSelect);
   },
 });
 export type ProSelectInstance = InstanceType<typeof _ProSelect>;
