@@ -1,30 +1,20 @@
 <template>
-  <ProTable
-    :columns="columns"
-    :request="request"
-    row-key="key"
-    :search="search"
-    :options="{ fullScreen: true }"
-    column-resizable
-    :bordered="{cell:true}"
-  >
+  <ProTable :columns="columns" :request="request" row-key="key" :search="search" :options="{ fullScreen: true }"
+    column-resizable :bordered="{ cell: true }">
     <template #header-title="{ action, selectedRowKeys, selectedRows }">
       <Link
         :href="encodeURI(`https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#动态自定义搜索栏-demo-1`)"
-        target="_blank"
-      >
+        target="_blank">
         动态自定义搜索栏(vue)[查看源代码]
       </Link>
     </template>
     <template #index="{ rowIndex, action }">
-      <span
-        :style="{
-          borderRadius: 6,
-          padding: '0 4px',
-          background: 'gray',
-          color: '#fff',
-        }"
-      >
+      <span :style="{
+        borderRadius: 6,
+        padding: '0 4px',
+        background: 'gray',
+        color: '#fff',
+      }">
         {{
           rowIndex +
           1 +
@@ -49,47 +39,36 @@
       <Button key="3" type="primary"> 新建 </Button>
     </template>
     <template #direction-form-item="{ formModel }">
-      <template v-if="formModel.value['state'] === 'online'"
-        ><Input placeholder="请输入"
-      /></template>
-      <template v-else
-        ><ProSelect
-          placeholder="请选择"
-          :options="[
-            { word: 'A', id: '1' },
-            {
-              word: 'B',
-              id: '2',
-            },
-          ]"
-          label-key="word"
-          value-key="id"
-      /></template>
+      <template v-if="formModel.value['state'] === 'online'"><Input placeholder="请输入" /></template>
+      <template v-else>
+        <ProSelect placeholder="请选择" :options="[
+          { word: 'A', id: '1' },
+          {
+            word: 'B',
+            id: '2',
+          },
+        ]" label-key="word" value-key="id" />
+      </template>
     </template>
     <!-- options自定义 -->
     <template #options-render="{ action }, defaultDom">
       <component :is="defaultDom[3]" />
       <component :is="defaultDom[2]" />
-      <Tooltip content="发送" :popupContainer="action?.getPopupContainer?.()"
-        ><IconSend @click="action?.reload?.()"
-      /></Tooltip>
+      <Tooltip content="发送" :popupContainer="action?.getPopupContainer?.()">
+        <IconSend @click="action?.reload?.()" />
+      </Tooltip>
       <IconStar @click="action?.fullScreen?.()" />
     </template>
   </ProTable>
 </template>
 <script setup lang="ts">
-import { h } from 'vue';
-import { Button, Input, Link, Space, Tooltip } from '@arco-design/web-vue';
+import { Button, Input, Link, Tooltip } from '@arco-design/web-vue';
 import {
   IconSend,
   IconStar,
-  IconFullscreen,
 } from '@arco-design/web-vue/es/icon';
 import type {
   ProColumns,
-  RenderData,
-  RenderFormItemData,
-  FormOptionProps,
 } from '../index';
 import ProTable from '../index';
 import ProSelect from '../../pro-select';

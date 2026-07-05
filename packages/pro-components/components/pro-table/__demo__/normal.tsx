@@ -142,7 +142,27 @@ const columns: ProColumns[] = [
 export default defineComponent({
   name: 'Normal',
   setup() {
-    const render = () => {
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#无查询表单-demo'
+        )}
+        target="_blank"
+      >
+        无查询表单[查看源代码]
+      </Link>
+    );
+    const toolBarRender = [
+      <Button key="show">查看日志</Button>,
+      <Button key="out">
+        导出数据
+        <IconDown />
+      </Button>,
+      <Button type="primary" key="primary">
+        创建应用
+      </Button>,
+    ];
+    return () => {
       return (
         <ProTable
           columns={columns}
@@ -162,32 +182,10 @@ export default defineComponent({
           size="small"
           search={false}
           defaultFormData={{ status: 'all' }}
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#无查询表单-demo")}
-              target="_blank"
-            >
-              无查询表单[查看源代码]
-            </Link>
-          }
-          toolBarRender={() => [
-            <Button key="show">查看日志</Button>,
-            <Button key="out">
-              导出数据
-              <IconDown />
-            </Button>,
-            <Button type="primary" key="primary">
-              创建应用
-            </Button>,
-          ]}
+          headerTitle={headTitle}
+          toolBarRender={toolBarRender}
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });

@@ -13,7 +13,7 @@ export default defineComponent({
   setup() {
     const tableCtx = inject<Partial<ProTableContext>>(proTableInjectionKey, {});
     const { getMessage } = useI18n();
-    const render = () => {
+    return () => {
       return tableCtx?.fullscreen ? (
         <MyToolTip content={getMessage('tableToolBar.exitFullScreen', '全屏')}>
           <IconFullscreenExit />
@@ -24,11 +24,5 @@ export default defineComponent({
         </MyToolTip>
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });

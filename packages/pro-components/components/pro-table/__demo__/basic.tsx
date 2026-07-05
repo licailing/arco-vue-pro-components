@@ -1,12 +1,6 @@
-import { defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import { Button, Modal, Link } from '@arco-design/web-vue';
-import type {
-  ActionType,
-  ProColumns,
-  RenderData,
-  TableData,
-  ToolBarData,
-} from '../index';
+import type { ActionType, ProColumns, RenderData, TableData } from '../index';
 import ProTable from '../index';
 
 const valueEnum: any = {
@@ -63,7 +57,23 @@ for (let i = 0; i < 10; i += 1) {
 export default defineComponent({
   name: 'Basic',
   setup(props, { attrs }) {
+    const tableRef = ref();
     const actionRef = ref();
+    // 直接从tableRef取selectedRowKeys内容
+    const headTitle = computed(() => (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#默认表格可互动-demo'
+        )}
+        target="_blank"
+      >
+        默认示例(可互动)[查看源代码]
+        <span>
+          已选中{tableRef.value ? tableRef.value.selectedRowKeys.length : 0}
+        </span>
+      </Link>
+    ));
+
     const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
     };
@@ -82,6 +92,9 @@ export default defineComponent({
         dataIndex: 'name',
         fixed: 'left',
         render: (data: RenderData) => <Link>{data.dom}</Link>,
+        girdItemProps: {
+          span: 2,
+        },
         formItemProps: ({ formModel, type }) => {
           if (type === 'form') {
             return {
@@ -117,9 +130,9 @@ export default defineComponent({
       {
         title: '执行进度',
         dataIndex: 'progress',
-        valueType: (item) => ({
+        valueType: ({ record }) => ({
           type: 'progress',
-          status: ProcessMap[item.status],
+          status: ProcessMap[record.status],
         }),
       },
       {
@@ -177,13 +190,28 @@ export default defineComponent({
     ];
     const selectedKeys = ref(['1']);
     const expandedKeys = ref([]);
-    const render = () => {
-      console.log(
-        'selectedKeys:%o, expandedKeys:%o',
-        selectedKeys.value,
-        expandedKeys.value
-      );
-
+    const searchProps = {
+      formProps: ({ formModel }) => {
+        return {
+          layout: 'horizontal',
+          autoLabelWidth: true,
+          rules: {
+            containers: [
+              {
+                required: formModel.value.key ? true : false,
+                message: '此项为必填项',
+              },
+            ],
+          },
+        };
+      },
+      gridProps: {
+        cols: 2,
+        rowGap: 20,
+        colGap: 20,
+      },
+    };
+    return () => {
       return (
         <div>
           <ProTable
@@ -193,6 +221,7 @@ export default defineComponent({
               showCheckedAll: true,
               checkStrictly: true,
             }}
+            ref={tableRef}
             actionRef={setActionRef}
             request={(params) => {
               console.log('request reload', params);
@@ -217,22 +246,7 @@ export default defineComponent({
             v-model:selectedKeys={selectedKeys.value}
             v-model:expandedKeys={expandedKeys.value}
             rowKey="key"
-            headerTitle={({
-              selectedRowKeys,
-              selectedRows,
-              action,
-            }: ToolBarData<any>) => {
-              return (
-                <Link
-                  href={encodeURI(
-                    'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#默认表格可互动-demo'
-                  )}
-                  target="_blank"
-                >
-                  默认示例(可互动)[查看源代码]
-                </Link>
-              );
-            }}
+            headerTitle={headTitle.value}
             {...attrs}
             {...props}
           />
@@ -250,37 +264,11 @@ export default defineComponent({
               columns={columns}
               type="form"
               defaultFormData={current.value}
-              search={{
-                formProps: ({ formModel }) => {
-                  return {
-                    layout: 'horizontal',
-                    autoLabelWidth: true,
-                    rules: {
-                      containers: [
-                        {
-                          required: formModel.value.key ? true : false,
-                          message: '此项为必填项',
-                        },
-                      ],
-                    },
-                  };
-                },
-                gridProps: {
-                  cols: 2,
-                  rowGap: 20,
-                  colGap: 20,
-                },
-              }}
+              search={searchProps}
             />
           </Modal>
         </div>
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });

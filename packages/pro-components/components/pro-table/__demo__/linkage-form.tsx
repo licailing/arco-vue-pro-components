@@ -20,6 +20,16 @@ import { getDictLabel } from '../../_utils/index';
 export default defineComponent({
   name: 'LinkageForm',
   setup(props, ctx) {
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#动态自定义搜索栏-demo'
+        )}
+        target="_blank"
+      >
+        动态自定义搜索栏[查看源代码]
+      </Link>
+    );
     const stateDict = [
       { label: '全部', value: 'all' },
       { label: '关闭', value: 'closed' },
@@ -103,7 +113,7 @@ export default defineComponent({
         },
       },
     ];
-    const render = () => {
+    return () => {
       return (
         <ProTable
           columns={columns}
@@ -123,14 +133,7 @@ export default defineComponent({
             };
           }}
           rowKey="key"
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#动态自定义搜索栏-demo")}
-              target="_blank"
-            >
-              动态自定义搜索栏[查看源代码]
-            </Link>
-          }
+          headerTitle={headTitle}
           search={{
             collapsed: false,
             optionRender: ({ dom }: FormOptionProps) => [
@@ -139,7 +142,7 @@ export default defineComponent({
             ],
           }}
           columnResizable
-          bordered={{cell:true}}
+          bordered={{ cell: true }}
           // 自定义图标
           // options={{fullScreen: true, reloadIcon: <IconSend />, settingIcon: <IconStar />}}
           options={{
@@ -163,7 +166,7 @@ export default defineComponent({
           //     return <IconStar />;
           //   },
           // }}
-          optionsRender={({ action }: ToolBarProps, defaultDom) => {
+          optionsRender={(_: ToolBarProps, defaultDom) => {
             // 自定义
             return [
               defaultDom[2],
@@ -195,11 +198,5 @@ export default defineComponent({
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });

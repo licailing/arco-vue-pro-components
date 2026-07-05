@@ -1,6 +1,4 @@
 import {
-  ComputedRef,
-  Ref,
   computed,
   nextTick,
   onMounted,
@@ -13,7 +11,7 @@ import {
 import { useI18n } from '../../locale';
 import { isEmptyObject } from '../../_utils/is';
 import { genColumnKey, setFields } from '../utils';
-import type { LightSearchConfig, ProColumns } from '../interface';
+import { omit } from '../../_utils/omit';
 
 const getFormFields = (info: any) => {
   const values = toRaw(info);
@@ -33,11 +31,9 @@ const getFormFields = (info: any) => {
 export const useLightFormSearchState = ({
   props,
   emit,
-  searchConfig,
 }: {
   props: any;
   emit: any;
-  searchConfig: ComputedRef<LightSearchConfig>;
 }) => {
   const { t } = useI18n();
   const columns = toRef(props, 'columns');
@@ -46,7 +42,16 @@ export const useLightFormSearchState = ({
   const searchText = ref<string | undefined>(undefined);
   const visible = ref(false);
   const formModel = ref<{ [propName: string]: any }>({});
-
+  const searchConfig = computed(() => {
+    return {
+      rowNumber: 2,
+      name: 'keyword',
+      search: true,
+      ...props.search,
+    };
+  });
+  const rowNumber = computed(() => searchConfig.value.rowNumber ?? 2);
+  const searchName = computed(() => searchConfig.value.name || 'keyword');
   const handleReset = () => {
     emit('reset');
   };
@@ -80,11 +85,13 @@ export const useLightFormSearchState = ({
     }
   });
 
+  const cleanDisabled = ref(true);
   const filterNum = ref(0);
   watch(
     formModel,
     (formModel) => {
       filterNum.value = getFormFields(formModel);
+      cleanDisabled.value = filterNum.value === 0;
     },
     {
       deep: true,
@@ -98,16 +105,14 @@ export const useLightFormSearchState = ({
     return item.title;
   };
 
-  const getFormItemInfo = (item: ProColumns, index: number) => {
-    const key = genColumnKey(item.key || item.dataIndex?.toString(), index);
-    const title = getTitle(item);
-    return { title, key };
-  };
-  const columnsList = ref<any[]>([]);
+  const columnsLen = ref(0);
+  const formItemList = ref<any[]>([]);
+  const powerItemList = ref<any[]>([]);
+  const showPopover = ref(false);
   watch(
     columns,
     (columns) => {
-      columnsList.value =
+      let list =
         columns
           .filter((item) => {
             if (item.hideInSearch && props.type !== 'form') {
@@ -138,6 +143,43 @@ export const useLightFormSearchState = ({
             }
             return 0;
           }) || [];
+      list = list.map((item, index) => {
+        const key = genColumnKey(item.key || item.dataIndex?.toString(), index);
+        const title = getTitle(item);
+        const valueType =
+          typeof item.valueType === 'function'
+            ? item.valueType({
+                record: formModel.value,
+                column: item,
+                type: 'search',
+              })
+            : item.valueType;
+        const hidden = valueType === 'hidden';
+        let formItemProps =
+          typeof item.formItemProps === 'function'
+            ? item.formItemProps({ formModel, item, type: props.type })
+            : item.formItemProps;
+        formItemProps = omit(formItemProps, [
+          'rules',
+          'disabled',
+          'required',
+          'validateStatus',
+          'validateTrigger',
+        ]);
+        return {
+          ...item,
+          key,
+          label: !hidden && typeof title === 'string' ? title : undefined,
+          title,
+          valueType,
+          hidden,
+          formItemProps,
+        };
+      });
+      columnsLen.value = list.length;
+      formItemList.value = list.slice(0, rowNumber.value);
+      powerItemList.value = list.slice(rowNumber.value);
+      showPopover.value = columnsLen.value > rowNumber.value;
     },
     { deep: true, immediate: true }
   );
@@ -149,11 +191,16 @@ export const useLightFormSearchState = ({
     visible,
     formModel,
     filterNum,
-    getFormItemInfo,
-    columnsList,
+    cleanDisabled,
+    columnsLen,
+    formItemList,
+    powerItemList,
     lightFormRef,
     onSubmitClick,
     onReset,
     handleReset,
+    rowNumber,
+    showPopover,
+    searchName,
   };
 };

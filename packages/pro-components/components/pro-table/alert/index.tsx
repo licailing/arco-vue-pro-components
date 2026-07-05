@@ -16,37 +16,37 @@ export default defineComponent({
       type: [Function, Boolean] as PropType<AlertRenderType>,
     },
   },
-  setup(props, { slots }) {
+  setup(props) {
     const { alwaysShowAlert } = toRefs(props);
     const tableCtx = inject<Partial<ProTableContext>>(proTableInjectionKey, {});
     const { getMessage } = useI18n();
     const prefixCls = getPrefixCls('pro-table-alert');
+    const handleClean = () => {
+      tableCtx.action?.clearSelected?.();
+    };
 
-    const render = () => {
-      const data = {
-        selectedRowKeys: tableCtx?.selectedRowKeys || [],
-        selectedRows: tableCtx?.selectedRows || [],
-        onCleanSelected: () => {
-          tableCtx?.action?.clearSelected?.();
-        },
-      };
-      if (slots['alert-render']) {
-        return slots['alert-render'](data);
-      }
+    const alertSlots = {
+      action: () => {
+        return (
+          <a class={`${prefixCls}-clear`} onClick={handleClean} key="0">
+            {getMessage('alert.clear', '清空')}
+          </a>
+        );
+      },
+    };
 
-      // 自定义render
-      const dom: any =
+    return () => {
+      let renderDom =
         typeof props.alertRender === 'function'
-          ? props.alertRender(data)
+          ? props.alertRender()
           : props.alertRender;
-
-      if (isVNode(dom)) {
-        return dom;
+      if (isVNode(renderDom)) {
+        return renderDom;
       }
       if (
-        dom === false ||
-        (tableCtx?.selectedRowKeys &&
-          tableCtx?.selectedRowKeys?.length < 1 &&
+        renderDom === false ||
+        (tableCtx.selectedRowKeys &&
+          tableCtx.selectedRowKeys?.length === 0 &&
           !alwaysShowAlert.value)
       ) {
         return null;
@@ -55,33 +55,15 @@ export default defineComponent({
         <Alert
           class={`${prefixCls}-container`}
           closable={false}
-          v-slots={{
-            action: () => {
-              return (
-                <a
-                  class={`${prefixCls}-clear`}
-                  onClick={data.onCleanSelected}
-                  key="0"
-                >
-                  {getMessage('alert.clear', '清空')}
-                </a>
-              );
-            },
-          }}
+          v-slots={alertSlots}
         >
           <Space>
             {getMessage('alert.selected', '已选择')}
-            {tableCtx?.selectedRowKeys && tableCtx?.selectedRowKeys.length}
+            {tableCtx.selectedRowKeys && tableCtx.selectedRowKeys.length}
             {getMessage('alert.item', '项')}&nbsp;&nbsp;
           </Space>
         </Alert>
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });

@@ -220,7 +220,7 @@ export default defineComponent({
       }
       return params;
     };
-    const render = () => (
+    return () => (
       <ProTable
         columns={columns}
         actionRef={setActionRef}
@@ -285,11 +285,5 @@ export default defineComponent({
         ]}
       />
     );
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });

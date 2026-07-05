@@ -3,6 +3,7 @@
 @pro-table-light-prefix-cls: ~'@{prefix}-pro-table-light';
 @pro-table-alert-prefix-cls: ~'@{prefix}-pro-table-alert';
 @pro-table-table-grid-prefix-cls: ~'@{prefix}-pro-table-table-grid';
+@pro-table-table-grid-prefix-cls: ~'@{prefix}-pro-table-table-grid';
 .@{pro-table-prefix-cls} {
   &:fullscreen {
     min-height: 100vh;
@@ -147,8 +148,16 @@
       }
     }
   }
+  &-suffix-rowRight {
+    text-align: right;
+  }
+  &-my-grid-item {
+    margin-bottom: 12px;
+    align-self: end;
+  }
 }
 .@{pro-table-table-grid-prefix-cls} {
+  flex: 1;
   .arco-form-item-layout-inline {
     margin-right: 0 !important;
   }

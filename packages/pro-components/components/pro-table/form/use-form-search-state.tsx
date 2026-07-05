@@ -1,16 +1,9 @@
-import {
-  computed,
-  CSSProperties,
-  onMounted,
-  ref,
-  toRef,
-  watchEffect,
-} from 'vue';
+import { computed, onMounted, ref, toRef, watchEffect } from 'vue';
 import { IconDown } from '@arco-design/web-vue/es/icon';
 import type { SearchConfig } from '../interface';
 import { omit } from '../../_utils/omit';
 import { genColumnKey } from '../utils';
-import { GridItemProps, GridProps } from '@arco-design/web-vue';
+import { GridProps } from '@arco-design/web-vue';
 
 export const useFormSearchState = ({
   props,
@@ -65,6 +58,10 @@ export const useFormSearchState = ({
   };
   const searchConfig = computed((): SearchConfig => {
     return Object.assign(defaultSearchConfig, props.search) as SearchConfig;
+  });
+
+  const gridSuffixType = computed(() => {
+    return searchConfig.value.gridSuffixType;
   });
 
   const resolvedLayout = computed(() => {
@@ -154,7 +151,11 @@ export const useFormSearchState = ({
       const title = getTitle(item);
       const valueType =
         typeof item.valueType === 'function'
-          ? item.valueType({})
+          ? item.valueType({
+              record: formModel.value,
+              column: item,
+              type: isForm.value ? 'form' : 'search',
+            })
           : item.valueType;
       const hidden = valueType === 'hidden';
       let formItemProps =
@@ -233,43 +234,14 @@ export const useFormSearchState = ({
   });
 
   const gridSuffixProps = computed(() => {
-    let suffixProps: GridItemProps & { style?: CSSProperties } = {};
-    switch (searchConfig.value.gridSuffixType) {
-      case 'rowLeft':
-        suffixProps = {
-          span: 24,
-          suffix: false,
-          style: {
-            'text-align': 'left',
-            'display': 'block !important',
-          },
-        };
-        break;
-      case 'rowRight':
-        suffixProps = {
-          span: 24,
-          suffix: false,
-          style: {
-            'text-align': 'right',
-            'display': 'block !important',
-          },
-        };
-        break;
-      default:
-        suffixProps = {
-          span: 1,
-          suffix: true,
-          style: { 'text-align': 'right' },
-        };
-        break;
-    }
     return {
-      ...suffixProps,
+      span: 1,
+      suffix: true,
       style: [
-        suffixProps.style,
+        { 'text-align': 'right' },
         !isForm.value ? { 'margin-bottom': '20px', 'align-self': 'end' } : {},
       ],
-      ...props.gridSuffixProps,
+      ...searchConfig.value.gridSuffixProps,
     };
   });
 
@@ -288,5 +260,6 @@ export const useFormSearchState = ({
     handleSubmit,
     resolvedLayout,
     gridSuffixProps,
+    gridSuffixType,
   };
 };

@@ -7,6 +7,17 @@ import { Link } from '@arco-design/web-vue';
 export default defineComponent({
   name: 'GroupingColumns',
   setup() {
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#groupingcolumns-分组表头表格-demo'
+        )}
+        target="_blank"
+      >
+        分组表头表格[查看源代码]
+      </Link>
+    );
+
     const columns = [
       {
         dataIndex: 'name',
@@ -153,7 +164,7 @@ export default defineComponent({
         email: 'william.smith@example.com',
       },
     ]);
-    const render = () => {
+    return () => {
       return (
         <ProTable
           columns={columns}
@@ -177,20 +188,9 @@ export default defineComponent({
           pagination={{
             pageSize: 5,
           }}
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#groupingcolumns-分组表头表格-demo")}
-              target="_blank"
-            >
-              分组表头表格[查看源代码]
-            </Link>
-          }
+          headerTitle={headTitle}
         />
       );
     };
-    return { render };
-  },
-  render() {
-    return this.render();
   },
 });

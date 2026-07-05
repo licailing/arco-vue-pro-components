@@ -52,6 +52,17 @@ for (let i = 0; i < 20; i += 1) {
 export default defineComponent({
   name: 'ValueType',
   setup(props, ctx) {
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-样式类-demo'
+        )}
+        target="_blank"
+      >
+        样式类[查看源代码]
+      </Link>
+    );
+
     const columns: ProColumns[] = [
       {
         title: '序号',
@@ -129,7 +140,7 @@ export default defineComponent({
         render: () => [<Link key="a">编辑</Link>],
       },
     ];
-    const render = () => {
+    return () => {
       return (
         <ProTable
           columns={columns}
@@ -142,22 +153,9 @@ export default defineComponent({
           }}
           rowKey="key"
           pagination={{ pageSize: 10 }}
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-样式类-demo")}
-              target="_blank"
-            >
-              样式类[查看源代码]
-            </Link>
-          }
+          headerTitle={headTitle}
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });

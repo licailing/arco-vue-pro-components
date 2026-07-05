@@ -3,6 +3,7 @@ import { Button, Link, Badge, Split, Card } from '@arco-design/web-vue';
 import type { ProColumns, RenderData } from '../index';
 import ProTable from '../index';
 
+
 type TableListItem = {
   createdAtRange?: number[];
   createdAt: number;
@@ -86,7 +87,7 @@ const DetailList = defineComponent({
         immediate: true,
       }
     );
-    const render = () => {
+    return () => {
       return (
         <ProTable
           columns={columns}
@@ -101,12 +102,6 @@ const DetailList = defineComponent({
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });
 
@@ -150,7 +145,7 @@ const IPList = defineComponent({
         valueType: 'percent',
       },
     ];
-    const render = () => {
+    return () => {
       return (
         <ProTable
           columns={columns}
@@ -176,7 +171,9 @@ const IPList = defineComponent({
           }}
           headerTitle={
             <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#左右结构-demo")}
+              href={encodeURI(
+                'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#左右结构-demo'
+              )}
               target="_blank"
             >
               左右结构[查看源代码]
@@ -192,19 +189,13 @@ const IPList = defineComponent({
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
-  },
+  }
 });
 
 export default defineComponent({
   name: 'Split',
   setup() {
-    const render = () => {
+    return () => {
       const ip = ref('0.0.0.0');
       return (
         <Split
@@ -230,9 +221,5 @@ export default defineComponent({
         </Split>
       );
     };
-    return { render };
-  },
-  render() {
-    return this.render();
   },
 });

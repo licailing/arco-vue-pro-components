@@ -1,12 +1,6 @@
 import { defineComponent, ref } from 'vue';
 import { Button, Link } from '@arco-design/web-vue';
-import type {
-  ActionType,
-  ProColumns,
-  RenderData,
-  TableData,
-  ToolBarData,
-} from '../index';
+import type { ActionType, ProColumns, RenderData, TableData } from '../index';
 import ProTable from '../index';
 
 const valueEnum: any = {
@@ -66,7 +60,35 @@ tableListDataSource[0].children[0].children = [generateDataItem(21)];
 export default defineComponent({
   name: 'BatchOption',
   setup(props) {
+    const tableRef = ref();
     const actionRef = ref();
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#表格批量操作-demo'
+        )}
+        target="_blank"
+      >
+        表格批量操作[查看源代码]
+      </Link>
+    );
+    const options = { fullScreen: true };
+    const toolBarRender = [
+      <Button
+        key="selected"
+        onClick={() => {
+          console.log('tableRef 获取选中的数据', tableRef.value.getSelected());
+          // 获取选中的数据
+          console.log(
+            'selectedKeys',
+            actionRef.value.getSelected() // selectedKeys和selectedRows
+          );
+        }}
+      >
+        获取选中
+      </Button>,
+      <Button key="show">查看日志</Button>,
+    ];
     const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
     };
@@ -94,9 +116,9 @@ export default defineComponent({
       {
         title: '执行进度',
         dataIndex: 'progress',
-        valueType: (item) => ({
+        valueType: ({ record }) => ({
           type: 'progress',
-          status: ProcessMap[item.status],
+          status: ProcessMap[record.status],
         }),
       },
       {
@@ -142,7 +164,7 @@ export default defineComponent({
     ];
     const selectedKeys = ref(['1']);
     const expandedKeys = ref([]);
-    const render = () => {
+    return () => {
       console.log(
         'selectedKeys:%o, expandedKeys:%o',
         selectedKeys.value,
@@ -157,6 +179,7 @@ export default defineComponent({
             checkStrictly: true,
             // defaultSelectedRowKeys: ['1'],
           }}
+          ref={tableRef}
           actionRef={setActionRef}
           data={tableListDataSource}
           scroll={{ x: 1300 }}
@@ -164,6 +187,7 @@ export default defineComponent({
           pagination={{
             pageSize: 5,
           }}
+          alwaysShowAlert
           onSelectAll={(checked: boolean) => {
             console.log('onSelectAll', checked);
           }}
@@ -178,46 +202,13 @@ export default defineComponent({
           v-model:selectedKeys={selectedKeys.value}
           v-model:expandedKeys={expandedKeys.value}
           rowKey="key"
-          headerTitle={
-            <Link
-              href={encodeURI('https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#表格批量操作-demo')}
-              target="_blank"
-            >
-              表格批量操作[查看源代码]
-            </Link>
-          }
-          options={{ fullScreen: true }}
-          toolBarRender={({
-            selectedRowKeys,
-            selectedRows,
-            action,
-          }: ToolBarData<any>) => {
-            return [
-              <Button
-                key="selected"
-                onClick={() => {
-                  // 获取选中的数据
-                  console.log(
-                    'selectedKeys',
-                    actionRef.value.getSelected() // selectedKeys和selectedRows
-                  );
-                }}
-              >
-                获取选中
-              </Button>,
-              <Button key="show">查看日志</Button>,
-            ];
-          }}
+          headerTitle={headTitle}
+          options={options}
+          toolBarRender={toolBarRender}
           // 不显示
           // alertRender={false}
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });

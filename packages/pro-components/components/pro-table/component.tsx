@@ -44,6 +44,7 @@ import type {
   TableData,
   ColumnStateType,
   AlertRenderType,
+  BaseType,
 } from './interface';
 import { mergePagination, useActionType } from './utils';
 import { useRequestData } from './hooks/use-request';
@@ -164,7 +165,7 @@ export default defineComponent({
      * @defaultValue undefined
      */
     toolBarRender: {
-      type: [Boolean, Function] as PropType<
+      type: [Boolean, Object, Function] as PropType<
         false | ToolBarProps<any>['toolBarRender']
       >,
       default: undefined,
@@ -201,11 +202,11 @@ export default defineComponent({
       default: '列表数据',
     },
     /**
-     * @zh Card 组件的 props，设置为 false 时不显示 Card
-     * @en Props of the Card component, not displayed when set to false
+     * @zh Card 组件的 props
+     * @en Props of the Card component
      */
     cardProps: {
-      type: [Boolean, Object] as PropType<boolean | Record<string, any>>,
+      type: Object,
       default: undefined,
     },
     /**
@@ -782,17 +783,11 @@ export default defineComponent({
    * @zh 自定义表格标题
    * @en Customize the head title
    * @slot header-title
-   * @binding {UseFetchDataAction} action
-   * @binding {any[]} selectedRowKeys
-   * @binding {any[]} selectedRows
    */
   /**
    * @zh 自定义操作栏右侧操作按钮
    * @en Customize the tool bar
    * @slot tool-bar
-   * @binding {UseFetchDataAction} action
-   * @binding {any[]} selectedRowKeys
-   * @binding {any[]} selectedRows
    */
   /**
    * @zh 自定义工具栏(tool-bar) 右侧表格操作按钮(如果options设置false则不显示),默认：reload(刷新)|density(表格密度)|setting(列设置)|fullScreen(全屏 默认不显示)
@@ -800,6 +795,11 @@ export default defineComponent({
    * @slot options-render
    * @binding {ToolBarProps} data
    * @binding {JSX.Element[]} settings
+   */
+  /**
+   * @zh 自定义批量操作栏
+   * @en Customize the alert bar
+   * @slot alert-render
    */
   /**
    * @zh 自定义普通搜索表单(searchType=query)的按钮(如果search=false则不显示)，默认：重置|查询(type=table),重置|提交(type=form)
@@ -884,7 +884,7 @@ export default defineComponent({
    * @slot th
    * @binding {TableColumnData} column
    */
-  setup(props, { attrs, emit, slots }) {
+  setup(props, { attrs, emit, slots, expose }) {
     const {
       rowSelection,
       selectedKeys,
@@ -1001,7 +1001,31 @@ export default defineComponent({
       popupContainer,
       dataCache,
     });
+    const loading = computed(() => props.loading || action.loading.value);
     const noRowSelection = computed(() => !rowSelection.value);
+
+    const showLightFormSearch = computed(() => {
+      return (
+        !slots['form-search'] && props.search && props.searchType === 'light'
+      );
+    });
+    const showFormSearch = computed(() => {
+      return (
+        !slots['form-search'] &&
+        ((props.search && props.searchType === 'query') ||
+          props.type === 'form')
+      );
+    });
+    const showToolBar = computed(() => {
+      return props.toolBarRender !== false || !!props.headerTitle;
+    });
+    const showAlert = computed(() => {
+      return (
+        !noRowSelection.value &&
+        props.alertRender !== false &&
+        !slots['alert-render']
+      );
+    });
     useSelectionPipeline({
       dataSource,
       rowKey: toRef(props, 'rowKey'),
@@ -1077,6 +1101,10 @@ export default defineComponent({
         setPopupContainer,
         columnsMap,
         setColumnsMap,
+        slots,
+        loading,
+        clearSelected: onCleanSelected,
+        formSearch,
       })
     );
     watchEffect(() => {
@@ -1141,33 +1169,38 @@ export default defineComponent({
       },
       onReset,
     };
-    const render = () => {
-      const content = (
-        <>
-          {slots['form-search']?.(formData)}
-          {!slots['form-search'] &&
-            props.search &&
-            props.searchType === 'light' && (
+    const handleLightFormSubmit = (values, firstLoad = false) => {
+      onSubmit({ ...formSearch.value, ...values }, firstLoad);
+    };
+    const handleLightFormSearch = (value) => {
+      formSearch.value = { ...formSearch.value, ...value };
+    };
+
+    expose({
+      action: actionRef,
+      selectedRowKeys,
+      selectedRows,
+      getSelected,
+      clearSelected: onCleanSelected,
+    });
+    return () => {
+      return (
+        <div ref={rootRef} class={`${prefixCls}`}>
+          <Card bordered={false} {...props.cardProps}>
+            {slots['form-search']?.(formData)}
+            {showLightFormSearch.value && (
               <LightFormSearch
                 columns={props.columns}
-                onSubmit={(values, firstLoad = false) => {
-                  onSubmit({ ...formSearch.value, ...values }, firstLoad);
-                }}
+                onSubmit={handleLightFormSubmit}
                 onReset={onReset}
-                onSearch={(value) => {
-                  formSearch.value = { ...formSearch.value, ...value };
-                }}
+                onSearch={handleLightFormSearch}
                 type={props.type}
-                formSearch={formSearch.value}
                 formRef={setFormRef}
                 search={props.lightSearchConfig}
                 defaultFormData={props.defaultFormData}
-                v-slots={slots}
               />
             )}
-          {!slots['form-search'] &&
-            ((props.search && props.searchType === 'query') ||
-              props.type === 'form') && (
+            {showFormSearch.value && (
               <FormSearch
                 columns={props.columns}
                 onSubmit={onSubmit}
@@ -1175,75 +1208,48 @@ export default defineComponent({
                 type={props.type}
                 search={props.search}
                 formRef={setFormRef}
-                submitButtonLoading={props.loading || action.loading.value}
                 defaultFormData={props.defaultFormData}
-                v-slots={slots}
               />
             )}
-          {props.type !== 'form' && (
-            <>
-              {props.toolBarRender !== false &&
-                (props.headerTitle || props.toolBarRender) && (
+            {props.type !== 'form' && (
+              <>
+                {showToolBar.value && (
                   <ToolBar
                     headerTitle={props.headerTitle}
-                    v-slots={slots}
                     toolBarRender={props.toolBarRender}
                     optionsRender={props.optionsRender}
                     options={props.options}
                   />
                 )}
-              {!noRowSelection.value ? (
-                <Alert
-                  alertRender={props.alertRender}
-                  alwaysShowAlert={props.alwaysShowAlert}
-                  v-slots={slots}
-                />
-              ) : null}
-              <Table
-                ref={tableRef}
-                {...props}
-                {...attrs}
-                size={tableSize.value}
-                columns={processedColumns.value}
-                loading={props.loading || action.loading.value}
-                data={dataSource.value}
-                loadMore={loadMore.value}
-                onChange={handleChange}
-                v-slots={{
-                  ...slots,
-                  index: renderIndex,
-                }}
-                pagination={pagination.value}
-                v-model:selectedKeys={selectedRowKeys.value}
-              ></Table>
-            </>
-          )}
-        </>
-      );
-
-      return (
-        <div ref={rootRef} class={`${prefixCls}`}>
-          {props.cardProps === false ? (
-            content
-          ) : (
-            <Card
-              bordered={false}
-              {...(typeof props.cardProps === 'object' ? props.cardProps : {})}
-            >
-              {content}
-            </Card>
-          )}
+                {slots['alert-render']?.()}
+                {showAlert.value ? (
+                  <Alert
+                    alertRender={props.alertRender}
+                    alwaysShowAlert={props.alwaysShowAlert}
+                  />
+                ) : null}
+                <Table
+                  ref={tableRef}
+                  {...props}
+                  {...attrs}
+                  size={tableSize.value}
+                  columns={processedColumns.value}
+                  loading={loading.value}
+                  data={dataSource.value}
+                  loadMore={loadMore.value}
+                  onChange={handleChange}
+                  v-slots={{
+                    ...slots,
+                    index: renderIndex,
+                  }}
+                  pagination={pagination.value}
+                  v-model:selectedKeys={selectedRowKeys.value}
+                ></Table>
+              </>
+            )}
+          </Card>
         </div>
       );
     };
-    return {
-      render,
-      selectedRowKeys,
-      selectedRows,
-      getSelected,
-    };
-  },
-  render() {
-    return this.render();
   },
 });

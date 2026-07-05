@@ -72,9 +72,16 @@ const renderValueTypeByObject = (
   return text;
 };
 
+const dateFormatMap = {
+  date: 'YYYY-MM-DD',
+  dateTime: 'YYYY-MM-DD HH:mm:ss',
+  time: 'HH:mm:ss',
+  dateRange: 'YYYY-MM-DD',
+  dateTimeRange: 'YYYY-MM-DD HH:mm:ss',
+};
 const renderValueTypeText = <T, U>(
   text: string | number | VNodeChild[],
-  valueType: ProColumnsValueType | ProColumnsValueTypeFunction<T>,
+  valueType: ProColumnsValueType | ProColumnsValueTypeFunction,
   rowIndex: number,
   item?: T,
   columnEmptyText?: ColumnEmptyText,
@@ -82,7 +89,11 @@ const renderValueTypeText = <T, U>(
   columnKey?: string
 ): VNodeChild => {
   if (typeof valueType === 'function' && item) {
-    const value = valueType(item);
+    const value = valueType({
+      type: 'column',
+      record: item,
+      column: itemColumn,
+    });
     if (typeof value === 'string') {
       return renderValueTypeText(
         text,
@@ -98,6 +109,12 @@ const renderValueTypeText = <T, U>(
       return renderValueTypeByObject(text as string, value);
     }
   }
+  if (typeof text !== 'boolean' && typeof text !== 'number' && !text) {
+    if (columnEmptyText) {
+      return typeof columnEmptyText === 'string' ? columnEmptyText : '-';
+    }
+    return '';
+  }
 
   if (valueType === 'select' && itemColumn?.fieldProps?.request) {
     return (
@@ -110,110 +127,76 @@ const renderValueTypeText = <T, U>(
       />
     );
   }
-
-  if (valueType === 'money' && (text || text === 0)) {
-    if (typeof text === 'string') {
-      return moneyIntl.format(parseFloat(text));
-    }
-    return moneyIntl.format(text as number);
+  const format = itemColumn.fieldProps?.format;
+  switch (valueType) {
+    case 'money':
+      if (typeof text === 'string') {
+        return moneyIntl.format(parseFloat(text));
+      }
+      return moneyIntl.format(text as number);
+    case 'date':
+    case 'dateTime':
+    case 'time':
+      if (typeof text === 'string' || typeof text === 'number') {
+        return dayjs(text).format(format || dateFormatMap[valueType]);
+      }
+    case 'dateRange':
+    case 'dateTimeRange':
+      if (Array.isArray(text) && text.length === 2) {
+        const [startText, endText] = text;
+        return (
+          <div>
+            <div>
+              {startText
+                ? dayjs(startText as any).format(
+                    format || dateFormatMap[valueType]
+                  )
+                : '-'}
+            </div>
+            <div>
+              {endText
+                ? dayjs(endText as any).format(
+                    format || dateFormatMap[valueType]
+                  )
+                : '-'}
+            </div>
+          </div>
+        );
+      }
+    case 'progress':
+      const status = getProgressStatus(parseFloat(text as string));
+      return (
+        <Progress
+          size="small"
+          percent={parseFloat(text as string)}
+          animation={status === 'normal'}
+          status={status}
+        />
+      );
+    case 'percent':
+      return showUnitColumn(text, '%');
+    case 'avatar':
+      if (typeof text === 'string') {
+        return <Avatar imageUrl={text as string} size={22} shape="circle" />;
+      }
+    case 'image':
+      return <Image src={text as string} width={32} />;
+    case 'code':
+      return (
+        <pre
+          style={{
+            padding: 16,
+            overflow: 'auto',
+            fontSize: '85%',
+            lineHeight: 1.45,
+            backgroundColor: '#f6f8fa',
+            borderRadius: 3,
+          }}
+        >
+          <code>{text}</code>
+        </pre>
+      );
   }
-  if (typeof text === 'string' || typeof text === 'number') {
-    if (valueType === 'date' && text) {
-      return dayjs(text).format('YYYY-MM-DD');
-    }
-
-    if (valueType === 'dateTime' && text) {
-      return dayjs(text).format('YYYY-MM-DD HH:mm:ss');
-    }
-
-    if (valueType === 'time' && text) {
-      return dayjs(text).format('HH:mm:ss');
-    }
-  }
-
-  if (
-    valueType === 'dateRange' &&
-    text &&
-    Array.isArray(text) &&
-    text.length === 2
-  ) {
-    const [startText, endText] = text;
-    return (
-      <div>
-        <div>
-          {startText ? dayjs(startText as any).format('YYYY-MM-DD') : '-'}
-        </div>
-        <div>{endText ? dayjs(endText as any).format('YYYY-MM-DD') : '-'}</div>
-      </div>
-    );
-  }
-  if (
-    valueType === 'dateTimeRange' &&
-    text &&
-    Array.isArray(text) &&
-    text.length === 2
-  ) {
-    const [startText, endText] = text;
-    return (
-      <div>
-        <div>
-          {startText
-            ? dayjs(startText as any).format('YYYY-MM-DD HH:mm:ss')
-            : '-'}
-        </div>
-        <div>
-          {endText ? dayjs(endText as any).format('YYYY-MM-DD HH:mm:ss') : '-'}
-        </div>
-      </div>
-    );
-  }
-
-  if (valueType === 'progress') {
-    const status = getProgressStatus(parseFloat(text as string));
-    return (
-      <Progress
-        size="small"
-        percent={parseFloat(text as string)}
-        animation={status === 'normal'}
-        status={status}
-      />
-    );
-  }
-  if (valueType === 'percent') {
-    return text ? showUnitColumn(text, '%') : columnEmptyText;
-  }
-
-  if (valueType === 'avatar' && typeof text === 'string') {
-    return <Avatar imageUrl={text as string} size={22} shape="circle" />;
-  }
-
-  if (valueType === 'image') {
-    return <Image src={text as string} width={32} />;
-  }
-
-  if (valueType === 'code' && text) {
-    return (
-      <pre
-        style={{
-          padding: 16,
-          overflow: 'auto',
-          fontSize: '85%',
-          lineHeight: 1.45,
-          backgroundColor: '#f6f8fa',
-          borderRadius: 3,
-        }}
-      >
-        <code>{text}</code>
-      </pre>
-    );
-  }
-
-  if (columnEmptyText) {
-    if (typeof text !== 'boolean' && typeof text !== 'number' && !text) {
-      return typeof columnEmptyText === 'string' ? columnEmptyText : '-';
-    }
-  }
-
   return text;
 };
 

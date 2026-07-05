@@ -1,4 +1,4 @@
-import { defineComponent, h, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { Button, Dropdown, Link, Tooltip } from '@arco-design/web-vue';
 import {
   IconDown,
@@ -54,6 +54,41 @@ export default defineComponent({
     const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
     };
+    const headerTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#高级筛选表格-demo'
+        )}
+        target="_blank"
+      >
+        高级筛选表格[查看源代码]
+      </Link>
+    );
+    const toolBarRender = [
+      <Button key="show" onClick={handleChange}>
+        切换请求参数
+      </Button>,
+      <Button key="show">查看日志</Button>,
+      <Button key="out">
+        导出数据
+        <IconDown />
+      </Button>,
+      <Button type="primary" key="primary">
+        创建应用
+      </Button>,
+    ];
+    const toolBarRender1 = [
+      [
+        <Button key="show">查看日志</Button>,
+        <Button key="out">
+          导出数据
+          <IconDown />
+        </Button>,
+        <Button type="primary" key="primary">
+          创建应用
+        </Button>,
+      ],
+    ];
     const columns: ProColumns[] = [
       {
         title: '应用名称',
@@ -252,7 +287,7 @@ export default defineComponent({
         },
       },
     ];
-    const render = () => {
+    return () => {
       return (
         <div>
           <ProTable
@@ -287,27 +322,8 @@ export default defineComponent({
             }}
             params={params.value}
             defaultFormData={{ status: 'all', name: 'aaa' }}
-            headerTitle={
-              <Link
-                href={encodeURI(
-                  'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#高级筛选表格-demo'
-                )}
-                target="_blank"
-              >
-                高级筛选表格[查看源代码]
-              </Link>
-            }
-            toolBarRender={() => [
-              <Button key="show" onClick={handleChange}>切换请求参数</Button>,
-              <Button key="show">查看日志</Button>,
-              <Button key="out">
-                导出数据
-                <IconDown />
-              </Button>,
-              <Button type="primary" key="primary">
-                创建应用
-              </Button>,
-            ]}
+            headerTitle={headerTitle}
+            toolBarRender={toolBarRender}
           />
           <ProTable
             columns={columns1}
@@ -333,25 +349,10 @@ export default defineComponent({
             }}
             defaultFormData={{ status: 'all', name: 'aaa' }}
             headerTitle="查询表格"
-            toolBarRender={() => [
-              <Button key="show">查看日志</Button>,
-              <Button key="out">
-                导出数据
-                <IconDown />
-              </Button>,
-              <Button type="primary" key="primary">
-                创建应用
-              </Button>,
-            ]}
+            toolBarRender={toolBarRender1}
           />
         </div>
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });

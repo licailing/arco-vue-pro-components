@@ -27,7 +27,7 @@ import { isArray } from '../../_utils/is';
 import MyToolTip from '../my-tool-tip';
 import { runFunction } from '../utils';
 
-function getSettingItem(setting: ListToolBarSetting, slots: any) {
+function getSettingItem(setting: ListToolBarSetting) {
   if (isVNode(setting)) {
     return setting;
   }
@@ -171,7 +171,7 @@ export default defineComponent({
      * @defaultValue undefined
      */
     toolBarRender: {
-      type: [Boolean, Function] as PropType<
+      type: [Boolean, Object, Function] as PropType<
         false | ToolBarProps<any>['toolBarRender']
       >,
       default: undefined,
@@ -208,97 +208,67 @@ export default defineComponent({
       default: '列表数据',
     },
   },
-  setup(props, { slots }) {
+  setup(props) {
     const tableCtx = inject<Partial<ProTableContext>>(proTableInjectionKey, {});
     const propsOptions = toRef(props, 'options');
     const prefixCls = getPrefixCls('pro-table');
     const { getMessage } = useI18n();
-    const optionDom = computed(() => {
-      const defaultOptions = {
-        reload: () => tableCtx.action?.reload(),
-        density: true,
-        setting: true,
-        fullScreen: () => tableCtx.action?.fullScreen?.(),
-      };
+    const defaultOptions = {
+      reload: () => tableCtx.action?.reload(),
+      density: true,
+      setting: true,
+      fullScreen: () => tableCtx.action?.fullScreen?.(),
+    };
+    const options = computed(() => {
       if (propsOptions.value === false) {
-        return [];
+        return {};
       }
-
-      const options = {
+      return {
         ...defaultOptions,
         fullScreen: false,
         ...(propsOptions.value === true ? {} : propsOptions.value),
       };
-
+    });
+    return () => {
       const settings = renderDefaultOption(
-        options,
+        options.value,
         {
           ...defaultOptions,
           getMessage,
         },
         tableCtx.action,
         tableCtx.columns,
-        slots
+        tableCtx.slots
       );
       // 插槽
-      if (slots['options-render']) {
-        return slots['options-render'](
+      const optionsRender =
+        props.optionsRender || tableCtx.slots?.['options-render'];
+      let optionDom: any[] = settings;
+      if (optionsRender) {
+        optionDom = optionsRender(
           {
+            action: tableCtx.action!,
             headerTitle: props.headerTitle,
             toolBarRender: props.toolBarRender,
-            action: tableCtx.action,
             options: propsOptions.value,
-            selectedRowKeys: tableCtx.selectedRowKeys || [],
-            selectedRows: tableCtx.selectedRows || [],
-            columns: tableCtx.columns || [],
             optionsRender: props.optionsRender,
           },
           settings
         );
       }
-      if (props.optionsRender) {
-        return props.optionsRender(
-          {
-            headerTitle: props.headerTitle,
-            toolBarRender: props.toolBarRender,
-            action: tableCtx.action,
-            options: propsOptions.value,
-            selectedRowKeys: tableCtx.selectedRowKeys || [],
-            selectedRows: tableCtx.selectedRows || [],
-            columns: tableCtx.columns || [],
-            optionsRender: props.optionsRender,
-          },
-          // @ts-ignore
-          settings
-        );
-      }
-      return settings;
-    });
-    const render = () => {
-      const data = {
-        action: tableCtx.action,
-        selectedRowKeys: tableCtx.selectedRowKeys || [],
-        selectedRows: tableCtx.selectedRows || [],
-      };
-      // 操作列表
-      const actions = props.toolBarRender ? props.toolBarRender(data) : [];
       return (
         <div class={`${prefixCls}-toolbarContainer`}>
           <div class={`${prefixCls}-title`}>
-            {slots['header-title']?.(data) ??
-              runFunction(props.headerTitle, data)}
+            {tableCtx.slots?.['header-title']?.() ??
+              runFunction(props.headerTitle)}
           </div>
           <Space>
-            {slots['tool-bar']?.(data)}
-            {actions
-              .filter((item) => !!item)
-              .map((node, index) => (
-                <Fragment key={index}>{node}</Fragment>
-              ))}
-            {isArray(optionDom.value) && optionDom.value?.length ? (
+            {tableCtx.slots?.['tool-bar']?.() ??
+              runFunction(props.toolBarRender)}
+            {isArray(optionDom) && optionDom?.length ? (
               <div class={`${prefixCls}-setting`}>
-                {optionDom.value.map((setting: any, index: number) => {
-                  const settingItem = getSettingItem(setting, slots);
+                {optionDom.map((setting: any, index: number) => {
+                  const settingItem = getSettingItem(setting);
                   if (!settingItem) {
                     return null;
                   }
@@ -314,11 +284,5 @@ export default defineComponent({
         </div>
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });

@@ -25,9 +25,9 @@
   </ProTable>
 </template>
 <script setup lang="ts">
-import { defineComponent, ref, Ref, toRaw } from 'vue';
+import { ref, Ref, toRaw } from 'vue';
 import { Button, Link } from '@arco-design/web-vue';
-import type { ProColumns, RenderData } from '../index';
+import type { ProColumns } from '../index';
 import ProTable from '../index';
 
 const formRef = ref();

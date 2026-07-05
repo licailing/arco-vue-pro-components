@@ -653,82 +653,73 @@ export default defineComponent({
         </div>
       );
     };
-    const render = () => {
-      return (
-        <Popover
-          // @ts-ignore
-          showArrow={false}
-          overlayClassName={`${prefixCls}-overlay`}
-          trigger="click"
-          position="br"
-          popupContainer={tableCtx.popupContainer}
-          v-slots={{
-            title: () => {
-              return (
-                <div class={`${prefixCls}-title`}>
-                  {props.checkable === false ? (
-                    <div />
-                  ) : (
-                    <Checkbox
-                      indeterminate={indeterminate.value}
-                      modelValue={
-                        checkedKeys.value.length ===
-                        defaultAllCheckedKeys.value.length
-                      }
-                      onChange={(val) => {
-                        checkedAll(val);
-                      }}
-                    >
-                      {getMessage('tableToolBar.columnDisplay', '列展示')}
-                    </Checkbox>
-                  )}
-                  {props.checkedReset ? (
-                    <a
-                      onClick={() => {
-                        checkedAll(true, true);
-                      }}
-                      class={`${prefixCls}-action-rest-button`}
-                    >
-                      {getMessage('tableToolBar.reset', '重置')}
-                    </a>
-                  ) : null}
-                  {slots['setting-extra'] ? (
-                    <Space size={12} align="center">
-                      {slots['setting-extra']()}
-                    </Space>
-                  ) : null}
-                </div>
-              );
-            },
-            content: () => {
-              return (
-                <GroupCheckboxList
-                  checkable={props.checkable ?? true}
-                  draggable={props.draggable ?? true}
-                  showListItemOption={props.showListItemOption ?? true}
-                />
-              );
-            },
-            default: () => {
-              return (
-                <MyToolTip
-                  content={getMessage('tableToolBar.columnSetting', '列设置')}
-                >
-                  {slots['setting-icon'] ? slots['setting-icon']() : props.icon}
-                </MyToolTip>
-              );
-            },
-            ...slots,
-          }}
-        ></Popover>
-      );
-    };
-
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
+    return () => (
+      <Popover
+        // @ts-ignore
+        showArrow={false}
+        overlayClassName={`${prefixCls}-overlay`}
+        trigger="click"
+        position="br"
+        popupContainer={tableCtx.popupContainer}
+        v-slots={{
+          title: () => {
+            return (
+              <div class={`${prefixCls}-title`}>
+                {props.checkable === false ? (
+                  <div />
+                ) : (
+                  <Checkbox
+                    indeterminate={indeterminate.value}
+                    modelValue={
+                      checkedKeys.value.length ===
+                      defaultAllCheckedKeys.value.length
+                    }
+                    onChange={(val) => {
+                      checkedAll(val);
+                    }}
+                  >
+                    {getMessage('tableToolBar.columnDisplay', '列展示')}
+                  </Checkbox>
+                )}
+                {props.checkedReset ? (
+                  <a
+                    onClick={() => {
+                      checkedAll(true, true);
+                    }}
+                    class={`${prefixCls}-action-rest-button`}
+                  >
+                    {getMessage('tableToolBar.reset', '重置')}
+                  </a>
+                ) : null}
+                {slots['setting-extra'] ? (
+                  <Space size={12} align="center">
+                    {slots['setting-extra']()}
+                  </Space>
+                ) : null}
+              </div>
+            );
+          },
+          content: () => {
+            return (
+              <GroupCheckboxList
+                checkable={props.checkable ?? true}
+                draggable={props.draggable ?? true}
+                showListItemOption={props.showListItemOption ?? true}
+              />
+            );
+          },
+          default: () => {
+            return (
+              <MyToolTip
+                content={getMessage('tableToolBar.columnSetting', '列设置')}
+              >
+                {slots['setting-icon'] ? slots['setting-icon']() : props.icon}
+              </MyToolTip>
+            );
+          },
+          ...slots,
+        }}
+      ></Popover>
+    );
   },
 });

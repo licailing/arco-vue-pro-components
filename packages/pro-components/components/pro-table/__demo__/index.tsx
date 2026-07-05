@@ -119,190 +119,181 @@ import ValueType from './value-type.tsx';
 import GroupingColumns from './grouping-columns.tsx';
 
 // 生成文档关闭
-import { reactive } from 'vue';
-import { Button } from '@arco-design/web-vue';
+// import { reactive } from 'vue';
+// import { Button } from '@arco-design/web-vue';
 
 // 生成文档关闭
-export const BasicDemo = {
-  name: '默认示例(可互动)',
-  argTypes: {
-    searchType: {
-      description: '设置表格的搜索表单类型',
-      table: {
-        type: { summary: '取值query|light' },
-        defaultValue: {
-          summary: 'query',
-        },
-      },
-      control: 'select',
-      options: ['普通表格', '高级表格'],
-    },
-    search: {
-      description: '是否显示表格的搜索表单或配置搜索表单',
-      table: {
-        type: { summary: 'boolean|object' },
-        defaultValue: {
-          summary: 'true',
-        },
-      },
-    },
-    searchLayout: {
-      description: '搜索表单布局方式search.layout',
-      table: {
-        type: { summary: 'horizontal|vertical|inline' },
-        defaultValue: {
-          summary: 'horizontal',
-        },
-      },
-      if: { arg: 'searchType', eq: '普通表格' },
-      control: 'inline-radio',
-      options: ['horizontal', 'vertical', 'inline'],
-    },
-    searchGridSuffixType: {
-      description:
-        '搜索表单后缀元素（重置、查询、展开按钮）显示类型search.gridSuffixType',
-      table: {
-        type: { summary: 'column|rowLeft|rowRight' },
-        defaultValue: {
-          summary: 'column',
-        },
-      },
-      if: { arg: 'searchType', eq: '普通表格' },
-      control: 'inline-radio',
-      options: ['column', 'rowLeft', 'rowRight'],
-    },
-    lightSearchConfig: {
-      description: `是否显示表格的搜索表单或配置搜索表单, lightSearchConfig: { rowNumber: 2, name: 'keyword', search: true, clearToSearch: false } rowNumber:设置右侧直接搜索表单项显示几个： 默认是2个，其他表单项在高级筛选弹框里面,name: 设置左侧文本框名称(传值给后台的字段)，默认：keyword,search:传给左侧文本搜索框props，左侧文本搜索框为false不显示,clearToSearch:设置左侧文本搜索框清空时，为true时候，立即搜索数据`,
-      table: {
-        type: { summary: 'object' },
-      },
-      if: { arg: 'searchType', eq: '高级表格' },
-      control: 'object',
-    },
-    toolBarRender: {
-      description: '是否显示工具栏或自定义工具栏中右侧操作按钮',
-      table: {
-        type: { summary: '取值false|function' },
-        defaultValue: {
-          summary: `此案列配置的({ action }: ToolBarData<any>) => {
-            ...
-          }`,
-        },
-      },
-      control: 'inline-radio',
-      options: ['显示已配置的', '不显示'],
-    },
-    options: {
-      description: '配置表格工具栏的右侧表格操作按钮',
-      table: {
-        type: { summary: 'false|object' },
-        defaultValue: {
-          summary: false,
-        },
-      },
-      control: 'inline-check',
-      options: ['不显示', '刷新', '表格密度', '列设置', '全屏'],
-    },
-    optionsRender: {
-      description:
-        '自定义工具栏右侧表格操作按钮,为false则显示默认的表格操作按钮（刷新|表格密度|列设置|全屏（默认不显示））',
-      table: {
-        type: { summary: 'false|function' },
-        defaultValue: {
-          summary: 'false',
-        },
-      },
-    },
-    pagination: {
-      description: '是否显示分页导航或自定义分页导航',
-      table: {
-        type: { summary: '取值boolean|object' },
-        defaultValue: {
-          summary: 'true',
-        },
-      },
-    },
-    alertRender: {
-      description: '是否显示已选中数据提示或自定义已选中数据提示',
-      table: {
-        type: { summary: '取值boolean|function' },
-        defaultValue: {
-          summary: 'undefined',
-        },
-      },
-    },
-  },
-  args: {
-    search: true,
-    searchLayout: 'horizontal',
-    searchGridSuffixType: 'column',
-    searchType: '普通表格',
-    lightSearchConfig: { rowNumber: 2, name: 'keyword', search: true },
-    toolBarRender: '显示已配置的',
-    options: ['刷新', '表格密度', '列设置', '全屏'],
-    alertRender: true,
-    pagination: true,
-  },
-  render: (args: any) => ({
-    setup() {
-      const props = reactive<any>({
-        options: { fullScreen: true },
-        toolBarRender: undefined,
-        searchType: 'query',
-        search: true,
-      });
-      if (args.options) {
-        if (args.options.includes('不显示')) {
-          props.options = false;
-        } else {
-          props.options = {
-            reload: args.options.includes('刷新'),
-            density: args.options.includes('表格密度'),
-            setting: args.options.includes('列设置'),
-            fullScreen: args.options.includes('全屏'),
-          };
-        }
-      }
-      if (args.toolBarRender === '显示已配置的') {
-        props.toolBarRender = ({ action }: any) => {
-          return [
-            <Button
-              key="selected"
-              onClick={() => {
-                // 获取选中的数据
-                console.log(
-                  'selectedKeys',
-                  action.getSelected() // selectedKeys和selectedRows
-                );
-              }}
-            >
-              获取选中
-            </Button>,
-            <Button key="show">查看日志</Button>,
-          ];
-        };
-      } else {
-        props.toolBarRender = false;
-      }
-      props.searchType = args.searchType === '普通表格' ? 'query' : 'light';
-      if (args.search) {
-        props.search = {
-          layout: args.searchLayout,
-          gridSuffixType: args.searchGridSuffixType,
-        };
-      } else {
-        props.search = false;
-      }
-      return () => <Basic {...args} {...props} />;
-    },
-  }),
-};
-
-// 生成文档打开
 // export const BasicDemo = {
 //   name: '默认示例(可互动)',
-//   render: () => Basic,
+//   argTypes: {
+//     searchType: {
+//       description: '设置表格的搜索表单类型',
+//       table: {
+//         type: { summary: '取值query|light' },
+//         defaultValue: {
+//           summary: 'query',
+//         },
+//       },
+//       control: 'select',
+//       options: ['普通表格', '高级表格'],
+//     },
+//     search: {
+//       description: '是否显示表格的搜索表单或配置搜索表单',
+//       table: {
+//         type: { summary: 'boolean|object' },
+//         defaultValue: {
+//           summary: 'true',
+//         },
+//       },
+//     },
+//     searchLayout: {
+//       description: '搜索表单布局方式search.layout',
+//       table: {
+//         type: { summary: 'horizontal|vertical|inline' },
+//         defaultValue: {
+//           summary: 'horizontal',
+//         },
+//       },
+//       if: { arg: 'searchType', eq: '普通表格' },
+//       control: 'inline-radio',
+//       options: ['horizontal', 'vertical', 'inline'],
+//     },
+//     searchGridSuffixType: {
+//       description:
+//         '搜索表单后缀元素（重置、查询、展开按钮）显示类型search.gridSuffixType',
+//       table: {
+//         type: { summary: 'column|rowLeft|rowRight' },
+//         defaultValue: {
+//           summary: 'column',
+//         },
+//       },
+//       if: { arg: 'searchType', eq: '普通表格' },
+//       control: 'inline-radio',
+//       options: ['column', 'rowLeft', 'rowRight'],
+//     },
+//     lightSearchConfig: {
+//       description: `是否显示表格的搜索表单或配置搜索表单, lightSearchConfig: { rowNumber: 2, name: 'keyword', search: true, clearToSearch: false } rowNumber:设置右侧直接搜索表单项显示几个： 默认是2个，其他表单项在高级筛选弹框里面,name: 设置左侧文本框名称(传值给后台的字段)，默认：keyword,search:传给左侧文本搜索框props，左侧文本搜索框为false不显示,clearToSearch:设置左侧文本搜索框清空时，为true时候，立即搜索数据`,
+//       table: {
+//         type: { summary: 'object' },
+//       },
+//       if: { arg: 'searchType', eq: '高级表格' },
+//       control: 'object',
+//     },
+//     toolBarRender: {
+//       description: '是否显示工具栏或自定义工具栏中右侧操作按钮',
+//       table: {
+//         type: { summary: '取值false|VNodeTypes[]|function' },
+//         defaultValue: {
+//           summary: `此案列配置的() => {
+//             ...
+//           }`,
+//         },
+//       },
+//       control: 'inline-radio',
+//       options: ['显示已配置的', '不显示'],
+//     },
+//     options: {
+//       description: '配置表格工具栏的右侧表格操作按钮',
+//       table: {
+//         type: { summary: 'false|object' },
+//         defaultValue: {
+//           summary: false,
+//         },
+//       },
+//       control: 'inline-check',
+//       options: ['不显示', '刷新', '表格密度', '列设置', '全屏'],
+//     },
+//     optionsRender: {
+//       description:
+//         '自定义工具栏右侧表格操作按钮,为false则显示默认的表格操作按钮（刷新|表格密度|列设置|全屏（默认不显示））',
+//       table: {
+//         type: { summary: 'false|function' },
+//         defaultValue: {
+//           summary: 'false',
+//         },
+//       },
+//     },
+//     pagination: {
+//       description: '是否显示分页导航或自定义分页导航',
+//       table: {
+//         type: { summary: '取值boolean|object' },
+//         defaultValue: {
+//           summary: 'true',
+//         },
+//       },
+//     },
+//     alertRender: {
+//       description: '是否显示已选中数据提示或自定义已选中数据提示',
+//       table: {
+//         type: { summary: '取值boolean|function' },
+//         defaultValue: {
+//           summary: 'undefined',
+//         },
+//       },
+//     },
+//   },
+//   args: {
+//     search: true,
+//     searchLayout: 'inline',
+//     searchGridSuffixType: 'rowLeft',
+//     searchType: '普通表格',
+//     lightSearchConfig: { rowNumber: 2, name: 'keyword', search: true },
+//     toolBarRender: '显示已配置的',
+//     options: ['刷新', '表格密度', '列设置', '全屏'],
+//     alertRender: true,
+//     pagination: true,
+//   },
+//   render: (args: any) => ({
+//     setup() {
+//       const props = reactive<any>({
+//         options: { fullScreen: true },
+//         toolBarRender: undefined,
+//         searchType: 'query',
+//         search: true,
+//       });
+//       if (args.options) {
+//         if (args.options.includes('不显示')) {
+//           props.options = false;
+//         } else {
+//           props.options = {
+//             reload: args.options.includes('刷新'),
+//             density: args.options.includes('表格密度'),
+//             setting: args.options.includes('列设置'),
+//             fullScreen: args.options.includes('全屏'),
+//           };
+//         }
+//       }
+//       if (args.toolBarRender === '显示已配置的') {
+//         props.toolBarRender = [
+//           <Button
+//             key="selected"
+//           >
+//             获取选中
+//           </Button>,
+//           <Button key="show">查看日志</Button>,
+//         ];
+//       } else {
+//         props.toolBarRender = false;
+//       }
+//       props.searchType = args.searchType === '普通表格' ? 'query' : 'light';
+//       if (args.search) {
+//         props.search = {
+//           layout: args.searchLayout,
+//           gridSuffixType: args.searchGridSuffixType,
+//         };
+//       } else {
+//         props.search = false;
+//       }
+//       return () => <Basic {...args} {...props} />;
+//     },
+//   }),
 // };
+
+// 生成文档打开
+export const BasicDemo = {
+  name: '默认示例(可互动)',
+  render: () => Basic,
+};
 
 export const SingleDemo = {
   name: '查询表格',

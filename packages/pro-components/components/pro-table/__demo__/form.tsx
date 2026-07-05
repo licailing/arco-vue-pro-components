@@ -11,19 +11,61 @@ export type TableListItem = {
 export default defineComponent({
   name: 'Form',
   setup() {
+    const tableRef = ref();
     const formRef = ref();
     const actionRef = ref();
     const collapsed = ref(false);
+    const onReload = () => {
+      if (tableRef.value) {
+        tableRef.value.action.reload();
+      }
+      // 或
+      // if (actionRef.value) {
+      //   actionRef.value.reload();
+      // }
+    };
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#表单赋值-demo'
+        )}
+        target="_blank"
+      >
+        表单赋值[查看源代码]
+      </Link>
+    );
+    const toolBarRender = [
+      <Button
+        key="set"
+        onClick={() => {
+          if (formRef.value) {
+            formRef.value.setFields({
+              name: { value: 'test-xxx' },
+            });
+          }
+        }}
+      >
+        赋值
+      </Button>,
+      <Button
+        key="submit"
+        onClick={() => {
+          if (formRef.value) {
+            formRef.value.submit();
+          }
+        }}
+      >
+        提交
+      </Button>,
+      <Button key="submit" onClick={onReload}>
+        刷新
+      </Button>,
+    ];
     const setFormRef = (ref: Ref) => {
       formRef.value = ref;
     };
     const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
-    };
-    const onReload = () => {
-      if (actionRef.value) {
-        actionRef.value.reload();
-      }
     };
     const columns: ProColumns[] = [
       {
@@ -46,9 +88,10 @@ export default defineComponent({
         valueType: 'dateTime',
       },
     ];
-    const render = () => {
+    return () => {
       return (
         <ProTable
+          ref={tableRef}
           columns={columns}
           request={(params: any, sort: any, filters: any) => {
             console.log(
@@ -82,49 +125,10 @@ export default defineComponent({
           }}
           formRef={setFormRef}
           actionRef={setActionRef}
-          toolBarRender={() => [
-            <Button
-              key="set"
-              onClick={() => {
-                if (formRef.value) {
-                  formRef.value.setFields({
-                    name: { value: 'test-xxx' },
-                  });
-                }
-              }}
-            >
-              赋值
-            </Button>,
-            <Button
-              key="submit"
-              onClick={() => {
-                if (formRef.value) {
-                  formRef.value.submit();
-                }
-              }}
-            >
-              提交
-            </Button>,
-            <Button key="submit" onClick={onReload}>
-              刷新
-            </Button>,
-          ]}
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#表单赋值-demo")}
-              target="_blank"
-            >
-              表单赋值[查看源代码]
-            </Link>
-          }
+          toolBarRender={toolBarRender}
+          headerTitle={headTitle}
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });

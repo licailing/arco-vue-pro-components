@@ -61,6 +61,26 @@ for (let i = 0; i < 5; i += 1) {
 export default defineComponent({
   name: 'TableNested',
   setup() {
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#嵌套表格-demo'
+        )}
+        target="_blank"
+      >
+        嵌套表格[查看源代码]
+      </Link>
+    );
+    const toolBarRender = [
+      <Button key="show">查看日志</Button>,
+      <Button key="out">
+        导出数据
+        <IconDown />
+      </Button>,
+      <Button key="primary" type="primary">
+        创建应用
+      </Button>,
+    ];
     const columns: ProColumns[] = [
       {
         title: '应用名称',
@@ -167,7 +187,7 @@ export default defineComponent({
         />
       );
     };
-    const render = () => {
+    return () => {
       return (
         <ProTable
           columns={columns}
@@ -186,32 +206,10 @@ export default defineComponent({
           }}
           expandable={{ expandedRowRender }}
           search={false}
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#嵌套表格-demo")}
-              target="_blank"
-            >
-              嵌套表格[查看源代码]
-            </Link>
-          }
-          toolBarRender={() => [
-            <Button key="show">查看日志</Button>,
-            <Button key="out">
-              导出数据
-              <IconDown />
-            </Button>,
-            <Button key="primary" type="primary">
-              创建应用
-            </Button>,
-          ]}
+          headerTitle={headTitle}
+          toolBarRender={toolBarRender}
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });

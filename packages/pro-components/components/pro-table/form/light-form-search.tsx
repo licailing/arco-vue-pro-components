@@ -1,21 +1,13 @@
-import {
-  PropType,
-  computed,
-  defineComponent,
-  cloneVNode,
-  Ref,
-  inject,
-} from 'vue';
+import { PropType, defineComponent, Ref, inject, provide, reactive } from 'vue';
 import {
   Button,
   Space,
   Form,
-  FormItem,
   Popover,
   InputSearch,
 } from '@arco-design/web-vue';
 import { IconFindReplace } from '@arco-design/web-vue/es/icon';
-import { renderFormInput } from './form-search';
+import FormInput from './form-input';
 import {
   LightSearchConfig,
   ProColumns,
@@ -23,10 +15,11 @@ import {
   ProTableTypes,
 } from '../interface';
 import { getPrefixCls } from '../../_utils';
-import { proTableInjectionKey } from './context';
+import { proFormSearchInjectionKey, proTableInjectionKey } from './context';
 import { useLightFormSearchState } from './use-light-form-search-state';
+import { usePureProp } from '../../_hooks/use-pure-prop';
+import LightFormPowerContent from './light-form-power-content';
 
-const rangeType = ['dateRange', 'dateTimeRange'];
 export default defineComponent({
   name: 'ProLightSearch',
   props: {
@@ -46,10 +39,6 @@ export default defineComponent({
       type: Object,
       default: () => ({}),
     },
-    formSearch: {
-      type: Object,
-      default: () => ({}),
-    },
     formRef: {
       type: Function as PropType<(formRef: Ref) => void>,
     },
@@ -59,218 +48,147 @@ export default defineComponent({
     reset: (formData?: Record<string, unknown>) => true,
     search: (value: Record<string, unknown>) => true,
   },
-  setup(props, { slots, emit }) {
+  setup(props, { emit, expose }) {
+    const type = usePureProp(props, 'type');
     const tableCtx = inject<Partial<ProTableContext>>(proTableInjectionKey, {});
     const prefixCls = getPrefixCls('pro-table-light');
-    const searchConfig = computed(() => {
-      return {
-        rowNumber: 2,
-        name: 'keyword',
-        search: true,
-        ...props.search,
-      };
-    });
     const {
       t,
-      searchConfig: searchConfigState,
+      searchConfig,
       searchText,
       visible,
       formModel,
       filterNum,
-      getFormItemInfo,
-      columnsList,
+      cleanDisabled,
+      formItemList,
+      powerItemList,
       lightFormRef,
       onSubmitClick,
       handleReset,
-    } = useLightFormSearchState({ props, emit, searchConfig });
-    const searchName = computed(
-      () => searchConfigState.value.name || 'keyword'
-    );
-    const rowNumber = computed(() => searchConfigState.value.rowNumber ?? 2);
+      showPopover,
+      searchName,
+    } = useLightFormSearchState({ props, emit });
 
-    const renderPowerContent = () => {
+    provide(
+      proFormSearchInjectionKey,
+      reactive({
+        formModel,
+        formRef: lightFormRef,
+        type,
+      })
+    );
+
+    const onChange = (dataIndex, value) => {
+      emit('search', {
+        [dataIndex]: value,
+        [searchName.value]: searchText.value,
+      });
+    };
+
+    expose({
+      formModel,
+      formRef: lightFormRef,
+      submit: onSubmitClick,
+      reset: handleReset,
+    });
+    const handleOpen = () => {
+      visible.value = true;
+    };
+    const handleClose = () => {
+      visible.value = false;
+    };
+    const handleClean = () => {
+      lightFormRef.value.resetFields();
+    };
+    const powerSlots = {
+      content: () => {
+        return (
+          <LightFormPowerContent
+            powerItemList={powerItemList.value}
+            cleanDisabled={cleanDisabled.value}
+            onClean={handleClean}
+            onClose={handleClose}
+            onSearch={onSubmitClick}
+          />
+        );
+      },
+    };
+    return () => {
       return (
-        <div class={`${prefixCls}-power-popover`}>
-          <div class={`${prefixCls}-power-content`}>
-            {columnsList.value
-              .slice(rowNumber.value)
-              .map((item: any, index) => {
-                const { key, title } = getFormItemInfo(item, index);
-                return (
-                  <FormItem
-                    field={item.dataIndex}
-                    key={key}
-                    label={typeof title === 'string' ? title : undefined}
-                    v-slots={{
-                      label: () => {
-                        return title;
-                      },
-                    }}
-                  >
-                    {renderFormInput(
-                      item,
-                      props.type,
-                      formModel,
-                      lightFormRef,
-                      slots,
-                      t
-                    )}
-                  </FormItem>
-                );
-              })}
-            <div class={`${prefixCls}-power-buttons`}>
-              <Button
-                type="text"
-                disabled={!filterNum.value}
-                class={`${prefixCls}-link-btn`}
-                onClick={(e: Event) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  lightFormRef.value.resetFields();
+        <Form model={formModel.value} ref={lightFormRef} layout="vertical">
+          <div class={`${prefixCls}-container`}>
+            {searchConfig.value.search ? (
+              <InputSearch
+                placeholder={t('tableForm.lightInputPlaceholder')}
+                buttonText={t('tableForm.lightSearch')}
+                style={{ 'width': '420px', 'margin-right': '8px' }}
+                v-model={searchText.value}
+                defauleValue={tableCtx.formSearch?.[searchName.value]}
+                onSearch={(keyword: string) => {
+                  emit('search', { [searchName.value]: keyword });
                 }}
-              >
-                清空搜索条件
-              </Button>
+                onClear={() => {
+                  if (searchConfig.value.clearToSearch) {
+                    emit('search', { [searchName.value]: '' });
+                  }
+                }}
+                {...(typeof searchConfig.value.search === 'object'
+                  ? searchConfig.value.search || {}
+                  : {})}
+                searchButton
+                // @ts-ignore
+                allowClear
+              />
+            ) : null}
+            <div class={`${prefixCls}-right`}>
               <Space>
-                <Button
-                  onClick={() => {
-                    visible.value = false;
-                  }}
-                  type="outline"
-                >
-                  取消
-                </Button>
-                <Button
-                  onClick={() => {
-                    onSubmitClick();
-                  }}
-                  type="primary"
-                >
-                  确定
-                </Button>
+                {formItemList.value.map((powerItem: any) => {
+                  return (
+                    <div key={powerItem.key}>
+                      <FormInput
+                        item={powerItem}
+                        onChange={onChange}
+                        type="light"
+                      />
+                    </div>
+                  );
+                })}
+                {showPopover.value ? (
+                  <Popover
+                    popupVisible={visible.value}
+                    trigger="click"
+                    position="br"
+                    // @ts-ignore
+                    showArrow={false}
+                    unmountOnClose={false}
+                    popupContainer={tableCtx?.popupContainer}
+                    v-slots={powerSlots}
+                  >
+                    <Button
+                      type={filterNum.value ? 'outline' : 'secondary'}
+                      class={{
+                        [`${prefixCls}-power-btn`]: !filterNum.value,
+                      }}
+                      onClick={handleOpen}
+                    >
+                      <IconFindReplace
+                        size={18}
+                        style={{ 'margin-right': '12px' }}
+                      />
+                      高级筛选
+                      {filterNum.value ? (
+                        <span style={{ 'margin-left': '8px' }}>
+                          {filterNum.value}
+                        </span>
+                      ) : null}
+                    </Button>
+                  </Popover>
+                ) : null}
               </Space>
             </div>
           </div>
-        </div>
+        </Form>
       );
     };
-    const render = () => (
-      <Form model={formModel.value} ref={lightFormRef} layout="vertical">
-        <div class={`${prefixCls}-container`}>
-          {searchConfigState.value.search ? (
-            <InputSearch
-              placeholder={t('tableForm.lightInputPlaceholder')}
-              buttonText={t('tableForm.lightSearch')}
-              style={{ 'width': '420px', 'margin-right': '8px' }}
-              v-model={searchText.value}
-              defauleValue={props.formSearch[searchName.value]}
-              onSearch={(keyword: string) => {
-                emit('search', { [searchName.value]: keyword });
-              }}
-              onClear={() => {
-                if (searchConfigState.value.clearToSearch) {
-                  emit('search', { [searchName.value]: '' });
-                }
-              }}
-              {...(typeof searchConfigState.value.search === 'object'
-                ? searchConfigState.value.search || {}
-                : {})}
-              searchButton
-              // @ts-ignore
-              allowClear
-            />
-          ) : null}
-          <div class={`${prefixCls}-right`}>
-            <Space>
-              {columnsList.value.length > 0 &&
-                columnsList.value
-                  .slice(0, searchConfig.value.rowNumber)
-                  .map((powerItem: any, index) => {
-                    const { key, title } = getFormItemInfo(powerItem, index);
-                    return (
-                      <div key={key}>
-                        {cloneVNode(
-                          renderFormInput(
-                            powerItem,
-                            props.type,
-                            formModel,
-                            lightFormRef,
-                            slots,
-                            t
-                          ),
-                          {
-                            'placeholder': rangeType.includes(
-                              powerItem.valueType
-                            )
-                              ? undefined
-                              : title,
-                            'style': { width: 160 },
-                            'modelValue': props.formSearch[powerItem.dataIndex],
-                            'onUpdate:modelValue': (value: any) => {
-                              // 更新formSearch数据
-                              emit('search', {
-                                [powerItem.dataIndex]: value,
-                                [searchName.value]: searchText.value,
-                              });
-                            },
-                          }
-                        )}
-                      </div>
-                    );
-                  })}
-              {columnsList.value.length <= rowNumber.value ? null : (
-                <Popover
-                  popupVisible={visible.value}
-                  trigger="click"
-                  position="br"
-                  // @ts-ignore
-                  showArrow={false}
-                  unmountOnClose={false}
-                  popupContainer={tableCtx?.popupContainer}
-                  v-slots={{
-                    default: () => {
-                      return (
-                        <Button
-                          type={filterNum.value ? 'outline' : 'secondary'}
-                          class={{
-                            [`${prefixCls}-power-btn`]: !filterNum.value,
-                          }}
-                          onClick={() => {
-                            visible.value = true;
-                          }}
-                        >
-                          <IconFindReplace
-                            size={18}
-                            style={{ 'margin-right': '12px' }}
-                          />
-                          高级筛选
-                          {filterNum.value ? (
-                            <span style={{ 'margin-left': '8px' }}>
-                              {filterNum.value}
-                            </span>
-                          ) : null}
-                        </Button>
-                      );
-                    },
-                    content: () => {
-                      return renderPowerContent();
-                    },
-                  }}
-                ></Popover>
-              )}
-            </Space>
-          </div>
-        </div>
-      </Form>
-    );
-    return {
-      render,
-      selfSubmit: onSubmitClick,
-      selfReset: handleReset,
-      lightFormRef,
-    };
-  },
-  render() {
-    return this.render();
   },
 });

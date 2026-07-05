@@ -40,7 +40,16 @@ export default defineComponent({
       online: { text: '已上线', status: 'Success' },
       error: { text: '异常', status: 'Error' },
     };
-
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-选项类-demo'
+        )}
+        target="_blank"
+      >
+        选项类[查看源代码]
+      </Link>
+    );
     const columns: ProColumns[] = [
       {
         title: '状态',
@@ -59,7 +68,7 @@ export default defineComponent({
         fieldProps: {
           // requestSearch: true, // 是否需要远程搜索 不需要设为false
           request: async (keyword) => {
-            console.log('request', keyword)
+            console.log('request', keyword);
             // if(keyword) {
             //   return [
             //     { name: keyword, id: keyword },
@@ -71,7 +80,7 @@ export default defineComponent({
               { name: '已上线', id: 'online' },
               { name: '异常', id: 'error' },
               // { name:  `${Math.floor(Math.random() * 10)}`, id: `${Math.floor(Math.random() * 10)}`}
-            ]
+            ];
           },
           // cacheForSwr: false, // 可以设置不缓存 翻页会重新请求select数据
           labelKey: 'name',
@@ -112,7 +121,7 @@ export default defineComponent({
         render: ({ action }: RenderData) => [<Link key="a">编辑</Link>],
       },
     ];
-    const render = () => {
+    return () => {
       return (
         <ProTable
           columns={columns}
@@ -137,22 +146,9 @@ export default defineComponent({
             status3: ['all'],
           }}
           rowKey="key"
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-选项类-demo")}
-              target="_blank"
-            >
-              选项类[查看源代码]
-            </Link>
-          }
+          headerTitle={headTitle}
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });

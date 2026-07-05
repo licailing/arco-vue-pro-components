@@ -5,6 +5,7 @@ import {
   VNodeTypes,
   CSSProperties,
   RenderFunction,
+  Slots,
 } from 'vue';
 import type {
   GridItemProps,
@@ -68,8 +69,8 @@ export type ProColumnsValueType =
 /**
  * value type by function
  */
-export type ProColumnsValueTypeFunction<T> = (
-  item: T
+export type ProColumnsValueTypeFunction = (
+  data: ValueTypeData
 ) => ProColumnsValueType | ProColumnsValueObjectType;
 
 export type ValueEnumObj = {
@@ -114,12 +115,49 @@ export type ColumnStateType = {
 };
 
 export interface FormItemPropsData {
+  /**
+   * @zh form表单的model
+   * @en form model
+   */
   formModel: Ref;
+  /**
+  * @zh column的信息
+  * @en column information
+  */
   item: ProColumns;
+  /**
+  * @zh 类型
+  * @en type
+  */
   type: ProTableTypes;
 }
+export interface ValueTypeData {
+  /**
+   * @zh form表单数据或行数据
+   * @en form model or row data
+   */
+  record: Record<string, any>;
+  /**
+  * @zh column的信息
+  * @en column information
+  */
+  column: any;
+  /**
+  * @zh 类型search:搜索表单中|form:表单中|column: 表格列中
+  * @en type search:search form|form:form|column: column
+  */
+  type: 'search' | 'form' | 'column';
+}
 export interface FormPropsData {
+  /**
+   * @zh form表单的model
+   * @en form model
+   */
   formModel: Ref;
+  /**
+  * @zh 类型
+  * @en type
+  */
   type: ProTableTypes;
 }
 
@@ -178,7 +216,7 @@ export interface ProColumns
    * @zh 值的类型,会生成不同的渲染器
    * @en The type of value, which will generate different renderers
    */
-  valueType?: ProColumnsValueType | ProColumnsValueTypeFunction<any>;
+  valueType?: ProColumnsValueType | ProColumnsValueTypeFunction;
   /**
    * @zh 渲染查询表单的输入组件
    * @en Render the input component of the query form
@@ -575,6 +613,15 @@ export interface ProTableContext {
   };
   setColumnsMap: (data: any) => void;
   fullscreen?: boolean;
+  slots?: Slots;
+  loading?: boolean;
+  formSearch?: Record<string, any>
+}
+
+export interface ProFormSearchContext {
+  formModel: any;
+  formRef: any;
+  type: ProTableTypes;
 }
 
 /**
@@ -620,25 +667,6 @@ export type ActionType = {
   setPageInfo?: (page: Partial<PageInfo>) => void;
   getPopupContainer?: () => any;
 };
-
-export interface ToolBarData<T> {
-  /**
-   * @zh 表格action方法
-   * @en table action
-   * @type ActionType
-   */
-  action?: ActionType;
-  /**
-   * @zh 列表选中键值数组
-   * @en Table selected row keys array
-   */
-  selectedRowKeys: (string | number)[];
-  /**
-   * @zh 列表选中行数据
-   * @en Table selected row array
-   */
-  selectedRows: T[];
-}
 
 /**
  * @zh tool-bar 右侧列设置按钮的相关
@@ -728,6 +756,7 @@ export type OptionsType = OptionsFunctionType | boolean;
  * @en tool bar props
  */
 export interface ToolBarProps<T = unknown> {
+  action: ActionType;
   /**
    * @zh 工具栏 标题,为false不显示
    * @en tool bar title
@@ -736,12 +765,12 @@ export interface ToolBarProps<T = unknown> {
   | string
   | boolean
   | VNode
-  | ((data: ToolBarData<T>) => VNodeTypes);
+  | (() => VNodeTypes);
   /**
    * @zh 自定义工具栏右侧操作按钮,为false则不显示工具栏
    * @en Custom tool bar
    */
-  toolBarRender?: false | ((data: ToolBarData<T>) => VNodeTypes[]);
+  toolBarRender?: false | VNodeTypes[] | (() => VNodeTypes[]);
   /**
    * @zh 配置工具栏右侧表格操作按钮是否显示及图标,为false不显示,可配置以下按钮显不显示：reload(刷新)|density(表格密度)|setting(列设置)|fullScreen(全屏 默认不显示)
    * @en Custom tool bar right options
@@ -754,26 +783,6 @@ export interface ToolBarProps<T = unknown> {
   optionsRender?:
   | false
   | ((props: ToolBarProps<T>, defaultDom: Element[]) => VNodeTypes[]);
-  /**
-   * @zh 表格action方法
-   * @en table action
-   */
-  action?: ActionType;
-  /**
-   * @zh 列表选中键值数组
-   * @en Table selected row keys array
-   */
-  selectedRowKeys: (string | number)[];
-  /**
-   * @zh 列表选中行数据
-   * @en Table selected row array
-   */
-  selectedRows: any[];
-  /**
-   * @zh 表格columns
-   * @en table column
-   */
-  columns: ProColumns[];
 }
 
 /**
@@ -957,8 +966,8 @@ export interface SearchConfig {
    */
   gridSuffixType?: 'column' | 'rowLeft' | 'rowRight';
   /**
-   * @zh 表单后缀元素（重置、查询、展开按钮）props
-   * @en Form suffix element (reset, query, collapse button) props
+   * @zh 表单后缀元素（重置、查询、展开按钮）props， 当gridSuffixType=column时生效
+   * @en Form suffix element (reset, query, collapse button) props, when gridSuffixType=column is valid
    */
   gridSuffixProps?: GridItemProps;
   /**
@@ -1430,11 +1439,7 @@ export interface TriggerProps {
 }
 
 export type AlertRenderType =
-  | ((props: {
-    selectedRowKeys: any[];
-    selectedRows: any[];
-    onCleanSelected: () => void;
-  }) => VNode)
+  | (() => VNode)
   | false;
 
 export type TableAlertProps = {

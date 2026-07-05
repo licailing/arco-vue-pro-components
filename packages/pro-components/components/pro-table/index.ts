@@ -30,7 +30,6 @@ export type {
   ProTableProps,
   ProTableTypes,
   ActionType,
-  ToolBarData,
   ToolBarProps,
   UseFetchProps,
   SearchConfig,

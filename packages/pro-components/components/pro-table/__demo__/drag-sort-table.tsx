@@ -6,6 +6,16 @@ import ProTable from '../index';
 export default defineComponent({
   name: 'DragSortTable',
   setup(props, ctx) {
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#拖拽排序-demo'
+        )}
+        target="_blank"
+      >
+        拖拽排序[查看源代码]
+      </Link>
+    );
     const columns: ProColumns[] = reactive([
       {
         title: '姓名',
@@ -51,17 +61,10 @@ export default defineComponent({
       dataSource.value = newDataSource;
       Message.success('修改列表排序成功');
     };
-    const render = () => {
+    return () => {
       return (
         <ProTable
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#拖拽排序-demo")}
-              target="_blank"
-            >
-              拖拽排序[查看源代码]
-            </Link>
-          }
+          headerTitle={headTitle}
           columns={columns}
           draggable={{ type: 'handle', width: 40 }}
           rowKey="key"
@@ -71,11 +74,5 @@ export default defineComponent({
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });

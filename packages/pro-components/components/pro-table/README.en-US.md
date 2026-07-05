@@ -33,7 +33,7 @@ description: pro-table component based on arco-design web-vue table package
 |options-render|Custom action bar|`false \| ToolBarProps<any>['optionsRender']`|`false`|
 |options|table toolbar, not displayed when set to false|`boolean \| ToolBarProps<any>['options']`|`false`|
 |header-title|table tilte|`ToolBarProps<any>['headerTitle']`|`'列表数据'`|
-|card-props|Props of the Card component, not displayed when set to false|`boolean \| Record<string, any>`|`-`|
+|card-props|Props of the Card component|`object`|`-`|
 |default-form-data|form init data|`object`|`-`|
 |search-type|search from type|`ProTableProps['searchType']`|`'query'`|
 |light-search-config|advanced search form setting|`LightSearchConfig`|`-`|
@@ -113,9 +113,10 @@ description: pro-table component based on arco-design web-vue table package
 |expand-row|Expand row content|record: `TableData`|
 |expand-icon|Expand row icon|expanded: `boolean`<br>record: `TableData`|
 |option-render|Customize the search config|data: `FormOptionProps`|
+|alert-render|Customize the alert bar|-|
 |options-render|Customize the tool bar options|data: `ToolBarProps`<br>settings: `JSX.Element[]`|
-|tool-bar|Customize the tool bar|action: `UseFetchDataAction`<br>selectedRowKeys: `any[]`<br>selectedRows: `any[]`|
-|header-title|Customize the head title|action: `UseFetchDataAction`<br>selectedRowKeys: `any[]`<br>selectedRows: `any[]`|
+|tool-bar|Customize the tool bar|-|
+|header-title|Customize the head title|-|
 |index|columns Indicates the user-defined index columns|data: `RenderData`|
 |form-search|Customize the search form|formData: `any`|
 |columns|Table column definitions. When enabled, the columns attribute is masked|-|
@@ -123,6 +124,35 @@ description: pro-table component based on arco-design web-vue table package
 
 
 ## Type
+
+
+### FormItemPropsData
+
+|Name|Description|Type|Default|
+|---|---|---|:---:|
+|formModel|form model|`Ref`|`-`|
+|item|column information|`ProColumns`|`-`|
+|type|type|`ProTableTypes`|`-`|
+
+
+
+### ValueTypeData
+
+|Name|Description|Type|Default|
+|---|---|---|:---:|
+|record|form model or row data|`Record<string, any>`|`-`|
+|column|column information|`any`|`-`|
+|type|type search:search form\|form:form\|column: column|`'search' \| 'form' \| 'column'`|`-`|
+
+
+
+### FormPropsData
+
+|Name|Description|Type|Default|
+|---|---|---|:---:|
+|formModel|form model|`Ref`|`-`|
+|type|type|`ProTableTypes`|`-`|
+
 
 
 ### ProColumns
@@ -137,7 +167,7 @@ description: pro-table component based on arco-design web-vue table package
 |fieldProps|The configuration passed to the query form entry a-form-item field|`{ [prop: string]: any }`|`-`|
 |girdItemProps|The configuration passed to the query form a-grid-item|`GridItemProps`|`-`|
 |defaultValue|query form default value|`any`|`-`|
-|valueType|The type of value, which will generate different renderers|`ProColumnsValueType \| ProColumnsValueTypeFunction<any>`|`-`|
+|valueType|The type of value, which will generate different renderers|`ProColumnsValueType \| ProColumnsValueTypeFunction`|`-`|
 |renderFormItem|Render the input component of the query form|`(data: RenderFormItemData) => VNode`|`-`|
 |hideInSearch|This item is not displayed in the query form|`boolean`|`false`|
 |hideInTable|This column is not displayed in the Table|`boolean`|`false`|
@@ -204,28 +234,14 @@ description: pro-table component based on arco-design web-vue table package
 
 
 
-### ToolBarData
-
-|Name|Description|Type|Default|
-|---|---|---|:---:|
-|action|table action|`ActionType`|`-`|
-|selectedRowKeys|Table selected row keys array|`(string \| number)[]`|`-`|
-|selectedRows|Table selected row array|`T[]`|`-`|
-
-
-
 ### ToolBarProps
 
 |Name|Description|Type|Default|
 |---|---|---|:---:|
-|headerTitle|tool bar title|`string  \| boolean  \| VNode  \| ((data: ToolBarData<T>) => VNodeTypes)`|`-`|
-|toolBarRender|Custom tool bar|`false \| ((data: ToolBarData<T>) => VNodeTypes[])`|`-`|
+|headerTitle|tool bar title|`string  \| boolean  \| VNode  \| (() => VNodeTypes)`|`-`|
+|toolBarRender|Custom tool bar|`false \| VNodeTypes[] \| (() => VNodeTypes[])`|`-`|
 |options|Custom tool bar right options|`OptionConfig \| boolean`|`-`|
 |optionsRender|Custom tool bar right option-render|`false  \| ((props: ToolBarProps<T>, defaultDom: Element[]) => VNodeTypes[])`|`-`|
-|action|table action|`ActionType`|`-`|
-|selectedRowKeys|Table selected row keys array|`(string \| number)[]`|`-`|
-|selectedRows|Table selected row array|`any[]`|`-`|
-|columns|table column|`ProColumns[]`|`-`|
 
 
 
@@ -274,7 +290,7 @@ description: pro-table component based on arco-design web-vue table package
 |submitText|The text of the submit button|`string`|`-`|
 |layout|Form layout|`'horizontal' \| 'vertical' \| 'inline'`|`-`|
 |gridSuffixType|Form suffix element (reset, query, collapse button) display type, column: one column\|rowLeft: one row (on the left)\|rowRight: one row (on the right), default: column|`'column' \| 'rowLeft' \| 'rowRight'`|`-`|
-|gridSuffixProps|Form suffix element (reset, query, collapse button) props|`GridItemProps`|`-`|
+|gridSuffixProps|Form suffix element (reset, query, collapse button) props, when gridSuffixType=column is valid|`GridItemProps`|`-`|
 |gridProps|Set the Grid props for the form|`GridProps`|`-`|
 |formProps|Set the Form props for the form|`((data: FormPropsData) => Omit<FormInstance, 'model' \| 'scrollToFirstError'>)  \| Omit<FormInstance, 'model' \| 'scrollToFirstError'>`|`-`|
 |optionRender|Customize the search config|`((props: FormOptionProps) => VNodeTypes) \| false`|`-`|
@@ -400,15 +416,9 @@ description: pro-table component based on arco-design web-vue table package
 
 ### basic table [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--basic-demo)
 ```tsx
-import { defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import { Button, Modal, Link } from '@arco-design/web-vue';
-import type {
-  ActionType,
-  ProColumns,
-  RenderData,
-  TableData,
-  ToolBarData,
-} from '../index';
+import type { ActionType, ProColumns, RenderData, TableData } from '../index';
 import ProTable from '../index';
 
 const valueEnum: any = {
@@ -465,7 +475,23 @@ for (let i = 0; i < 10; i += 1) {
 export default defineComponent({
   name: 'Basic',
   setup(props, { attrs }) {
+    const tableRef = ref();
     const actionRef = ref();
+    // 直接从tableRef取selectedRowKeys内容
+    const headTitle = computed(() => (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#默认表格可互动-demo'
+        )}
+        target="_blank"
+      >
+        默认示例(可互动)[查看源代码]
+        <span>
+          已选中{tableRef.value ? tableRef.value.selectedRowKeys.length : 0}
+        </span>
+      </Link>
+    ));
+
     const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
     };
@@ -484,6 +510,9 @@ export default defineComponent({
         dataIndex: 'name',
         fixed: 'left',
         render: (data: RenderData) => <Link>{data.dom}</Link>,
+        girdItemProps: {
+          span: 2,
+        },
         formItemProps: ({ formModel, type }) => {
           if (type === 'form') {
             return {
@@ -519,9 +548,9 @@ export default defineComponent({
       {
         title: '执行进度',
         dataIndex: 'progress',
-        valueType: (item) => ({
+        valueType: ({ record }) => ({
           type: 'progress',
-          status: ProcessMap[item.status],
+          status: ProcessMap[record.status],
         }),
       },
       {
@@ -579,13 +608,28 @@ export default defineComponent({
     ];
     const selectedKeys = ref(['1']);
     const expandedKeys = ref([]);
-    const render = () => {
-      console.log(
-        'selectedKeys:%o, expandedKeys:%o',
-        selectedKeys.value,
-        expandedKeys.value
-      );
-
+    const searchProps = {
+      formProps: ({ formModel }) => {
+        return {
+          layout: 'horizontal',
+          autoLabelWidth: true,
+          rules: {
+            containers: [
+              {
+                required: formModel.value.key ? true : false,
+                message: '此项为必填项',
+              },
+            ],
+          },
+        };
+      },
+      gridProps: {
+        cols: 2,
+        rowGap: 20,
+        colGap: 20,
+      },
+    };
+    return () => {
       return (
         <div>
           <ProTable
@@ -595,6 +639,7 @@ export default defineComponent({
               showCheckedAll: true,
               checkStrictly: true,
             }}
+            ref={tableRef}
             actionRef={setActionRef}
             request={(params) => {
               console.log('request reload', params);
@@ -619,22 +664,7 @@ export default defineComponent({
             v-model:selectedKeys={selectedKeys.value}
             v-model:expandedKeys={expandedKeys.value}
             rowKey="key"
-            headerTitle={({
-              selectedRowKeys,
-              selectedRows,
-              action,
-            }: ToolBarData<any>) => {
-              return (
-                <Link
-                  href={encodeURI(
-                    'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#默认表格可互动-demo'
-                  )}
-                  target="_blank"
-                >
-                  默认示例(可互动)[查看源代码]
-                </Link>
-              );
-            }}
+            headerTitle={headTitle.value}
             {...attrs}
             {...props}
           />
@@ -652,38 +682,12 @@ export default defineComponent({
               columns={columns}
               type="form"
               defaultFormData={current.value}
-              search={{
-                formProps: ({ formModel }) => {
-                  return {
-                    layout: 'horizontal',
-                    autoLabelWidth: true,
-                    rules: {
-                      containers: [
-                        {
-                          required: formModel.value.key ? true : false,
-                          message: '此项为必填项',
-                        },
-                      ],
-                    },
-                  };
-                },
-                gridProps: {
-                  cols: 2,
-                  rowGap: 20,
-                  colGap: 20,
-                },
-              }}
+              search={searchProps}
             />
           </Modal>
         </div>
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });
 
@@ -691,7 +695,7 @@ export default defineComponent({
 
 ### advanced filter replacement query form [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--lightfilter-demo)
 ```tsx
-import { defineComponent, h, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { Button, Dropdown, Link, Tooltip } from '@arco-design/web-vue';
 import {
   IconDown,
@@ -747,6 +751,41 @@ export default defineComponent({
     const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
     };
+    const headerTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#高级筛选表格-demo'
+        )}
+        target="_blank"
+      >
+        高级筛选表格[查看源代码]
+      </Link>
+    );
+    const toolBarRender = [
+      <Button key="show" onClick={handleChange}>
+        切换请求参数
+      </Button>,
+      <Button key="show">查看日志</Button>,
+      <Button key="out">
+        导出数据
+        <IconDown />
+      </Button>,
+      <Button type="primary" key="primary">
+        创建应用
+      </Button>,
+    ];
+    const toolBarRender1 = [
+      [
+        <Button key="show">查看日志</Button>,
+        <Button key="out">
+          导出数据
+          <IconDown />
+        </Button>,
+        <Button type="primary" key="primary">
+          创建应用
+        </Button>,
+      ],
+    ];
     const columns: ProColumns[] = [
       {
         title: '应用名称',
@@ -945,7 +984,7 @@ export default defineComponent({
         },
       },
     ];
-    const render = () => {
+    return () => {
       return (
         <div>
           <ProTable
@@ -980,27 +1019,8 @@ export default defineComponent({
             }}
             params={params.value}
             defaultFormData={{ status: 'all', name: 'aaa' }}
-            headerTitle={
-              <Link
-                href={encodeURI(
-                  'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#高级筛选表格-demo'
-                )}
-                target="_blank"
-              >
-                高级筛选表格[查看源代码]
-              </Link>
-            }
-            toolBarRender={() => [
-              <Button key="show" onClick={handleChange}>切换请求参数</Button>,
-              <Button key="show">查看日志</Button>,
-              <Button key="out">
-                导出数据
-                <IconDown />
-              </Button>,
-              <Button type="primary" key="primary">
-                创建应用
-              </Button>,
-            ]}
+            headerTitle={headerTitle}
+            toolBarRender={toolBarRender}
           />
           <ProTable
             columns={columns1}
@@ -1026,26 +1046,11 @@ export default defineComponent({
             }}
             defaultFormData={{ status: 'all', name: 'aaa' }}
             headerTitle="查询表格"
-            toolBarRender={() => [
-              <Button key="show">查看日志</Button>,
-              <Button key="out">
-                导出数据
-                <IconDown />
-              </Button>,
-              <Button type="primary" key="primary">
-                创建应用
-              </Button>,
-            ]}
+            toolBarRender={toolBarRender1}
           />
         </div>
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });
 
@@ -1055,13 +1060,7 @@ export default defineComponent({
 ```tsx
 import { defineComponent, ref } from 'vue';
 import { Button, Link } from '@arco-design/web-vue';
-import type {
-  ActionType,
-  ProColumns,
-  RenderData,
-  TableData,
-  ToolBarData,
-} from '../index';
+import type { ActionType, ProColumns, RenderData, TableData } from '../index';
 import ProTable from '../index';
 
 const valueEnum: any = {
@@ -1121,7 +1120,35 @@ tableListDataSource[0].children[0].children = [generateDataItem(21)];
 export default defineComponent({
   name: 'BatchOption',
   setup(props) {
+    const tableRef = ref();
     const actionRef = ref();
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#表格批量操作-demo'
+        )}
+        target="_blank"
+      >
+        表格批量操作[查看源代码]
+      </Link>
+    );
+    const options = { fullScreen: true };
+    const toolBarRender = [
+      <Button
+        key="selected"
+        onClick={() => {
+          console.log('tableRef 获取选中的数据', tableRef.value.getSelected());
+          // 获取选中的数据
+          console.log(
+            'selectedKeys',
+            actionRef.value.getSelected() // selectedKeys和selectedRows
+          );
+        }}
+      >
+        获取选中
+      </Button>,
+      <Button key="show">查看日志</Button>,
+    ];
     const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
     };
@@ -1149,9 +1176,9 @@ export default defineComponent({
       {
         title: '执行进度',
         dataIndex: 'progress',
-        valueType: (item) => ({
+        valueType: ({ record }) => ({
           type: 'progress',
-          status: ProcessMap[item.status],
+          status: ProcessMap[record.status],
         }),
       },
       {
@@ -1197,7 +1224,7 @@ export default defineComponent({
     ];
     const selectedKeys = ref(['1']);
     const expandedKeys = ref([]);
-    const render = () => {
+    return () => {
       console.log(
         'selectedKeys:%o, expandedKeys:%o',
         selectedKeys.value,
@@ -1212,6 +1239,7 @@ export default defineComponent({
             checkStrictly: true,
             // defaultSelectedRowKeys: ['1'],
           }}
+          ref={tableRef}
           actionRef={setActionRef}
           data={tableListDataSource}
           scroll={{ x: 1300 }}
@@ -1219,6 +1247,7 @@ export default defineComponent({
           pagination={{
             pageSize: 5,
           }}
+          alwaysShowAlert
           onSelectAll={(checked: boolean) => {
             console.log('onSelectAll', checked);
           }}
@@ -1233,47 +1262,14 @@ export default defineComponent({
           v-model:selectedKeys={selectedKeys.value}
           v-model:expandedKeys={expandedKeys.value}
           rowKey="key"
-          headerTitle={
-            <Link
-              href={encodeURI('https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#表格批量操作-demo')}
-              target="_blank"
-            >
-              表格批量操作[查看源代码]
-            </Link>
-          }
-          options={{ fullScreen: true }}
-          toolBarRender={({
-            selectedRowKeys,
-            selectedRows,
-            action,
-          }: ToolBarData<any>) => {
-            return [
-              <Button
-                key="selected"
-                onClick={() => {
-                  // 获取选中的数据
-                  console.log(
-                    'selectedKeys',
-                    actionRef.value.getSelected() // selectedKeys和selectedRows
-                  );
-                }}
-              >
-                获取选中
-              </Button>,
-              <Button key="show">查看日志</Button>,
-            ];
-          }}
+          headerTitle={headTitle}
+          options={options}
+          toolBarRender={toolBarRender}
           // 不显示
           // alertRender={false}
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });
 
@@ -1425,7 +1421,27 @@ const columns: ProColumns[] = [
 export default defineComponent({
   name: 'Normal',
   setup() {
-    const render = () => {
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#无查询表单-demo'
+        )}
+        target="_blank"
+      >
+        无查询表单[查看源代码]
+      </Link>
+    );
+    const toolBarRender = [
+      <Button key="show">查看日志</Button>,
+      <Button key="out">
+        导出数据
+        <IconDown />
+      </Button>,
+      <Button type="primary" key="primary">
+        创建应用
+      </Button>,
+    ];
+    return () => {
       return (
         <ProTable
           columns={columns}
@@ -1445,33 +1461,11 @@ export default defineComponent({
           size="small"
           search={false}
           defaultFormData={{ status: 'all' }}
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#无查询表单-demo")}
-              target="_blank"
-            >
-              无查询表单[查看源代码]
-            </Link>
-          }
-          toolBarRender={() => [
-            <Button key="show">查看日志</Button>,
-            <Button key="out">
-              导出数据
-              <IconDown />
-            </Button>,
-            <Button type="primary" key="primary">
-              创建应用
-            </Button>,
-          ]}
+          headerTitle={headTitle}
+          toolBarRender={toolBarRender}
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });
 
@@ -1542,6 +1536,26 @@ for (let i = 0; i < 5; i += 1) {
 export default defineComponent({
   name: 'TableNested',
   setup() {
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#嵌套表格-demo'
+        )}
+        target="_blank"
+      >
+        嵌套表格[查看源代码]
+      </Link>
+    );
+    const toolBarRender = [
+      <Button key="show">查看日志</Button>,
+      <Button key="out">
+        导出数据
+        <IconDown />
+      </Button>,
+      <Button key="primary" type="primary">
+        创建应用
+      </Button>,
+    ];
     const columns: ProColumns[] = [
       {
         title: '应用名称',
@@ -1648,7 +1662,7 @@ export default defineComponent({
         />
       );
     };
-    const render = () => {
+    return () => {
       return (
         <ProTable
           columns={columns}
@@ -1667,33 +1681,11 @@ export default defineComponent({
           }}
           expandable={{ expandedRowRender }}
           search={false}
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#嵌套表格-demo")}
-              target="_blank"
-            >
-              嵌套表格[查看源代码]
-            </Link>
-          }
-          toolBarRender={() => [
-            <Button key="show">查看日志</Button>,
-            <Button key="out">
-              导出数据
-              <IconDown />
-            </Button>,
-            <Button key="primary" type="primary">
-              创建应用
-            </Button>,
-          ]}
+          headerTitle={headTitle}
+          toolBarRender={toolBarRender}
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });
 
@@ -1705,6 +1697,7 @@ import { defineComponent, ref, toRefs, watch } from 'vue';
 import { Button, Link, Badge, Split, Card } from '@arco-design/web-vue';
 import type { ProColumns, RenderData } from '../index';
 import ProTable from '../index';
+
 
 type TableListItem = {
   createdAtRange?: number[];
@@ -1789,7 +1782,7 @@ const DetailList = defineComponent({
         immediate: true,
       }
     );
-    const render = () => {
+    return () => {
       return (
         <ProTable
           columns={columns}
@@ -1804,12 +1797,6 @@ const DetailList = defineComponent({
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });
 
@@ -1853,7 +1840,7 @@ const IPList = defineComponent({
         valueType: 'percent',
       },
     ];
-    const render = () => {
+    return () => {
       return (
         <ProTable
           columns={columns}
@@ -1879,7 +1866,9 @@ const IPList = defineComponent({
           }}
           headerTitle={
             <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#左右结构-demo")}
+              href={encodeURI(
+                'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#左右结构-demo'
+              )}
               target="_blank"
             >
               左右结构[查看源代码]
@@ -1895,19 +1884,13 @@ const IPList = defineComponent({
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
-  },
+  }
 });
 
 export default defineComponent({
   name: 'Split',
   setup() {
-    const render = () => {
+    return () => {
       const ip = ref('0.0.0.0');
       return (
         <Split
@@ -1933,10 +1916,6 @@ export default defineComponent({
         </Split>
       );
     };
-    return { render };
-  },
-  render() {
-    return this.render();
   },
 });
 
@@ -1957,19 +1936,61 @@ export type TableListItem = {
 export default defineComponent({
   name: 'Form',
   setup() {
+    const tableRef = ref();
     const formRef = ref();
     const actionRef = ref();
     const collapsed = ref(false);
+    const onReload = () => {
+      if (tableRef.value) {
+        tableRef.value.action.reload();
+      }
+      // 或
+      // if (actionRef.value) {
+      //   actionRef.value.reload();
+      // }
+    };
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#表单赋值-demo'
+        )}
+        target="_blank"
+      >
+        表单赋值[查看源代码]
+      </Link>
+    );
+    const toolBarRender = [
+      <Button
+        key="set"
+        onClick={() => {
+          if (formRef.value) {
+            formRef.value.setFields({
+              name: { value: 'test-xxx' },
+            });
+          }
+        }}
+      >
+        赋值
+      </Button>,
+      <Button
+        key="submit"
+        onClick={() => {
+          if (formRef.value) {
+            formRef.value.submit();
+          }
+        }}
+      >
+        提交
+      </Button>,
+      <Button key="submit" onClick={onReload}>
+        刷新
+      </Button>,
+    ];
     const setFormRef = (ref: Ref) => {
       formRef.value = ref;
     };
     const setActionRef = (ref: ActionType) => {
       actionRef.value = ref;
-    };
-    const onReload = () => {
-      if (actionRef.value) {
-        actionRef.value.reload();
-      }
     };
     const columns: ProColumns[] = [
       {
@@ -1992,9 +2013,10 @@ export default defineComponent({
         valueType: 'dateTime',
       },
     ];
-    const render = () => {
+    return () => {
       return (
         <ProTable
+          ref={tableRef}
           columns={columns}
           request={(params: any, sort: any, filters: any) => {
             console.log(
@@ -2028,50 +2050,11 @@ export default defineComponent({
           }}
           formRef={setFormRef}
           actionRef={setActionRef}
-          toolBarRender={() => [
-            <Button
-              key="set"
-              onClick={() => {
-                if (formRef.value) {
-                  formRef.value.setFields({
-                    name: { value: 'test-xxx' },
-                  });
-                }
-              }}
-            >
-              赋值
-            </Button>,
-            <Button
-              key="submit"
-              onClick={() => {
-                if (formRef.value) {
-                  formRef.value.submit();
-                }
-              }}
-            >
-              提交
-            </Button>,
-            <Button key="submit" onClick={onReload}>
-              刷新
-            </Button>,
-          ]}
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#表单赋值-demo")}
-              target="_blank"
-            >
-              表单赋值[查看源代码]
-            </Link>
-          }
+          toolBarRender={toolBarRender}
+          headerTitle={headTitle}
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });
 
@@ -2106,9 +2089,9 @@ export default defineComponent({
   </ProTable>
 </template>
 <script setup lang="ts">
-import { defineComponent, ref, Ref, toRaw } from 'vue';
+import { ref, Ref, toRaw } from 'vue';
 import { Button, Link } from '@arco-design/web-vue';
-import type { ProColumns, RenderData } from '../index';
+import type { ProColumns } from '../index';
 import ProTable from '../index';
 
 const formRef = ref();
@@ -2203,6 +2186,16 @@ import ProTable from '../index';
 export default defineComponent({
   name: 'DragSortTable',
   setup(props, ctx) {
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#拖拽排序-demo'
+        )}
+        target="_blank"
+      >
+        拖拽排序[查看源代码]
+      </Link>
+    );
     const columns: ProColumns[] = reactive([
       {
         title: '姓名',
@@ -2248,17 +2241,10 @@ export default defineComponent({
       dataSource.value = newDataSource;
       Message.success('修改列表排序成功');
     };
-    const render = () => {
+    return () => {
       return (
         <ProTable
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#拖拽排序-demo")}
-              target="_blank"
-            >
-              拖拽排序[查看源代码]
-            </Link>
-          }
+          headerTitle={headTitle}
           columns={columns}
           draggable={{ type: 'handle', width: 40 }}
           rowKey="key"
@@ -2268,12 +2254,6 @@ export default defineComponent({
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });
 
@@ -2503,7 +2483,7 @@ export default defineComponent({
       }
       return params;
     };
-    const render = () => (
+    return () => (
       <ProTable
         columns={columns}
         actionRef={setActionRef}
@@ -2568,12 +2548,6 @@ export default defineComponent({
         ]}
       />
     );
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });
 
@@ -2603,6 +2577,16 @@ import { getDictLabel } from '../../_utils/index';
 export default defineComponent({
   name: 'LinkageForm',
   setup(props, ctx) {
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#动态自定义搜索栏-demo'
+        )}
+        target="_blank"
+      >
+        动态自定义搜索栏[查看源代码]
+      </Link>
+    );
     const stateDict = [
       { label: '全部', value: 'all' },
       { label: '关闭', value: 'closed' },
@@ -2686,7 +2670,7 @@ export default defineComponent({
         },
       },
     ];
-    const render = () => {
+    return () => {
       return (
         <ProTable
           columns={columns}
@@ -2706,14 +2690,7 @@ export default defineComponent({
             };
           }}
           rowKey="key"
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#动态自定义搜索栏-demo")}
-              target="_blank"
-            >
-              动态自定义搜索栏[查看源代码]
-            </Link>
-          }
+          headerTitle={headTitle}
           search={{
             collapsed: false,
             optionRender: ({ dom }: FormOptionProps) => [
@@ -2722,7 +2699,7 @@ export default defineComponent({
             ],
           }}
           columnResizable
-          bordered={{cell:true}}
+          bordered={{ cell: true }}
           // 自定义图标
           // options={{fullScreen: true, reloadIcon: <IconSend />, settingIcon: <IconStar />}}
           options={{
@@ -2746,7 +2723,7 @@ export default defineComponent({
           //     return <IconStar />;
           //   },
           // }}
-          optionsRender={({ action }: ToolBarProps, defaultDom) => {
+          optionsRender={(_: ToolBarProps, defaultDom) => {
             // 自定义
             return [
               defaultDom[2],
@@ -2778,12 +2755,6 @@ export default defineComponent({
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });
 
@@ -2792,32 +2763,22 @@ export default defineComponent({
 ### Dynamically customize the search bar [demo](https://licailing.github.io/arco-vue-pro-components/?path=/story/pro-table--linkage-form-v-demo)
 ```vue
 <template>
-  <ProTable
-    :columns="columns"
-    :request="request"
-    row-key="key"
-    :search="search"
-    :options="{ fullScreen: true }"
-    column-resizable
-    :bordered="{cell:true}"
-  >
+  <ProTable :columns="columns" :request="request" row-key="key" :search="search" :options="{ fullScreen: true }"
+    column-resizable :bordered="{ cell: true }">
     <template #header-title="{ action, selectedRowKeys, selectedRows }">
       <Link
         :href="encodeURI(`https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#动态自定义搜索栏-demo-1`)"
-        target="_blank"
-      >
+        target="_blank">
         动态自定义搜索栏(vue)[查看源代码]
       </Link>
     </template>
     <template #index="{ rowIndex, action }">
-      <span
-        :style="{
-          borderRadius: 6,
-          padding: '0 4px',
-          background: 'gray',
-          color: '#fff',
-        }"
-      >
+      <span :style="{
+        borderRadius: 6,
+        padding: '0 4px',
+        background: 'gray',
+        color: '#fff',
+      }">
         {{
           rowIndex +
           1 +
@@ -2842,47 +2803,36 @@ export default defineComponent({
       <Button key="3" type="primary"> 新建 </Button>
     </template>
     <template #direction-form-item="{ formModel }">
-      <template v-if="formModel.value['state'] === 'online'"
-        ><Input placeholder="请输入"
-      /></template>
-      <template v-else
-        ><ProSelect
-          placeholder="请选择"
-          :options="[
-            { word: 'A', id: '1' },
-            {
-              word: 'B',
-              id: '2',
-            },
-          ]"
-          label-key="word"
-          value-key="id"
-      /></template>
+      <template v-if="formModel.value['state'] === 'online'"><Input placeholder="请输入" /></template>
+      <template v-else>
+        <ProSelect placeholder="请选择" :options="[
+          { word: 'A', id: '1' },
+          {
+            word: 'B',
+            id: '2',
+          },
+        ]" label-key="word" value-key="id" />
+      </template>
     </template>
     <!-- options自定义 -->
     <template #options-render="{ action }, defaultDom">
       <component :is="defaultDom[3]" />
       <component :is="defaultDom[2]" />
-      <Tooltip content="发送" :popupContainer="action?.getPopupContainer?.()"
-        ><IconSend @click="action?.reload?.()"
-      /></Tooltip>
+      <Tooltip content="发送" :popupContainer="action?.getPopupContainer?.()">
+        <IconSend @click="action?.reload?.()" />
+      </Tooltip>
       <IconStar @click="action?.fullScreen?.()" />
     </template>
   </ProTable>
 </template>
 <script setup lang="ts">
-import { h } from 'vue';
-import { Button, Input, Link, Space, Tooltip } from '@arco-design/web-vue';
+import { Button, Input, Link, Tooltip } from '@arco-design/web-vue';
 import {
   IconSend,
   IconStar,
-  IconFullscreen,
 } from '@arco-design/web-vue/es/icon';
 import type {
   ProColumns,
-  RenderData,
-  RenderFormItemData,
-  FormOptionProps,
 } from '../index';
 import ProTable from '../index';
 import ProSelect from '../../pro-select';
@@ -2993,7 +2943,16 @@ export default defineComponent({
       online: { text: '已上线', status: 'Success' },
       error: { text: '异常', status: 'Error' },
     };
-
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-选项类-demo'
+        )}
+        target="_blank"
+      >
+        选项类[查看源代码]
+      </Link>
+    );
     const columns: ProColumns[] = [
       {
         title: '状态',
@@ -3012,7 +2971,7 @@ export default defineComponent({
         fieldProps: {
           // requestSearch: true, // 是否需要远程搜索 不需要设为false
           request: async (keyword) => {
-            console.log('request', keyword)
+            console.log('request', keyword);
             // if(keyword) {
             //   return [
             //     { name: keyword, id: keyword },
@@ -3024,7 +2983,7 @@ export default defineComponent({
               { name: '已上线', id: 'online' },
               { name: '异常', id: 'error' },
               // { name:  `${Math.floor(Math.random() * 10)}`, id: `${Math.floor(Math.random() * 10)}`}
-            ]
+            ];
           },
           // cacheForSwr: false, // 可以设置不缓存 翻页会重新请求select数据
           labelKey: 'name',
@@ -3065,7 +3024,7 @@ export default defineComponent({
         render: ({ action }: RenderData) => [<Link key="a">编辑</Link>],
       },
     ];
-    const render = () => {
+    return () => {
       return (
         <ProTable
           columns={columns}
@@ -3090,23 +3049,10 @@ export default defineComponent({
             status3: ['all'],
           }}
           rowKey="key"
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-选项类-demo")}
-              target="_blank"
-            >
-              选项类[查看源代码]
-            </Link>
-          }
+          headerTitle={headTitle}
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });
 
@@ -3137,6 +3083,7 @@ export type TableListItem = {
   createdAtRange: string[];
   createdAtRange1: string[];
   code: string;
+  closeAt: string;
 };
 const tableListDataSource: TableListItem[] = [];
 
@@ -3147,6 +3094,7 @@ for (let i = 0; i < 2; i += 1) {
     status: valueEnum[Math.floor(Math.random() * 10) % 4],
     updatedAt: '2019-11-16 12:50:26',
     createdAt: '2019-11-16 12:50:26',
+    closeAt: '2019-11-16 12:50:26',
     createdAtRange: ['2019-11-16 12:50:26', '2019-11-16 12:50:26'],
     createdAtRange1: ['2019-11-16 12:50:26', '2019-11-16 12:50:26'],
     money: Math.floor(Math.random() * 2000) * i,
@@ -3165,88 +3113,85 @@ for (let i = 0; i < 2; i += 1) {
 export default defineComponent({
   name: 'ValueTypeDate',
   setup() {
-    const render = () => {
-      return (
-        <ProTable
-          columns={[
-            {
-              title: '创建时间',
-              key: 'since',
-              dataIndex: 'createdAt',
-              valueType: 'dateTime',
-              width: 180,
-            },
-            {
-              title: '日期区间',
-              key: 'dateRange',
-              dataIndex: 'createdAtRange',
-              valueType: 'dateRange',
-            },
-            {
-              title: '时间区间',
-              key: 'dateTimeRange',
-              dataIndex: 'createdAtRange1',
-              valueType: 'dateTimeRange',
-            },
-            {
-              title: '更新时间',
-              key: 'since2',
-              dataIndex: 'createdAt',
-              width: 120,
-              valueType: 'date',
-            },
-            {
-              title: '关闭时间',
-              key: 'since3',
-              width: 120,
-              dataIndex: 'updatedAt',
-              valueType: 'time',
-            },
-            {
-              title: '操作',
-              key: 'option',
-              hideInSearch: true,
-              width: 120,
-              dataIndex: 'option',
-              valueType: 'option',
-              render: () => [<Link key="a">编辑</Link>],
-            },
-          ]}
-          request={(params: any) => {
-            console.log('params', params);
-            return Promise.resolve({
-              total: 200,
-              data: tableListDataSource,
-              success: true,
-            });
-          }}
-          beforeSearchSubmit={(params) => {
-            if (params.createdAtRange) {
-              const [startTime, endTime] = params.createdAtRange;
-              params.startTime = startTime;
-              params.endTime = endTime;
-              delete params.createdAtRange;
-            }
-            return params;
-          }}
-          rowKey="key"
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-日期类-demo")}
-              target="_blank"
-            >
-              日期类[查看源代码]
-            </Link>
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-日期类-demo'
+        )}
+        target="_blank"
+      >
+        日期类[查看源代码]
+      </Link>
+    );
+
+    const columns = [
+      {
+        title: '创建时间',
+        key: 'since',
+        dataIndex: 'createdAt',
+        valueType: 'dateTime',
+        width: 180,
+      },
+      {
+        title: '日期区间',
+        key: 'dateRange',
+        dataIndex: 'createdAtRange',
+        valueType: 'dateRange',
+      },
+      {
+        title: '时间区间',
+        key: 'dateTimeRange',
+        dataIndex: 'createdAtRange1',
+        valueType: 'dateTimeRange',
+      },
+      {
+        title: '更新时间',
+        key: 'since2',
+        dataIndex: 'updatedAt',
+        width: 120,
+        valueType: 'date',
+      },
+      {
+        title: '关闭时间',
+        key: 'since3',
+        width: 120,
+        dataIndex: 'closeAt',
+        valueType: 'time',
+      },
+      {
+        title: '操作',
+        key: 'option',
+        hideInSearch: true,
+        width: 120,
+        dataIndex: 'option',
+        valueType: 'option',
+        render: () => [<Link key="a">编辑</Link>],
+      },
+    ];
+    return () => (
+      <ProTable
+        columns={columns}
+        request={(params: any) => {
+          console.log('params', params);
+          return Promise.resolve({
+            total: 200,
+            data: tableListDataSource,
+            success: true,
+          });
+        }}
+        beforeSearchSubmit={(params) => {
+          if (params.createdAtRange) {
+            const [startTime, endTime] = params.createdAtRange;
+            params.startTime = startTime;
+            params.endTime = endTime;
+            delete params.createdAtRange;
           }
-        />
-      );
-    };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
+          return params;
+        }}
+        rowKey="key"
+        headerTitle={headTitle}
+      />
+    );
   },
 });
 
@@ -3305,59 +3250,70 @@ for (let i = 0; i < 20; i += 1) {
 export default defineComponent({
   name: 'ValueTypeDate',
   setup() {
-    const render = () => {
+    return () => {
+      const headTitle = (
+        <Link
+          href={encodeURI(
+            'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-数字类-demo'
+          )}
+          target="_blank"
+        >
+          数字类[查看源代码]
+        </Link>
+      );
+      const columns = [
+        {
+          title: '进度',
+          key: 'progress',
+          dataIndex: 'progress',
+          valueType: ({ record }) => {
+            return {
+              type: 'progress',
+              status: record.status !== 'error' ? 'normal' : 'danger',
+            };
+          },
+          width: 200,
+        },
+        {
+          title: '金额',
+          dataIndex: 'money',
+          valueType: 'money',
+          width: 150,
+        },
+        {
+          title: '数字',
+          dataIndex: 'money',
+          key: 'digit',
+          valueType: 'digit',
+          width: 150,
+        },
+        {
+          title: '小数',
+          dataIndex: 'money',
+          key: 'decimal',
+          valueType: 'decimal',
+          width: 150,
+        },
+        {
+          title: '百分比',
+          key: 'percent',
+          width: 120,
+          dataIndex: 'percent',
+          valueType: 'percent',
+        },
+        {
+          title: '操作',
+          key: 'option',
+          width: 120,
+          hideInSearch: true,
+          dataIndex: 'option',
+          valueType: 'option',
+          render: () => [<Link key="a">编辑</Link>],
+        },
+      ];
       return (
         <ProTable
-          columns={[
-            {
-              title: '进度',
-              key: 'progress',
-              dataIndex: 'progress',
-              valueType: (item) => {
-                return {
-                  type: 'progress',
-                  status: item.status !== 'error' ? 'normal' : 'danger',
-                };
-              },
-              width: 200,
-            },
-            {
-              title: '金额',
-              dataIndex: 'money',
-              valueType: 'money',
-              width: 150,
-            },
-            {
-              title: '数字',
-              dataIndex: 'money',
-              key: 'digit',
-              valueType: 'digit',
-              width: 150,
-            },
-            {
-              title: '小数',
-              dataIndex: 'money',
-              key: 'decimal',
-              valueType: 'decimal',
-              width: 150,
-            },
-            {
-              title: '百分比',
-              key: 'percent',
-              width: 120,
-              dataIndex: 'percent',
-              valueType: 'percent',
-            },
-            {
-              title: '操作',
-              key: 'option',
-              width: 120,
-              hideInSearch: true,
-              dataIndex: 'option',
-              valueType: 'option',
-              render: () => [<Link key="a">编辑</Link>],
-            },
-          ]}
+          columns={columns}
           request={() => {
             return Promise.resolve({
               total: 20,
@@ -3366,23 +3322,10 @@ export default defineComponent({
             });
           }}
           rowKey="key"
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-数字类-demo")}
-              target="_blank"
-            >
-              数字类[查看源代码]
-            </Link>
-          }
+          headerTitle={headTitle}
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });
 
@@ -3444,6 +3387,17 @@ for (let i = 0; i < 20; i += 1) {
 export default defineComponent({
   name: 'ValueType',
   setup(props, ctx) {
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-样式类-demo'
+        )}
+        target="_blank"
+      >
+        样式类[查看源代码]
+      </Link>
+    );
+
     const columns: ProColumns[] = [
       {
         title: '序号',
@@ -3521,7 +3475,7 @@ export default defineComponent({
         render: () => [<Link key="a">编辑</Link>],
       },
     ];
-    const render = () => {
+    return () => {
       return (
         <ProTable
           columns={columns}
@@ -3534,23 +3488,10 @@ export default defineComponent({
           }}
           rowKey="key"
           pagination={{ pageSize: 10 }}
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-样式类-demo")}
-              target="_blank"
-            >
-              样式类[查看源代码]
-            </Link>
-          }
+          headerTitle={headTitle}
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });
 
@@ -3567,6 +3508,17 @@ import { Link } from '@arco-design/web-vue';
 export default defineComponent({
   name: 'GroupingColumns',
   setup() {
+    const headTitle = (
+      <Link
+        href={encodeURI(
+          'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#groupingcolumns-分组表头表格-demo'
+        )}
+        target="_blank"
+      >
+        分组表头表格[查看源代码]
+      </Link>
+    );
+
     const columns = [
       {
         dataIndex: 'name',
@@ -3713,7 +3665,7 @@ export default defineComponent({
         email: 'william.smith@example.com',
       },
     ]);
-    const render = () => {
+    return () => {
       return (
         <ProTable
           columns={columns}
@@ -3737,21 +3689,10 @@ export default defineComponent({
           pagination={{
             pageSize: 5,
           }}
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#groupingcolumns-分组表头表格-demo")}
-              target="_blank"
-            >
-              分组表头表格[查看源代码]
-            </Link>
-          }
+          headerTitle={headTitle}
         />
       );
     };
-    return { render };
-  },
-  render() {
-    return this.render();
   },
 });
 

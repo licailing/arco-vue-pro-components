@@ -49,59 +49,70 @@ for (let i = 0; i < 20; i += 1) {
 export default defineComponent({
   name: 'ValueTypeDate',
   setup() {
-    const render = () => {
+    return () => {
+      const headTitle = (
+        <Link
+          href={encodeURI(
+            'https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-数字类-demo'
+          )}
+          target="_blank"
+        >
+          数字类[查看源代码]
+        </Link>
+      );
+      const columns = [
+        {
+          title: '进度',
+          key: 'progress',
+          dataIndex: 'progress',
+          valueType: ({ record }) => {
+            return {
+              type: 'progress',
+              status: record.status !== 'error' ? 'normal' : 'danger',
+            };
+          },
+          width: 200,
+        },
+        {
+          title: '金额',
+          dataIndex: 'money',
+          valueType: 'money',
+          width: 150,
+        },
+        {
+          title: '数字',
+          dataIndex: 'money',
+          key: 'digit',
+          valueType: 'digit',
+          width: 150,
+        },
+        {
+          title: '小数',
+          dataIndex: 'money',
+          key: 'decimal',
+          valueType: 'decimal',
+          width: 150,
+        },
+        {
+          title: '百分比',
+          key: 'percent',
+          width: 120,
+          dataIndex: 'percent',
+          valueType: 'percent',
+        },
+        {
+          title: '操作',
+          key: 'option',
+          width: 120,
+          hideInSearch: true,
+          dataIndex: 'option',
+          valueType: 'option',
+          render: () => [<Link key="a">编辑</Link>],
+        },
+      ];
       return (
         <ProTable
-          columns={[
-            {
-              title: '进度',
-              key: 'progress',
-              dataIndex: 'progress',
-              valueType: (item) => {
-                return {
-                  type: 'progress',
-                  status: item.status !== 'error' ? 'normal' : 'danger',
-                };
-              },
-              width: 200,
-            },
-            {
-              title: '金额',
-              dataIndex: 'money',
-              valueType: 'money',
-              width: 150,
-            },
-            {
-              title: '数字',
-              dataIndex: 'money',
-              key: 'digit',
-              valueType: 'digit',
-              width: 150,
-            },
-            {
-              title: '小数',
-              dataIndex: 'money',
-              key: 'decimal',
-              valueType: 'decimal',
-              width: 150,
-            },
-            {
-              title: '百分比',
-              key: 'percent',
-              width: 120,
-              dataIndex: 'percent',
-              valueType: 'percent',
-            },
-            {
-              title: '操作',
-              key: 'option',
-              width: 120,
-              hideInSearch: true,
-              dataIndex: 'option',
-              valueType: 'option',
-              render: () => [<Link key="a">编辑</Link>],
-            },
-          ]}
+          columns={columns}
           request={() => {
             return Promise.resolve({
               total: 20,
@@ -110,22 +121,9 @@ export default defineComponent({
             });
           }}
           rowKey="key"
-          headerTitle={
-            <Link
-              href={encodeURI("https://gitee.com/li-cailing/arco-vue-pro-components/blob/main/packages/pro-components/components/pro-table/README.md#valuetype-数字类-demo")}
-              target="_blank"
-            >
-              数字类[查看源代码]
-            </Link>
-          }
+          headerTitle={headTitle}
         />
       );
     };
-    return {
-      render,
-    };
-  },
-  render() {
-    return this.render();
   },
 });
